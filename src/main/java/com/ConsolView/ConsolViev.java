@@ -1,5 +1,6 @@
 package com.ConsolView;
 
+import com.DateTask.EpicTask;
 import com.DateTask.Task;
 import com.Сontroller.MemoryTask;
 
@@ -19,12 +20,12 @@ public  class ConsolViev {
            // String text;
             int i = command.indexOf(' ');
             if (i > 0) {
-                 inputCommand = command.substring(0, i);
+                 inputCommand = command.substring(0, i).toLowerCase();
                  //text = command.substring(i);
             }
-            else inputCommand = command;
+            else inputCommand = command.toLowerCase();
 
-            switch (inputCommand.toLowerCase()){
+            switch (inputCommand){
                 case("exit") -> {
                     isExit = true;
                 }
@@ -43,7 +44,10 @@ public  class ConsolViev {
                     System.out.print("Input description Task: ");
                     String textDescription = in.nextLine();
                     listTask.add(new Task(textName,textDescription));
-
+                }
+                case("addepic") -> {
+                    String textName = command.substring(i);
+                    addEpicTask(listTask, textName, in);
                 }
 
                 default -> {
@@ -65,10 +69,12 @@ public  class ConsolViev {
         StringBuilder textHelp = new StringBuilder();
         textHelp.append("Доступные команды: \n");
         textHelp.append(" \"help\" - показать список команда\n");
-        textHelp.append(" \"add 'указать имя задач'\" - добавить задачу\n");
-        textHelp.append(" \"printAll\" - показать все задачи\n");
         textHelp.append(" \"exit\" - завершить программу\n");
         textHelp.append(" \"save\" - сохранить все записи\n");
+        textHelp.append(" \"printAll\" - показать все задачи\n");
+
+        textHelp.append(" \"add 'указать имя задач'\" - добавить задачу\n");
+        textHelp.append(" \"addEpic 'указать имя задач'\" - добавить задачу c подзадачами\n");
 
         System.out.println(textHelp);
     }
@@ -76,4 +82,24 @@ public  class ConsolViev {
     public static void printTaskList(ArrayList<Task> listTask){
         System.out.println(listTask);
     }
+
+    public static void addEpicTask(ArrayList<Task> listTask, String textName, Scanner in){
+        System.out.print("Input description Epic Task: ");
+        String textDescription = in.nextLine();
+        EpicTask epicTask = new EpicTask(textName,textDescription);
+        String console = "";
+        int count = 1;
+        System.out.print("Input Name "+ count + " SubTask: ");
+        console = in.nextLine();
+        do {
+            System.out.print("Input Description "+ count + " SubTask: ");
+            textDescription = in.nextLine();
+            epicTask.addSubTask(console, textDescription);
+            System.out.print("Input Name "+ count + "SubTask or Input 'END' to complete: ");
+            console = in.nextLine();
+            count++;
+        }while(!console.equalsIgnoreCase("end"));
+        listTask.add(epicTask);
+    }
+
 }

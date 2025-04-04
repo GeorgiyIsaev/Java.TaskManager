@@ -10,10 +10,9 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Task> listTask = new ArrayList<>();
-        ArrayList<Task> listTask2 = MemoryTask.ReadTaskList();
+        ArrayList<Task> listTask = MemoryTask.ReadTaskList();
 
-        ConsolViev.run(listTask2);
+        ConsolViev.run(listTask);
 
     }
 }

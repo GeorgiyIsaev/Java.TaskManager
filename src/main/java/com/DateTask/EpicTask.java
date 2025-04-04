@@ -10,5 +10,8 @@ public class EpicTask extends Task {
       //  task.add(new SubTask(this));
 
     }
+    public void addSubTask(String name, String description){
+        task.add(new SubTask (name, description));
+    }
 }
 
