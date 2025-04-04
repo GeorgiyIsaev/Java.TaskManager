@@ -15,11 +15,7 @@ public class Main {
         ArrayList<Task> listTask = new ArrayList<>();
         ConsolViev.run(listTask);
 
-        Task task = new Task();
-        System.out.println(task.getID());
-        Task task2 = new SubTask("Задача 1", "Мое описание");
-        System.out.println(task2.getID());
-        System.out.println(task2.getID());
+
 
     }
 }

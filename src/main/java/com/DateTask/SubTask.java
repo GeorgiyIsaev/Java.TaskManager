@@ -2,18 +2,15 @@ package com.DateTask;
 
 public class SubTask extends Task{
     EpicTask refrains;
-    public SubTask(EpicTask refrains) {
-        this.refrains = refrains;
-    }
+
     public SubTask(String name, String description) {
-        this.name = name;
-        this.description = description;
-        this.taskStatus = TaskStatus.NEW;
+        super(name,description);
         this.refrains = null;
     }
 
+
     public SubTask(String name, String description, EpicTask refrains) {
-        this(name, description);
+        super(name,description);
         this.refrains = refrains;
     }
 }

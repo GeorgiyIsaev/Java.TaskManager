@@ -30,6 +30,18 @@ public  class ConsolViev {
                 case("help") -> {
                     help();
                 }
+                case("printall") -> {
+                    printTaskList(listTask);
+                }
+
+                case("add") -> {
+                    String textName = command.substring(i);
+                    System.out.print("Input description Task: ");
+                    String textDescription = in.nextLine();
+                    listTask.add(new Task(textName,textDescription));
+
+                }
+
                 default -> {
                     System.out.println("Команда не распознана!");
                 }
@@ -54,5 +66,9 @@ public  class ConsolViev {
         textHelp.append(" \"end\" - завершить программу\n");
 
         System.out.println(textHelp);
+    }
+
+    public static void printTaskList(ArrayList<Task> listTask){
+        System.out.println(listTask);
     }
 }
