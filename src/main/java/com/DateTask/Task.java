@@ -1,14 +1,13 @@
 package com.DateTask;
 
 public class Task extends IdTask{
-    private String name;
-    private String description;
-    private TaskStatus status;
-    MultiTask refrains;
+    protected String name;
+    protected String description;
+    protected TaskStatus status;
+    protected TaskStatus taskStatus;
 
-    public Task(MultiTask refrains) {
-        this.refrains = refrains;
+    @Override
+    public String toString() {
+        return " " + TaskStatus + "; TASK: " + name + ";";
     }
-
-
 }

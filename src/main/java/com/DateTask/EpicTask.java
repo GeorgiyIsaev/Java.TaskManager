@@ -1,13 +1,13 @@
 package com.DateTask;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MultiTask {
+public class EpicTask extends Task {
     ArrayList<Task> task;
-    public MultiTask(){
+    public EpicTask(){
         task = new ArrayList<>();
-        task.add(new Task(this));
+        task.add(new SubTask(this));
 
     }
 }
+
