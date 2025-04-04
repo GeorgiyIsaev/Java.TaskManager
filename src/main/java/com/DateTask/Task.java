@@ -8,6 +8,30 @@ public class Task extends IdTask  implements Serializable {
     protected TaskStatus taskStatus;
 
 
+    public String getName() {
+        return name;
+    }
+
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
@@ -16,6 +40,8 @@ public class Task extends IdTask  implements Serializable {
 
     @Override
     public String toString() {
-        return " " + taskStatus + "; TASK id" + getID() +": " + name + "; " + description +";";
+        return "[" + taskStatus + "; TASK id" + getID() +": " + name + "; " + description +"];";
     }
+
+
 }

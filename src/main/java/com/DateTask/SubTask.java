@@ -13,4 +13,12 @@ public class SubTask extends Task{
         super(name,description);
         this.refrains = refrains;
     }
+
+    @Override
+    public String toString() {
+        return "[SubT id " + getID() + "; STATUS-" +
+                taskStatus + " NAME: " + name +
+                "; Description: " + description + ";]";
+
+    }
 }
