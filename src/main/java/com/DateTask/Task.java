@@ -14,6 +14,6 @@ public class Task extends IdTask{
 
     @Override
     public String toString() {
-        return " " + taskStatus + "; TASK: " + name + ";";
+        return " " + taskStatus + "; TASK id" + getID() +": " + name + "; " + description +";";
     }
 }
