@@ -8,11 +8,23 @@ import java.util.ArrayList;
 public class MemoryTask {
 
     static String getNameFile(){
-        return "Date" + File.separator +  "MyTask.bin";
+      // String sep = File.separator;
+        String sep = "//";
+
+        return "Date" + sep + "MyTask.bin";
+    }
+
+
+    static void createFile(){
+        if(!(new File(getNameFile()).exists())){
+            new File("Date").mkdirs();
+            File f = new File(getNameFile());
+        }
     }
 
     public static void WriteTaskList(ArrayList<Task> listTask ){
-        try ( ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
+        createFile();
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
             oos.writeObject(listTask);
         } catch (IOException e) {
             e.printStackTrace();

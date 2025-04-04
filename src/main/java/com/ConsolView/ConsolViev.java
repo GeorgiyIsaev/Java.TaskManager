@@ -1,6 +1,7 @@
 package com.ConsolView;
 
 import com.DateTask.Task;
+import com.Сontroller.MemoryTask;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public  class ConsolViev {
             else inputCommand = command;
 
             switch (inputCommand.toLowerCase()){
-                case("end") -> {
+                case("exit") -> {
                     isExit = true;
                 }
                 case("help") -> {
@@ -32,6 +33,9 @@ public  class ConsolViev {
                 }
                 case("printall") -> {
                     printTaskList(listTask);
+                }
+                case("save") -> {
+                    MemoryTask.WriteTaskList(listTask);
                 }
 
                 case("add") -> {
@@ -63,7 +67,8 @@ public  class ConsolViev {
         textHelp.append(" \"help\" - показать список команда\n");
         textHelp.append(" \"add 'указать имя задач'\" - добавить задачу\n");
         textHelp.append(" \"printAll\" - показать все задачи\n");
-        textHelp.append(" \"end\" - завершить программу\n");
+        textHelp.append(" \"exit\" - завершить программу\n");
+        textHelp.append(" \"save\" - сохранить все записи\n");
 
         System.out.println(textHelp);
     }

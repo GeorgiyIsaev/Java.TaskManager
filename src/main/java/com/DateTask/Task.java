@@ -1,6 +1,8 @@
 package com.DateTask;
 
-public class Task extends IdTask{
+import java.io.Serializable;
+
+public class Task extends IdTask  implements Serializable {
     protected String name;
     protected String description;
     protected TaskStatus taskStatus;
