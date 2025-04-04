@@ -35,6 +35,10 @@ public  class ConsolViev {
                 case("printall") -> {
                     printTaskList(listTask);
                 }
+                case("deleteall") -> {
+                    listTask = new ArrayList<>();
+                }
+
                 case("save") -> {
                     MemoryTask.WriteTaskList(listTask);
                 }
@@ -48,6 +52,14 @@ public  class ConsolViev {
                 case("addepic") -> {
                     String textName = command.substring(i);
                     addEpicTask(listTask, textName, in);
+                }
+                case("printId") -> {
+
+
+                }
+                case("") -> {
+
+
                 }
 
                 default -> {
@@ -72,6 +84,9 @@ public  class ConsolViev {
         textHelp.append(" \"exit\" - завершить программу\n");
         textHelp.append(" \"save\" - сохранить все записи\n");
         textHelp.append(" \"printAll\" - показать все задачи\n");
+        textHelp.append(" \"deleteAll\" - удалить все задачи\n");
+
+        textHelp.append(" \"printId 'NUMBER' \" - показать задачу по id\n");
 
         textHelp.append(" \"add 'указать имя задач'\" - добавить задачу\n");
         textHelp.append(" \"addEpic 'указать имя задач'\" - добавить задачу c подзадачами\n");
@@ -102,4 +117,24 @@ public  class ConsolViev {
         listTask.add(epicTask);
     }
 
+    public static void printID(ArrayList<Task> listTask, String id){
+        int idTask = -1;
+        int findIdList = -1;
+        try {
+              idTask = Integer.parseInt(id);
+              for (Task task : listTask){
+                  if (task.findID(idTask)){
+                      //
+                  }
+              }
+
+        }
+        catch (NumberFormatException e) {
+            idTask = -1;
+        }
+
+       // listTask.get(0)
+
+       System.out.println(listTask);
+    }
 }

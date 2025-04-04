@@ -12,6 +12,10 @@ public class EpicTask extends Task {
     public void addSubTask(String name, String description){
         subTasks.add(new SubTask (name, description));
     }
+    public void addSubTask(SubTask sub){
+        subTasks.add(sub);
+    }
+
     @Override
     public String toString() {
         StringBuilder text = new StringBuilder();
@@ -27,6 +31,18 @@ public class EpicTask extends Task {
 
 
         return text.toString();
+    }
+    public boolean findID(int id){
+        if(this.id == id)
+             return true;
+        else{
+            for(Task task : subTasks){
+                if(task.findID(id)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 

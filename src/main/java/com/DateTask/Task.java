@@ -42,6 +42,9 @@ public class Task extends IdTask  implements Serializable {
     public String toString() {
         return "[" + taskStatus + "; TASK id" + getID() +": " + name + "; " + description +"];";
     }
+    public boolean findID(int id){
+        return this.id == id;
+    }
 
 
 }
