@@ -32,7 +32,16 @@ public  class ConsolViev {
                     help();
                 }
                 case("printall") -> {
-                    printTaskList(listTask);
+                    printList(listTask);
+                }
+                case("printtask") -> {
+                    printList(listTask, "TASK");
+                }
+                case("printepic") -> {
+                    printList(listTask, "EPIC");
+                }
+                case("printsubtask") -> {
+                    printList(listTask, "SubTASK");
                 }
                 case("deleteall") -> {
                     listTask = new HashMap<Integer,Task> ();
@@ -143,7 +152,7 @@ public  class ConsolViev {
         }
     }
 
-    public static void printListPlus(HashMap<Integer, Task> listTask, String type){
+    public static void printList(HashMap<Integer, Task> listTask, String type){
        // "EPIC" "TASK" "SubTASK"
 
         String myFormat = "%3s %4s %8s %12s %12s %25s";
@@ -155,10 +164,11 @@ public  class ConsolViev {
             Integer key = entry.getKey();
             Task value = entry.getValue();
 
-            System.out.println(String.format(myFormat,
-                    key,value.getID(),value.getTypeTask(),value.getTaskStatus(),
-                    value.getLinkStr(),value.getName()));
-
+            if(type.equalsIgnoreCase(value.getTypeTask())) {
+                System.out.println(String.format(myFormat,
+                        key, value.getID(), value.getTypeTask(), value.getTaskStatus(),
+                        value.getLinkStr(), value.getName()));
+            }
         }
     }
 
