@@ -47,7 +47,7 @@ public  class ConsolViev {
                 case("printsubtask") -> {
                     printList(listTask, "SubTASK");
                 }
-                case("printId") -> {
+                case("printid") -> {
                     System.out.println("Функция printId пока нет"); ////***/
                 }
 
@@ -82,14 +82,14 @@ public  class ConsolViev {
                     String result =  deleteID(listTask, textName);
                     System.out.println(result);
                 }
-                case("renameid ") -> {
+                case("renameid") -> {
                     System.out.println("Функция renameid  пока нет"); ////***/
                 }
-                case("redescid ") -> {
+                case("redescid") -> {
                     System.out.println("Функция redescid  пока нет"); ////***/
                 }
 
-                case("restatusid ") -> {
+                case("restatusid") -> {
                     System.out.println("Функция restatusid  пока нет"); ////***/
                 }
 
@@ -113,19 +113,19 @@ public  class ConsolViev {
         textHelp.append(" \"exit\" - завершить программу\n");
         textHelp.append(" \"save\" - сохранить все записи\n");
 
-        textHelp.append(" КОМАНДЫ ДЛЯ ОТОБРАЖЕНИЯ ЗАДАЧ: \n");
+        textHelp.append("КОМАНДЫ ДЛЯ ОТОБРАЖЕНИЯ ЗАДАЧ: \n");
         textHelp.append(" \"printAll\" - показать все задачи\n");
         textHelp.append(" \"printEpic\" - показать только ЭПИКИ\n");
         textHelp.append(" \"printSubTask\" - показать только ПОДЗАДАЧИ \n");
         textHelp.append(" \"printTask\" - показать только ОБЫЧНЫЕ ЗАДАЧИ \n");
-        textHelp.append(" \"printId 'NUMBER ID' \" - показать задачу по id\n");
+        textHelp.append(" \"printId 'NUMBER ID'\" - показать задачу по id\n");
 
-        textHelp.append(" КОМАНДЫ ДЛЯ ДОБАВЛЕНИЯ ЗАДАЧ: \n");
+        textHelp.append("КОМАНДЫ ДЛЯ ДОБАВЛЕНИЯ ЗАДАЧ: \n");
         textHelp.append(" \"add 'указать имя задач'\" - добавить обычную задачу\n");
         textHelp.append(" \"addEpic 'указать имя задач'\" - добавить задачу c подзадачами\n");
         textHelp.append(" \"addSubTaskToID 'NUMBER ID'\" - добавить подзадачу к Эпику с указанным ID\n");
 
-        textHelp.append(" УДАЛЕНИЕ И ИЗМЕНЕНИЕ ЗАДАЧ: \n");
+        textHelp.append("УДАЛЕНИЕ И ИЗМЕНЕНИЕ ЗАДАЧ: \n");
         textHelp.append(" \"deleteAll\" - удалить все задачи\n");
         textHelp.append(" \"deleteID 'NUMBER ID'\" - удалить задачу с ID\n");
         textHelp.append(" \"reNameID 'NUMBER ID'\" – изменить имя задачи с ID\n");
