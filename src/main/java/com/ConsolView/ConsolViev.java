@@ -74,7 +74,14 @@ public  class ConsolViev {
                     addEpicTask(listTask, textName, in);
                 }
                 case("addsubtasktoid") -> {
-                    System.out.println("Функция addsubtasktoid пока нет"); ////***/
+                    if(command.length() <= i++){
+                        System.out.println("Команда не распознана!");
+                        break;
+                    }
+
+
+
+                    System.out.println(addSubTaskToEpic(listTask, command.substring(i), in)); ////***/
                 }
 
                 /*Изменение*/
@@ -168,6 +175,23 @@ public  class ConsolViev {
 
         listTask.put(epicTask.getID(),epicTask);
     }
+    public static String addSubTaskToEpic(HashMap<Integer,Task> listTask, String textConsole, Scanner in){
+        int idTask = StringToIntID(textConsole);
+        if (!listTask.containsKey(idTask))
+            return "Этого индекса нет в списке";
+        if(!listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC"))
+            return "Задача с ID: " + idTask + " не является ЭПИКОМ, добавление подзадачи не возможно!";
+        EpicTask epicTask = (EpicTask) listTask.get(idTask);
+        System.out.print("Input Name SubTask: ");
+        String name = in.nextLine();
+        System.out.print("Input Description SubTask: ");
+        String description = in.nextLine();
+        SubTask subTask = new SubTask(name,description,epicTask);
+        listTask.put(subTask.getID(), subTask);
+        return "Подзадача для ЭПИКА с ID " + idTask +  " добавлена!";
+    }
+
+
     static String myFormat = "%-4s %-4s %-8s %-12s %-12s %-25s";
     public static String printID(HashMap<Integer,Task> listTask, String id){
 
