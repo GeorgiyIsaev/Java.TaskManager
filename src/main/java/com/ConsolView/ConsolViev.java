@@ -2,6 +2,7 @@ package com.ConsolView;
 
 import com.Controller.ChangeTaskMap;
 import com.DateTask.EpicTask;
+import com.DateTask.SubTask;
 import com.DateTask.Task;
 import com.Controller.MemoryTask;
 
@@ -48,7 +49,14 @@ public  class ConsolViev {
                     printList(listTask, "SubTASK");
                 }
                 case("printid") -> {
-                    System.out.println("Функция printId пока нет"); ////***/
+                    if(command.length() <= i++){
+                        System.out.println("Команда не распознана!");
+                        break;
+                    }
+                    printID(listTask, command.substring(i));
+
+
+                    System.out.println(printID(listTask, command.substring(i)));
                 }
 
 
@@ -160,16 +168,34 @@ public  class ConsolViev {
 
         listTask.put(epicTask.getID(),epicTask);
     }
+    static String myFormat = "%-4s %-4s %-8s %-12s %-12s %-25s";
+    public static String printID(HashMap<Integer,Task> listTask, String id){
 
-    public static void printID(HashMap<Integer,Task> listTask, String id){
+        int idTask = StringToIntID(id);
+        if (!listTask.containsKey(idTask))
+            return "Этого индекса нет в списке";
+        Task task = listTask.get(idTask);
 
+        String consoleTable = "";
+        consoleTable += String.format(myFormat,"KEY","ID","TYPE","STATUS","LINK","INFORMATION");
+        consoleTable += "\n";
+        consoleTable += String.format(myFormat, idTask, task.getID(), task.getTypeTask(), task.getTaskStatus(),
+                task.getLinkStr(), task.getName());
 
-       System.out.println(listTask);
+        if(task.getTypeTask().equalsIgnoreCase("EPIC")){
+            for(SubTask subTask : ((EpicTask)task).getSubTasks()){
+                consoleTable += "\n";
+                consoleTable += String.format(myFormat, subTask.getID(), subTask.getID(), subTask.getTypeTask(), subTask.getTaskStatus(),
+                        subTask.getLinkStr(), subTask.getName());
+            }
+        }
+
+        return consoleTable;
     }
 
 
     public static void printList(HashMap<Integer, Task> listTask){
-        String myFormat = "%3s %4s %8s %12s %12s %25s";
+       // String myFormat = "%3s %4s %8s %12s %12s %25s";
         System.out.println(String.format(myFormat,"KEY","ID","TYPE","STATUS","LINK","INFORMATION"));
 
         Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
@@ -187,7 +213,7 @@ public  class ConsolViev {
     public static void printList(HashMap<Integer, Task> listTask, String type){
        // "EPIC" "TASK" "SubTASK"
 
-        String myFormat = "%3s %4s %8s %12s %12s %25s";
+       // String myFormat = "%3s %4s %8s %12s %12s %25s";
         System.out.println(String.format(myFormat,"KEY","ID","TYPE","STATUS","LINK","INFORMATION"));
 
         Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
@@ -205,15 +231,20 @@ public  class ConsolViev {
     }
 
     public static String deleteID(HashMap<Integer,Task> listTask, String id){
+        int i = StringToIntID(id);
+        if (i<1) return "Неверно указан id объекта!";
+
+        return    ChangeTaskMap.deleteID(listTask, i);
+    }
+
+    public static int StringToIntID(String id){
         int i;
         try {
             i = Integer.parseInt(id);
         } catch (NumberFormatException e) {
             i = -1;
-            return "Неверно указан id объекта!";
         }
-
-        return    ChangeTaskMap.deleteID(listTask, i);
+        return i;
     }
 
 }
