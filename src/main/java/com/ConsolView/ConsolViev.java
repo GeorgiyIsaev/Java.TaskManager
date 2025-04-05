@@ -179,16 +179,16 @@ public  class ConsolViev {
         int idTask = StringToIntID(textConsole);
         if (!listTask.containsKey(idTask))
             return "Этого индекса нет в списке";
+        if (!listTask.containsKey(idTask))
+            return "Этого индекса нет в списке";
         if(!listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC"))
             return "Задача с ID: " + idTask + " не является ЭПИКОМ, добавление подзадачи не возможно!";
-        EpicTask epicTask = (EpicTask) listTask.get(idTask);
+
         System.out.print("Input Name SubTask: ");
         String name = in.nextLine();
         System.out.print("Input Description SubTask: ");
         String description = in.nextLine();
-        SubTask subTask = new SubTask(name,description,epicTask);
-        listTask.put(subTask.getID(), subTask);
-        return "Подзадача для ЭПИКА с ID " + idTask +  " добавлена!";
+        return ChangeTaskMap.addSubTaskToEpic(listTask, idTask, name, description);
     }
 
 
