@@ -54,14 +54,11 @@ public class EpicTask extends Task {
 
     @Override
     public String getLinkStr(){
-        StringBuilder link = new StringBuilder("[");
+        ArrayList<Integer> arr = new ArrayList<>();
         for(SubTask subTask : subTasks){
-            link.append(subTask.getID()).append(",");
+            arr.add(subTask.getID());
         }
-        link.append("]");
-        return link.toString();
-
-
+        return arr.toString();
     }
 }
 
