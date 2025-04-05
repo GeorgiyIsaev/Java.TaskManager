@@ -128,24 +128,37 @@ public  class ConsolViev {
 
 
     public static void printList(HashMap<Integer, Task> listTask){
+        String myFormat = "%3s %4s %8s %12s %12s %25s";
+        System.out.println(String.format(myFormat,"KEY","ID","TYPE","STATUS","LINK","INFORMATION"));
+
         Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<Integer, Task> entry = iterator.next();
             Integer key = entry.getKey();
             Task value = entry.getValue();
-            System.out.println("Key: " + key + ", Value: " + value);
+            System.out.println(String.format(myFormat,
+                    key,value.getID(),value.getTypeTask(),value.getTaskStatus(),
+                    value.getLinkStr(),value.getName()));
+
         }
     }
 
-    public static void printListPlus(HashMap<Integer, Task> listTask){
+    public static void printListPlus(HashMap<Integer, Task> listTask, String type){
+       // "EPIC" "TASK" "SubTASK"
+
+        String myFormat = "%3s %4s %8s %12s %12s %25s";
+        System.out.println(String.format(myFormat,"KEY","ID","TYPE","STATUS","LINK","INFORMATION"));
+
         Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
-        String t = "ЛУН";
-        System.out.println(String.format("name: %s",t));
         while (iterator.hasNext()) {
             Map.Entry<Integer, Task> entry = iterator.next();
             Integer key = entry.getKey();
             Task value = entry.getValue();
-            System.out.println("Key: " + key + ", Value: " + value);
+
+            System.out.println(String.format(myFormat,
+                    key,value.getID(),value.getTypeTask(),value.getTaskStatus(),
+                    value.getLinkStr(),value.getName()));
+
         }
     }
 
