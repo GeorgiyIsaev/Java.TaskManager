@@ -30,6 +30,11 @@ public  class ConsolViev {
                 case("help") -> {
                     help();
                 }
+                case("save") -> {
+                    MemoryTask.WriteTaskList(listTask);
+                }
+
+                /*Отображение*/
                 case("printall") -> {
                     printList(listTask);
                 }
@@ -42,23 +47,12 @@ public  class ConsolViev {
                 case("printsubtask") -> {
                     printList(listTask, "SubTASK");
                 }
-                case("deleteall") -> {
-                    listTask = new HashMap<Integer,Task> ();
-                }
-                case("deleteid") -> {
-                    if(command.length() <= i++){
-                        System.out.println("Команда не распознана!");
-                        break;
-                    }
-                    String textName = command.substring(i);
-                    String result =  deleteID(listTask, textName);
-                    System.out.println(result);
+                case("printId") -> {
+                    System.out.println("Функция printId пока нет"); ////***/
                 }
 
-                case("save") -> {
-                    MemoryTask.WriteTaskList(listTask);
-                }
 
+                /*Добавление*/
                 case("add") -> {
                     String textName = command.substring(i);
                     System.out.print("Input description Task: ");
@@ -71,20 +65,37 @@ public  class ConsolViev {
                     String textName = command.substring(i);
                     addEpicTask(listTask, textName, in);
                 }
-                case("printId") -> {
-
-                    String textName = "";
+                case("addsubtasktoid") -> {
+                    System.out.println("Функция addsubtasktoid пока нет"); ////***/
                 }
-                case("") -> {
 
+                /*Изменение*/
+                case("deleteall") -> {
+                    listTask = new HashMap<Integer,Task> ();
+                }
+                case("deleteid") -> {
+                    if(command.length() <= i++){
+                        System.out.println("Команда не распознана!");
+                        break;
+                    }
+                    String textName = command.substring(i);
+                    String result =  deleteID(listTask, textName);
+                    System.out.println(result);
+                }
+                case("renameid ") -> {
+                    System.out.println("Функция renameid  пока нет"); ////***/
+                }
+                case("redescid ") -> {
+                    System.out.println("Функция redescid  пока нет"); ////***/
+                }
 
+                case("restatusid ") -> {
+                    System.out.println("Функция restatusid  пока нет"); ////***/
                 }
 
                 default -> {
                     System.out.println("Команда не распознана!");
                 }
-
-
             }
 
 
@@ -97,17 +108,30 @@ public  class ConsolViev {
 
     public static void help(){
         StringBuilder textHelp = new StringBuilder();
-        textHelp.append("Доступные команды: \n");
+        textHelp.append("ДОСТУПНЫЕ КОМАНДЫ: \n");
         textHelp.append(" \"help\" - показать список команда\n");
         textHelp.append(" \"exit\" - завершить программу\n");
         textHelp.append(" \"save\" - сохранить все записи\n");
+
+        textHelp.append(" КОМАНДЫ ДЛЯ ОТОБРАЖЕНИЯ ЗАДАЧ: \n");
         textHelp.append(" \"printAll\" - показать все задачи\n");
-        textHelp.append(" \"deleteAll\" - удалить все задачи\n");
+        textHelp.append(" \"printEpic\" - показать только ЭПИКИ\n");
+        textHelp.append(" \"printSubTask\" - показать только ПОДЗАДАЧИ \n");
+        textHelp.append(" \"printTask\" - показать только ОБЫЧНЫЕ ЗАДАЧИ \n");
+        textHelp.append(" \"printId 'NUMBER ID' \" - показать задачу по id\n");
 
-        textHelp.append(" \"printId 'NUMBER' \" - показать задачу по id\n");
-
-        textHelp.append(" \"add 'указать имя задач'\" - добавить задачу\n");
+        textHelp.append(" КОМАНДЫ ДЛЯ ДОБАВЛЕНИЯ ЗАДАЧ: \n");
+        textHelp.append(" \"add 'указать имя задач'\" - добавить обычную задачу\n");
         textHelp.append(" \"addEpic 'указать имя задач'\" - добавить задачу c подзадачами\n");
+        textHelp.append(" \"addSubTaskToID 'NUMBER ID'\" - добавить подзадачу к Эпику с указанным ID\n");
+
+        textHelp.append(" УДАЛЕНИЕ И ИЗМЕНЕНИЕ ЗАДАЧ: \n");
+        textHelp.append(" \"deleteAll\" - удалить все задачи\n");
+        textHelp.append(" \"deleteID 'NUMBER ID'\" - удалить задачу с ID\n");
+        textHelp.append(" \"reNameID 'NUMBER ID'\" – изменить имя задачи с ID\n");
+        textHelp.append(" \"reDescID 'NUMBER ID'\" – изменить описание задачи с ID\n");
+        textHelp.append(" \"reStatusID 'NUMBER ID' (NEW, PROG, DONE)\" – изменить статус задачи с ID\n");
+
 
         System.out.println(textHelp);
     }
