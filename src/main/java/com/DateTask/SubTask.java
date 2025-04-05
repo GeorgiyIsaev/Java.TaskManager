@@ -27,4 +27,13 @@ public class SubTask extends Task{
                 "; Description: " + description + "; toEPIC_ID: " + refrains.getID() + "]";
 
     }
+
+    @Override
+    public String getTypeTask(){
+        return "SubTASK";
+    }
+    @Override
+    public String getLinkStr(){
+        return this.refrains.getID().toString();
+    }
 }

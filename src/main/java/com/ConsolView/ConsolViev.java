@@ -136,4 +136,17 @@ public  class ConsolViev {
             System.out.println("Key: " + key + ", Value: " + value);
         }
     }
+
+    public static void printListPlus(HashMap<Integer, Task> listTask){
+        Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
+        String t = "ЛУН";
+        System.out.println(String.format("name: %s",t));
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Task> entry = iterator.next();
+            Integer key = entry.getKey();
+            Task value = entry.getValue();
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
+    }
+
 }

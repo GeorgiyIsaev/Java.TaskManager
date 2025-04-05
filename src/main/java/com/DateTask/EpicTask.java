@@ -46,5 +46,22 @@ public class EpicTask extends Task {
         return text.toString();
 
     }
+
+    @Override
+    public String getTypeTask(){
+        return "EPIC";
+    }
+
+    @Override
+    public String getLinkStr(){
+        StringBuilder link = new StringBuilder("[");
+        for(SubTask subTask : subTasks){
+            link.append(subTask.getID()).append(",");
+        }
+        link.append("]");
+        return link.toString();
+
+
+    }
 }
 

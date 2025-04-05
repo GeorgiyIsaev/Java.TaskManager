@@ -54,6 +54,12 @@ public class Task extends IdTask  implements Serializable {
                 "; Description: " + description + ";]";
 
     }
+    public String getTypeTask(){
+        return "TASK";
+    }
+    public String getLinkStr(){
+        return "-";
+    }
 
 
 }
