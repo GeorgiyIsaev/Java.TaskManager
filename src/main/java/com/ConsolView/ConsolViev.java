@@ -1,5 +1,6 @@
 package com.ConsolView;
 
+import com.Controller.ChangeTaskMap;
 import com.DateTask.EpicTask;
 import com.DateTask.Task;
 import com.Controller.MemoryTask;
@@ -45,7 +46,13 @@ public  class ConsolViev {
                     listTask = new HashMap<Integer,Task> ();
                 }
                 case("deleteid") -> {
-                  String result =  deleteID(listTask, textName);
+                    if(command.length() <= i++){
+                        System.out.println("Команда не распознана!");
+                        break;
+                    }
+                    String textName = command.substring(i);
+                    String result =  deleteID(listTask, textName);
+                    System.out.println(result);
                 }
 
                 case("save") -> {
@@ -66,7 +73,7 @@ public  class ConsolViev {
                 }
                 case("printId") -> {
 
-
+                    String textName = "";
                 }
                 case("") -> {
 
@@ -174,9 +181,15 @@ public  class ConsolViev {
     }
 
     public static String deleteID(HashMap<Integer,Task> listTask, String id){
-        //СhangeTaskMap
+        int i;
+        try {
+            i = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            i = -1;
+            return "Неверно указан id объекта!";
+        }
 
-        return "";
+        return    ChangeTaskMap.deleteID(listTask, i);
     }
 
 }
