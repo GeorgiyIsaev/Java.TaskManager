@@ -3,6 +3,10 @@ package com.DateTask;
 public class SubTask extends Task{
     EpicTask refrains;
 
+    public EpicTask getRefrains() {
+        return refrains;
+    }
+
     public SubTask(String name, String description) {
         super(name,description);
         this.refrains = null;

@@ -16,11 +16,9 @@ public  class ConsolViev {
             String command = in.nextLine();
 
             String inputCommand;
-           // String text;
             int i = command.indexOf(' ');
             if (i > 0) {
                  inputCommand = command.substring(0, i).toLowerCase();
-                 //text = command.substring(i);
             }
             else inputCommand = command.toLowerCase();
 
@@ -45,6 +43,9 @@ public  class ConsolViev {
                 }
                 case("deleteall") -> {
                     listTask = new HashMap<Integer,Task> ();
+                }
+                case("deleteid") -> {
+                  String result =  deleteID(listTask, textName);
                 }
 
                 case("save") -> {
@@ -170,6 +171,12 @@ public  class ConsolViev {
                         value.getLinkStr(), value.getName()));
             }
         }
+    }
+
+    public static String deleteID(HashMap<Integer,Task> listTask, String id){
+        //СhangeTaskMap
+
+        return "";
     }
 
 }

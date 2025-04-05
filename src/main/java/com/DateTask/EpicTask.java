@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class EpicTask extends Task {
     ArrayList<SubTask> subTasks;
+
+    public ArrayList<SubTask> getSubTasks() {
+        return subTasks;
+    }
+
     public EpicTask(String name, String description){
        super(name, description);
         subTasks = new ArrayList<>();
@@ -15,6 +20,14 @@ public class EpicTask extends Task {
     public void addSubTask(SubTask sub){
         subTasks.add(sub);
     }
+    public void deleteSubTask(SubTask subTask){
+        int i = subTasks.indexOf(subTask);
+        subTasks.remove(subTask);
+
+    }
+
+
+
 
     @Override
     public String toString() {
