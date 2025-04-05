@@ -4,9 +4,7 @@ import com.DateTask.EpicTask;
 import com.DateTask.Task;
 import com.Сontroller.MemoryTask;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public  class ConsolViev {
 
@@ -98,7 +96,7 @@ public  class ConsolViev {
     }
 
     public static void printTaskList(HashMap<Integer,Task> listTask){
-        System.out.println(listTask);
+        printList(listTask);
     }
 
     public static void addEpicTask(HashMap<Integer,Task> listTask, String textName, Scanner in){
@@ -126,5 +124,16 @@ public  class ConsolViev {
 
 
        System.out.println(listTask);
+    }
+
+
+    public static void printList(HashMap<Integer, Task> listTask){
+        Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Task> entry = iterator.next();
+            Integer key = entry.getKey();
+            Task value = entry.getValue();
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
     }
 }
