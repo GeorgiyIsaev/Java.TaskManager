@@ -7,10 +7,11 @@ import com.DateTask.Task;
 import com.Сontroller.MemoryTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Task> listTask = MemoryTask.ReadTaskList();
+        HashMap<Integer,Task> listTask = MemoryTask.ReadTaskList();
 
         ConsolViev.run(listTask);
 

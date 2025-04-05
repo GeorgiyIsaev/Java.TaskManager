@@ -1,13 +1,13 @@
 package com.DateTask;
 
 public abstract class IdTask {
-    int id;
+    Integer id;
     static int staticId =  0;
     public IdTask(){
         id = staticId;
         staticId++;
     }
-    public int getID(){
+    public Integer getID(){
         return id;
     }
 }

@@ -18,19 +18,10 @@ public class EpicTask extends Task {
 
     @Override
     public String toString() {
-        StringBuilder text = new StringBuilder();
-        text.append("[EPIC id ").append(getID()).append("; STATUS-")
-                .append(taskStatus).append(" NAME: ").append(name)
-                .append("; Description: ").append(description).append(";]\n");
-        for(Task task : subTasks){
-            text.append("  ").append(task);
-            if (task.getID() != subTasks.get(subTasks.size() - 1).getID()){
-                text.append("\n");
-            }
-        }
-
-
-        return text.toString();
+        String text = "[EPIC id " + getID() + "; STATUS-" + taskStatus +
+                " NAME: " + name + "; Description: " + description + "; " +
+                " COUNT SubTask: " + subTasks.size() + "]";
+        return text;
     }
     public boolean findID(int id){
         if(this.id == id)
@@ -43,6 +34,17 @@ public class EpicTask extends Task {
             }
         }
         return false;
+    }
+    public String fullInfo(){
+
+        StringBuilder text = new StringBuilder("[EPIC id " + getID() + "; STATUS-" +
+                taskStatus + " NAME: " + name +
+                "; Description: " + description + "; toEPIC_ID: " + +subTasks.size() + "]\n");
+        for(SubTask subTask : subTasks){
+            text.append(subTask).append("\n");
+        }
+        return text.toString();
+
     }
 }
 

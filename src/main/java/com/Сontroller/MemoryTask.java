@@ -4,6 +4,7 @@ import com.DateTask.Task;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MemoryTask {
 
@@ -22,7 +23,7 @@ public class MemoryTask {
         }
     }
 
-    public static void WriteTaskList(ArrayList<Task> listTask ){
+    public static void WriteTaskList(HashMap<Integer,Task> listTask){
         createFile();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
             oos.writeObject(listTask);
@@ -31,14 +32,14 @@ public class MemoryTask {
         }
     }
 
-    public static ArrayList<Task> ReadTaskList(){
-        ArrayList<Task> taskList = new ArrayList<>();
+    public static HashMap<Integer,Task> ReadTaskList(){
+        HashMap<Integer,Task> taskList = new HashMap<>();
         if(!(new File(getNameFile()).exists())){
             return taskList;
         }
 
        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(getNameFile()))){
-           taskList = (ArrayList<Task>)ois.readObject();
+           taskList = (HashMap<Integer,Task>) ois.readObject();
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

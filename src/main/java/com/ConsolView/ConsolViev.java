@@ -5,11 +5,12 @@ import com.DateTask.Task;
 import com.Сontroller.MemoryTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public  class ConsolViev {
 
-    public static void run(ArrayList<Task> listTask){
+    public static void run(HashMap<Integer,Task> listTask){
         Scanner in = new Scanner(System.in);
         boolean isExit = false;
         do{
@@ -36,7 +37,7 @@ public  class ConsolViev {
                     printTaskList(listTask);
                 }
                 case("deleteall") -> {
-                    listTask = new ArrayList<>();
+                    listTask = new HashMap<Integer,Task> ();
                 }
 
                 case("save") -> {
@@ -47,7 +48,9 @@ public  class ConsolViev {
                     String textName = command.substring(i);
                     System.out.print("Input description Task: ");
                     String textDescription = in.nextLine();
-                    listTask.add(new Task(textName,textDescription));
+                    Task task =  new Task(textName,textDescription);
+                    listTask.put(task.getID(),task);
+
                 }
                 case("addepic") -> {
                     String textName = command.substring(i);
@@ -94,13 +97,14 @@ public  class ConsolViev {
         System.out.println(textHelp);
     }
 
-    public static void printTaskList(ArrayList<Task> listTask){
+    public static void printTaskList(HashMap<Integer,Task> listTask){
         System.out.println(listTask);
     }
 
-    public static void addEpicTask(ArrayList<Task> listTask, String textName, Scanner in){
+    public static void addEpicTask(HashMap<Integer,Task> listTask, String textName, Scanner in){
         System.out.print("Input description Epic Task: ");
         String textDescription = in.nextLine();
+
         EpicTask epicTask = new EpicTask(textName,textDescription);
         String console = "";
         int count = 1;
@@ -114,26 +118,12 @@ public  class ConsolViev {
             console = in.nextLine();
             count++;
         }while(!console.equalsIgnoreCase("end"));
-        listTask.add(epicTask);
+
+        listTask.put(epicTask.getID(),epicTask);
     }
 
-    public static void printID(ArrayList<Task> listTask, String id){
-        int idTask = -1;
-        int findIdList = -1;
-        try {
-              idTask = Integer.parseInt(id);
-              for (Task task : listTask){
-                  if (task.findID(idTask)){
-                      //
-                  }
-              }
+    public static void printID(HashMap<Integer,Task> listTask, String id){
 
-        }
-        catch (NumberFormatException e) {
-            idTask = -1;
-        }
-
-       // listTask.get(0)
 
        System.out.println(listTask);
     }

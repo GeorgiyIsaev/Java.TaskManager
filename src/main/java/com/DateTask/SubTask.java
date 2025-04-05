@@ -18,7 +18,13 @@ public class SubTask extends Task{
     public String toString() {
         return "[SubT id " + getID() + "; STATUS-" +
                 taskStatus + " NAME: " + name +
-                "; Description: " + description + ";]";
+                "; Description: " + description + "; toEPIC_ID: " + refrains.getID() + "]";
+
+    }
+    public String fullInfo(){
+        return "[SubT id " + getID() + "; STATUS-" +
+                taskStatus + " NAME: " + name +
+                "; Description: " + description + "; toEPIC_ID: " + refrains.getID() + "]";
 
     }
 }
