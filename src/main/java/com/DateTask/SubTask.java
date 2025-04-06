@@ -6,18 +6,14 @@ public class SubTask extends Task{
     public EpicTask getRefrains() {
         return refrains;
     }
-
     public SubTask(String name, String description) {
         super(name,description);
         this.refrains = null;
     }
-
-
     public SubTask(String name, String description, EpicTask refrains) {
         super(name,description);
         this.refrains = refrains;
     }
-
 
     @Override
     public String fullInfo(){
