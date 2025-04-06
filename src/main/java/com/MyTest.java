@@ -29,11 +29,11 @@ public class MyTest {
         epic.addSubTask(sub2);
 
         listTask.put(epic.getID(),epic);
-
+        listTask.get(3).statusUp();
 
         System.out.println("Старый список");
         printList(listTask);
-
+        listTask.get(3).statusUp();
         ((SubTask) listTask.get(listTask.size()-1)).setName("Изменено");
         System.out.println("Новый список");
         printList(listTask);

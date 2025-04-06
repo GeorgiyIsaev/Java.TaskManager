@@ -30,13 +30,17 @@ public class EpicTask extends Task {
     @Override
     public TaskStatus getTaskStatus() {
         taskStatus = TaskStatus.NEW;
+        int count = 0;
         for (SubTask sub : subTasks){
-            if(sub.getTaskStatus() == TaskStatus.IN_PROGRESS{
+            if (sub.getTaskStatus() == TaskStatus.IN_PROGRESS) {
                 taskStatus = TaskStatus.IN_PROGRESS;
                 return taskStatus;
+            }else if (sub.getTaskStatus() == TaskStatus.DONE){
+                taskStatus = TaskStatus.IN_PROGRESS;
+                count++;
             }
         }
-        if(subTasks.get(0).getTaskStatus() == TaskStatus.DONE || subTasks.isEmpty()) {
+        if (count == subTasks.size()) {
             taskStatus = TaskStatus.DONE;
         }
         return taskStatus;
@@ -45,21 +49,11 @@ public class EpicTask extends Task {
 
     @Override
     public boolean statusUp() {
-        if(this.taskStatus == TaskStatus.NEW)
-            this.taskStatus =TaskStatus.IN_PROGRESS;
-        if(this.taskStatus == TaskStatus.IN_PROGRESS)
-            this.taskStatus =TaskStatus.DONE;
-        else return false;
-        return true;
+        return false;
     }
     @Override
     public boolean statusDown() {
-        if(this.taskStatus == TaskStatus.IN_PROGRESS)
-            this.taskStatus =TaskStatus.NEW;
-        if(this.taskStatus == TaskStatus.DONE)
-            this.taskStatus =TaskStatus.IN_PROGRESS;
-        else return false;
-        return true;
+        return false;
     }
 
 

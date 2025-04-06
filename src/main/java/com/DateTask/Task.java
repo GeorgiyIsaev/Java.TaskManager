@@ -32,14 +32,15 @@ public class Task extends IdTask  implements Serializable {
     public boolean statusUp() {
         if(this.taskStatus == TaskStatus.NEW)
             this.taskStatus =TaskStatus.IN_PROGRESS;
-        if(this.taskStatus == TaskStatus.IN_PROGRESS)
+        else if(this.taskStatus == TaskStatus.IN_PROGRESS)
             this.taskStatus =TaskStatus.DONE;
+        else return false;
         return true;
     }
     public boolean statusDown() {
         if(this.taskStatus == TaskStatus.IN_PROGRESS)
             this.taskStatus =TaskStatus.NEW;
-        if(this.taskStatus == TaskStatus.DONE)
+        else if(this.taskStatus == TaskStatus.DONE)
             this.taskStatus =TaskStatus.IN_PROGRESS;
         else return false;
         return true;
