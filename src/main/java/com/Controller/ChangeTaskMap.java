@@ -63,13 +63,21 @@ public class ChangeTaskMap {
     public static String statusUP(HashMap<Integer, Task> listTask, Integer idTask){
         if (!listTask.containsKey(idTask))
             return "Этого индекса нет в списке";
+        boolean result = listTask.get(idTask).statusUp();
+        if (result)
+            return "Статус выполнения повышен для задачи c ID: " + idTask + " InFO: " + listTask.get(idTask);
 
-        return "";
+        return "Повышение статуса выполнения для задачи с ID: " + idTask + " не возможно!\n" +
+                "Текущий статус этой задачи: " +  listTask.get(idTask).getTaskStatus();
     }
     public static String statusDown(HashMap<Integer, Task> listTask, Integer idTask){
         if (!listTask.containsKey(idTask))
             return "Этого индекса нет в списке";
-        return "";
+        boolean result = listTask.get(idTask).statusDown();
+        if (result)
+            return "Статус выполнения понижен для задачи c ID: " + idTask + " InFO: " + listTask.get(idTask);
+        return "Понижения статуса выполнения для задачи с ID: " + idTask + " не возможно!\n" +
+                "Текущий статус этой задачи: " +  listTask.get(idTask).getTaskStatus();
     }
 
 }
