@@ -47,5 +47,17 @@ public class ChangeTaskMap {
         listTask.put(subTask.getID(), subTask);
         return "Подзадача добавлена";
     }
+    public static String reNameTaskToID(HashMap<Integer, Task> listTask, Integer idTask, String newName){
+        if (!listTask.containsKey(idTask))
+            return "Этого индекса нет в списке";
+        listTask.get(idTask).setName(newName);
+        return "ID: " + idTask + " - " +  listTask.get(idTask);
+    }
+    public static String reDescTaskToID(HashMap<Integer, Task> listTask, Integer idTask, String newDesc){
+        if (!listTask.containsKey(idTask))
+            return "Этого индекса нет в списке";
+        listTask.get(idTask).setDescription(newDesc);
+        return "ID: " + idTask + " - " +  listTask.get(idTask);
+    }
 
 }

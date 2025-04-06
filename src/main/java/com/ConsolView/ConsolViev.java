@@ -83,9 +83,6 @@ public  class ConsolViev {
                         System.out.println("Команда не распознана!");
                         break;
                     }
-
-
-
                     System.out.println(addSubTaskToEpic(listTask, command.substring(i), in)); ////***/
                 }
 
@@ -103,10 +100,34 @@ public  class ConsolViev {
                     System.out.println(result);
                 }
                 case("renameid") -> {
-                    System.out.println("Функция renameid  пока нет"); ////***/
+                    if(command.length() <= i++){
+                        System.out.println("Команда не распознана!");
+                        break;
+                    }
+                    int idTask =  StringToIntID(command.substring(i));
+                    if (!listTask.containsKey(idTask)) {
+                        System.out.println("Этого индекса нет в списке");
+                        break;
+                    }
+                    System.out.print("Input NewName Task: ");
+                    String newName = in.nextLine();
+                    String result =  ChangeTaskMap.reNameTaskToID(listTask, idTask, newName);
+                    System.out.println(result);
                 }
                 case("redescid") -> {
-                    System.out.println("Функция redescid  пока нет"); ////***/
+                    if(command.length() <= i++){
+                        System.out.println("Команда не распознана!");
+                        break;
+                    }
+                    int idTask =  StringToIntID(command.substring(i));
+                    if (!listTask.containsKey(idTask)) {
+                        System.out.println("Этого индекса нет в списке");
+                        break;
+                    }
+                    System.out.print("Input NewDescription Task: ");
+                    String newName = in.nextLine();
+                    String result =  ChangeTaskMap.reDescTaskToID(listTask, idTask, newName);
+                    System.out.println(result);
                 }
 
                 case("restatusid") -> {
