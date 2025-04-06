@@ -130,18 +130,38 @@ public  class ConsolViev {
                     System.out.println(result);
                 }
 
-                case("restatusid") -> {
-                    System.out.println("Функция restatusid  пока нет"); ////***/
+                case("statusupid") -> {
+                    if(command.length() <= i++){
+                        System.out.println("Команда не распознана!");
+                        break;
+                    }
+                    int idTask =  StringToIntID(command.substring(i));
+                    if (!listTask.containsKey(idTask)) {
+                        System.out.println("Этого индекса нет в списке");
+                        break;
+                    }
+                    String result =  ChangeTaskMap.statusUP(listTask, idTask);
+                    System.out.println(result);
+                }
+
+                case("statusdownid") -> {
+                    if(command.length() <= i++){
+                        System.out.println("Команда не распознана!");
+                        break;
+                    }
+                    int idTask =  StringToIntID(command.substring(i));
+                    if (!listTask.containsKey(idTask)) {
+                        System.out.println("Этого индекса нет в списке");
+                        break;
+                    }
+                    String result =  ChangeTaskMap.statusDown(listTask, idTask);
+                    System.out.println(result);
                 }
 
                 default -> {
                     System.out.println("Команда не распознана!");
                 }
             }
-
-
-
-
         }
         while (!isExit);
 
@@ -171,8 +191,8 @@ public  class ConsolViev {
         textHelp.append(" \"deleteID 'NUMBER ID'\" - удалить задачу с ID\n");
         textHelp.append(" \"reNameID 'NUMBER ID'\" – изменить имя задачи с ID\n");
         textHelp.append(" \"reDescID 'NUMBER ID'\" – изменить описание задачи с ID\n");
-        textHelp.append(" \"reStatusID 'NUMBER ID' (NEW, PROG, DONE)\" – изменить статус задачи с ID\n");
-
+        textHelp.append(" \"StatusUpID 'NUMBER ID'\"  – повысит статус выполнения задачи с ID\n");
+        textHelp.append(" \"StatusDownID 'NUMBER ID'\"  – понизить статус выполнения задачи с ID\n");
 
         System.out.println(textHelp);
     }
