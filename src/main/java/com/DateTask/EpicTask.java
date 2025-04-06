@@ -29,13 +29,7 @@ public class EpicTask extends Task {
 
 
 
-    @Override
-    public String toString() {
-        String text = "[EPIC id " + getID() + "; STATUS-" + taskStatus +
-                " NAME: " + name + "; Description: " + description + "; " +
-                " COUNT SubTask: " + subTasks.size() + "]";
-        return text;
-    }
+
     public boolean findID(int id){
         if(this.id == id)
              return true;
@@ -48,6 +42,8 @@ public class EpicTask extends Task {
         }
         return false;
     }
+
+    @Override
     public String fullInfo(){
 
         StringBuilder text = new StringBuilder("[EPIC id " + getID() + "; STATUS-" +

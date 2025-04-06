@@ -18,13 +18,8 @@ public class SubTask extends Task{
         this.refrains = refrains;
     }
 
-    @Override
-    public String toString() {
-        return "[SubT id " + getID() + "; STATUS-" +
-                taskStatus + " NAME: " + name +
-                "; Description: " + description + "; toEPIC_ID: " + refrains.getID() + "]";
 
-    }
+    @Override
     public String fullInfo(){
         return "[SubT id " + getID() + "; STATUS-" +
                 taskStatus + " NAME: " + name +

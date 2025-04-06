@@ -40,9 +40,8 @@ public class Task extends IdTask  implements Serializable {
 
     @Override
     public String toString() {
-        return "[TASK id " + getID() + "; STATUS-" +
-                taskStatus + " NAME: " + name +
-                "; Description: " + description + ";]";
+        return name +
+                " {" + description + "}";
 
     }
     public boolean findID(int id){
