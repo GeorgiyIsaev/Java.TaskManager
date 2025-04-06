@@ -58,6 +58,11 @@ public  class ConsolViev {
 
                     System.out.println(printID(listTask, command.substring(i)));
                 }
+                case("printdebug") -> {
+                    printListDebug(listTask);
+                }
+
+
 
 
                 /*Добавление*/
@@ -192,7 +197,7 @@ public  class ConsolViev {
     }
 
 
-    static String myFormat = "%-4s %-4s %-8s %-12s %-12s %-25s";
+    static String myFormat = "%-4s %-8s %-12s %-12s %-25s";
     public static String printID(HashMap<Integer,Task> listTask, String id){
 
         int idTask = StringToIntID(id);
@@ -201,15 +206,15 @@ public  class ConsolViev {
         Task task = listTask.get(idTask);
 
         String consoleTable = "";
-        consoleTable += String.format(myFormat,"KEY","ID","TYPE","STATUS","LINK","INFORMATION");
+        consoleTable += String.format(myFormat,"ID","TYPE","STATUS","LINK","INFORMATION");
         consoleTable += "\n";
-        consoleTable += String.format(myFormat, idTask, task.getID(), task.getTypeTask(), task.getTaskStatus(),
+        consoleTable += String.format(myFormat, task.getID(), task.getTypeTask(), task.getTaskStatus(),
                 task.getLinkStr(), task.getName());
 
         if(task.getTypeTask().equalsIgnoreCase("EPIC")){
             for(SubTask subTask : ((EpicTask)task).getSubTasks()){
                 consoleTable += "\n";
-                consoleTable += String.format(myFormat, subTask.getID(), subTask.getID(), subTask.getTypeTask(), subTask.getTaskStatus(),
+                consoleTable += String.format(myFormat, subTask.getID(), subTask.getTypeTask(), subTask.getTaskStatus(),
                         subTask.getLinkStr(), subTask.getName());
             }
         }
@@ -220,7 +225,7 @@ public  class ConsolViev {
 
     public static void printList(HashMap<Integer, Task> listTask){
        // String myFormat = "%3s %4s %8s %12s %12s %25s";
-        System.out.println(String.format(myFormat,"KEY","ID","TYPE","STATUS","LINK","INFORMATION"));
+        System.out.println(String.format(myFormat,"ID","TYPE","STATUS","LINK","INFORMATION"));
 
         Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -228,7 +233,7 @@ public  class ConsolViev {
             Integer key = entry.getKey();
             Task value = entry.getValue();
             System.out.println(String.format(myFormat,
-                    key,value.getID(),value.getTypeTask(),value.getTaskStatus(),
+                    key,value.getTypeTask(),value.getTaskStatus(),
                     value.getLinkStr(),value.getName()));
 
         }
@@ -238,7 +243,7 @@ public  class ConsolViev {
        // "EPIC" "TASK" "SubTASK"
 
        // String myFormat = "%3s %4s %8s %12s %12s %25s";
-        System.out.println(String.format(myFormat,"KEY","ID","TYPE","STATUS","LINK","INFORMATION"));
+        System.out.println(String.format(myFormat,"ID","TYPE","STATUS","LINK","INFORMATION"));
 
         Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -248,9 +253,24 @@ public  class ConsolViev {
 
             if(type.equalsIgnoreCase(value.getTypeTask())) {
                 System.out.println(String.format(myFormat,
-                        key, value.getID(), value.getTypeTask(), value.getTaskStatus(),
+                        value.getID(), value.getTypeTask(), value.getTaskStatus(),
                         value.getLinkStr(), value.getName()));
             }
+        }
+    }
+    public static void printListDebug(HashMap<Integer, Task> listTask){
+        String myFormatDebug = "%3s %4s %8s %12s %12s %25s";
+        System.out.println(String.format(myFormatDebug,"KEY","ID","TYPE","STATUS","LINK","INFORMATION"));
+
+        Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Task> entry = iterator.next();
+            Integer key = entry.getKey();
+            Task value = entry.getValue();
+            System.out.println(String.format(myFormatDebug,
+                    key,value.getID(),value.getTypeTask(),value.getTaskStatus(),
+                    value.getLinkStr(),value.getName()));
+
         }
     }
 
