@@ -28,9 +28,24 @@ public class Task extends IdTask  implements Serializable {
         this.description = description;
     }
 
-    public void setTaskStatus(TaskStatus taskStatus) {
-        this.taskStatus = taskStatus;
+
+    public boolean statusUp() {
+        if(this.taskStatus == TaskStatus.NEW)
+            this.taskStatus =TaskStatus.IN_PROGRESS;
+        if(this.taskStatus == TaskStatus.IN_PROGRESS)
+            this.taskStatus =TaskStatus.DONE;
+        return true;
     }
+    public boolean statusDown() {
+        if(this.taskStatus == TaskStatus.IN_PROGRESS)
+            this.taskStatus =TaskStatus.NEW;
+        if(this.taskStatus == TaskStatus.DONE)
+            this.taskStatus =TaskStatus.IN_PROGRESS;
+        else return false;
+        return true;
+    }
+
+
 
     public Task(String name, String description) {
         this.name = name;

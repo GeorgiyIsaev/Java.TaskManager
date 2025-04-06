@@ -60,4 +60,16 @@ public class ChangeTaskMap {
         return "ID: " + idTask + " - " +  listTask.get(idTask);
     }
 
+    public static String statusUP(HashMap<Integer, Task> listTask, Integer idTask){
+        if (!listTask.containsKey(idTask))
+            return "Этого индекса нет в списке";
+
+        return "";
+    }
+    public static String statusDown(HashMap<Integer, Task> listTask, Integer idTask){
+        if (!listTask.containsKey(idTask))
+            return "Этого индекса нет в списке";
+        return "";
+    }
+
 }
