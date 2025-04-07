@@ -40,14 +40,19 @@ public class MyTest {
             printList(managerTaskMap.getListTask());
             System.out.println(managerTaskMap.getListTask().get(2).fullInfo());
 
-            Task task = managerTaskMap.deleteIDTask(3);
-            System.out.println("удаления епик");
-            System.out.println(task);
-
-
-
-            System.out.println("Демонстрация удаления епика");
+            managerTaskMap.reNameToIDTask(5, "Крутое название");
+            managerTaskMap.reDescToIDTask(3, "Крутое описание");
+            System.out.println("Демонстрация изменений");
             printList(managerTaskMap.getListTask());
+
+           // Task task = managerTaskMap.deleteIDTask(3);
+           // System.out.println("удаления епик");
+            //System.out.println(task);
+
+
+
+           // System.out.println("Демонстрация удаления епика");
+           ///printList(managerTaskMap.getListTask());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
