@@ -31,7 +31,9 @@ public class MyTest {
             System.out.println("Демонстрация 2");
             printList(managerTaskMap.getListTask());
 
-
+            System.out.println("Отдельно");
+            System.out.println(managerTaskMap.getListTask().get(2).fullInfo());
+            System.out.println(managerTaskMap.getListTask().get(3).fullInfo());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

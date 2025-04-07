@@ -18,6 +18,8 @@ public class ManagerTaskMap {
 
        // listTask = MemoryTask.ReadTaskList();
     }
+
+    ///////////// ДОБАВЛЕНИЯ
     public void addTask(String nameTask, String discTask){
         int id = CreateID.getNewID();
         listTask.put(id, new Task(id, nameTask,discTask));
@@ -38,13 +40,6 @@ public class ManagerTaskMap {
         ((EpicTask)listTask.get(idEpic)).addSubTask(subTask);
         listTask.put(id, subTask);
     }
-
-
-
-
-
-
-
     public static String addSubTaskToEpic(HashMap<Integer, Task> listTask, Integer idEPIC,
                                           String nameSubTask, String discSubTask){
         if (!listTask.containsKey(idEPIC))
@@ -52,10 +47,12 @@ public class ManagerTaskMap {
         if(!listTask.get(idEPIC).getTypeTask().equalsIgnoreCase("EPIC"))
             return "Задача с ID: " + idEPIC + " не является ЭПИКОМ, добавление подзадачи не возможно!";
         SubTask subTask = new SubTask(0, nameSubTask,discSubTask, (EpicTask) listTask.get(idEPIC));
-       // ((EpicTask)listTask.get(idEPIC)).addSubTask(subTask);
+        ((EpicTask)listTask.get(idEPIC)).addSubTask(subTask);
         listTask.put(subTask.getID(), subTask);
         return "Подзадача добавлена";
     }
+
+
 
 
 
