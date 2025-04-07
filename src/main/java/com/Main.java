@@ -16,7 +16,7 @@ public class Main {
        // System.out.println("У вас в работе "+ listTask.size() +" задач.");
        // System.out.println("Введите help что бы отобразить доступные команды.");
 
-        ConsoleView consoleView = new ConsoleView();
+        ConsoleView consoleView = new ConsoleView(listTask);
         consoleView.run();
 
        // ConsoleViewOld.run(listTask);

@@ -8,8 +8,19 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ConsoleView {
-    public void run(HashMap<Integer, Task> listTask){
-        Scanner in = new Scanner(System.in);
+    Scanner in;
+    HashMap<Integer, Task> listTask;
+
+    public ConsoleView(HashMap<Integer, Task> listTask){
+        this.listTask =listTask;
+        in = new Scanner(System.in);
+    }
+
+    public void run(){
+        System.out.println("Добро пожаловать в TaskManager!");
+        System.out.println("У вас в работе "+ listTask.size() +" задач.");
+        System.out.println("Введите help что бы отобразить доступные команды.");
+
         boolean isExit = false;
         do{
             System.out.print("Input command: ");
