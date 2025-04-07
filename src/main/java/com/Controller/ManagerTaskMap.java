@@ -19,7 +19,7 @@ public class ManagerTaskMap {
        // listTask = MemoryTask.ReadTaskList();
     }
 
-    ///////////// ДОБАВЛЕНИЯ
+    /// /// /// /// ДОБАВЛЕНИЕ
     public void addTask(String nameTask, String discTask){
         int id = CreateID.getNewID();
         listTask.put(id, new Task(id, nameTask,discTask));
@@ -40,20 +40,36 @@ public class ManagerTaskMap {
         ((EpicTask)listTask.get(idEpic)).addSubTask(subTask);
         listTask.put(id, subTask);
     }
-    public static String addSubTaskToEpic(HashMap<Integer, Task> listTask, Integer idEPIC,
-                                          String nameSubTask, String discSubTask){
-        if (!listTask.containsKey(idEPIC))
-            return "Этого индекса нет в списке";
-        if(!listTask.get(idEPIC).getTypeTask().equalsIgnoreCase("EPIC"))
-            return "Задача с ID: " + idEPIC + " не является ЭПИКОМ, добавление подзадачи не возможно!";
-        SubTask subTask = new SubTask(0, nameSubTask,discSubTask, (EpicTask) listTask.get(idEPIC));
-        ((EpicTask)listTask.get(idEPIC)).addSubTask(subTask);
-        listTask.put(subTask.getID(), subTask);
-        return "Подзадача добавлена";
+
+    /// /// /// /// УДАЛЕНИЕ
+    public void clearHashMap() {
+        this.listTask = new HashMap<>();
     }
+    public Task deleteIDTask(Integer idTask) throws Exception {
+        String textInfo = "Этого индекса нет в списке";
+        if (!listTask.containsKey(idTask)){
+            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
+        }
 
-
-
+        Task task = listTask.get(idTask);
+        if(listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC")){
+            for(SubTask subTask :  ((EpicTask)listTask.get(idTask)).getSubTasks()){
+                listTask.remove(subTask.getID());
+            }
+            listTask.remove(idTask);
+            return task;
+        }
+        else if(listTask.get(idTask).getTypeTask().equalsIgnoreCase("SubTASK")){
+            ((SubTask)listTask.get(idTask)).getRefrains().deleteSubTask((SubTask)listTask.get(idTask));
+            listTask.remove(idTask);
+            return task;
+        }
+        else if(listTask.get(idTask).getTypeTask().equalsIgnoreCase("TASK")){
+            listTask.remove(idTask);
+            return task;
+        }
+        return null;
+    }
 
 
 

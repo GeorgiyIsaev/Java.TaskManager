@@ -35,6 +35,20 @@ public class MyTest {
             System.out.println(managerTaskMap.getListTask().get(2).fullInfo());
             System.out.println(managerTaskMap.getListTask().get(3).fullInfo());
 
+            managerTaskMap.deleteIDTask(6);
+            System.out.println("Демонстрация удаления саба");
+            printList(managerTaskMap.getListTask());
+            System.out.println(managerTaskMap.getListTask().get(2).fullInfo());
+
+            Task task = managerTaskMap.deleteIDTask(3);
+            System.out.println("удаления епик");
+            System.out.println(task);
+
+
+
+            System.out.println("Демонстрация удаления епика");
+            printList(managerTaskMap.getListTask());
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

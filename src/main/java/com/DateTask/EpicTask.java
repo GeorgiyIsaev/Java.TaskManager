@@ -20,11 +20,11 @@ public class EpicTask extends Task {
     public void addSubTask(SubTask sub){
         subTasks.add(sub);
     }
-//    public void deleteSubTask(SubTask subTask){
-//        int i = subTasks.indexOf(subTask);
-//        subTasks.remove(subTask);
-//
-//    }
+    public void deleteSubTask(SubTask subTask){
+        int i = subTasks.indexOf(subTask);
+        subTasks.remove(subTask);
+
+    }
 
 
     @Override
