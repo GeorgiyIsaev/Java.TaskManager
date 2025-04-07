@@ -25,6 +25,8 @@ public class ConsoleView {
 
         boolean isExit = false;
         do{
+            try {
+
             System.out.print("Input command: ");
             String command = in.nextLine();
 
@@ -35,72 +37,77 @@ public class ConsoleView {
             }
             else inputCommand = command.toLowerCase();
 
-            switch (inputCommand){
-                case("exit") -> {
+            switch (inputCommand) {
+                case ("exit") -> {
                     isExit = true;
                 }
-                case("help") -> {
+                case ("help") -> {
                     help();
                 }
-                case("save") -> {
+                case ("save") -> {
                     System.out.println("Команда  statusdownid не распознана!");
                 }
 
                 /*Отображение*/
-                case("printall") -> {
+                case ("printall") -> {
                     System.out.println("Команда  statusdownid не распознана!");
                 }
-                case("printtask") -> {
+                case ("printtask") -> {
                     System.out.println("Команда  statnjusdownid не распознана!");
                 }
-                case("printepic") -> {
+                case ("printepic") -> {
                     System.out.println("Команда  statjusdownid не распознана!");
                 }
-                case("printsubtask") -> {
+                case ("printsubtask") -> {
                     System.out.println("Команда  statjjusdownid не распознана!");
                 }
-                case("printid") -> {
+                case ("printid") -> {
                     System.out.println("Команда  statujjsdownid не распознана!");
                 }
-                case("printdebug") -> {
+                case ("printdebug") -> {
                     System.out.println("Команда  statusdow[nid не распознана!");
                 }
 
                 /*Добавление*/
-                case("add") -> {
+                case ("add") -> {
                     System.out.println("Команда  statusdgergownid не распознана!");
 
                 }
-                case("addepic") -> {
+                case ("addepic") -> {
                     System.out.println("Команда  statusdreownid не распознана!");
                 }
-                case("addsubtasktoid") -> {
+                case ("addsubtasktoid") -> {
                     System.out.println("Команда  statusjrdownid не распознана!");
                 }
 
                 /*Изменение*/
-                case("deleteall") -> {
+                case ("deleteall") -> {
                     System.out.println("Команда  statukydownid не распознана!");
                 }
-                case("deleteid") -> {
+                case ("deleteid") -> {
                     System.out.println("Команда  statusdktkownid не распознана!");
                 }
-                case("renameid") -> {
+                case ("renameid") -> {
                     System.out.println("Команда  statfwefewusdownid не распознана!");
                 }
-                case("redescid") -> {
+                case ("redescid") -> {
                     System.out.println("Команда  statusdgewgownid не распознана!");
                 }
-                case("statusupid") -> {
+                case ("statusupid") -> {
                     System.out.println("Команда  stdwqdtusdownid не распознана!");
                 }
-                case("statusdownid") -> {
+                case ("statusdownid") -> {
                     System.out.println("Команда  statuwdqdsdfweownid не распознана!");
                 }
 
                 default -> {
                     System.out.println("Команда не распознана!");
                 }
+            }
+
+            }
+            catch (Exception ex){
+                System.out.println(ex.getMessage());
             }
         }
         while (!isExit);
