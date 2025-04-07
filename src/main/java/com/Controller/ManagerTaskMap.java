@@ -42,11 +42,10 @@ public class ManagerTaskMap {
     }
 
     /// /// /// /// УДАЛЕНИЕ
-    public void clearHashMap() {
+    public void deleteALL() {
         this.listTask = new HashMap<>();
     }
     public Task deleteIDTask(Integer idTask) throws Exception {
-        String textInfo = "Этого индекса нет в списке";
         if (!listTask.containsKey(idTask)){
             throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
         }
@@ -70,7 +69,18 @@ public class ManagerTaskMap {
         }
         return null;
     }
-
-
+    /// /// /// /// Изменение
+    public void reNameToIDTask (Integer idTask, String newName) throws Exception {
+        if (!listTask.containsKey(idTask)){
+            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
+        }
+        listTask.get(idTask).setName(newName);
+    }
+    public void reDescToIDTask (Integer idTask, String newDescription) throws Exception {
+        if (!listTask.containsKey(idTask)){
+            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
+        }
+        listTask.get(idTask).setName(newDescription);
+    }
 
 }
