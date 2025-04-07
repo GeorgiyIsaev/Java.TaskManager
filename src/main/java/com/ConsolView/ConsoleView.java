@@ -1,6 +1,7 @@
 package com.ConsolView;
 
 import com.Controller.ChangeTaskMap;
+import com.Controller.ManagerTaskMap;
 import com.Controller.MemoryTask;
 import com.DateTask.Task;
 
@@ -10,15 +11,16 @@ import java.util.Scanner;
 public class ConsoleView {
     Scanner in;
     HashMap<Integer, Task> listTask;
+    ManagerTaskMap managerTaskMap = new ManagerTaskMap();
 
-    public ConsoleView(HashMap<Integer, Task> listTask){
-        this.listTask =listTask;
+    public ConsoleView(ManagerTaskMap managerTaskMap ){
+        this.managerTaskMap = managerTaskMap;
         in = new Scanner(System.in);
     }
 
     public void run(){
         System.out.println("Добро пожаловать в TaskManager!");
-        System.out.println("У вас в работе "+ listTask.size() +" задач.");
+        System.out.println("У вас в работе "+ managerTaskMap.getListTask().size() +" задач.");
         System.out.println("Введите help что бы отобразить доступные команды.");
 
         boolean isExit = false;
