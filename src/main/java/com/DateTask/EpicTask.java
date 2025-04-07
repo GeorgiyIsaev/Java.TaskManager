@@ -14,12 +14,12 @@ public class EpicTask extends Task {
         subTasks = new ArrayList<>();
 
     }
-//    public void addSubTask(String name, String description){
-//        subTasks.add(new SubTask (name, description));
-//    }
-//    public void addSubTask(SubTask sub){
-//        subTasks.add(sub);
-//    }
+    public void addSubTask(Integer id, String name, String description){
+        subTasks.add(new SubTask (id, name, description));
+    }
+    public void addSubTask(SubTask sub){
+        subTasks.add(sub);
+    }
 //    public void deleteSubTask(SubTask subTask){
 //        int i = subTasks.indexOf(subTask);
 //        subTasks.remove(subTask);

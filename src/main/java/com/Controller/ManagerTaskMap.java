@@ -22,6 +22,25 @@ public class ManagerTaskMap {
         int id = CreateID.getNewID();
         listTask.put(id, new Task(id, nameTask,discTask));
     }
+    public void addEpic(String nameEpic, String discEpic){
+        int id = CreateID.getNewID();
+        listTask.put(id, new EpicTask(id, nameEpic,discEpic));
+    }
+    public void addSubTaskToEpic(String nameSubTask, String discSubTask, Integer idEpic) throws Exception {
+        if (!listTask.containsKey(idEpic)){
+            throw new Exception("ERROR: Задачи с индексом " + idEpic + " не существует!" );
+        }
+        if(!listTask.get(idEpic).getTypeTask().equalsIgnoreCase("EPIC")){
+            throw new Exception("ERROR: Задача с ID: " + idEpic + " не является ЭПИКОМ, добавление подзадачи не возможно!;" );
+        }
+        int id = CreateID.getNewID();
+        SubTask subTask = new SubTask(id, nameSubTask,discSubTask, (EpicTask) listTask.get(idEpic));
+        ((EpicTask)listTask.get(idEpic)).addSubTask(subTask);
+        listTask.put(id, subTask);
+    }
+
+
+
 
 
 
