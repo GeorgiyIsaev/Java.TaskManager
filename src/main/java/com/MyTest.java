@@ -20,8 +20,22 @@ public class MyTest {
         System.out.println("Демонстрация");
         printList(managerTaskMap.getListTask());
 
+        try {
+            managerTaskMap.addEpic("Эпичная задача", "Очень эпичное описание");
+            managerTaskMap.addEpic("Мини Эпик", "Короткое описание");
+            managerTaskMap.addSubTaskToEpic("Подзадача 01", "Для тестирования 01", (Integer) 2);
+            managerTaskMap.addSubTaskToEpic("Подзадача 02", "Для тестирования 02", 2);
+            managerTaskMap.addSubTaskToEpic("Подзадача 03", "Для тестирования 03", 2);
+            managerTaskMap.addSubTaskToEpic("Один пункт", "Ничего важного", 3);
+
+            System.out.println("Демонстрация 2");
+            printList(managerTaskMap.getListTask());
 
 
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
 
     }
