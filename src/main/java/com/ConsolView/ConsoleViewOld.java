@@ -8,7 +8,7 @@ import com.Controller.MemoryTask;
 
 import java.util.*;
 
-public  class ConsolViev {
+public  class ConsoleViewOld {
 
     public static void run(HashMap<Integer,Task> listTask){
         Scanner in = new Scanner(System.in);
