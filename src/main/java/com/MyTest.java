@@ -1,6 +1,7 @@
 package com;
 
 
+import com.ConsolView.ConsoleView;
 import com.Controller.ManagerTaskMap;
 import com.DateTask.EpicTask;
 import com.DateTask.SubTask;
@@ -48,11 +49,16 @@ public class MyTest {
            // Task task = managerTaskMap.deleteIDTask(3);
            // System.out.println("удаления епик");
             //System.out.println(task);
+            ConsoleView consoleView = new ConsoleView(managerTaskMap);
+            System.out.println("ID 2");
+            System.out.println(consoleView.printID("2"));
 
 
 
            // System.out.println("Демонстрация удаления епика");
            ///printList(managerTaskMap.getListTask());
+
+
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
