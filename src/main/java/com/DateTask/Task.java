@@ -2,10 +2,20 @@ package com.DateTask;
 
 import java.io.Serializable;
 
-public class Task extends IdTask  implements Serializable {
+public class Task implements Serializable {
+    Integer id;
+    public Integer getID(){
+        return id;
+    }
     protected String name;
     protected String description;
     protected TaskStatus taskStatus;
+    public Task(int id,  String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.taskStatus = TaskStatus.NEW;
+    }
 
 
     public String getName() {
@@ -48,11 +58,6 @@ public class Task extends IdTask  implements Serializable {
 
 
 
-    public Task(String name, String description) {
-        this.name = name;
-        this.description = description;
-        this.taskStatus = TaskStatus.NEW;
-    }
 
     @Override
     public String toString() {

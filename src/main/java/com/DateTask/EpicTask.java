@@ -9,22 +9,22 @@ public class EpicTask extends Task {
         return subTasks;
     }
 
-    public EpicTask(String name, String description){
-       super(name, description);
+    public EpicTask(Integer id, String name, String description){
+       super(id, name, description);
         subTasks = new ArrayList<>();
 
     }
-    public void addSubTask(String name, String description){
-        subTasks.add(new SubTask (name, description));
-    }
-    public void addSubTask(SubTask sub){
-        subTasks.add(sub);
-    }
-    public void deleteSubTask(SubTask subTask){
-        int i = subTasks.indexOf(subTask);
-        subTasks.remove(subTask);
-
-    }
+//    public void addSubTask(String name, String description){
+//        subTasks.add(new SubTask (name, description));
+//    }
+//    public void addSubTask(SubTask sub){
+//        subTasks.add(sub);
+//    }
+//    public void deleteSubTask(SubTask subTask){
+//        int i = subTasks.indexOf(subTask);
+//        subTasks.remove(subTask);
+//
+//    }
 
 
     @Override
