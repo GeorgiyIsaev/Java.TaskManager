@@ -14,9 +14,9 @@ public class ManagerTaskMap {
     }
 
     public ManagerTaskMap (){
-        listTask = new HashMap<>();
+        //listTask = new HashMap<>();
 
-       // listTask = MemoryTask.ReadTaskList();
+       listTask = MemoryTask.ReadTaskList();
     }
 
     /// /// /// /// ДОБАВЛЕНИЕ
@@ -82,5 +82,9 @@ public class ManagerTaskMap {
         }
         listTask.get(idTask).setDescription(newDescription);
     }
+    public void saveToFileTXT(){
+        MemoryTask.WriteTaskList(listTask);
+    }
+
 
 }

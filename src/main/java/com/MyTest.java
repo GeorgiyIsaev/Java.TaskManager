@@ -55,6 +55,7 @@ public class MyTest {
 
            // System.out.println("Демонстрация удаления епика");
            ///printList(managerTaskMap.getListTask());
+             managerTaskMap.saveToFileTXT();
 
 
 
