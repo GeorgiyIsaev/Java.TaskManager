@@ -1,6 +1,4 @@
 package com.ConsolView;
-
-
 import com.Controller.ManagerTaskMap;
 
 import com.DateTask.Task;
@@ -14,7 +12,6 @@ import java.util.Scanner;
 
 public class ConsoleView {
     Scanner in;
-    //HashMap<Integer, Task> listTask;
     ManagerTaskMap managerTaskMap;
 
     public ConsoleView(ManagerTaskMap managerTaskMap) {
@@ -42,6 +39,7 @@ public class ConsoleView {
             else inputCommand = command.toLowerCase();
 
             switch (inputCommand) {
+/// //// //// /// /// ОБЩЕЕ
                 case ("exit") -> {
                     isExit = true;
                 }
@@ -49,10 +47,10 @@ public class ConsoleView {
                     help();
                 }
                 case ("save") -> {
-                    managerTaskMap.saveToFileTXT();
+                   // managerTaskMap.saveToFileTXT();
                 }
 
-                /*Отображение*/
+/// //// //// /// /// ПРИНТ
                 case ("printall") -> {
                     printTaskMap();
                 }
@@ -76,7 +74,7 @@ public class ConsoleView {
                     printDebug();
                 }
 
-                /*Добавление*/
+/// //// //// /// /// ДОБАВЛЕНИЕ
                 case ("add") -> {
                     if (command.length() <= i++) {
                         throw new Exception ("ERROR: Вы не ввели имя задачи");
@@ -116,7 +114,7 @@ public class ConsoleView {
                     System.out.println("Add SubTask (id = "+task.getID() +"): " + task);
                 }
 
-                /*Изменение*/
+/// //// //// /// /// ИЗМЕНЕНИЕ и УДАЛЕНИЕ
                 case ("deleteall") -> {
                     managerTaskMap.deleteALL();
                 }
@@ -218,30 +216,27 @@ public class ConsoleView {
     }
 
     public void help(){
-        StringBuilder textHelp = new StringBuilder();
-        textHelp.append("ДОСТУПНЫЕ КОМАНДЫ: \n");
-        textHelp.append(" \"help\" - показать список команда\n");
-        textHelp.append(" \"exit\" - завершить программу\n");
-        textHelp.append(" \"save\" - сохранить все записи\n");
 
-        textHelp.append("КОМАНДЫ ДЛЯ ОТОБРАЖЕНИЯ ЗАДАЧ: \n");
-        textHelp.append(" \"printAll\" - показать все задачи\n");
-        textHelp.append(" \"printEpic\" - показать только ЭПИКИ\n");
-        textHelp.append(" \"printSubTask\" - показать только ПОДЗАДАЧИ \n");
-        textHelp.append(" \"printTask\" - показать только ОБЫЧНЫЕ ЗАДАЧИ \n");
-        textHelp.append(" \"printId 'NUMBER ID'\" - показать задачу по id\n");
-
-        textHelp.append("КОМАНДЫ ДЛЯ ДОБАВЛЕНИЯ ЗАДАЧ: \n");
-        textHelp.append(" \"add 'указать имя задач'\" - добавить обычную задачу\n");
-        textHelp.append(" \"addEpic 'указать имя задач'\" - добавить задачу c подзадачами\n");
-        textHelp.append(" \"addSubTaskToID 'NUMBER ID'\" - добавить подзадачу к Эпику с указанным ID\n");
-
-        textHelp.append("УДАЛЕНИЕ И ИЗМЕНЕНИЕ ЗАДАЧ: \n");
-        textHelp.append(" \"deleteAll\" - удалить все задачи\n");
-        textHelp.append(" \"deleteID 'NUMBER ID'\" - удалить задачу с ID\n");
-        textHelp.append(" \"reNameID 'NUMBER ID'\" – изменить имя задачи с ID\n");
-        textHelp.append(" \"reDescID 'NUMBER ID'\" – изменить описание задачи с ID\n");
-        textHelp.append(" \"newStatusId 'NUMBER ID' ('NEW, 'PROG' or 'DONE')\"  – изменить статус выполнения задачи с ID\n");
+        String textHelp = "ДОСТУПНЫЕ КОМАНДЫ: \n" +
+                " \"help\" - показать список команда\n" +
+                " \"exit\" - завершить программу\n" +
+                " \"save\" - сохранить все записи\n" +
+                "КОМАНДЫ ДЛЯ ОТОБРАЖЕНИЯ ЗАДАЧ: \n" +
+                " \"printAll\" - показать все задачи\n" +
+                " \"printEpic\" - показать только ЭПИКИ\n" +
+                " \"printSubTask\" - показать только ПОДЗАДАЧИ \n" +
+                " \"printTask\" - показать только ОБЫЧНЫЕ ЗАДАЧИ \n" +
+                " \"printId 'NUMBER ID'\" - показать задачу по id\n" +
+                "КОМАНДЫ ДЛЯ ДОБАВЛЕНИЯ ЗАДАЧ: \n" +
+                " \"add 'указать имя задач'\" - добавить обычную задачу\n" +
+                " \"addEpic 'указать имя задач'\" - добавить задачу c подзадачами\n" +
+                " \"addSubTaskToID 'NUMBER ID'\" - добавить подзадачу к Эпику с указанным ID\n" +
+                "УДАЛЕНИЕ И ИЗМЕНЕНИЕ ЗАДАЧ: \n" +
+                " \"deleteAll\" - удалить все задачи\n" +
+                " \"deleteID 'NUMBER ID'\" - удалить задачу с ID\n" +
+                " \"reNameID 'NUMBER ID'\" – изменить имя задачи с ID\n" +
+                " \"reDescID 'NUMBER ID'\" – изменить описание задачи с ID\n" +
+                " \"newStatusId 'NUMBER ID' ('NEW, 'PROG' or 'DONE')\"  – изменить статус выполнения задачи с ID\n";
          System.out.println(textHelp);
     }
 

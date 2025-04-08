@@ -58,24 +58,24 @@ public class MemoryTaskMapToTXT {
                lineFile.add(scanner.nextLine());
            }
           Task task=null;
-          for(int i = 0; i< lineFile.size(); i++){
-              String type = lineFile.get(i);
+          for(int i = 0; i< lineFile.size();){
+              String type = lineFile.get(i++);
               String status = lineFile.get(i++);
               String name = lineFile.get(i++);
               String description = lineFile.get(i++);
 
               if (type.equalsIgnoreCase("TASK")){
                   task =  taskMap.addTask(name,description);
-                  task.setTaskStatus(TaskStatus.toTaskStatus(type));
+                  task.setTaskStatus(TaskStatus.toTaskStatus(status));
               }
               if (type.equalsIgnoreCase("EPIC")){
                   task =  taskMap.addEpic(name,description);
-                  task.setTaskStatus(TaskStatus.toTaskStatus(type));
+                  task.setTaskStatus(TaskStatus.toTaskStatus(status));
               }
               if (type.equalsIgnoreCase("SubTASK")){
                   assert task != null;
                   SubTask subTask = (SubTask)taskMap.addSubTaskToEpicID(name,description, task.getID());
-                  subTask.setTaskStatus(TaskStatus.toTaskStatus(type));
+                  subTask.setTaskStatus(TaskStatus.toTaskStatus(status));
               }
           }
        } catch (IOException | ClassNotFoundException e) {

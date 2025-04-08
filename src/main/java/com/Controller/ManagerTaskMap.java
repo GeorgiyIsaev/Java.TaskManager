@@ -12,14 +12,12 @@ public class ManagerTaskMap {
 
     public ManagerTaskMap () {
         listTask = new HashMap<>();
-
-     // listTask = MemoryTask.ReadTaskList();
     }
     public ManagerTaskMap (int i) throws Exception {
         listTask = MemoryTask.ReadTaskList();
     }
 
-    /// /// /// /// ДОБАВЛЕНИЕ
+/// /// /// /// ДОБАВЛЕНИЕ
     public Task addTask(String nameTask, String discTask){
         int id = CreateID.getNewID();
         listTask.put(id, new Task(id, nameTask,discTask));
@@ -44,7 +42,7 @@ public class ManagerTaskMap {
         return listTask.get(id);
     }
 
-    /// /// /// /// УДАЛЕНИЕ
+/// /// /// /// УДАЛЕНИЕ
     public void deleteALL() {
         this.listTask = new HashMap<>();
     }
@@ -72,9 +70,8 @@ public class ManagerTaskMap {
         }
         return null;
     }
-    /// /// /// /// Изменение
-    ///
-    /// @return
+
+/// /// /// /// Изменение
     public Task reNameToIDTask (Integer idTask, String newName) throws Exception {
         if (!listTask.containsKey(idTask)){
             throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
@@ -89,9 +86,7 @@ public class ManagerTaskMap {
         listTask.get(idTask).setDescription(newDescription);
         return listTask.get(idTask);
     }
-//    public boolean isExistID(Integer idTask){
-//
-//    }
+
 
     public boolean reStatus(Integer idTask, TaskStatus taskStatus) throws Exception {
         if (!listTask.containsKey(idTask)){
@@ -109,18 +104,6 @@ public class ManagerTaskMap {
 
     public boolean isEpic(Integer idTask){
        return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
-    }
-
-
-
-
-    public void saveToFileTXT() throws Exception {
-        MemoryTask.WriteTaskList(listTask);
-    }
-
-    public void load(){
-
-
     }
 }
 

@@ -1,28 +1,21 @@
 package com;
-
-
 import com.ConsolView.ConsoleView;
-
 import com.Controller.ManagerTaskMap;
-import com.DateTask.Task;
-import com.Controller.MemoryTask;
+import com.Controller.MemoryTaskMapToTXT;
 
-import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
+        ManagerTaskMap managerTaskMap = new ManagerTaskMap();
 
-        ManagerTaskMap managerTaskMap = null;
         try {
-            managerTaskMap = new ManagerTaskMap();
-            ConsoleView consoleView = new ConsoleView(managerTaskMap);
-            consoleView.run();
+            managerTaskMap = MemoryTaskMapToTXT.readTasks();
         } catch (Exception e) {
-          System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
 
+        ConsoleView consoleView = new ConsoleView(managerTaskMap);
+        consoleView.run();
 
-
-       // ConsoleViewOld.run(listTask);
     }
 }
