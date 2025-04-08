@@ -1,5 +1,6 @@
 package com.Controller;
 
+import com.DateTask.CreateID;
 import com.DateTask.Task;
 
 import java.io.*;
@@ -20,16 +21,16 @@ public class MemoryTask {
         }
     }
 
-    public static void WriteTaskList(HashMap<Integer, Task> listTask) {
+    public static void WriteTaskList(HashMap<Integer, Task> listTask) throws Exception {
         createFile();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
             oos.writeObject(listTask);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new Exception("Error MemoryTask.ReadTaskList():" + e.getMessage());
         }
     }
 
-    public static HashMap<Integer, Task> ReadTaskList() {
+    public static HashMap<Integer, Task> ReadTaskList() throws Exception {
         HashMap<Integer, Task> taskList = new HashMap<>();
         if (!(new File(getNameFile()).exists())) {
             return taskList;
@@ -39,8 +40,9 @@ public class MemoryTask {
             taskList = (HashMap<Integer, Task>) ois.readObject();
 
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new Exception("Error MemoryTask.ReadTaskList():" + e.getMessage());
         }
+        CreateID.newStartID(taskList.size());
         return taskList;
     }
 }

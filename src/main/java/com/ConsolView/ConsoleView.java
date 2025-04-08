@@ -67,7 +67,7 @@ public class ConsoleView {
                 }
                 case ("printid") -> {
                     if (command.length() <= i++) {
-                        throw new Exception ("ERROR: Неуказан id!");
+                        throw new Exception ("ERROR: вы не ввели id задачи");
                     }
                     printID(command.substring(i));
                 }
@@ -77,24 +77,67 @@ public class ConsoleView {
 
                 /*Добавление*/
                 case ("add") -> {
-                    System.out.println("Команда  statusdgergownid не распознана!");
-
+                    if (command.length() <= i++) {
+                        throw new Exception ("ERROR: Вы не ввели имя задачи");
+                    }
+                    String textName = command.substring(i);
+                    System.out.print("Input description Task: ");
+                    String textDescription = in.nextLine();
+                    Task task = managerTaskMap.addTask(textName,textDescription);
+                    System.out.println("Add Task (id = "+task.getID() +"): " + task);
                 }
                 case ("addepic") -> {
-                    System.out.println("Команда  statusdreownid не распознана!");
+                    if (command.length() <= i++) {
+                        System.out.println("ERROR: Вы не ввели имя задачи");
+                        break;
+                    }
+                    String textName = command.substring(i);
+                    System.out.print("Input description Epic: ");
+                    String textDescription = in.nextLine();
+                    Task task = managerTaskMap.addEpic(textName,textDescription);
+                    System.out.println("Add EpicTask (id = "+task.getID() +"): " + task);
                 }
                 case ("addsubtasktoid") -> {
-                    System.out.println("Команда  statusjrdownid не распознана!");
+                    if (command.length() <= i++) {
+                        System.out.println("ERROR: вы не ввели id задачи");
+                        break;
+                    }
+                    int idEpicTask = Integer.parseInt(command.substring(i));
+                    if(!managerTaskMap.getListTask().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")){
+                        System.out.println("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
+                        break;
+                    }
+                    System.out.print("Input Name Sub Task: ");
+                    String textName =  in.nextLine();
+                    System.out.print("Input Description Sub Task: ");
+                    String textDescription = in.nextLine();
+                    Task task = managerTaskMap.addSubTaskToEpicID(textName,textDescription, idEpicTask);
+                    System.out.println("Add SubTask (id = "+task.getID() +"): " + task);
                 }
 
                 /*Изменение*/
                 case ("deleteall") -> {
-                    System.out.println("Команда  statukydownid не распознана!");
+                    managerTaskMap.deleteALL();
                 }
                 case ("deleteid") -> {
-                    System.out.println("Команда  statusdktkownid не распознана!");
+                    if (command.length() <= i++) {
+                        System.out.println("ERROR: вы не ввели id задачи");
+                        break;
+                    }
+                    int idEpicTask = Integer.parseInt(command.substring(i));
+                    Task task = managerTaskMap.deleteIDTask(idEpicTask);
+                    System.out.println("ЗАПИСЬ: " + task.getTypeTask() + " " + task +  "УДАЛЕНА!");
                 }
                 case ("renameid") -> {
+                    if (command.length() <= i++) {
+                        System.out.println("ERROR: вы не ввели id задачи");
+                        break;
+                    }
+                    int idEpicTask = Integer.parseInt(command.substring(i));
+                    System.out.print("Input NewName Task: ");
+                    String textName =  in.nextLine();
+                    Task task = managerTaskMap.reNameToIDTask(idEpicTask, );
+
                     System.out.println("Команда  statfwefewusdownid не распознана!");
                 }
                 case ("redescid") -> {

@@ -20,15 +20,17 @@ public class ManagerTaskMap {
     }
 
     /// /// /// /// ДОБАВЛЕНИЕ
-    public void addTask(String nameTask, String discTask){
+    public Task addTask(String nameTask, String discTask){
         int id = CreateID.getNewID();
         listTask.put(id, new Task(id, nameTask,discTask));
+        return listTask.get(id);
     }
-    public void addEpic(String nameEpic, String discEpic){
+    public Task addEpic(String nameEpic, String discEpic){
         int id = CreateID.getNewID();
         listTask.put(id, new EpicTask(id, nameEpic,discEpic));
+        return listTask.get(id);
     }
-    public void addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) throws Exception {
+    public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) throws Exception {
         if (!listTask.containsKey(idEpic)){
             throw new Exception("ERROR: Задачи с индексом " + idEpic + " не существует!" );
         }
@@ -39,6 +41,7 @@ public class ManagerTaskMap {
         SubTask subTask = new SubTask(id, nameSubTask,discSubTask, (EpicTask) listTask.get(idEpic));
         ((EpicTask)listTask.get(idEpic)).addSubTask(subTask);
         listTask.put(id, subTask);
+        return listTask.get(id);
     }
 
     /// /// /// /// УДАЛЕНИЕ
