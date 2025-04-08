@@ -1,6 +1,7 @@
 package com.ConsolView;
 import com.Controller.ManagerTaskMap;
 
+import com.Controller.MemoryTaskMapToTXT;
 import com.DateTask.Task;
 import com.DateTask.EpicTask;
 import com.DateTask.SubTask;
@@ -47,7 +48,8 @@ public class ConsoleView {
                     help();
                 }
                 case ("save") -> {
-                   // managerTaskMap.saveToFileTXT();
+                    MemoryTaskMapToTXT.writeTasks(managerTaskMap.getListTask());
+                    System.out.println("Данные сохранены в файл!");
                 }
 
 /// //// //// /// /// ПРИНТ
@@ -56,7 +58,7 @@ public class ConsoleView {
                 }
                 case ("printtask") -> {
                     printTaskMap("TASK");
-                    System.out.println("Команда  statnjusdownid не распознана!");
+
                 }
                 case ("printepic") -> {
                      printTaskMap("EPIC");
@@ -212,7 +214,6 @@ public class ConsoleView {
             }
         }
         while (!isExit);
-
     }
 
     public void help(){
@@ -304,7 +305,4 @@ public class ConsoleView {
                     value.getLinkStr(), value));
         }
     }
-
-
-
 }
