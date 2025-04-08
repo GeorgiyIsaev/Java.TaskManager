@@ -53,9 +53,9 @@ public class MyTest {
             System.out.println("ID 2");
             consoleView.printID("2");
 
-            consoleView.printList();
-
-
+            consoleView.printDebug();
+            consoleView.printTaskMap();
+            consoleView.printTaskMap("EPIC");
 
            // System.out.println("Демонстрация удаления епика");
            ///printList(managerTaskMap.getListTask());
