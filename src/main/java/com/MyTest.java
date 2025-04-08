@@ -51,7 +51,9 @@ public class MyTest {
             //System.out.println(task);
             ConsoleView consoleView = new ConsoleView(managerTaskMap);
             System.out.println("ID 2");
-            System.out.println(consoleView.printID("2"));
+            consoleView.printID("2");
+
+            consoleView.printList();
 
 
 

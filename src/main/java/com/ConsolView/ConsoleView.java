@@ -8,6 +8,8 @@ import com.DateTask.EpicTask;
 import com.DateTask.SubTask;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleView {
@@ -150,7 +152,7 @@ public class ConsoleView {
 
     /// /// /// ВЫВОД - ПРИНТ
     String myFormat = "%-4s %-8s %-12s %-12s %-25s";
-    public String printID(String id) throws Exception {
+    public void printID(String id) throws Exception {
         int idTask = Integer.parseInt(id);
         if (!managerTaskMap.getListTask().containsKey(idTask)){
             throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
@@ -170,25 +172,22 @@ public class ConsoleView {
                         subTask.getLinkStr(), subTask));
             }
         }
-        return consoleTable.toString();
+        System.out.println(consoleTable);
     }
 
 
-//    public void printList(){
-//       // String myFormat = "%3s %4s %8s %12s %12s %25s";
-//        System.out.println(String.format(myFormat,"ID","TYPE","STATUS","LINK","INFORMATION"));
-//
-//        Iterator<Map.Entry<Integer, Task>> iterator = listTask.entrySet().iterator();
-//        while (iterator.hasNext()) {
-//            Map.Entry<Integer, Task> entry = iterator.next();
-//            Integer key = entry.getKey();
-//            Task value = entry.getValue();
-//            System.out.println(String.format(myFormat,
-//                    key,value.getTypeTask(),value.getTaskStatus(),
-//                    value.getLinkStr(),value));
-//
-//        }
-//    }
+    public void printList(){
+        System.out.println(String.format(myFormat,"ID","TYPE","STATUS","LINK","INFORMATION"));
+        Iterator<Map.Entry<Integer, Task>> iterator = managerTaskMap.getListTask().entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Task> entry = iterator.next();
+            Integer key = entry.getKey();
+            Task value = entry.getValue();
+            System.out.println(String.format(myFormat,
+                    key,value.getTypeTask(),value.getTaskStatus(),
+                    value.getLinkStr(),value));
+        }
+    }
 
 //    public void printList(String type){
 //       // "EPIC" "TASK" "SubTASK"

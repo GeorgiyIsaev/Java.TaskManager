@@ -80,7 +80,7 @@ public class ManagerTaskMap {
         if (!listTask.containsKey(idTask)){
             throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
         }
-        listTask.get(idTask).setName(newDescription);
+        listTask.get(idTask).setDescription(newDescription);
     }
 
 }
