@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class MyTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ManagerTaskMap managerTaskMap = new ManagerTaskMap();
         managerTaskMap.addTask("Первая задач", "Описание простой задачи");
         managerTaskMap.addTask("Вторая задач", "Другое описание простой задачи");

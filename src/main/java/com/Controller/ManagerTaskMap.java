@@ -13,7 +13,7 @@ public class ManagerTaskMap {
         return listTask;
     }
 
-    public ManagerTaskMap (){
+    public ManagerTaskMap () throws Exception {
         //listTask = new HashMap<>();
 
        listTask = MemoryTask.ReadTaskList();
@@ -73,19 +73,24 @@ public class ManagerTaskMap {
         return null;
     }
     /// /// /// /// Изменение
-    public void reNameToIDTask (Integer idTask, String newName) throws Exception {
+    ///
+    /// @return
+    public Task reNameToIDTask (Integer idTask, String newName) throws Exception {
         if (!listTask.containsKey(idTask)){
             throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
         }
         listTask.get(idTask).setName(newName);
+        return listTask.get(idTask);
     }
-    public void reDescToIDTask (Integer idTask, String newDescription) throws Exception {
+    public Task reDescToIDTask (Integer idTask, String newDescription) throws Exception {
         if (!listTask.containsKey(idTask)){
             throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
         }
         listTask.get(idTask).setDescription(newDescription);
+        return listTask.get(idTask);
     }
-    public void saveToFileTXT(){
+
+    public void saveToFileTXT() throws Exception {
         MemoryTask.WriteTaskList(listTask);
     }
 

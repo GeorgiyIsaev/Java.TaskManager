@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class ConsoleView {
     Scanner in;
     //HashMap<Integer, Task> listTask;
-    ManagerTaskMap managerTaskMap = new ManagerTaskMap();
+    ManagerTaskMap managerTaskMap;
 
-    public ConsoleView(ManagerTaskMap managerTaskMap ){
+    public ConsoleView(ManagerTaskMap managerTaskMap) throws Exception {
         this.managerTaskMap = managerTaskMap;
         in = new Scanner(System.in);
     }
@@ -136,7 +136,7 @@ public class ConsoleView {
                     int idEpicTask = Integer.parseInt(command.substring(i));
                     System.out.print("Input NewName Task: ");
                     String textName =  in.nextLine();
-                    Task task = managerTaskMap.reNameToIDTask(idEpicTask, );
+                    Task task = managerTaskMap.reNameToIDTask(idEpicTask, textName);
 
                     System.out.println("Команда  statfwefewusdownid не распознана!");
                 }
