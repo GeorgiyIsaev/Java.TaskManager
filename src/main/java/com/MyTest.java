@@ -3,10 +3,7 @@ package com;
 
 import com.ConsolView.ConsoleView;
 import com.Controller.ManagerTaskMap;
-import com.DateTask.EpicTask;
-import com.DateTask.SubTask;
 import com.DateTask.Task;
-import com.Controller.MemoryTask;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,10 +21,10 @@ public class MyTest {
         try {
             managerTaskMap.addEpic("Эпичная задача", "Очень эпичное описание");
             managerTaskMap.addEpic("Мини Эпик", "Короткое описание");
-            managerTaskMap.addSubTaskToEpic("Подзадача 01", "Для тестирования 01", (Integer) 2);
-            managerTaskMap.addSubTaskToEpic("Подзадача 02", "Для тестирования 02", 2);
-            managerTaskMap.addSubTaskToEpic("Подзадача 03", "Для тестирования 03", 2);
-            managerTaskMap.addSubTaskToEpic("Один пункт", "Ничего важного", 3);
+            managerTaskMap.addSubTaskToEpicID("Подзадача 01", "Для тестирования 01", (Integer) 2);
+            managerTaskMap.addSubTaskToEpicID("Подзадача 02", "Для тестирования 02", 2);
+            managerTaskMap.addSubTaskToEpicID("Подзадача 03", "Для тестирования 03", 2);
+            managerTaskMap.addSubTaskToEpicID("Один пункт", "Ничего важного", 3);
 
             System.out.println("Демонстрация 2");
             printList(managerTaskMap.getListTask());
@@ -52,7 +49,6 @@ public class MyTest {
             ConsoleView consoleView = new ConsoleView(managerTaskMap);
             System.out.println("ID 2");
             consoleView.printID("2");
-
             consoleView.printDebug();
             consoleView.printTaskMap();
             consoleView.printTaskMap("EPIC");

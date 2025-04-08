@@ -28,7 +28,7 @@ public class ManagerTaskMap {
         int id = CreateID.getNewID();
         listTask.put(id, new EpicTask(id, nameEpic,discEpic));
     }
-    public void addSubTaskToEpic(String nameSubTask, String discSubTask, Integer idEpic) throws Exception {
+    public void addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) throws Exception {
         if (!listTask.containsKey(idEpic)){
             throw new Exception("ERROR: Задачи с индексом " + idEpic + " не существует!" );
         }

@@ -53,22 +53,26 @@ public class ConsoleView {
 
                 /*Отображение*/
                 case ("printall") -> {
-                    System.out.println("Команда  statusdownid не распознана!");
+                    printTaskMap();
                 }
                 case ("printtask") -> {
+                    printTaskMap("TASK");
                     System.out.println("Команда  statnjusdownid не распознана!");
                 }
                 case ("printepic") -> {
-                    System.out.println("Команда  statjusdownid не распознана!");
+                     printTaskMap("EPIC");
                 }
                 case ("printsubtask") -> {
-                    System.out.println("Команда  statjjusdownid не распознана!");
+                      printTaskMap("SubTASK");
                 }
                 case ("printid") -> {
-                    System.out.println("Команда  statujjsdownid не распознана!");
+                    if (command.length() <= i++) {
+                        throw new Exception ("ERROR: Неуказан id!");
+                    }
+                    printID(command.substring(i));
                 }
                 case ("printdebug") -> {
-                    System.out.println("Команда  statusdow[nid не распознана!");
+                    printDebug();
                 }
 
                 /*Добавление*/
@@ -151,6 +155,7 @@ public class ConsoleView {
 
     /// /// /// ВЫВОД - ПРИНТ
     String myFormat = "%-4s %-8s %-12s %-12s %-25s";
+
     public void printID(String id) throws Exception {
         int idTask = Integer.parseInt(id);
         if (!managerTaskMap.getListTask().containsKey(idTask)){
@@ -173,8 +178,6 @@ public class ConsoleView {
         }
         System.out.println(consoleTable);
     }
-
-
     public void printTaskMap(){
         System.out.println(String.format(myFormat,"ID","TYPE","STATUS","LINK","INFORMATION"));
         Iterator<Map.Entry<Integer, Task>> iterator = managerTaskMap.getListTask().entrySet().iterator();
@@ -187,13 +190,12 @@ public class ConsoleView {
                     value.getLinkStr(),value));
         }
     }
-
-    public void printTaskMap(String type){
+    public void printTaskMap(String typeTask){
        // "EPIC" "TASK" "SubTASK"
         System.out.println(String.format(myFormat,"ID","TYPE","STATUS","LINK","INFORMATION"));
         for (Map.Entry<Integer, Task> entry : managerTaskMap.getListTask().entrySet()) {
             Task value = entry.getValue();
-            if (type.equalsIgnoreCase(value.getTypeTask())) {
+            if (typeTask.equalsIgnoreCase(value.getTypeTask())) {
                 System.out.println(String.format(myFormat,
                         value.getID(), value.getTypeTask(), value.getTaskStatus(),
                         value.getLinkStr(), value));
