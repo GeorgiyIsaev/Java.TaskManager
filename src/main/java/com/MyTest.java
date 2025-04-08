@@ -3,6 +3,7 @@ package com;
 
 import com.ConsolView.ConsoleView;
 import com.Controller.ManagerTaskMap;
+import com.Controller.MemoryTaskMapToTXT;
 import com.DateTask.Task;
 
 import java.util.HashMap;
@@ -55,7 +56,9 @@ public class MyTest {
 
            // System.out.println("Демонстрация удаления епика");
            ///printList(managerTaskMap.getListTask());
-             managerTaskMap.saveToFileTXT();
+            // managerTaskMap.saveToFileTXT();
+
+            MemoryTaskMapToTXT.writeTasks(managerTaskMap.getListTask());
 
 
 

@@ -17,7 +17,7 @@ public class ConsoleView {
     //HashMap<Integer, Task> listTask;
     ManagerTaskMap managerTaskMap;
 
-    public ConsoleView(ManagerTaskMap managerTaskMap) throws Exception {
+    public ConsoleView(ManagerTaskMap managerTaskMap) {
         this.managerTaskMap = managerTaskMap;
         in = new Scanner(System.in);
     }

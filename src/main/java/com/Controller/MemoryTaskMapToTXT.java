@@ -3,9 +3,9 @@ package com.Controller;
 import com.DateTask.*;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.util.*;
 
 public class MemoryTaskMapToTXT {
     static String getNameFile() {
@@ -30,7 +30,7 @@ public class MemoryTaskMapToTXT {
                 else if ("EPIC".equalsIgnoreCase(value.getTypeTask())) {
                     write(value, pw);
                     for (SubTask subTask : ((EpicTask)value).getSubTasks()){
-                        write(value, pw);
+                        write(subTask, pw);
                     }
                 }
             }
@@ -49,14 +49,20 @@ public class MemoryTaskMapToTXT {
 
     public static ManagerTaskMap readTasks() throws Exception {
        ManagerTaskMap taskMap = new ManagerTaskMap();
+
        try (Scanner scanner = new Scanner(new File(getNameFile()))) {
-          String[] linesTXT = scanner.nextLine().split("\n");
-          Task task = null;
-          for(int i = 0; i< linesTXT.length; i++){
-              String type = linesTXT[i];
-              String status = linesTXT[i++];
-              String name = linesTXT[i++];
-              String description = linesTXT[i++];
+
+
+            ArrayList<String> lineFile = new ArrayList<>();
+           while (scanner.hasNextLine()) {
+               lineFile.add(scanner.nextLine());
+           }
+          Task task=null;
+          for(int i = 0; i< lineFile.size(); i++){
+              String type = lineFile.get(i);
+              String status = lineFile.get(i++);
+              String name = lineFile.get(i++);
+              String description = lineFile.get(i++);
 
               if (type.equalsIgnoreCase("TASK")){
                   task =  taskMap.addTask(name,description);
