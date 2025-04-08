@@ -14,6 +14,12 @@ public class SubTask extends Task{
         super(id,name,description);
         this.refrains = refrains;
     }
+    @Override
+    public void setTaskStatus(TaskStatus taskStatus) {
+       this.taskStatus = taskStatus;
+       refrains.updateTaskStatus();
+    }
+
 
     @Override
     public String fullInfo(){

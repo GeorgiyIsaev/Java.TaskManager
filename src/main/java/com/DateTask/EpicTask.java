@@ -28,13 +28,15 @@ public class EpicTask extends Task {
 
 
     @Override
-    public TaskStatus getTaskStatus() {
+    public void setTaskStatus(TaskStatus taskStatus) {
+    }
+    public void updateTaskStatus(){
         taskStatus = TaskStatus.NEW;
         int count = 0;
         for (SubTask sub : subTasks){
             if (sub.getTaskStatus() == TaskStatus.IN_PROGRESS) {
                 taskStatus = TaskStatus.IN_PROGRESS;
-                return taskStatus;
+
             }else if (sub.getTaskStatus() == TaskStatus.DONE){
                 taskStatus = TaskStatus.IN_PROGRESS;
                 count++;
@@ -43,8 +45,10 @@ public class EpicTask extends Task {
         if (count == subTasks.size()) {
             taskStatus = TaskStatus.DONE;
         }
-        return taskStatus;
     }
+
+
+
 
 
     @Override

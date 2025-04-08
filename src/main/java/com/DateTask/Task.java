@@ -17,6 +17,9 @@ public class Task implements Serializable {
         this.taskStatus = TaskStatus.NEW;
     }
 
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
 
     public String getName() {
         return name;

@@ -1,9 +1,6 @@
 package com.Controller;
 
-import com.DateTask.CreateID;
-import com.DateTask.EpicTask;
-import com.DateTask.SubTask;
-import com.DateTask.Task;
+import com.DateTask.*;
 
 import java.util.HashMap;
 
@@ -89,6 +86,30 @@ public class ManagerTaskMap {
         listTask.get(idTask).setDescription(newDescription);
         return listTask.get(idTask);
     }
+//    public boolean isExistID(Integer idTask){
+//
+//    }
+
+    public boolean reStatus(Integer idTask, TaskStatus taskStatus) throws Exception {
+        if (!listTask.containsKey(idTask)){
+            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
+        }
+        if(isEpic(idTask)){
+            throw new Exception("ERROR: Задачи с индексом " + idTask + " EPIC! Ручное изменение статуса не возможно!" );
+        }
+        if (listTask.get(idTask).getTaskStatus() == taskStatus){
+            return false;
+        }
+        listTask.get(idTask).setTaskStatus(taskStatus);
+        return true;
+    }
+
+    public boolean isEpic(Integer idTask){
+       return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
+    }
+
+
+
 
     public void saveToFileTXT() throws Exception {
         MemoryTask.WriteTaskList(listTask);
