@@ -79,7 +79,7 @@ public class MemoryTaskMapToTXT {
               }
           }
        } catch (IOException | ClassNotFoundException e) {
-           throw new Exception("Error ReadTasks: " + e.getMessage());
+           throw new Exception("Error MemoryTaskMapToTXT.ReadTasks(): " + e.getMessage());
        }
        return taskMap;
    }
