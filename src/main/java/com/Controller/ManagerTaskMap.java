@@ -11,9 +11,9 @@ public class ManagerTaskMap {
     }
 
     public ManagerTaskMap () throws Exception {
-        //listTask = new HashMap<>();
+       // listTask = new HashMap<>();
 
-       listTask = MemoryTask.ReadTaskList();
+      listTask = MemoryTask.ReadTaskList();
     }
 
     /// /// /// /// ДОБАВЛЕНИЕ

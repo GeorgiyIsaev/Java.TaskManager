@@ -173,14 +173,21 @@ public class ConsoleView {
                         break;
                     }
                     if (managerTaskMap.isEpic(idTask)){
-                        System.out.println("ERROR: Задачи с ID: " + idTask + " EPIC! Расчет статуса осуществляется автоматически");
+                        System.out.println("ERROR: Задачи с ID: " + idTask + " EPIC! Расчет статуса осуществляется автоматически!");
+                        System.out.println("Статус задачи: " + managerTaskMap.getListTask().get(idTask).getTaskStatus());
                         break;
                     }
                     TaskStatus newStatus = null;
                     switch (elemetsString[2].toLowerCase()){
-                        case "new": newStatus= TaskStatus.NEW;
-                        case "prog": newStatus= TaskStatus.NEW;
-                        case "done": newStatus= TaskStatus.NEW;
+                        case "new"->{
+                            newStatus= TaskStatus.NEW;
+                        }
+                        case "prog" ->{
+                            newStatus= TaskStatus.IN_PROGRESS;
+                        }
+                        case "done"->{
+                            newStatus= TaskStatus.DONE;
+                        }
                     }
                     if(newStatus == null){
                         System.out.println("ERROR: Значение '" + elemetsString[2].toUpperCase() + "' не соответствует команде изменения статус.\n" +
@@ -188,9 +195,7 @@ public class ConsoleView {
                         break;
                     }
 
-
-
-                    if(managerTaskMap.reStatus(idTask, TaskStatus.DONE)){
+                    if(managerTaskMap.reStatus(idTask, newStatus)){
                         System.out.println("Статус задачи с ID: " + idTask + " изменен!");
                     }
                     else{
