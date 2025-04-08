@@ -12,6 +12,16 @@ public enum TaskStatus {
             default -> {return "NON";}
         }
     }
+    public static TaskStatus toTaskStatus(String taskStatus){
+        if(taskStatus.equalsIgnoreCase("IN_PROGRESS")){
+            return TaskStatus.IN_PROGRESS;
+        }
+        else if(taskStatus.equalsIgnoreCase("DONE")){
+            return TaskStatus.DONE;
+        }
+        return TaskStatus.NEW;
+    }
+
 
 
 

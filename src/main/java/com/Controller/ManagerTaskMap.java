@@ -10,10 +10,13 @@ public class ManagerTaskMap {
         return listTask;
     }
 
-    public ManagerTaskMap () throws Exception {
-       // listTask = new HashMap<>();
+    public ManagerTaskMap () {
+        listTask = new HashMap<>();
 
-      listTask = MemoryTask.ReadTaskList();
+     // listTask = MemoryTask.ReadTaskList();
+    }
+    public ManagerTaskMap (int i) throws Exception {
+        listTask = MemoryTask.ReadTaskList();
     }
 
     /// /// /// /// ДОБАВЛЕНИЕ
@@ -115,5 +118,9 @@ public class ManagerTaskMap {
         MemoryTask.WriteTaskList(listTask);
     }
 
+    public void load(){
 
+
+    }
 }
+
