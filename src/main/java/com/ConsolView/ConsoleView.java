@@ -48,7 +48,7 @@ public class ConsoleView {
                     help();
                 }
                 case ("save") -> {
-                    System.out.println("Команда  statusdownid не распознана!");
+                    managerTaskMap.saveToFileTXT();
                 }
 
                 /*Отображение*/
