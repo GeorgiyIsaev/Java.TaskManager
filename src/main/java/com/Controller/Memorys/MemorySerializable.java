@@ -8,7 +8,7 @@ import java.io.*;
 public class MemorySerializable extends Memory{
     static String getNameFile() {
         String sep = File.separator;
-        return "Date" + sep + "MyTask.bin";
+        return "Date" + sep + "MyTaskSer.bin";
     }
     static void createFile() {
         if (!(new File(getNameFile()).exists())) {

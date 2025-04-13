@@ -4,9 +4,10 @@ import com.Controller.Memorys.Memory;
 import com.DateTask.*;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class ManagerTaskMap {
+public class ManagerTaskMap implements Serializable {
     private static Integer currentMaxID = 0;
     HashMap<Integer, Task> listTask;
     Memory memory;
@@ -20,7 +21,7 @@ public class ManagerTaskMap {
         listTask = new HashMap<>();
         memory = null;
     }
-    public ManagerTaskMap (Memory memory) {
+    public ManagerTaskMap (Memory memory) throws IOException {
         listTask = new HashMap<>();
         this.memory = memory;
         memory.setManagerTaskMap(this);
