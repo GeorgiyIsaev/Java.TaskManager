@@ -3,6 +3,7 @@ package com.Controller;
 import com.Controller.Memorys.Memory;
 import com.DateTask.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class ManagerTaskMap {
@@ -28,6 +29,10 @@ public class ManagerTaskMap {
     public ManagerTaskMap (int i) throws Exception {
         listTask = MemoryTask.ReadTaskList();
     }
+    public Integer getCurrentID(){
+        return currentMaxID;
+    }
+
 
 /// /// /// /// ДОБАВЛЕНИЕ
     public Task addTask(String nameTask, String discTask){
@@ -119,12 +124,11 @@ public class ManagerTaskMap {
        return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
     }
 /// /// /// /// Сохранение и загрузка
-    public void load(){
+    public void load() throws IOException {
         if(memory == null) return;
         else memory.load();
-
     }
-    public void save(){
+    public void save() throws IOException {
         if(memory == null) return;
         else memory.save();
     }

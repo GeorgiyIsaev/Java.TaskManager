@@ -3,6 +3,7 @@ package com.Controller.Memorys;
 import com.Controller.ManagerTaskMap;
 
 import java.awt.color.ICC_ColorSpace;
+import java.io.IOException;
 
 public abstract class Memory {
     ManagerTaskMap managerTaskMap;
@@ -10,8 +11,8 @@ public abstract class Memory {
     public void setManagerTaskMap(ManagerTaskMap managerTaskMap) {
         this.managerTaskMap = managerTaskMap;
     }
-    public void save(){}
-    public void load(){}
+    public void save() throws IOException {}
+    public void load() throws IOException {}
 
 }
 

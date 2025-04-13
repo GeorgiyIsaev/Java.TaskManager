@@ -6,10 +6,9 @@ public enum CreateID {
     public static Integer getNewID(){
         return staticId++;
     }
-    public static void newStartID(int newID) throws Exception {
-        if(staticId>newID){
-            throw new Exception("ERROR: Новый стартовый ID не может быть меньше существующего!");
+    public static void newStartID(int newID){
+        if(staticId<newID) {
+            staticId = newID;
         }
-        staticId = newID;
     }
 }
