@@ -1,5 +1,7 @@
 package com.Controller.Memorys;
 
+import com.Controller.ManagerTaskMap;
+
 public class MemoryTXT extends Memory{
 
     @Override

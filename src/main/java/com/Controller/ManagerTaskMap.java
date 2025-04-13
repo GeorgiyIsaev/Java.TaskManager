@@ -1,17 +1,29 @@
 package com.Controller;
 
+import com.Controller.Memorys.Memory;
 import com.DateTask.*;
 
 import java.util.HashMap;
 
 public class ManagerTaskMap {
+    private static Integer currentMaxID = 0;
     HashMap<Integer, Task> listTask;
+    Memory memory;
+
+
     public HashMap<Integer, Task> getListTask() {
         return listTask;
     }
 
     public ManagerTaskMap () {
         listTask = new HashMap<>();
+        memory = null;
+    }
+    public ManagerTaskMap (Memory memory) {
+        listTask = new HashMap<>();
+        this.memory = memory;
+        memory.setManagerTaskMap(this);
+        load();
     }
     public ManagerTaskMap (int i) throws Exception {
         listTask = MemoryTask.ReadTaskList();
@@ -19,14 +31,15 @@ public class ManagerTaskMap {
 
 /// /// /// /// ДОБАВЛЕНИЕ
     public Task addTask(String nameTask, String discTask){
-        int id = CreateID.getNewID();
-        listTask.put(id, new Task(id, nameTask,discTask));
-        return listTask.get(id);
+        currentMaxID = CreateID.getNewID();
+        listTask.put(currentMaxID, new Task(currentMaxID, nameTask,discTask));
+        return listTask.get(currentMaxID);
     }
     public Task addEpic(String nameEpic, String discEpic){
-        int id = CreateID.getNewID();
-        listTask.put(id, new EpicTask(id, nameEpic,discEpic));
-        return listTask.get(id);
+        currentMaxID = CreateID.getNewID();
+        listTask.put(currentMaxID, new EpicTask(currentMaxID, nameEpic,discEpic));
+
+        return listTask.get(currentMaxID);
     }
     public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) throws Exception {
         if (!listTask.containsKey(idEpic)){
@@ -35,11 +48,11 @@ public class ManagerTaskMap {
         if(!listTask.get(idEpic).getTypeTask().equalsIgnoreCase("EPIC")){
             throw new Exception("ERROR: Задача с ID: " + idEpic + " не является ЭПИКОМ, добавление подзадачи не возможно!;" );
         }
-        int id = CreateID.getNewID();
-        SubTask subTask = new SubTask(id, nameSubTask,discSubTask, (EpicTask) listTask.get(idEpic));
+        currentMaxID = CreateID.getNewID();
+        SubTask subTask = new SubTask(currentMaxID, nameSubTask,discSubTask, (EpicTask) listTask.get(idEpic));
         ((EpicTask)listTask.get(idEpic)).addSubTask(subTask);
-        listTask.put(id, subTask);
-        return listTask.get(id);
+        listTask.put(currentMaxID, subTask);
+        return listTask.get(currentMaxID);
     }
 
 /// /// /// /// УДАЛЕНИЕ
@@ -105,5 +118,16 @@ public class ManagerTaskMap {
     public boolean isEpic(Integer idTask){
        return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
     }
+/// /// /// /// Сохранение и загрузка
+    public void load(){
+        if(memory == null) return;
+        else memory.load();
+
+    }
+    public void save(){
+        if(memory == null) return;
+        else memory.save();
+    }
 }
+
 
