@@ -1,7 +1,7 @@
 package com.ConsolView;
 import com.Controller.ManagerTaskMap;
 
-import com.Controller.MemoryTaskMapToTXT;
+
 import com.DateTask.Task;
 import com.DateTask.EpicTask;
 import com.DateTask.SubTask;
@@ -48,8 +48,12 @@ public class ConsoleView {
                     help();
                 }
                 case ("save") -> {
-                    MemoryTaskMapToTXT.writeTasks(managerTaskMap.getListTask());
-                    System.out.println("Данные сохранены в файл!");
+                    if(managerTaskMap.save()){
+                        System.out.println("Данные сохранены в файл!");
+                    }
+                    else {
+                        System.out.println("Сохранение не реализованно");
+                    }
                 }
 
 /// //// //// /// /// ПРИНТ

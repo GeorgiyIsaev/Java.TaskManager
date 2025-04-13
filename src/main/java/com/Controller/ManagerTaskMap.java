@@ -27,9 +27,9 @@ public class ManagerTaskMap implements Serializable {
         memory.setManagerTaskMap(this);
         load();
     }
-    public ManagerTaskMap (int i) throws Exception {
-        listTask = MemoryTask.ReadTaskList();
-    }
+///    public ManagerTaskMap (int i) throws Exception {
+  //      listTask = MemoryTask.ReadTaskList();
+   // }
     public Integer getCurrentID(){
         return currentMaxID;
     }
@@ -125,13 +125,17 @@ public class ManagerTaskMap implements Serializable {
        return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
     }
 /// /// /// /// Сохранение и загрузка
-    public void load() throws IOException {
-        if(memory == null) return;
-        else memory.load();
+    public boolean load() throws IOException {
+        if(memory == null) return false;
+        else {
+            memory.load();
+        }
+        return true;
     }
-    public void save() throws IOException {
-        if(memory == null) return;
+    public boolean save() throws IOException {
+        if(memory == null) return false;
         else memory.save();
+        return true;
     }
 }
 

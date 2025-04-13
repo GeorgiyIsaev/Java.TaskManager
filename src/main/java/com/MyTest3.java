@@ -2,7 +2,6 @@ package com;
 
 import com.ConsolView.ConsoleView;
 import com.Controller.ManagerTaskMap;
-import com.Controller.MemoryTaskMapToTXT;
 import com.Controller.Memorys.MemorySerializable;
 import com.Controller.Memorys.MemoryTXT;
 
