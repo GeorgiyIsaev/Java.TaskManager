@@ -4,14 +4,14 @@ import com.DateTask.*;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class ManagerTaskMap implements Serializable {
+public class ManagerTask implements Serializable {
     HashMap<Integer, Task> listTask;
 
     public HashMap<Integer, Task> getListTask() {
         return listTask;
     }
 
-    public ManagerTaskMap () {
+    public ManagerTask() {
         listTask = new HashMap<>();
     }
 

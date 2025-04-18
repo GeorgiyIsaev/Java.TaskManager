@@ -1,8 +1,5 @@
 package com;
 
-import com.ConsolView.ConsoleView;
-import com.Controller.ManagerTaskMap;
-
 
 public class MyTest3 {
     public static void main(String[] args) {
