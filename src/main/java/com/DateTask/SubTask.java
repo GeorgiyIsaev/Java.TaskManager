@@ -1,7 +1,7 @@
 package com.DateTask;
 
 public class SubTask extends Task{
-    EpicTask refrains;
+    private EpicTask refrains;
 
     public EpicTask getRefrains() {
         return refrains;

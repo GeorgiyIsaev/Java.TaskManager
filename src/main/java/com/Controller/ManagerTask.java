@@ -3,16 +3,18 @@ package com.Controller;
 import com.DateTask.*;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ManagerTask implements Serializable {
-    HashMap<Integer, Task> listTask;
+    private Map<Integer, Task> listTask;
 
-    public HashMap<Integer, Task> getListTask() {
+    public Map<Integer, Task> getListTask() {
         return listTask;
     }
 
     public ManagerTask() {
-        listTask = new HashMap<>();
+        listTask = new TreeMap<>();
     }
 
 /// /// /// /// ДОБАВЛЕНИЕ

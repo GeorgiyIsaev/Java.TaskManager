@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleView {
-    Scanner in;
-    ManagerTask managerTask;
+    private Scanner in;
+    private ManagerTask managerTask;
 
     public ConsoleView(ManagerTask managerTask) {
         this.managerTask = managerTask;

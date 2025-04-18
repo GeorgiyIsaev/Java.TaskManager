@@ -21,8 +21,4 @@ public enum TaskStatus {
         }
         return TaskStatus.NEW;
     }
-
-
-
-
 }

@@ -3,7 +3,7 @@ package com.DateTask;
 import java.io.Serializable;
 
 public class Task implements Serializable {
-    Integer id;
+    private Integer id;
     public Integer getID(){
         return id;
     }

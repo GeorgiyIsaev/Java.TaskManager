@@ -3,7 +3,7 @@ package com.DateTask;
 import java.util.ArrayList;
 
 public class EpicTask extends Task {
-    ArrayList<SubTask> subTasks;
+    private ArrayList<SubTask> subTasks;
 
     public ArrayList<SubTask> getSubTasks() {
         return subTasks;
