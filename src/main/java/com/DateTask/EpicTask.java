@@ -64,7 +64,7 @@ public class EpicTask extends Task {
 
 
     public boolean findID(int id){
-        if(this.id == id)
+        if(this.getID() == id)
              return true;
         else{
             for(Task task : subTasks){
