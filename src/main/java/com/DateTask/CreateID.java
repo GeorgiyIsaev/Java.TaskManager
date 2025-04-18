@@ -1,14 +1,16 @@
 package com.DateTask;
 
 public enum CreateID {
-    CreateID01;
-    static int staticId =  0;
-    public static Integer getNewID(){
-        return staticId++;
+    INSTANCE;
+    private int id = 0;
+
+    public Integer createID(){
+        return id++;
     }
-    public static void newStartID(int newID){
-        if(staticId<newID) {
-            staticId = newID;
+
+    public void setId(int newID){
+        if(id <newID) {
+            id = newID;
         }
     }
 }

@@ -1,17 +1,11 @@
 package com.Controller;
 
-import com.Controller.Memorys.Memory;
 import com.DateTask.*;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 
 public class ManagerTaskMap implements Serializable {
-    private static Integer currentMaxID = 0;
     HashMap<Integer, Task> listTask;
-    Memory memory;
-
 
     public HashMap<Integer, Task> getListTask() {
         return listTask;
@@ -19,33 +13,19 @@ public class ManagerTaskMap implements Serializable {
 
     public ManagerTaskMap () {
         listTask = new HashMap<>();
-        memory = null;
     }
-    public ManagerTaskMap (Memory memory) throws IOException {
-        listTask = new HashMap<>();
-        this.memory = memory;
-        memory.setManagerTaskMap(this);
-        load();
-    }
-///    public ManagerTaskMap (int i) throws Exception {
-  //      listTask = MemoryTask.ReadTaskList();
-   // }
-    public Integer getCurrentID(){
-        return currentMaxID;
-    }
-
 
 /// /// /// /// ДОБАВЛЕНИЕ
     public Task addTask(String nameTask, String discTask){
-        currentMaxID = CreateID.getNewID();
-        listTask.put(currentMaxID, new Task(currentMaxID, nameTask,discTask));
-        return listTask.get(currentMaxID);
+        int currentID = CreateID.INSTANCE.createID();
+        listTask.put(currentID, new Task(currentID, nameTask,discTask));
+        return listTask.get(currentID);
     }
     public Task addEpic(String nameEpic, String discEpic){
-        currentMaxID = CreateID.getNewID();
-        listTask.put(currentMaxID, new EpicTask(currentMaxID, nameEpic,discEpic));
+        int currentID = CreateID.INSTANCE.createID();
+        listTask.put(currentID, new EpicTask(currentID, nameEpic,discEpic));
 
-        return listTask.get(currentMaxID);
+        return listTask.get(currentID);
     }
     public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) throws Exception {
         if (!listTask.containsKey(idEpic)){
@@ -54,17 +34,18 @@ public class ManagerTaskMap implements Serializable {
         if(!listTask.get(idEpic).getTypeTask().equalsIgnoreCase("EPIC")){
             throw new Exception("ERROR: Задача с ID: " + idEpic + " не является ЭПИКОМ, добавление подзадачи не возможно!;" );
         }
-        currentMaxID = CreateID.getNewID();
-        SubTask subTask = new SubTask(currentMaxID, nameSubTask,discSubTask, (EpicTask) listTask.get(idEpic));
+        int currentID = CreateID.INSTANCE.createID();
+        SubTask subTask = new SubTask(currentID, nameSubTask,discSubTask, (EpicTask) listTask.get(idEpic));
         ((EpicTask)listTask.get(idEpic)).addSubTask(subTask);
-        listTask.put(currentMaxID, subTask);
-        return listTask.get(currentMaxID);
+        listTask.put(currentID, subTask);
+        return listTask.get(currentID);
     }
 
 /// /// /// /// УДАЛЕНИЕ
     public void deleteALL() {
-        this.listTask = new HashMap<>();
+        this.listTask.clear();
     }
+
     public Task deleteIDTask(Integer idTask) throws Exception {
         if (!listTask.containsKey(idTask)){
             throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
@@ -122,20 +103,7 @@ public class ManagerTaskMap implements Serializable {
     }
 
     public boolean isEpic(Integer idTask){
-       return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
-    }
-/// /// /// /// Сохранение и загрузка
-    public boolean load() throws IOException {
-        if(memory == null) return false;
-        else {
-            memory.load();
-        }
-        return true;
-    }
-    public boolean save() throws IOException {
-        if(memory == null) return false;
-        else memory.save();
-        return true;
+        return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
     }
 }
 
