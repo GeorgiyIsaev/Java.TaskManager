@@ -2,10 +2,10 @@ package com.Controller.ControlException;
 
 public class NotChangedEpicStatusException  extends ControlException{
     public NotChangedEpicStatusException() {
-        super("NotChangedEpicStatusException: Задачи с указанным индексом не ЭПИК!");
+        super("NotChangedEpicStatusException: Нельзя изменить статус Эпика! Статус рассчитывается автоматически!");
     }
     public NotChangedEpicStatusException(Integer IdTask) {
-        super("NotChangedEpicStatusException: Задача с ID: " + IdTask + " не является ЭПИКОМ, добавление подзадачи не возможно!");
+        super("NotChangedEpicStatusException: Нельзя изменить статус Эпика с " + IdTask + "! Статус рассчитывается автоматически!");
     }
 }
 
