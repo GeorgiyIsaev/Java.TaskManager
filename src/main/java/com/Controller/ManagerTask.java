@@ -15,6 +15,10 @@ public class ManagerTask implements Serializable {
         return listTask;
     }
 
+    public void setListTask(Map<Integer, Task> listTask) {
+        this.listTask = listTask;
+    }
+
     public ManagerTask() {
         listTask = new TreeMap<>();
     }
