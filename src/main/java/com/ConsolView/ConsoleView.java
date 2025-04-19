@@ -217,6 +217,8 @@ public class ConsoleView {
         while (!isExit);
     }
 
+
+/// /// /// ХЕЛП
     public void help() {
 
         String textHelp = "ДОСТУПНЫЕ КОМАНДЫ: \n" +
@@ -243,9 +245,23 @@ public class ConsoleView {
     }
 
 
-    /// /// /// ВЫВОД - ПРИНТ
+/// /// /// ВЫВОД - ПРИНТ
     String myFormat = "%-4s %-8s %-12s %-12s %-25s";
-
+    public void printTaskMap() {
+        printTaskMap(null);
+    }
+    public void printTaskMap(String typeFilter) {
+        // "EPIC" "TASK" "SubTASK"
+        System.out.println(String.format(myFormat, "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
+        for (Map.Entry<Integer, Task> entry : managerTask.getListTask().entrySet()) {
+            Task value = entry.getValue();
+            if (typeFilter == null || typeFilter.equalsIgnoreCase(value.getTypeTask())) {
+                System.out.println(String.format(myFormat,
+                        value.getID(), value.getTypeTask(), value.getTaskStatus(),
+                        value.getLinkStr(), value));
+            }
+        }
+    }
     public void printID(String id) throws Exception {
         int idTask = Integer.parseInt(id);
         if (!managerTask.getListTask().containsKey(idTask)) {
@@ -268,27 +284,8 @@ public class ConsoleView {
         }
         System.out.println(consoleTable);
     }
-
-    public void printTaskMap() {
-        printTaskMap(null);
-    }
-
-    public void printTaskMap(String typeFilter) {
-        // "EPIC" "TASK" "SubTASK"
-        System.out.println(String.format(myFormat, "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
-        for (Map.Entry<Integer, Task> entry : managerTask.getListTask().entrySet()) {
-            Task value = entry.getValue();
-            if (typeFilter == null || typeFilter.equalsIgnoreCase(value.getTypeTask())) {
-                System.out.println(String.format(myFormat,
-                        value.getID(), value.getTypeTask(), value.getTaskStatus(),
-                        value.getLinkStr(), value));
-            }
-        }
-    }
-
-
-    // TODO похож на printTaskMap
     public void printDebug() {
+       ///  Только для проверок разработчиком
         String myFormatDebug = "%3s %4s %8s %12s %12s %s";
         System.out.println(String.format(myFormatDebug, "KEY", "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
         Iterator<Map.Entry<Integer, Task>> iterator = managerTask.getListTask().entrySet().iterator();
@@ -301,4 +298,8 @@ public class ConsoleView {
                     value.getLinkStr(), value));
         }
     }
+
+
+
+
 }
