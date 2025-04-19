@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class ConsoleView {
     private Scanner in;
     private ManagerTask managerTask;
+    MyCommand myCommand;
 
     public ConsoleView(ManagerTask managerTask) {
         this.managerTask = managerTask;
@@ -31,15 +32,9 @@ public class ConsoleView {
             try {
 
                 System.out.print("Input command: ");
-                String command = in.nextLine();
-
-                String inputCommand;
-                int i = command.indexOf(' ');
-                if (i > 0) {
-                    inputCommand = command.substring(0, i).toLowerCase();
-                } else inputCommand = command.toLowerCase();
-
-                switch (inputCommand) {
+                String textCommand = in.nextLine();
+                myCommand = new MyCommand(textCommand);
+                switch (myCommand.baseCommand()) {
 /// //// //// /// /// ОБЩЕЕ
                     case ("exit") -> {
                         isExit = true;
@@ -70,10 +65,7 @@ public class ConsoleView {
                         printTaskMap("SubTASK");
                     }
                     case ("printid") -> {
-                        if (command.length() <= i++) {
-                            throw new Exception("ERROR: вы не ввели id задачи");
-                        }
-                        printID(command.substring(i));
+                        printID(myCommand.getID());
                     }
                     case ("printdebug") -> {
                         printDebug();
@@ -160,13 +152,15 @@ public class ConsoleView {
             }
         }
     }
-    public void printID(String id) throws Exception {
-        int idTask = Integer.parseInt(id);
-        if (!managerTask.getListTask().containsKey(idTask)) {
-            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!");
+    public void printID(Integer id){
+        if(id == null){
+            System.out.println("ERROR: вы не ввели id задачи");
+            return;
         }
-
-        Task task = managerTask.getListTask().get(idTask);
+        if (!managerTask.getListTask().containsKey(id)) {
+            System.out.println("ERROR: Задачи с индексом " + id + " не существует!");
+        }
+        Task task = managerTask.getListTask().get(id);
         StringBuilder consoleTable = new StringBuilder();
         consoleTable.append(String.format(myFormat, "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
         consoleTable.append("\n");
