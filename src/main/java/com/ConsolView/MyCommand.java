@@ -1,10 +1,15 @@
 package com.ConsolView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyCommand {
     private String command;
     public MyCommand(String command){
         this.command = command;
     }
+
+
     public String baseCommand(){
         String inputCommand;
         int i = command.indexOf(' ');
@@ -25,13 +30,13 @@ public class MyCommand {
         return secondCommand();
     }
     public Integer getID(){
-        String idString = secondCommand();
-        if(idString == null){
+        String[] sp = command.split(" ");
+        if (sp.length < 1){
             return null;
         }
         Integer i;
         try {
-            i = Integer.parseInt(idString);
+            i = Integer.parseInt(sp[1]);
         } catch (NumberFormatException e) {
             i = null;
         }
