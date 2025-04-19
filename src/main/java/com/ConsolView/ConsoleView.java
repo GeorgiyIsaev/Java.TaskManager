@@ -73,13 +73,13 @@ public class ConsoleView {
 
 /// //// //// /// /// ДОБАВЛЕНИЕ
                     case ("add") -> {
-                        addTask(command);
+                        addTask();
                     }
                     case ("addepic") -> {
-                        addEpicTask(command);
+                        addEpicTask();
                     }
                     case ("addsubtasktoid") -> {
-                        addSubTask(command);
+                        addSubTask();
                     }
 
 /// //// //// /// /// ИЗМЕНЕНИЕ и УДАЛЕНИЕ
@@ -87,17 +87,17 @@ public class ConsoleView {
                         managerTask.deleteALL();
                     }
                     case ("deleteid") -> {
-                        deleteID(command);
+                        deleteID();
                     }
                     case ("renameid") -> {
-                        reNameID(command);
+                        reNameID();
 
                     }
                     case ("redescid") -> {
-                        reDescID(command);
+                        reDescID();
                     }
                     case ("newstatusid") -> {
-                        newStatus(command);
+                        newStatus();
                     }
                 }
             } catch (Exception ex) {
@@ -192,36 +192,38 @@ public class ConsoleView {
     }
 
 /// /// /// Добавление
-    public void addTask(String command) throws Exception {
-        int i =  command.indexOf(' ');
-        if (command.length() <= i++) {
-            throw new Exception("ERROR: Вы не ввели имя задачи");
+    public void addTask(){
+        String textName = myCommand.secondCommand();
+        if(textName == null){
+            System.out.println("ERROR: Вы не ввели имя задачи");
+            return;
         }
-        String textName = command.substring(i);
         System.out.print("Input description Task: ");
         String textDescription = in.nextLine();
         Task task = managerTask.addTask(textName, textDescription);
         System.out.println("Add Task (id = " + task.getID() + "): " + task);
     }
-    public void addEpicTask(String command) throws Exception {
-        int i =  command.indexOf(' ');
-        if (command.length() <= i++) {
-            throw new Exception("ERROR: Вы не ввели имя задачи");
+    public void addEpicTask() throws Exception {
+        String textName = myCommand.secondCommand();
+        if(textName == null){
+            System.out.println("ERROR: Вы не ввели имя задачи");
+            return;
         }
-        String textName = command.substring(i);
         System.out.print("Input description Epic: ");
         String textDescription = in.nextLine();
         Task task = managerTask.addEpic(textName, textDescription);
         System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
     }
     public void addSubTask(String command) throws Exception {
-        int i =  command.indexOf(' ');
-        if (command.length() <= i++) {
-            throw new Exception("ERROR: вы не ввели id задачи");
+        Integer idEpicTask = myCommand.getID();
+        if(idEpicTask == null){
+            System.out.println("ERROR: вы не ввели id Эпик задачи");
+            return;
         }
-        int idEpicTask = Integer.parseInt(command.substring(i));
+
         if (!managerTask.getListTask().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")) {
-            throw new Exception("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
+            System.out.println("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
+            return;
         }
         System.out.print("Input Name Sub Task: ");
         String textName = in.nextLine();
@@ -233,7 +235,14 @@ public class ConsoleView {
 
 
 /// /// /// ИЗМЕНЕНИЯ
-    public void deleteID(String command) throws Exception {
+    public void deleteID() throws Exception {
+        Integer i = myCommand.getID();
+        if(i == null){
+            System.out.println("ERROR: вы не ввели id Эпик задачи");
+            return;
+        }
+
+
         int i =  command.indexOf(' ');
         if (command.length() <= i++) {
             throw new Exception("ERROR: вы не ввели id задачи");
