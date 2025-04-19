@@ -1,8 +1,9 @@
 package com.Controller;
 
+import com.Controller.ControlException.NotEpicException;
+import com.Controller.ControlException.NotExistIdException;
 import com.DateTask.*;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -26,15 +27,14 @@ public class ManagerTask implements Serializable {
     public Task addEpic(String nameEpic, String discEpic){
         int currentID = CreateID.INSTANCE.createID();
         listTask.put(currentID, new EpicTask(currentID, nameEpic,discEpic));
-
         return listTask.get(currentID);
     }
-    public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) throws Exception {
+    public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) {
         if (!listTask.containsKey(idEpic)){
-            throw new Exception("ERROR: Задачи с индексом " + idEpic + " не существует!" );
+            throw new NotExistIdException(idEpic);
         }
-        if(!listTask.get(idEpic).getTypeTask().equalsIgnoreCase("EPIC")){
-            throw new Exception("ERROR: Задача с ID: " + idEpic + " не является ЭПИКОМ, добавление подзадачи не возможно!;" );
+        if(!isEpic(idEpic)){
+            throw new NotEpicException(idEpic);
         }
         int currentID = CreateID.INSTANCE.createID();
         SubTask subTask = new SubTask(currentID, nameSubTask,discSubTask, (EpicTask) listTask.get(idEpic));
