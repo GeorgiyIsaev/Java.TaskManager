@@ -1,6 +1,7 @@
 package com.ConsolView;
 
 import com.Controller.ControlException.ControlException;
+import com.Controller.ManagerFile;
 import com.Controller.ManagerTask;
 
 
@@ -48,11 +49,7 @@ public class ConsoleView {
                         help();
                     }
                     case ("save") -> {
-                        if (false) {
-                            System.out.println("Данные сохранены в файл!");
-                        } else {
-                            System.out.println("Сохранение не реализованно");
-                        }
+                        ManagerFile.save(managerTask);
                     }
 
 /// //// //// /// /// ПРИНТ

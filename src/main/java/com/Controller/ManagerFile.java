@@ -3,10 +3,7 @@ package com.Controller;
 import com.Controller.ControlException.ManagerFileException;
 import com.DateTask.CreateID;
 import com.DateTask.Task;
-
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,7 +18,6 @@ public class ManagerFile {
             File f = new File(getNameFile());
         }
     }
-
     public static void save(ManagerTask managerTask)  {
         createFile();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
