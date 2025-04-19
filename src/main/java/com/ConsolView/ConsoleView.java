@@ -1,5 +1,6 @@
 package com.ConsolView;
 
+import com.Controller.ControlException.ControlException;
 import com.Controller.ManagerTask;
 
 
@@ -104,7 +105,7 @@ public class ConsoleView {
                         newStatus();
                     }
                 }
-            } catch (Exception ex) {
+            } catch (ControlException ex) {
                 System.out.println(ex.getMessage());
             }
         }
@@ -205,7 +206,7 @@ public class ConsoleView {
         Task task = managerTask.addTask(textName, textDescription);
         System.out.println("Add Task (id = " + task.getID() + "): " + task);
     }
-    public void addEpicTask() throws Exception {
+    public void addEpicTask() {
         String textName = myCommand.secondCommand();
         if(textName == null){
             System.out.println("ERROR: Вы не ввели имя задачи");
@@ -216,7 +217,7 @@ public class ConsoleView {
         Task task = managerTask.addEpic(textName, textDescription);
         System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
     }
-    public void addSubTask() throws Exception {
+    public void addSubTask() {
         Integer idEpicTask = myCommand.getID();
         if(idEpicTask == null){
             System.out.println("ERROR: вы не ввели id Эпик задачи");
@@ -236,7 +237,7 @@ public class ConsoleView {
     }
 
 /// /// /// ИЗМЕНЕНИЯ
-    public void deleteID() throws Exception {
+    public void deleteID() {
         Integer id = myCommand.getID();
         if(id == null){
             System.out.println("ERROR: вы не ввели id задачи");
@@ -245,7 +246,7 @@ public class ConsoleView {
         Task task = managerTask.deleteIDTask(id);
         System.out.println("ЗАПИСЬ: " + task.getTypeTask() + " " + task + "УДАЛЕНА!");
     }
-    public void reNameID() throws Exception {
+    public void reNameID() {
         Integer idTask = myCommand.getID();
         if(idTask == null){
             System.out.println("ERROR: вы не ввели id задачи");
@@ -261,7 +262,7 @@ public class ConsoleView {
 
         System.out.println(task.getTypeTask() + " с ID: " + idTask + " переименован! -> " + task);
     }
-    public void  reDescID() throws Exception {
+    public void  reDescID() {
         Integer idTask = myCommand.getID();
         if(idTask == null){
             System.out.println("ERROR: вы не ввели id задачи");
@@ -276,7 +277,7 @@ public class ConsoleView {
         Task task = managerTask.reDescToIDTask(idTask, textName);
         System.out.println(task.getTypeTask() + " с ID: " + idTask + " изменил описание! -> " + task);
     }
-    public void newStatus() throws Exception {
+    public void newStatus() {
         Integer idTask = myCommand.getID();
         if(idTask == null){
             System.out.println("ERROR: вы не ввели id задачи");
