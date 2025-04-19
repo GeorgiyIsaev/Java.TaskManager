@@ -1,5 +1,6 @@
 package com.Controller;
 
+import com.Controller.ControlException.NotChangedEpicStatusException;
 import com.Controller.ControlException.NotEpicException;
 import com.Controller.ControlException.NotExistIdException;
 import com.DateTask.*;
@@ -89,12 +90,12 @@ public class ManagerTask implements Serializable {
     }
 
 
-    public boolean reStatus(Integer idTask, TaskStatus taskStatus) throws Exception {
+    public boolean reStatus(Integer idTask, TaskStatus taskStatus) {
         if (!listTask.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
         if(isEpic(idTask)){
-            throw new Exception("ERROR: Задачи с индексом " + idTask + " EPIC! Ручное изменение статуса не возможно!" );
+            throw new NotChangedEpicStatusException(idTask);
         }
         if (listTask.get(idTask).getTaskStatus() == taskStatus){
             return false;
