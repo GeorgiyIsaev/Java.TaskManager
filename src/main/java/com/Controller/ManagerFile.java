@@ -13,16 +13,24 @@ import java.util.TreeMap;
 public class ManagerFile {
     private static String getNameFile() {
         String sep = File.separator;
-        return "Date" + sep + "MyTaskSer.bin";
+        return "Date" + sep + "MyTask.bin";
     }
+    private static void createFile() {
+        if (!(new File(getNameFile()).exists())) {
+            new File("Date").mkdirs();
+            File f = new File(getNameFile());
+        }
+    }
+
     public static void save(ManagerTask managerTask)  {
+        createFile();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
             oos.writeObject(managerTask.getListTask());
         } catch (IOException e) {
             throw new ManagerFileException(e);
         }
     }
-    public void load(ManagerTask managerTask) {
+    public static void load(ManagerTask managerTask) {
         Map<Integer, Task> tasksMap;
         if (!(new File(getNameFile()).exists())) {
             return;
