@@ -17,6 +17,10 @@ public class ConsoleView {
     private ManagerTask managerTask;
     MyCommand myCommand;
 
+    public void setMyCommand(String textCommand) {
+        this.myCommand = new MyCommand(textCommand);;
+    }
+
     public ConsoleView(ManagerTask managerTask) {
         this.managerTask = managerTask;
         in = new Scanner(System.in);
@@ -33,7 +37,7 @@ public class ConsoleView {
 
                 System.out.print("Input command: ");
                 String textCommand = in.nextLine();
-                myCommand = new MyCommand(textCommand);
+                setMyCommand(textCommand);
                 switch (myCommand.baseCommand()) {
 /// //// //// /// /// ОБЩЕЕ
                     case ("exit") -> {
@@ -110,7 +114,6 @@ public class ConsoleView {
 
 /// /// /// ХЕЛП
     public void help() {
-
         String textHelp = "ДОСТУПНЫЕ КОМАНДЫ: \n" +
                 " \"help\" - показать список команда\n" +
                 " \"exit\" - завершить программу\n" +
@@ -133,7 +136,6 @@ public class ConsoleView {
                 " \"newStatusId 'NUMBER ID' ('NEW, 'PROG' or 'DONE')\"  – изменить статус выполнения задачи с ID\n";
         System.out.println(textHelp);
     }
-
 
 /// /// /// ВЫВОД - ПРИНТ
     String myFormat = "%-4s %-8s %-12s %-12s %-25s";
@@ -233,7 +235,6 @@ public class ConsoleView {
         System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
     }
 
-
 /// /// /// ИЗМЕНЕНИЯ
     public void deleteID() throws Exception {
         Integer id = myCommand.getID();
@@ -301,9 +302,8 @@ public class ConsoleView {
                 managerTask.reStatus(idTask, TaskStatus.DONE);
             }
             default -> {
-                System.out.println("ERROR: Значение '" + myCommand.thirdCommand().toUpperCase() + "' не соответствует команде изменения статус.\n" +
+                System.out.println("ERROR: Значение '" + myCommand.thirdCommand().toUpperCase() + "' не соответствует значению статуса.\n" +
                         " Допустимые значение 'NEW' 'PROG' 'DONE'");
-                return;
             }
         }
         System.out.println("Статус задачи: " + managerTask.getListTask().get(idTask) + " -> " + managerTask.getListTask().get(idTask).getTaskStatus());
