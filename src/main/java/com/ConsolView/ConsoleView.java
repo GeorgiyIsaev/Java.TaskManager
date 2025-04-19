@@ -81,42 +81,13 @@ public class ConsoleView {
 
 /// //// //// /// /// ДОБАВЛЕНИЕ
                     case ("add") -> {
-                        if (command.length() <= i++) {
-                            throw new Exception("ERROR: Вы не ввели имя задачи");
-                        }
-                        String textName = command.substring(i);
-                        System.out.print("Input description Task: ");
-                        String textDescription = in.nextLine();
-                        Task task = managerTask.addTask(textName, textDescription);
-                        System.out.println("Add Task (id = " + task.getID() + "): " + task);
+                        addTask(command);
                     }
                     case ("addepic") -> {
-                        if (command.length() <= i++) {
-                            System.out.println("ERROR: Вы не ввели имя задачи");
-                            break;
-                        }
-                        String textName = command.substring(i);
-                        System.out.print("Input description Epic: ");
-                        String textDescription = in.nextLine();
-                        Task task = managerTask.addEpic(textName, textDescription);
-                        System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
+                        addEpicTask(command);
                     }
                     case ("addsubtasktoid") -> {
-                        if (command.length() <= i++) {
-                            System.out.println("ERROR: вы не ввели id задачи");
-                            break;
-                        }
-                        int idEpicTask = Integer.parseInt(command.substring(i));
-                        if (!managerTask.getListTask().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")) {
-                            System.out.println("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
-                            break;
-                        }
-                        System.out.print("Input Name Sub Task: ");
-                        String textName = in.nextLine();
-                        System.out.print("Input Description Sub Task: ");
-                        String textDescription = in.nextLine();
-                        Task task = managerTask.addSubTaskToEpicID(textName, textDescription, idEpicTask);
-                        System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
+                        addSubTask(command);
                     }
 
 /// //// //// /// /// ИЗМЕНЕНИЕ и УДАЛЕНИЕ
@@ -298,6 +269,48 @@ public class ConsoleView {
                     value.getLinkStr(), value));
         }
     }
+
+/// /// /// Добавление
+    public void addTask(String command) throws Exception {
+        int i =  command.indexOf(' ');
+        if (command.length() <= i++) {
+            throw new Exception("ERROR: Вы не ввели имя задачи");
+        }
+        String textName = command.substring(i);
+        System.out.print("Input description Task: ");
+        String textDescription = in.nextLine();
+        Task task = managerTask.addTask(textName, textDescription);
+        System.out.println("Add Task (id = " + task.getID() + "): " + task);
+    }
+    public void addEpicTask(String command) throws Exception {
+        int i =  command.indexOf(' ');
+        if (command.length() <= i++) {
+            throw new Exception("ERROR: Вы не ввели имя задачи");
+        }
+        String textName = command.substring(i);
+        System.out.print("Input description Epic: ");
+        String textDescription = in.nextLine();
+        Task task = managerTask.addEpic(textName, textDescription);
+        System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
+    }
+    public void addSubTask(String command) throws Exception {
+        int i =  command.indexOf(' ');
+        if (command.length() <= i++) {
+            throw new Exception("ERROR: вы не ввели id задачи");
+        }
+        int idEpicTask = Integer.parseInt(command.substring(i));
+        if (!managerTask.getListTask().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")) {
+            throw new Exception("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
+        }
+        System.out.print("Input Name Sub Task: ");
+        String textName = in.nextLine();
+        System.out.print("Input Description Sub Task: ");
+        String textDescription = in.nextLine();
+        Task task = managerTask.addSubTaskToEpicID(textName, textDescription, idEpicTask);
+        System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
+    }
+
+
 
 
 
