@@ -1,5 +1,6 @@
 package com.Controller;
 
+import com.Controller.ControlException.ManagerFileException;
 import com.DateTask.CreateID;
 import com.DateTask.Task;
 
@@ -18,7 +19,7 @@ public class ManagerFile {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
             oos.writeObject(managerTask.getListTask());
         } catch (IOException e) {
-            //обработка?
+            throw new ManagerFileException(e);
         }
     }
     public void load(ManagerTask managerTask) {
@@ -35,7 +36,7 @@ public class ManagerFile {
             managerTask.setListTask(tasksMap);
 
         } catch (IOException | ClassNotFoundException e) {
-            //обработка?
+            throw new ManagerFileException(e);
         }
     }
 }
