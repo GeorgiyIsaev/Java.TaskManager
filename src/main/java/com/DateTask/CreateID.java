@@ -9,8 +9,9 @@ public enum CreateID {
     }
 
     public void setId(int newID){
-        if(id <newID) {
+        if(id <=newID) {
             id = newID;
+            id++;
         }
     }
 }
