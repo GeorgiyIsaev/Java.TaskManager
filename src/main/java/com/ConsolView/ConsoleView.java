@@ -95,92 +95,19 @@ public class ConsoleView {
                         managerTask.deleteALL();
                     }
                     case ("deleteid") -> {
-                        if (command.length() <= i++) {
-                            System.out.println("ERROR: вы не ввели id задачи");
-                            break;
-                        }
-                        int idEpicTask = Integer.parseInt(command.substring(i));
-                        Task task = managerTask.deleteIDTask(idEpicTask);
-                        System.out.println("ЗАПИСЬ: " + task.getTypeTask() + " " + task + "УДАЛЕНА!");
+                        deleteID(command);
                     }
                     case ("renameid") -> {
-                        if (command.length() <= i++) {
-                            System.out.println("ERROR: вы не ввели id задачи");
-                            break;
-                        }
-                        int idTask = Integer.parseInt(command.substring(i));
-                        if (!managerTask.getListTask().containsKey(idTask)) {
-                            System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
-                            break;
-                        }
-                        System.out.print("Input NewName Task: ");
-                        String textName = in.nextLine();
-                        Task task = managerTask.reNameToIDTask(idTask, textName);
-
-                        System.out.println(task.getTypeTask() + " с ID: " + idTask + " переименован! -> " + task);
+                        reNameID(command);
 
                     }
                     case ("redescid") -> {
-                        if (command.length() <= i++) {
-                            System.out.println("ERROR: вы не ввели id задачи");
-                            break;
-                        }
-                        int idTask = Integer.parseInt(command.substring(i));
-                        if (!managerTask.getListTask().containsKey(idTask)) {
-                            System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
-                            break;
-                        }
-                        System.out.print("Input NewDescription Task: ");
-                        String textName = in.nextLine();
-                        Task task = managerTask.reDescToIDTask(idTask, textName);
-                        System.out.println(task.getTypeTask() + " с ID: " + idTask + " изменил описание! -> " + task);
+                        reDescID(command);
                     }
                     case ("newstatusid") -> {
-                        if (command.length() <= i++) {
-                            System.out.println("ERROR: вы не ввели id задачи");
-                            break;
-                        }
-                        String[] elemetsString = command.split("\\s+");
-                        int idTask = Integer.parseInt(elemetsString[1]);
-                        if (!managerTask.getListTask().containsKey(idTask)) {
-                            System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
-                            break;
-                        }
-                        if (managerTask.isEpic(idTask)) {
-                            System.out.println("ERROR: Задачи с ID: " + idTask + " EPIC! Расчет статуса осуществляется автоматически!");
-                            System.out.println("Статус задачи: " + managerTask.getListTask().get(idTask).getTaskStatus());
-                            break;
-                        }
-                        TaskStatus newStatus = null;
-                        switch (elemetsString[2].toLowerCase()) {
-                            case "new" -> {
-                                newStatus = TaskStatus.NEW;
-                            }
-                            case "prog" -> {
-                                newStatus = TaskStatus.IN_PROGRESS;
-                            }
-                            case "done" -> {
-                                newStatus = TaskStatus.DONE;
-                            }
-                        }
-                        if (newStatus == null) {
-                            System.out.println("ERROR: Значение '" + elemetsString[2].toUpperCase() + "' не соответствует команде изменения статус.\n" +
-                                    " Допустимые значение 'NEW' 'PROG' 'DONE'");
-                            break;
-                        }
-
-                        if (managerTask.reStatus(idTask, newStatus)) {
-                            System.out.println("Статус задачи с ID: " + idTask + " изменен!");
-                        } else {
-                            System.out.println("Статус задачи с ID: " + idTask + " не изменен!");
-                        }
-                        System.out.println("Статус задачи: " + managerTask.getListTask().get(idTask).getTaskStatus());
-                    }
-                    default -> {
-                        System.out.println("Команда не распознана!");
+                        newStatus(command);
                     }
                 }
-
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
@@ -309,6 +236,87 @@ public class ConsoleView {
         Task task = managerTask.addSubTaskToEpicID(textName, textDescription, idEpicTask);
         System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
     }
+
+
+/// /// /// ИЗМЕНЕНИЯ
+    public void deleteID(String command) throws Exception {
+        int i =  command.indexOf(' ');
+        if (command.length() <= i++) {
+            throw new Exception("ERROR: вы не ввели id задачи");
+        }
+        int idEpicTask = Integer.parseInt(command.substring(i));
+        Task task = managerTask.deleteIDTask(idEpicTask);
+        System.out.println("ЗАПИСЬ: " + task.getTypeTask() + " " + task + "УДАЛЕНА!");
+    }
+    public void reNameID(String command) throws Exception {
+        int i =  command.indexOf(' ');
+        if (command.length() <= i++) {
+            throw new Exception("ERROR: вы не ввели id задачи");
+        }
+        int idTask = Integer.parseInt(command.substring(i));
+        if (!managerTask.getListTask().containsKey(idTask)) {
+            throw new Exception("ERROR: Задачи с ID: " + idTask + " не существует!");
+        }
+        System.out.print("Input NewName Task: ");
+        String textName = in.nextLine();
+        Task task = managerTask.reNameToIDTask(idTask, textName);
+
+        System.out.println(task.getTypeTask() + " с ID: " + idTask + " переименован! -> " + task);
+    }
+    public void  reDescID(String command) throws Exception {
+        int i =  command.indexOf(' ');
+        if (command.length() <= i++) {
+            throw new Exception("ERROR: вы не ввели id задачи");
+        }
+        int idTask = Integer.parseInt(command.substring(i));
+        if (!managerTask.getListTask().containsKey(idTask)) {
+            throw new Exception("ERROR: Задачи с ID: " + idTask + " не существует!");
+        }
+        System.out.print("Input NewDescription Task: ");
+        String textName = in.nextLine();
+        Task task = managerTask.reDescToIDTask(idTask, textName);
+        System.out.println(task.getTypeTask() + " с ID: " + idTask + " изменил описание! -> " + task);
+    }
+    public void newStatus(String command) throws Exception {
+        int i =  command.indexOf(' ');
+        if (command.length() <= i++) {
+            throw new Exception("ERROR: вы не ввели id задачи");
+        }
+        String[] elemetsString = command.split("\\s+");
+        int idTask = Integer.parseInt(elemetsString[1]);
+        if (!managerTask.getListTask().containsKey(idTask)) {
+            throw new Exception("ERROR: Задачи с ID: " + idTask + " не существует!");
+        }
+        if (managerTask.isEpic(idTask)) {
+            throw new Exception("ERROR: Задачи с ID: " + idTask + " EPIC! Расчет статуса осуществляется автоматически!/n"+
+                    "Статус задачи: " + managerTask.getListTask().get(idTask).getTaskStatus());
+        }
+        TaskStatus newStatus = null;
+        switch (elemetsString[2].toLowerCase()) {
+            case "new" -> {
+                newStatus = TaskStatus.NEW;
+            }
+            case "prog" -> {
+                newStatus = TaskStatus.IN_PROGRESS;
+            }
+            case "done" -> {
+                newStatus = TaskStatus.DONE;
+            }
+        }
+        if (newStatus == null) {
+            throw new Exception("ERROR: Значение '" + elemetsString[2].toUpperCase() + "' не соответствует команде изменения статус.\n" +
+                    " Допустимые значение 'NEW' 'PROG' 'DONE'");
+        }
+
+        if (managerTask.reStatus(idTask, newStatus)) {
+            System.out.println("Статус задачи с ID: " + idTask + " изменен!");
+        } else {
+            System.out.println("Статус задачи с ID: " + idTask + " не изменен!");
+        }
+        System.out.println("Статус задачи: " + managerTask.getListTask().get(idTask).getTaskStatus());
+    }
+
+
 
 
 
