@@ -48,11 +48,10 @@ public class ManagerTask implements Serializable {
         this.listTask.clear();
     }
 
-    public Task deleteIDTask(Integer idTask) throws Exception {
+    public Task deleteIDTask(Integer idTask) {
         if (!listTask.containsKey(idTask)){
-            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
+            throw new NotExistIdException(idTask);
         }
-
         Task task = listTask.get(idTask);
         if(listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC")){
             for(SubTask subTask :  ((EpicTask)listTask.get(idTask)).getSubTasks()){
@@ -74,16 +73,16 @@ public class ManagerTask implements Serializable {
     }
 
 /// /// /// /// Изменение
-    public Task reNameToIDTask (Integer idTask, String newName) throws Exception {
+    public Task reNameToIDTask (Integer idTask, String newName) {
         if (!listTask.containsKey(idTask)){
-            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
+            throw new NotExistIdException(idTask);
         }
         listTask.get(idTask).setName(newName);
         return listTask.get(idTask);
     }
-    public Task reDescToIDTask (Integer idTask, String newDescription) throws Exception {
+    public Task reDescToIDTask (Integer idTask, String newDescription) {
         if (!listTask.containsKey(idTask)){
-            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
+            throw new NotExistIdException(idTask);
         }
         listTask.get(idTask).setDescription(newDescription);
         return listTask.get(idTask);
@@ -92,7 +91,7 @@ public class ManagerTask implements Serializable {
 
     public boolean reStatus(Integer idTask, TaskStatus taskStatus) throws Exception {
         if (!listTask.containsKey(idTask)){
-            throw new Exception("ERROR: Задачи с индексом " + idTask + " не существует!" );
+            throw new NotExistIdException(idTask);
         }
         if(isEpic(idTask)){
             throw new Exception("ERROR: Задачи с индексом " + idTask + " EPIC! Ручное изменение статуса не возможно!" );
