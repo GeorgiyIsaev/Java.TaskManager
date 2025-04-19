@@ -180,9 +180,7 @@ public class ConsoleView {
        ///  Только для проверок разработчиком
         String myFormatDebug = "%3s %4s %8s %12s %12s %s";
         System.out.println(String.format(myFormatDebug, "KEY", "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
-        Iterator<Map.Entry<Integer, Task>> iterator = managerTask.getListTask().entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Integer, Task> entry = iterator.next();
+        for (Map.Entry<Integer, Task> entry : managerTask.getListTask().entrySet()) {
             Integer key = entry.getKey();
             Task value = entry.getValue();
             System.out.println(String.format(myFormatDebug,
