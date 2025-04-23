@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ManagerTask implements Serializable {
+public class ManagerTask implements Serializable, IManagerTask {
     private Map<Integer, Task> listTask;
 
     public Map<Integer, Task> getListTask() {
@@ -24,16 +24,19 @@ public class ManagerTask implements Serializable {
     }
 
 /// /// /// /// ДОБАВЛЕНИЕ
+    @Override
     public Task addTask(String nameTask, String discTask){
         int currentID = CreateID.INSTANCE.createID();
         listTask.put(currentID, new Task(currentID, nameTask,discTask));
         return listTask.get(currentID);
     }
+    @Override
     public Task addEpic(String nameEpic, String discEpic){
         int currentID = CreateID.INSTANCE.createID();
         listTask.put(currentID, new EpicTask(currentID, nameEpic,discEpic));
         return listTask.get(currentID);
     }
+    @Override
     public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) {
         if (!listTask.containsKey(idEpic)){
             throw new NotExistIdException(idEpic);
@@ -49,10 +52,11 @@ public class ManagerTask implements Serializable {
     }
 
 /// /// /// /// УДАЛЕНИЕ
+    @Override
     public void deleteALL() {
         this.listTask.clear();
     }
-
+    @Override
     public Task deleteIDTask(Integer idTask) {
         if (!listTask.containsKey(idTask)){
             throw new NotExistIdException(idTask);
@@ -78,6 +82,7 @@ public class ManagerTask implements Serializable {
     }
 
 /// /// /// /// Изменение
+    @Override
     public Task reNameToIDTask (Integer idTask, String newName) {
         if (!listTask.containsKey(idTask)){
             throw new NotExistIdException(idTask);
@@ -85,6 +90,7 @@ public class ManagerTask implements Serializable {
         listTask.get(idTask).setName(newName);
         return listTask.get(idTask);
     }
+    @Override
     public Task reDescToIDTask (Integer idTask, String newDescription) {
         if (!listTask.containsKey(idTask)){
             throw new NotExistIdException(idTask);
@@ -93,7 +99,7 @@ public class ManagerTask implements Serializable {
         return listTask.get(idTask);
     }
 
-
+    @Override
     public boolean reStatus(Integer idTask, TaskStatus taskStatus) {
         if (!listTask.containsKey(idTask)){
             throw new NotExistIdException(idTask);
