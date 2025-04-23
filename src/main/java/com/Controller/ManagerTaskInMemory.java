@@ -13,6 +13,7 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
     private Map<Integer, Task> listTask;
     private IHistoryManager historyManager;
     public ManagerTaskInMemory() {
+        historyManager = new ManagerHistoryInMemory();
         listTask = new TreeMap<>();
     }
 
@@ -24,7 +25,6 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
     @Override
     public void setListTask(Map<Integer, Task> listTask) {
         this.listTask = listTask;
-        historyManager = new ManagerHistoryInMemory();
     }
 
     @Override

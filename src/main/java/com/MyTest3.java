@@ -40,7 +40,7 @@ public class MyTest3 {
     }
     public static void createTask(IManagerTask managerTaskInMemory) {
         managerTaskInMemory.addTask("Первая задача", "Описание простой задачи");
-        //managerTaskInMemory.getTask(0);
+        managerTaskInMemory.getTask(0);
         managerTaskInMemory.addTask("Вторая задача", "Другое описание простой задачи");
         managerTaskInMemory.getTask(1);
         managerTaskInMemory.addEpic("Эпичная задача", "Очень эпичное описание");
@@ -51,6 +51,9 @@ public class MyTest3 {
         managerTaskInMemory.getTask(2);
         managerTaskInMemory.getTask(3);
         managerTaskInMemory.getTask(4);
+        managerTaskInMemory.getTask(1);
+        managerTaskInMemory.getTask(1);
+        managerTaskInMemory.getTask(1);
 
     }
 
@@ -60,6 +63,8 @@ public class MyTest3 {
         managerTaskInMemory.reDescToIDTask(3, "Новое крутое описание");
        //managerTask.deleteIDTask(4);
         managerTaskInMemory.reStatus(3, TaskStatus.IN_PROGRESS);
+        managerTaskInMemory.getTask(3);
+        managerTaskInMemory.getTask(3);
         managerTaskInMemory.getTask(3);
     }
 }
