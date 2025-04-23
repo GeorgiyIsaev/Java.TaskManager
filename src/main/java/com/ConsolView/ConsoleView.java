@@ -1,6 +1,7 @@
 package com.ConsolView;
 
 import com.Controller.ControlException.ControlException;
+import com.Controller.IManagerTask;
 import com.Controller.ManagerFile;
 import com.Controller.ManagerTaskInMemory;
 
@@ -15,14 +16,14 @@ import java.util.Scanner;
 
 public class ConsoleView {
     private Scanner in;
-    private ManagerTaskInMemory managerTaskInMemory;
+    private IManagerTask managerTaskInMemory;
     MyCommand myCommand;
 
     public void setMyCommand(String textCommand) {
         this.myCommand = new MyCommand(textCommand);;
     }
 
-    public ConsoleView(ManagerTaskInMemory managerTaskInMemory) {
+    public ConsoleView(IManagerTask managerTaskInMemory) {
         this.managerTaskInMemory = managerTaskInMemory;
         in = new Scanner(System.in);
     }

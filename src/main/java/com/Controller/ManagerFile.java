@@ -18,7 +18,7 @@ public class ManagerFile {
             File f = new File(getNameFile());
         }
     }
-    public static void save(ManagerTaskInMemory managerTaskInMemory)  {
+    public static void save(IManagerTask managerTaskInMemory)  {
         createFile();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
             oos.writeObject(managerTaskInMemory.getListTask());
@@ -26,7 +26,7 @@ public class ManagerFile {
             throw new ManagerFileException(e);
         }
     }
-    public static void load(ManagerTaskInMemory managerTaskInMemory) {
+    public static void load(IManagerTask managerTaskInMemory) {
         Map<Integer, Task> tasksMap;
         if (!(new File(getNameFile()).exists())) {
             return;

@@ -5,24 +5,24 @@ import com.Controller.ControlException.NotEpicException;
 import com.Controller.ControlException.NotExistIdException;
 import com.DateTask.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class ManagerTaskInMemory implements Serializable, IManagerTask {
     private Map<Integer, Task> listTask;
-
-    public Map<Integer, Task> getListTask() {
-        return listTask;
-    }
-
-    public void setListTask(Map<Integer, Task> listTask) {
-        this.listTask = listTask;
-    }
-
     public ManagerTaskInMemory() {
         listTask = new TreeMap<>();
     }
 
+    @Override
+    public Map<Integer, Task> getListTask() {
+        return listTask;
+    }
+    @Override
+    public void setListTask(Map<Integer, Task> listTask) {
+        this.listTask = listTask;
+    }
 /// /// /// /// ДОБАВЛЕНИЕ
     @Override
     public Task addTask(String nameTask, String discTask){
@@ -113,10 +113,25 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         listTask.get(idTask).setTaskStatus(taskStatus);
         return true;
     }
-
+    @Override
     public boolean isEpic(Integer idTask){
         return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
     }
+
+    @Override
+    public Task getTask(Integer idTask){
+        if (!listTask.containsKey(idTask)){
+            throw new NotExistIdException(idTask);
+        }
+        return listTask.get(idTask);
+    }
+
+
+
+
+
+
+
 }
 
 
