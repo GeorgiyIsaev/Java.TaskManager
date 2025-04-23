@@ -1,0 +1,27 @@
+package com.Controller;
+
+import com.DateTask.Task;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ManagerHistoryInMemory implements IHistoryManager{
+    private static List<Task> historyList = new ArrayList<>();
+
+
+    @Override
+    public void add(Task task) {
+        if (historyList.size() >=10){
+            historyList.remove(0);
+        }
+        historyList.add(task);
+    }
+
+    @Override
+    public List<Task> getHistory() {
+        List<Task> noChangesHistoryList = new ArrayList<>(historyList.size());
+        Collections.copy(noChangesHistoryList, historyList);
+       return noChangesHistoryList;
+    }
+}
