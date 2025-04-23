@@ -7,7 +7,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class ManagerHistoryInMemory implements IHistoryManager{
-    private static List<Task> historyList = new ArrayList<>();
+    private List<Task> historyList;
+
+    public ManagerHistoryInMemory(){
+        this.historyList = new ArrayList<>();
+    }
 
 
     @Override

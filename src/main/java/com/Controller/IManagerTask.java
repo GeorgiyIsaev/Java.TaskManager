@@ -3,6 +3,7 @@ package com.Controller;
 import com.DateTask.Task;
 import com.DateTask.TaskStatus;
 
+import java.util.List;
 import java.util.Map;
 
 public interface IManagerTask {
@@ -23,4 +24,6 @@ public interface IManagerTask {
 
     public Map<Integer, Task> getListTask();
     public void setListTask(Map<Integer, Task> listTask);
+    public List<Task> getHistory();
+
 }

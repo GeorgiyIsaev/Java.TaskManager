@@ -11,6 +11,7 @@ import java.util.TreeMap;
 
 public class ManagerTaskInMemory implements Serializable, IManagerTask {
     private Map<Integer, Task> listTask;
+    private IHistoryManager historyManager;
     public ManagerTaskInMemory() {
         listTask = new TreeMap<>();
     }
@@ -18,12 +19,20 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
     @Override
     public Map<Integer, Task> getListTask() {
         return listTask;
+
     }
     @Override
     public void setListTask(Map<Integer, Task> listTask) {
         this.listTask = listTask;
+        historyManager = new ManagerHistoryInMemory();
     }
-/// /// /// /// ДОБАВЛЕНИЕ
+
+    @Override
+    public List<Task> getHistory() {
+        return historyManager.getHistory();
+    }
+
+    /// /// /// /// ДОБАВЛЕНИЕ
     @Override
     public Task addTask(String nameTask, String discTask){
         int currentID = CreateID.INSTANCE.createID();
@@ -123,7 +132,11 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         if (!listTask.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
-        return listTask.get(idTask);
+        Task task = listTask.get(idTask);
+        if(task != null) {
+            historyManager.add(task);
+        }
+        return task;
     }
 
 
