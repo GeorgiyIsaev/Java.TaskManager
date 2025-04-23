@@ -2,7 +2,7 @@ package com.ConsolView;
 
 import com.Controller.ControlException.ControlException;
 import com.Controller.ManagerFile;
-import com.Controller.ManagerTask;
+import com.Controller.ManagerTaskInMemory;
 
 
 import com.DateTask.Task;
@@ -10,27 +10,26 @@ import com.DateTask.EpicTask;
 import com.DateTask.SubTask;
 import com.DateTask.TaskStatus;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleView {
     private Scanner in;
-    private ManagerTask managerTask;
+    private ManagerTaskInMemory managerTaskInMemory;
     MyCommand myCommand;
 
     public void setMyCommand(String textCommand) {
         this.myCommand = new MyCommand(textCommand);;
     }
 
-    public ConsoleView(ManagerTask managerTask) {
-        this.managerTask = managerTask;
+    public ConsoleView(ManagerTaskInMemory managerTaskInMemory) {
+        this.managerTaskInMemory = managerTaskInMemory;
         in = new Scanner(System.in);
     }
 
     public void run() {
         System.out.println("Добро пожаловать в TaskManager!");
-        System.out.println("У вас в работе " + managerTask.getListTask().size() + " задач.");
+        System.out.println("У вас в работе " + managerTaskInMemory.getListTask().size() + " задач.");
         System.out.println("Введите help что бы отобразить доступные команды.");
 
         boolean isExit = false;
@@ -49,7 +48,7 @@ public class ConsoleView {
                         help();
                     }
                     case ("save") -> {
-                        ManagerFile.save(managerTask);
+                        ManagerFile.save(managerTaskInMemory);
                     }
 
 /// //// //// /// /// ПРИНТ
@@ -86,7 +85,7 @@ public class ConsoleView {
 
 /// //// //// /// /// ИЗМЕНЕНИЕ и УДАЛЕНИЕ
                     case ("deleteall") -> {
-                        managerTask.deleteALL();
+                        managerTaskInMemory.deleteALL();
                     }
                     case ("deleteid") -> {
                         deleteID();
@@ -143,7 +142,7 @@ public class ConsoleView {
     public void printTaskMap(String typeFilter) {
         // "EPIC" "TASK" "SubTASK"
         System.out.println(String.format(myFormat, "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
-        for (Map.Entry<Integer, Task> entry : managerTask.getListTask().entrySet()) {
+        for (Map.Entry<Integer, Task> entry : managerTaskInMemory.getListTask().entrySet()) {
             Task value = entry.getValue();
             if (typeFilter == null || typeFilter.equalsIgnoreCase(value.getTypeTask())) {
                 System.out.println(String.format(myFormat,
@@ -157,10 +156,10 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        if (!managerTask.getListTask().containsKey(id)) {
+        if (!managerTaskInMemory.getListTask().containsKey(id)) {
             System.out.println("ERROR: Задачи с индексом " + id + " не существует!");
         }
-        Task task = managerTask.getListTask().get(id);
+        Task task = managerTaskInMemory.getListTask().get(id);
         StringBuilder consoleTable = new StringBuilder();
         consoleTable.append(String.format(myFormat, "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
         consoleTable.append("\n");
@@ -180,7 +179,7 @@ public class ConsoleView {
        ///  Только для проверок разработчиком
         String myFormatDebug = "%3s %4s %8s %12s %12s %s";
         System.out.println(String.format(myFormatDebug, "KEY", "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
-        for (Map.Entry<Integer, Task> entry : managerTask.getListTask().entrySet()) {
+        for (Map.Entry<Integer, Task> entry : managerTaskInMemory.getListTask().entrySet()) {
             Integer key = entry.getKey();
             Task value = entry.getValue();
             System.out.println(String.format(myFormatDebug,
@@ -198,7 +197,7 @@ public class ConsoleView {
         }
         System.out.print("Input description Task: ");
         String textDescription = in.nextLine();
-        Task task = managerTask.addTask(textName, textDescription);
+        Task task = managerTaskInMemory.addTask(textName, textDescription);
         System.out.println("Add Task (id = " + task.getID() + "): " + task);
     }
     public void addEpicTask() {
@@ -209,7 +208,7 @@ public class ConsoleView {
         }
         System.out.print("Input description Epic: ");
         String textDescription = in.nextLine();
-        Task task = managerTask.addEpic(textName, textDescription);
+        Task task = managerTaskInMemory.addEpic(textName, textDescription);
         System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
     }
     public void addSubTask() {
@@ -219,7 +218,7 @@ public class ConsoleView {
             return;
         }
 
-        if (!managerTask.getListTask().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")) {
+        if (!managerTaskInMemory.getListTask().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")) {
             System.out.println("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
             return;
         }
@@ -227,7 +226,7 @@ public class ConsoleView {
         String textName = in.nextLine();
         System.out.print("Input Description Sub Task: ");
         String textDescription = in.nextLine();
-        Task task = managerTask.addSubTaskToEpicID(textName, textDescription, idEpicTask);
+        Task task = managerTaskInMemory.addSubTaskToEpicID(textName, textDescription, idEpicTask);
         System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
     }
 
@@ -238,7 +237,7 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        Task task = managerTask.deleteIDTask(id);
+        Task task = managerTaskInMemory.deleteIDTask(id);
         System.out.println("ЗАПИСЬ: " + task.getTypeTask() + " " + task + "УДАЛЕНА!");
     }
     public void reNameID() {
@@ -247,13 +246,13 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        if (!managerTask.getListTask().containsKey(idTask)) {
+        if (!managerTaskInMemory.getListTask().containsKey(idTask)) {
             System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
             return;
         }
         System.out.print("Input NewName Task: ");
         String textName = in.nextLine();
-        Task task = managerTask.reNameToIDTask(idTask, textName);
+        Task task = managerTaskInMemory.reNameToIDTask(idTask, textName);
 
         System.out.println(task.getTypeTask() + " с ID: " + idTask + " переименован! -> " + task);
     }
@@ -263,13 +262,13 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        if (!managerTask.getListTask().containsKey(idTask)) {
+        if (!managerTaskInMemory.getListTask().containsKey(idTask)) {
             System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
             return;
         }
         System.out.print("Input NewDescription Task: ");
         String textName = in.nextLine();
-        Task task = managerTask.reDescToIDTask(idTask, textName);
+        Task task = managerTaskInMemory.reDescToIDTask(idTask, textName);
         System.out.println(task.getTypeTask() + " с ID: " + idTask + " изменил описание! -> " + task);
     }
     public void newStatus() {
@@ -278,30 +277,30 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        if (!managerTask.getListTask().containsKey(idTask)) {
+        if (!managerTaskInMemory.getListTask().containsKey(idTask)) {
             System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
             return;
         }
-        if (managerTask.isEpic(idTask)) {
+        if (managerTaskInMemory.isEpic(idTask)) {
             System.out.println("ERROR: Задачи с ID: " + idTask + " EPIC! Расчет статуса осуществляется автоматически!/n"+
-                    "Статус задачи: " + managerTask.getListTask().get(idTask).getTaskStatus());
+                    "Статус задачи: " + managerTaskInMemory.getListTask().get(idTask).getTaskStatus());
             return;
         }
         switch (myCommand.thirdCommand().toLowerCase()) {
             case "new" -> {
-                managerTask.reStatus(idTask, TaskStatus.NEW);
+                managerTaskInMemory.reStatus(idTask, TaskStatus.NEW);
             }
             case "prog" -> {
-                managerTask.reStatus(idTask, TaskStatus.IN_PROGRESS);
+                managerTaskInMemory.reStatus(idTask, TaskStatus.IN_PROGRESS);
             }
             case "done" -> {
-                managerTask.reStatus(idTask, TaskStatus.DONE);
+                managerTaskInMemory.reStatus(idTask, TaskStatus.DONE);
             }
             default -> {
                 System.out.println("ERROR: Значение '" + myCommand.thirdCommand().toUpperCase() + "' не соответствует значению статуса.\n" +
                         " Допустимые значение 'NEW' 'PROG' 'DONE'");
             }
         }
-        System.out.println("Статус задачи: " + managerTask.getListTask().get(idTask) + " -> " + managerTask.getListTask().get(idTask).getTaskStatus());
+        System.out.println("Статус задачи: " + managerTaskInMemory.getListTask().get(idTask) + " -> " + managerTaskInMemory.getListTask().get(idTask).getTaskStatus());
     }
 }

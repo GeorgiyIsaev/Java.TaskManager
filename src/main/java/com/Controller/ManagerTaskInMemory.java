@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ManagerTask implements Serializable, IManagerTask {
+public class ManagerTaskInMemory implements Serializable, IManagerTask {
     private Map<Integer, Task> listTask;
 
     public Map<Integer, Task> getListTask() {
@@ -19,7 +19,7 @@ public class ManagerTask implements Serializable, IManagerTask {
         this.listTask = listTask;
     }
 
-    public ManagerTask() {
+    public ManagerTaskInMemory() {
         listTask = new TreeMap<>();
     }
 

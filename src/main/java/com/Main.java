@@ -1,16 +1,16 @@
 package com;
 import com.ConsolView.ConsoleView;
 import com.Controller.ManagerFile;
-import com.Controller.ManagerTask;
+import com.Controller.ManagerTaskInMemory;
 
 
 
 public class Main {
     public static void main(String[] args) {
-        ManagerTask managerTask = new ManagerTask();
-        ManagerFile.load(managerTask);
+        ManagerTaskInMemory managerTaskInMemory = new ManagerTaskInMemory();
+        ManagerFile.load(managerTaskInMemory);
 
-        ConsoleView consoleView = new ConsoleView(managerTask);
+        ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
         consoleView.run();
     }
 }

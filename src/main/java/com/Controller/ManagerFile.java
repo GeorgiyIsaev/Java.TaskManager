@@ -18,15 +18,15 @@ public class ManagerFile {
             File f = new File(getNameFile());
         }
     }
-    public static void save(ManagerTask managerTask)  {
+    public static void save(ManagerTaskInMemory managerTaskInMemory)  {
         createFile();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
-            oos.writeObject(managerTask.getListTask());
+            oos.writeObject(managerTaskInMemory.getListTask());
         } catch (IOException e) {
             throw new ManagerFileException(e);
         }
     }
-    public static void load(ManagerTask managerTask) {
+    public static void load(ManagerTaskInMemory managerTaskInMemory) {
         Map<Integer, Task> tasksMap;
         if (!(new File(getNameFile()).exists())) {
             return;
@@ -37,7 +37,7 @@ public class ManagerFile {
             for (Map.Entry<Integer, Task> entry : tasksMap.entrySet()) {
                 CreateID.INSTANCE.setId(entry.getKey());
             }
-            managerTask.setListTask(tasksMap);
+            managerTaskInMemory.setListTask(tasksMap);
 
         } catch (IOException | ClassNotFoundException e) {
             throw new ManagerFileException(e);
