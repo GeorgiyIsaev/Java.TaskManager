@@ -36,7 +36,7 @@ public class MyTest3 {
         consoleView.printTaskMap();
 
         System.out.println("            История");
-        System.out.println(managerTaskInMemoryMap.getListTask());
+        System.out.println(managerTaskInMemoryMap.getHistory());
     }
     public static void createTask(IManagerTask managerTaskInMemory) {
         managerTaskInMemory.addTask("Первая задача", "Описание простой задачи");
