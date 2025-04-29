@@ -1,19 +1,20 @@
 package com.DateTask;
 
 public enum TaskStatus {
-    NEW, IN_PROGRESS,DONE;
+    NEW("NEW"), IN_PROGRESS("IN_PROG"),DONE ("DONE");
+
+    private final String name;
+    TaskStatus(String name) {
+        this.name = name;
+    }
 
     @Override
     public String toString() {
-        switch (this){
-            case NEW -> {return "NEW";}
-            case IN_PROGRESS -> {return "IN_PROGRESS";}
-            case DONE -> {return "DONE";}
-            default -> {return "NON";}
-        }
+        return name;
     }
     public static TaskStatus toTaskStatus(String taskStatus){
-        if(taskStatus.equalsIgnoreCase("IN_PROGRESS")){
+        if(taskStatus.equalsIgnoreCase("IN_PROGRESS")
+                ||taskStatus.equalsIgnoreCase("IN_PROG")){
             return TaskStatus.IN_PROGRESS;
         }
         else if(taskStatus.equalsIgnoreCase("DONE")){
