@@ -24,8 +24,6 @@ public class ManagerHistoryInMemory implements IHistoryManager{
 
     @Override
     public List<Task> getHistory() {
-     //   List<Task> noChangesHistoryList = new ArrayList<>(historyList.size());
-      //  Collections.copy(historyList, noChangesHistoryList);
-       return historyList;
+        return Collections.unmodifiableList(historyList);
     }
 }
