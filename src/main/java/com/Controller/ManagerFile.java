@@ -4,6 +4,8 @@ import com.Controller.ControlException.ManagerFileException;
 import com.DateTask.CreateID;
 import com.DateTask.Task;
 import java.io.*;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,15 +21,17 @@ public class ManagerFile {
         }
     }
     public static void save(IManagerTask managerTaskInMemory)  {
+        Map<Integer, Task> tasksMap = new TreeMap<>();
+        tasksMap.putAll(managerTaskInMemory.getTaskMap());
         createFile();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
-            oos.writeObject(managerTaskInMemory.getTaskMap());
+            oos.writeObject(tasksMap);
         } catch (IOException e) {
             throw new ManagerFileException(e);
         }
     }
     public static void load(IManagerTask managerTaskInMemory) {
-        Map<Integer, Task> tasksMap;
+       Map<Integer, Task> tasksMap;
         if (!(new File(getNameFile()).exists())) {
             return;
         }

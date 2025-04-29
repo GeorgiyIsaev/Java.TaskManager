@@ -20,7 +20,9 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
 
     @Override
     public Map<Integer, Task> getTaskMap() {
-        return   Collections.unmodifiableMap(taskMap);
+        Map<Integer, Task> noChangeTaskMap =   Collections.unmodifiableMap(           taskMap);
+
+        return noChangeTaskMap;
     }
     @Override
     public void setTaskMap(Map<Integer, Task> taskMap) {
