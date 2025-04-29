@@ -21,7 +21,7 @@ public class ManagerFile {
     public static void save(IManagerTask managerTaskInMemory)  {
         createFile();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
-            oos.writeObject(managerTaskInMemory.getListTask());
+            oos.writeObject(managerTaskInMemory.getTaskMap());
         } catch (IOException e) {
             throw new ManagerFileException(e);
         }
@@ -37,7 +37,7 @@ public class ManagerFile {
             for (Map.Entry<Integer, Task> entry : tasksMap.entrySet()) {
                 CreateID.INSTANCE.setId(entry.getKey());
             }
-            managerTaskInMemory.setListTask(tasksMap);
+            managerTaskInMemory.setTaskMap(tasksMap);
 
         } catch (IOException | ClassNotFoundException e) {
             throw new ManagerFileException(e);

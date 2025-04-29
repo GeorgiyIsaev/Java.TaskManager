@@ -5,26 +5,26 @@ import com.Controller.ControlException.NotEpicException;
 import com.Controller.ControlException.NotExistIdException;
 import com.DateTask.*;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class ManagerTaskInMemory implements Serializable, IManagerTask {
-    private Map<Integer, Task> listTask;
+    private Map<Integer, Task> taskMap;
     private IHistoryManager historyManager;
     public ManagerTaskInMemory() {
         historyManager = new ManagerHistoryInMemory();
-        listTask = new TreeMap<>();
+        taskMap = new TreeMap<>();
     }
 
     @Override
-    public Map<Integer, Task> getListTask() {
-        return listTask;
-
+    public Map<Integer, Task> getTaskMap() {
+        return   Collections.unmodifiableMap(taskMap);
     }
     @Override
-    public void setListTask(Map<Integer, Task> listTask) {
-        this.listTask = listTask;
+    public void setTaskMap(Map<Integer, Task> taskMap) {
+        this.taskMap = taskMap;
     }
 
     @Override
@@ -36,55 +36,55 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
     @Override
     public Task addTask(String nameTask, String discTask){
         int currentID = CreateID.INSTANCE.createID();
-        listTask.put(currentID, new Task(currentID, nameTask,discTask));
-        return listTask.get(currentID);
+        taskMap.put(currentID, new Task(currentID, nameTask,discTask));
+        return taskMap.get(currentID);
     }
     @Override
     public Task addEpic(String nameEpic, String discEpic){
         int currentID = CreateID.INSTANCE.createID();
-        listTask.put(currentID, new EpicTask(currentID, nameEpic,discEpic));
-        return listTask.get(currentID);
+        taskMap.put(currentID, new EpicTask(currentID, nameEpic,discEpic));
+        return taskMap.get(currentID);
     }
     @Override
     public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) {
-        if (!listTask.containsKey(idEpic)){
+        if (!taskMap.containsKey(idEpic)){
             throw new NotExistIdException(idEpic);
         }
         if(!isEpic(idEpic)){
             throw new NotEpicException(idEpic);
         }
         int currentID = CreateID.INSTANCE.createID();
-        SubTask subTask = new SubTask(currentID, nameSubTask,discSubTask, (EpicTask) listTask.get(idEpic));
-        ((EpicTask)listTask.get(idEpic)).addSubTask(subTask);
-        listTask.put(currentID, subTask);
-        return listTask.get(currentID);
+        SubTask subTask = new SubTask(currentID, nameSubTask,discSubTask, (EpicTask) taskMap.get(idEpic));
+        ((EpicTask) taskMap.get(idEpic)).addSubTask(subTask);
+        taskMap.put(currentID, subTask);
+        return taskMap.get(currentID);
     }
 
 /// /// /// /// УДАЛЕНИЕ
     @Override
     public void deleteALL() {
-        this.listTask.clear();
+        this.taskMap.clear();
     }
     @Override
     public Task deleteIDTask(Integer idTask) {
-        if (!listTask.containsKey(idTask)){
+        if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
-        Task task = listTask.get(idTask);
-        if(listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC")){
-            for(SubTask subTask :  ((EpicTask)listTask.get(idTask)).getSubTasks()){
-                listTask.remove(subTask.getID());
+        Task task = taskMap.get(idTask);
+        if(taskMap.get(idTask).getTypeTask().equalsIgnoreCase("EPIC")){
+            for(SubTask subTask :  ((EpicTask) taskMap.get(idTask)).getSubTasks()){
+                taskMap.remove(subTask.getID());
             }
-            listTask.remove(idTask);
+            taskMap.remove(idTask);
             return task;
         }
-        else if(listTask.get(idTask).getTypeTask().equalsIgnoreCase("SubTASK")){
-            ((SubTask)listTask.get(idTask)).getRefrains().deleteSubTask((SubTask)listTask.get(idTask));
-            listTask.remove(idTask);
+        else if(taskMap.get(idTask).getTypeTask().equalsIgnoreCase("SubTASK")){
+            ((SubTask) taskMap.get(idTask)).getRefrains().deleteSubTask((SubTask) taskMap.get(idTask));
+            taskMap.remove(idTask);
             return task;
         }
-        else if(listTask.get(idTask).getTypeTask().equalsIgnoreCase("TASK")){
-            listTask.remove(idTask);
+        else if(taskMap.get(idTask).getTypeTask().equalsIgnoreCase("TASK")){
+            taskMap.remove(idTask);
             return task;
         }
         return null;
@@ -93,46 +93,46 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
 /// /// /// /// Изменение
     @Override
     public Task reNameToIDTask (Integer idTask, String newName) {
-        if (!listTask.containsKey(idTask)){
+        if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
-        listTask.get(idTask).setName(newName);
-        return listTask.get(idTask);
+        taskMap.get(idTask).setName(newName);
+        return taskMap.get(idTask);
     }
     @Override
     public Task reDescToIDTask (Integer idTask, String newDescription) {
-        if (!listTask.containsKey(idTask)){
+        if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
-        listTask.get(idTask).setDescription(newDescription);
-        return listTask.get(idTask);
+        taskMap.get(idTask).setDescription(newDescription);
+        return taskMap.get(idTask);
     }
 
     @Override
     public boolean reStatus(Integer idTask, TaskStatus taskStatus) {
-        if (!listTask.containsKey(idTask)){
+        if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
         if(isEpic(idTask)){
             throw new NotChangedEpicStatusException(idTask);
         }
-        if (listTask.get(idTask).getTaskStatus() == taskStatus){
+        if (taskMap.get(idTask).getTaskStatus() == taskStatus){
             return false;
         }
-        listTask.get(idTask).setTaskStatus(taskStatus);
+        taskMap.get(idTask).setTaskStatus(taskStatus);
         return true;
     }
     @Override
     public boolean isEpic(Integer idTask){
-        return  listTask.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
+        return  taskMap.get(idTask).getTypeTask().equalsIgnoreCase("EPIC");
     }
 
     @Override
     public Task getTask(Integer idTask){
-        if (!listTask.containsKey(idTask)){
+        if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
-        Task task = listTask.get(idTask);
+        Task task = taskMap.get(idTask);
         if(task != null) {
             historyManager.add(task);
         }

@@ -3,7 +3,6 @@ package com.ConsolView;
 import com.Controller.ControlException.ControlException;
 import com.Controller.IManagerTask;
 import com.Controller.ManagerFile;
-import com.Controller.ManagerTaskInMemory;
 
 
 import com.DateTask.Task;
@@ -30,7 +29,7 @@ public class ConsoleView {
 
     public void run() {
         System.out.println("Добро пожаловать в TaskManager!");
-        System.out.println("У вас в работе " + managerTaskInMemory.getListTask().size() + " задач.");
+        System.out.println("У вас в работе " + managerTaskInMemory.getTaskMap().size() + " задач.");
         System.out.println("Введите help что бы отобразить доступные команды.");
 
         boolean isExit = false;
@@ -143,7 +142,7 @@ public class ConsoleView {
     public void printTaskMap(String typeFilter) {
         // "EPIC" "TASK" "SubTASK"
         System.out.println(String.format(myFormat, "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
-        for (Map.Entry<Integer, Task> entry : managerTaskInMemory.getListTask().entrySet()) {
+        for (Map.Entry<Integer, Task> entry : managerTaskInMemory.getTaskMap().entrySet()) {
             Task value = entry.getValue();
             if (typeFilter == null || typeFilter.equalsIgnoreCase(value.getTypeTask())) {
                 System.out.println(String.format(myFormat,
@@ -157,10 +156,10 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        if (!managerTaskInMemory.getListTask().containsKey(id)) {
+        if (!managerTaskInMemory.getTaskMap().containsKey(id)) {
             System.out.println("ERROR: Задачи с индексом " + id + " не существует!");
         }
-        Task task = managerTaskInMemory.getListTask().get(id);
+        Task task = managerTaskInMemory.getTaskMap().get(id);
         StringBuilder consoleTable = new StringBuilder();
         consoleTable.append(String.format(myFormat, "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
         consoleTable.append("\n");
@@ -180,7 +179,7 @@ public class ConsoleView {
        ///  Только для проверок разработчиком
         String myFormatDebug = "%3s %4s %8s %12s %12s %s";
         System.out.println(String.format(myFormatDebug, "KEY", "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
-        for (Map.Entry<Integer, Task> entry : managerTaskInMemory.getListTask().entrySet()) {
+        for (Map.Entry<Integer, Task> entry : managerTaskInMemory.getTaskMap().entrySet()) {
             Integer key = entry.getKey();
             Task value = entry.getValue();
             System.out.println(String.format(myFormatDebug,
@@ -219,7 +218,7 @@ public class ConsoleView {
             return;
         }
 
-        if (!managerTaskInMemory.getListTask().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")) {
+        if (!managerTaskInMemory.getTaskMap().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")) {
             System.out.println("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
             return;
         }
@@ -247,7 +246,7 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        if (!managerTaskInMemory.getListTask().containsKey(idTask)) {
+        if (!managerTaskInMemory.getTaskMap().containsKey(idTask)) {
             System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
             return;
         }
@@ -263,7 +262,7 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        if (!managerTaskInMemory.getListTask().containsKey(idTask)) {
+        if (!managerTaskInMemory.getTaskMap().containsKey(idTask)) {
             System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
             return;
         }
@@ -278,13 +277,13 @@ public class ConsoleView {
             System.out.println("ERROR: вы не ввели id задачи");
             return;
         }
-        if (!managerTaskInMemory.getListTask().containsKey(idTask)) {
+        if (!managerTaskInMemory.getTaskMap().containsKey(idTask)) {
             System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
             return;
         }
         if (managerTaskInMemory.isEpic(idTask)) {
             System.out.println("ERROR: Задачи с ID: " + idTask + " EPIC! Расчет статуса осуществляется автоматически!/n"+
-                    "Статус задачи: " + managerTaskInMemory.getListTask().get(idTask).getTaskStatus());
+                    "Статус задачи: " + managerTaskInMemory.getTaskMap().get(idTask).getTaskStatus());
             return;
         }
         switch (myCommand.thirdCommand().toLowerCase()) {
@@ -302,6 +301,6 @@ public class ConsoleView {
                         " Допустимые значение 'NEW' 'PROG' 'DONE'");
             }
         }
-        System.out.println("Статус задачи: " + managerTaskInMemory.getListTask().get(idTask) + " -> " + managerTaskInMemory.getListTask().get(idTask).getTaskStatus());
+        System.out.println("Статус задачи: " + managerTaskInMemory.getTaskMap().get(idTask) + " -> " + managerTaskInMemory.getTaskMap().get(idTask).getTaskStatus());
     }
 }

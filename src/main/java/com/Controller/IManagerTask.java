@@ -22,8 +22,8 @@ public interface IManagerTask {
     public Task getTask(Integer idTask);
     public boolean isEpic(Integer idTask);
 
-    public Map<Integer, Task> getListTask();
-    public void setListTask(Map<Integer, Task> listTask);
+    public Map<Integer, Task> getTaskMap();
+    public void setTaskMap(Map<Integer, Task> taskMap);
     public List<Task> getHistory();
 
 }
