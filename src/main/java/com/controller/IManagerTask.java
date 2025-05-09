@@ -1,7 +1,7 @@
-package com.Controller;
+package com.controller;
 
-import com.DateTask.Task;
-import com.DateTask.TaskStatus;
+import com.dateTask.Task;
+import com.dateTask.TaskStatus;
 
 import java.util.List;
 import java.util.Map;

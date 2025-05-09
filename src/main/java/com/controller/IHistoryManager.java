@@ -1,6 +1,6 @@
-package com.Controller;
+package com.controller;
 
-import com.DateTask.Task;
+import com.dateTask.Task;
 
 import java.util.List;
 

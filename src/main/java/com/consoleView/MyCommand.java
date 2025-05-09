@@ -1,7 +1,4 @@
-package com.ConsolView;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.consoleView;
 
 public class MyCommand {
     private String command;

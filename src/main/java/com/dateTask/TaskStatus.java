@@ -1,4 +1,4 @@
-package com.DateTask;
+package com.dateTask;
 
 public enum TaskStatus {
     NEW("NEW"), IN_PROGRESS("IN_PROG"),DONE ("DONE");

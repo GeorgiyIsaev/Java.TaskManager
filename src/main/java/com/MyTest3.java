@@ -1,13 +1,11 @@
 package com;
 
 
-import com.ConsolView.ConsoleView;
-import com.Controller.ControlException.Managers;
-import com.Controller.IHistoryManager;
-import com.Controller.IManagerTask;
-import com.Controller.ManagerFile;
-import com.Controller.ManagerTaskInMemory;
-import com.DateTask.TaskStatus;
+import com.consoleView.ConsoleView;
+import com.controller.controlException.Managers;
+import com.controller.IManagerTask;
+import com.controller.ManagerFile;
+import com.dateTask.TaskStatus;
 
 public class MyTest3 {
     public static void main(String[] args) {

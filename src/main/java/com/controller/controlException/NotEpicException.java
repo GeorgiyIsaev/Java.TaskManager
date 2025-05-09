@@ -1,4 +1,4 @@
-package com.Controller.ControlException;
+package com.controller.controlException;
 
 public class NotEpicException extends ControlException{
     public NotEpicException() {

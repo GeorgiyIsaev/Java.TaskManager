@@ -1,14 +1,14 @@
-package com.ConsolView;
+package com.consoleView;
 
-import com.Controller.ControlException.ControlException;
-import com.Controller.IManagerTask;
-import com.Controller.ManagerFile;
+import com.controller.controlException.ControlException;
+import com.controller.IManagerTask;
+import com.controller.ManagerFile;
 
 
-import com.DateTask.Task;
-import com.DateTask.EpicTask;
-import com.DateTask.SubTask;
-import com.DateTask.TaskStatus;
+import com.dateTask.Task;
+import com.dateTask.EpicTask;
+import com.dateTask.SubTask;
+import com.dateTask.TaskStatus;
 
 import java.util.Map;
 import java.util.Scanner;
