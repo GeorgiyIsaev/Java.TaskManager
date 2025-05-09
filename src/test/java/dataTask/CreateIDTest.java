@@ -3,16 +3,18 @@ package dataTask;
 import com.dateTask.CreateID;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class CreateIDTest {
 
-    @AfterAll
+    @BeforeAll
     public static void nextIdRun(){
         for(int i =0; i<10; i++){
-           CreateID.INSTANCE.createID();
+            int id1 =   CreateID.INSTANCE.createID();
+            System.out.println("newID: " + id1);
         }
     }
 
