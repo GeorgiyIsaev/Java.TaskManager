@@ -1,7 +1,4 @@
-package com.controller.controlException;
-
-import com.controller.IManagerTask;
-import com.controller.ManagerTaskInMemory;
+package com.controller;
 
 public class Managers {
     public static IManagerTask getDefault() {
