@@ -42,9 +42,9 @@ public class MyTest3 {
         managerTaskInMemory.addTask("Вторая задача", "Другое описание простой задачи");
         managerTaskInMemory.getTask(1);
         managerTaskInMemory.addEpic("Эпичная задача", "Очень эпичное описание");
-        managerTaskInMemory.addSubTaskToEpicID("Подзадача 01", "Для тестирования 01", 2);
-        managerTaskInMemory.addSubTaskToEpicID("Подзадача 02", "Для тестирования 02", 2);
-        managerTaskInMemory.addSubTaskToEpicID("Подзадача 03", "Для тестирования 03", 2);
+        managerTaskInMemory.addSubTaskToEpicID(2, "Подзадача 01", "Для тестирования 01");
+        managerTaskInMemory.addSubTaskToEpicID(2, "Подзадача 02", "Для тестирования 02");
+        managerTaskInMemory.addSubTaskToEpicID(2, "Подзадача 03", "Для тестирования 03");
 
         managerTaskInMemory.getTask(2);
         managerTaskInMemory.getTask(3);

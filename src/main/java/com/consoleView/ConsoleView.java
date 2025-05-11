@@ -226,7 +226,7 @@ public class ConsoleView {
         String textName = in.nextLine();
         System.out.print("Input Description Sub Task: ");
         String textDescription = in.nextLine();
-        Task task = managerTaskInMemory.addSubTaskToEpicID(textName, textDescription, idEpicTask);
+        Task task = managerTaskInMemory.addSubTaskToEpicID(idEpicTask, textName, textDescription);
         System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
     }
 

@@ -36,19 +36,19 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
 
     /// /// /// /// ДОБАВЛЕНИЕ
     @Override
-    public Task addTask(String nameTask, String discTask){
+    public Task addTask(String name, String description){
         int currentID = CreateID.INSTANCE.createID();
-        taskMap.put(currentID, new Task(currentID, nameTask,discTask));
+        taskMap.put(currentID, new Task(currentID, name, description));
         return taskMap.get(currentID);
     }
     @Override
-    public Task addEpic(String nameEpic, String discEpic){
+    public Task addEpic(String name, String description){
         int currentID = CreateID.INSTANCE.createID();
-        taskMap.put(currentID, new EpicTask(currentID, nameEpic,discEpic));
+        taskMap.put(currentID, new EpicTask(currentID, name, description));
         return taskMap.get(currentID);
     }
     @Override
-    public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic) {
+    public Task addSubTaskToEpicID(int idEpic, String name, String description) {
         if (!taskMap.containsKey(idEpic)){
             throw new NotExistIdException(idEpic);
         }
@@ -56,7 +56,7 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
             throw new NotEpicException(idEpic);
         }
         int currentID = CreateID.INSTANCE.createID();
-        SubTask subTask = new SubTask(currentID, nameSubTask,discSubTask, (EpicTask) taskMap.get(idEpic));
+        SubTask subTask = new SubTask(currentID, name, description, (EpicTask) taskMap.get(idEpic));
         ((EpicTask) taskMap.get(idEpic)).addSubTask(subTask);
         taskMap.put(currentID, subTask);
         return taskMap.get(currentID);

@@ -8,9 +8,9 @@ import java.util.Map;
 
 public interface IManagerTask {
 
-    public Task addTask(String nameTask, String discTask);
-    public Task addEpic(String nameEpic, String discEpic);
-    public Task addSubTaskToEpicID(String nameSubTask, String discSubTask, Integer idEpic);
+    public Task addTask(String name, String description);
+    public Task addEpic(String name, String description);
+    public Task addSubTaskToEpicID(int idEpic, String name, String description);
 
     public void deleteALL();
     public Task deleteIDTask(Integer idTask);
