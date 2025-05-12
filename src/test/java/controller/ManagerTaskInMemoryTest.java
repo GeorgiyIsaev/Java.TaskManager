@@ -2,6 +2,7 @@ package controller;
 
 import com.controller.IManagerTask;
 import com.controller.Managers;
+import com.controller.controlException.NotChangedEpicStatusException;
 import com.controller.controlException.NotExistIdException;
 import com.dateTask.SubTask;
 import com.dateTask.Task;
@@ -32,17 +33,6 @@ public class ManagerTaskInMemoryTest {
         System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
     }
 
-    @Test
-    public void addEpic(){
-        String name = "Тестовое название Epic";
-        String description = "Тестовое описание Epic";
-        int oldSize = managerTask.getTaskMap().size();
-        Task task = managerTask.addEpic(name, description);
-        int newSize = managerTask.getTaskMap().size();
-        Assertions.assertTrue(newSize>oldSize);
-        Assertions.assertTrue("EPIC".equalsIgnoreCase(task.getTypeTask()));
-        System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
-    }
 
     @Test
     public void addSubTask(){
@@ -117,6 +107,154 @@ public class ManagerTaskInMemoryTest {
                 Task taskBeforeDeleteTask =  managerTask.getTask(idTask);
             });
             System.out.println("Task c id " + idTask + " удален!");
+        }
+
+    }
+
+    @Nested
+    class EpicLifeCycle{
+        static int idEpic;
+        static int idSub;
+
+        @BeforeAll
+        public static void createEpic(){
+            String name = "Тестовое название Epic";
+            String description = "Тестовое описание Epic";
+            int oldSize = managerTask.getTaskMap().size();
+            Task task = managerTask.addEpic(name, description);
+            int newSize = managerTask.getTaskMap().size();
+            idEpic = task.getID();
+
+            Assertions.assertTrue(newSize>oldSize);
+            Assertions.assertTrue("EPIC".equalsIgnoreCase(task.getTypeTask()));
+            System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+        }
+
+        @BeforeEach
+        public void addSub() {
+            String name = "Тестовое название SubTask";
+            String description = "Тестовое описание SubTask";
+            int oldSize = managerTask.getTaskMap().size();
+            Task task = managerTask.addSubTaskToEpicID(idEpic, name, description);
+            int newSize = managerTask.getTaskMap().size();
+            idSub = task.getID();
+
+            Assertions.assertTrue(newSize>oldSize);
+            Assertions.assertTrue("SubTask".equalsIgnoreCase(task.getTypeTask()));
+            boolean isIdExists = managerTask.getTask(idEpic).findID(task.getID());
+            Assertions.assertTrue(isIdExists);
+            System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+        }
+
+        //Изменение Эпика
+        @Test
+        public void reNameTaskEpic(){
+            Task task = managerTask.getTask(idEpic);
+            System.out.println("Переименовывается " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+            String newName = "Новое название";
+            managerTask.reNameToIDTask(idEpic, newName);
+            Assertions.assertTrue(newName.equalsIgnoreCase(task.getName()));
+            System.out.println("Изменение " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+        }
+        @Test
+        public void reDescTaskEpic(){
+            Task task = managerTask.getTask(idEpic);
+            System.out.println("Переименовывается " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+            String newName = "Новое описание";
+            managerTask.reDescToIDTask(idEpic, newName);
+            Assertions.assertTrue(newName.equalsIgnoreCase(task.getDescription()));
+            System.out.println("Изменение " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+        }
+        @ParameterizedTest
+        @ValueSource(strings = { "NEW", "IN_PROGRESS", "DONE", "NEW" })
+        public void reStatusTaskEpic(TaskStatus taskStatus){
+            Task task = managerTask.getTask(idEpic);
+
+            Assertions.assertThrows(NotChangedEpicStatusException.class, ()->{
+                managerTask.reStatus(idEpic, taskStatus);
+            });
+            System.out.println("Не допускается изменение Эпика!");
+
+        }
+
+        //Изменение Эпика
+        @Test
+        public void reNameTaskSub(){
+            Task task = managerTask.getTask(idSub);
+            System.out.println("Переименовывается " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+            String newName = "Новое название";
+            managerTask.reNameToIDTask(idSub, newName);
+            Assertions.assertTrue(newName.equalsIgnoreCase(task.getName()));
+            System.out.println("Изменение " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+        }
+        @Test
+        public void reDescTaskSub(){
+            Task task = managerTask.getTask(idSub);
+            System.out.println("Переименовывается " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+            String newName = "Новое описание";
+            managerTask.reDescToIDTask(idSub, newName);
+            Assertions.assertTrue(newName.equalsIgnoreCase(task.getDescription()));
+            System.out.println("Изменение " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+        }
+        @ParameterizedTest
+        @ValueSource(strings = { "NEW", "IN_PROGRESS", "DONE", "NEW" })
+        public void reStatusTaskSub(TaskStatus taskStatus){
+            Task task = managerTask.getTask(idSub);
+            managerTask.reStatus(idSub, taskStatus);
+            Assertions.assertEquals(taskStatus, task.getTaskStatus());
+            System.out.println("Статус " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task
+                    + " --> " + task.getTaskStatus());
+
+        }
+
+        //Удаление Sub
+        @AfterEach
+        public void deleteSub(){
+            Task task = managerTask.getTask(idSub);
+            System.out.println("Удаляем " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+            managerTask.deleteIDTask(idSub);
+
+            Assertions.assertThrows(NotExistIdException.class, ()->{
+                Task taskBeforeDeleteTask =  managerTask.getTask(idSub);
+            });
+            System.out.println("Task c id " + idSub + " удален и недоступен!");
+
+            boolean isIdSubExistsInEpic =  managerTask.getTask(idEpic).findID(idSub);
+            Assertions.assertFalse(isIdSubExistsInEpic);
+            System.out.println("Task c id " + idSub + " не существует внутри Epic!");
+
+            Assertions.assertThrows(NotExistIdException.class, ()->{
+                managerTask.deleteIDTask(idSub);
+            });
+            System.out.println("Повторное удаление TASK c " + idSub + " вызывает ошибку NotExistIdException!");
+
+            //Добавим новый sub
+            idSub = managerTask.addSubTaskToEpicID(idEpic, "Замена", "Замена").getID();
+        }
+
+        @AfterAll
+        public static void deleteEpic(){
+            Task task = managerTask.getTask(idEpic);
+            System.out.println("Удаляем " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
+            System.out.println("Содержит " + managerTask.getTask(idSub).getTypeTask() + ": ID " +managerTask.getTask(idSub).getID()+ " - " + task);
+            managerTask.deleteIDTask(idEpic);
+
+            Assertions.assertThrows(NotExistIdException.class, ()->{
+                Task taskBeforeDeleteTask =  managerTask.getTask(idEpic);
+            });
+            System.out.println(task.getTypeTask() + " c id " + idEpic + " удален и недоступен!");
+
+            Assertions.assertThrows(NotExistIdException.class, ()->{
+                Task taskBeforeDeleteTask =  managerTask.getTask(idSub);
+            });
+            System.out.println("Связанный с ним Sub c id " + idSub + " удален и недоступен!");
+
+            Assertions.assertThrows(NotExistIdException.class, ()->{
+                managerTask.deleteIDTask(idSub);
+            });
+            System.out.println("Повторное удаление TASK c " + idEpic + " вызывает ошибку NotExistIdException!");
+
+
         }
 
     }
