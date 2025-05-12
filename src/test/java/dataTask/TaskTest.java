@@ -1,5 +1,6 @@
 package dataTask;
 
+import com.dateTask.CONST;
 import com.dateTask.CreateID;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
@@ -24,8 +25,8 @@ public class TaskTest {
         Assertions.assertEquals(description, task.getDescription());
         Assertions.assertEquals(id, task.getID());
         Assertions.assertEquals(TaskStatus.NEW, task.getTaskStatus());
-        Assertions.assertEquals("TASK", task.getTypeTask());
-        Assertions.assertEquals("-", task.getLinkStr());
+        Assertions.assertEquals(CONST.TASK_NAME, task.getTypeTask());
+        Assertions.assertEquals(CONST.NO_REFERENCE, task.getLinkStr());
 
     }
 

@@ -58,10 +58,10 @@ public class Task implements Serializable {
 
     }
     public String getTypeTask(){
-        return "TASK";
+        return CONST.TASK_NAME;
     }
     public String getLinkStr(){
-        return "-";
+        return CONST.NO_REFERENCE;
     }
 
 

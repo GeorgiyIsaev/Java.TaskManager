@@ -21,7 +21,7 @@ public class EpicTest {
         Assertions.assertEquals(description, task.getDescription());
         Assertions.assertEquals(id, task.getID());
         Assertions.assertEquals(TaskStatus.NEW, task.getTaskStatus());
-        Assertions.assertEquals("EPIC", task.getTypeTask());
+        Assertions.assertEquals(CONST.EPIC_NAME, task.getTypeTask());
         Assertions.assertEquals("[]", task.getLinkStr());
 
     }
@@ -63,7 +63,7 @@ public class EpicTest {
         Assertions.assertEquals(descriptionSub, subInEpic.getDescription());
         Assertions.assertEquals(id, subInEpic.getID());
         Assertions.assertEquals(TaskStatus.NEW, subInEpic.getTaskStatus());
-        Assertions.assertEquals("SubTASK", subInEpic.getTypeTask());
+        Assertions.assertEquals(CONST.SUB_NAME, subInEpic.getTypeTask());
         Assertions.assertEquals("" + task.getID(), subInEpic.getLinkStr());
 
     }

@@ -5,10 +5,7 @@ import com.controller.IManagerTask;
 import com.controller.ManagerFile;
 
 
-import com.dateTask.Task;
-import com.dateTask.EpicTask;
-import com.dateTask.SubTask;
-import com.dateTask.TaskStatus;
+import com.dateTask.*;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -56,14 +53,14 @@ public class ConsoleView {
                         printTaskMap();
                     }
                     case ("printtask") -> {
-                        printTaskMap("TASK");
+                        printTaskMap(CONST.TASK_NAME);
 
                     }
                     case ("printepic") -> {
-                        printTaskMap("EPIC");
+                        printTaskMap(CONST.EPIC_NAME);
                     }
                     case ("printsubtask") -> {
-                        printTaskMap("SubTASK");
+                        printTaskMap(CONST.SUB_NAME);
                     }
                     case ("printid") -> {
                         printID(myCommand.getID());
@@ -218,7 +215,7 @@ public class ConsoleView {
             return;
         }
 
-        if (!managerTaskInMemory.getTaskMap().get(idEpicTask).getTypeTask().equalsIgnoreCase("EPIC")) {
+        if (!managerTaskInMemory.isEpic(idEpicTask)) {
             System.out.println("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
             return;
         }

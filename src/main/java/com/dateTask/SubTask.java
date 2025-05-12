@@ -31,7 +31,7 @@ public class SubTask extends Task{
 
     @Override
     public String getTypeTask(){
-        return "SubTASK";
+        return CONST.SUB_NAME;
     }
     @Override
     public String getLinkStr(){
