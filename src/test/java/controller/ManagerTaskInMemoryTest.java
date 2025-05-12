@@ -259,7 +259,11 @@ public class ManagerTaskInMemoryTest {
 
     }
 
-
-
+    @AfterAll
+    public static void deleteAll(){
+        managerTask.deleteALL();
+        int sizeClearMap = 0;
+        Assertions.assertEquals(sizeClearMap, managerTask.getTaskMap().size());
+    }
 
 }

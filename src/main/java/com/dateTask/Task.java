@@ -3,8 +3,8 @@ package com.dateTask;
 import java.io.Serializable;
 
 public class Task implements Serializable {
-    private Integer id;
-    public Integer getID(){
+    private final int id;
+    public int getID(){
         return id;
     }
     protected String name;
@@ -40,26 +40,6 @@ public class Task implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-    public boolean statusUp() {
-        if(this.taskStatus == TaskStatus.NEW)
-            this.taskStatus =TaskStatus.IN_PROGRESS;
-        else if(this.taskStatus == TaskStatus.IN_PROGRESS)
-            this.taskStatus =TaskStatus.DONE;
-        else return false;
-        return true;
-    }
-    public boolean statusDown() {
-        if(this.taskStatus == TaskStatus.IN_PROGRESS)
-            this.taskStatus =TaskStatus.NEW;
-        else if(this.taskStatus == TaskStatus.DONE)
-            this.taskStatus =TaskStatus.IN_PROGRESS;
-        else return false;
-        return true;
-    }
-
-
 
 
     @Override
