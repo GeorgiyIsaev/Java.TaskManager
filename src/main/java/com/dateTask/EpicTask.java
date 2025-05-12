@@ -14,9 +14,7 @@ public class EpicTask extends Task {
         subTasks = new ArrayList<>();
 
     }
-    public void addSubTask(Integer id, String name, String description){
-        subTasks.add(new SubTask (id, name, description));
-    }
+
     public void addSubTask(SubTask sub){
         subTasks.add(sub);
     }
@@ -46,22 +44,6 @@ public class EpicTask extends Task {
             taskStatus = TaskStatus.DONE;
         }
     }
-
-
-
-
-
-    @Override
-    public boolean statusUp() {
-        return false;
-    }
-    @Override
-    public boolean statusDown() {
-        return false;
-    }
-
-
-
 
     public boolean findID(int id){
         if(this.getID() == id)

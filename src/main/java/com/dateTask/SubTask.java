@@ -6,10 +6,10 @@ public class SubTask extends Task{
     public EpicTask getRefrains() {
         return refrains;
     }
-    public SubTask(Integer id, String name, String description) {
-        super(id,name,description);
-        this.refrains = null;
-    }
+//    public SubTask(Integer id, String name, String description) {
+//        super(id,name,description);
+//        this.refrains = null;
+//    }
     public SubTask(Integer id, String name, String description, EpicTask refrains) {
         super(id,name,description);
         this.refrains = refrains;
@@ -35,6 +35,6 @@ public class SubTask extends Task{
     }
     @Override
     public String getLinkStr(){
-        return this.refrains.getID().toString();
+        return "" + this.refrains.getID();
     }
 }

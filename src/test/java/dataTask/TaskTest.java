@@ -18,7 +18,7 @@ public class TaskTest {
         int id = CreateID.INSTANCE.createID();
         String name = "Название";
         String description = "Описание";
-        Task task = new Task(id,name,description);
+        task = new Task(id,name,description);
 
         Assertions.assertEquals(name, task.getName());
         Assertions.assertEquals(description, task.getDescription());
