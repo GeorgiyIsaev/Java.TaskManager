@@ -1,5 +1,6 @@
 package controller;
 
+import com.consoleView.ConsoleUtils;
 import com.controller.IManagerTask;
 import com.controller.Managers;
 import com.controller.controlException.NotChangedEpicStatusException;
@@ -207,7 +208,7 @@ public class ManagerTaskInMemoryTest {
             //Добавим новый sub
             Task subTask =  managerTask.addSubTaskToEpicID(idEpic, "Замена", "Замена");
             System.out.println("Замена Саб");
-            System.out.println(subTask.fullInfo());
+            System.out.println(ConsoleUtils.getTaskString(subTask));
             idSub = subTask.getID();
         }
 

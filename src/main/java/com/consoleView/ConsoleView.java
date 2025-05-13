@@ -138,11 +138,11 @@ public class ConsoleView {
     }
     public void printTaskMap(String typeFilter) {
         // "EPIC" "TASK" "SubTASK"
-        System.out.println(CONST.CONSOLE_TITLE);
+        System.out.println(ConsoleUtils.CONSOLE_TITLE);
         for (Map.Entry<Integer, Task> entry : managerTaskInMemory.getTaskMap().entrySet()) {
             Task value = entry.getValue();
             if (typeFilter == null || typeFilter.equalsIgnoreCase(value.getTypeTask())) {
-                System.out.println(CONST.getTaskString(value));
+                System.out.println(ConsoleUtils.getTaskString(value));
             }
         }
     }
@@ -156,14 +156,14 @@ public class ConsoleView {
         }
         Task task = managerTaskInMemory.getTaskMap().get(id);
         StringBuilder consoleTable = new StringBuilder();
-        consoleTable.append(CONST.CONSOLE_TITLE);
+        consoleTable.append(ConsoleUtils.CONSOLE_TITLE);
         consoleTable.append("\n");
-        consoleTable.append(CONST.getTaskString(task));
+        consoleTable.append(ConsoleUtils.getTaskString(task));
 
         if (task.getTypeTask().equalsIgnoreCase(CONST.EPIC_NAME)) {
             for (SubTask subTask : ((EpicTask) task).getSubTasks()) {
                 consoleTable.append("\n");
-                consoleTable.append(CONST.getTaskString(subTask));
+                consoleTable.append(ConsoleUtils.getTaskString(subTask));
             }
         }
         System.out.println(consoleTable);

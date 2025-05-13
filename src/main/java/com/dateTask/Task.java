@@ -51,16 +51,10 @@ public class Task implements Serializable {
     public boolean findID(int id){
         return this.id == id;
     }
-    public String fullInfo(){
-        return CONST.getTaskString(this);
-
-    }
     public String getTypeTask(){
         return CONST.TASK_NAME;
     }
     public String getLinkStr(){
         return CONST.NO_REFERENCE;
     }
-
-
 }

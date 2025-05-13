@@ -1,5 +1,6 @@
 package controller;
 
+import com.consoleView.ConsoleUtils;
 import com.controller.IManagerTask;
 import com.controller.ManagerFile;
 import com.controller.Managers;
@@ -30,8 +31,8 @@ public class ManagerFileTest {
         managerTask.deleteALL();
         ManagerFile.load(managerTask);
         Task newTask = managerTask.getTask(task.getID());
-        System.out.println(CONST.CONSOLE_TITLE);
-        System.out.println(CONST.getTaskString(newTask));
+        System.out.println(ConsoleUtils.CONSOLE_TITLE);
+        System.out.println(ConsoleUtils.getTaskString(newTask));
     }
 
     @AfterAll
@@ -44,8 +45,8 @@ public class ManagerFileTest {
         System.out.println("Загружаем не существующий файл");
         Assertions.assertThrows(NotExistIdException.class, ()->{
             Task newTask=  managerTask.getTask(task.getID());
-            System.out.println(CONST.CONSOLE_TITLE);
-            System.out.println(CONST.getTaskString(newTask));
+            System.out.println(ConsoleUtils.CONSOLE_TITLE);
+            System.out.println(ConsoleUtils.getTaskString(newTask));
         });
         System.out.println("Конец");
 
