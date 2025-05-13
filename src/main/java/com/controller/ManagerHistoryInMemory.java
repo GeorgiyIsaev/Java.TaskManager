@@ -23,6 +23,24 @@ public class ManagerHistoryInMemory implements IHistoryManager{
     }
 
     @Override
+    public void remove(int id) {
+        Task task = getTask(id);
+        if(task != null) {
+            historyList.remove(task);
+        }
+    }
+    public Task getTask(int id){
+        Task task= null;
+        for (Task t : historyList) {
+            if (t.getID() == id) {
+                task = t;
+                break;
+            }
+        }
+        return task;
+    }
+
+    @Override
     public List<Task> getHistory() {
         return Collections.unmodifiableList(historyList);
     }
