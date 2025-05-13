@@ -4,6 +4,7 @@ import com.controller.IManagerTask;
 import com.controller.Managers;
 import com.controller.controlException.NotChangedEpicStatusException;
 import com.controller.controlException.NotExistIdException;
+import com.dateTask.CONST;
 import com.dateTask.SubTask;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
@@ -21,33 +22,6 @@ public class ManagerTaskInMemoryTest {
         managerTask = Managers.getDefault();
     }
 
-    @Test
-    public void addTest(){
-        String name = "Тестовое название";
-        String description = "Тестовое описание";
-        int oldSize = managerTask.getTaskMap().size();
-        Task task = managerTask.addTask(name, description);
-        int newSize = managerTask.getTaskMap().size();
-        Assertions.assertTrue(newSize>oldSize);
-        Assertions.assertTrue("TASK".equalsIgnoreCase(task.getTypeTask()));
-        System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
-    }
-
-
-    @Test
-    public void addSubTask(){
-        Task epic = managerTask.addEpic("EPIC", "description EPIC");
-        String name = "Тестовое название SubTask";
-        String description = "Тестовое описание SubTask";
-        int oldSize = managerTask.getTaskMap().size();
-        Task task = managerTask.addSubTaskToEpicID(epic.getID(), name, description);
-        int newSize = managerTask.getTaskMap().size();
-        Assertions.assertTrue(newSize>oldSize);
-        Assertions.assertTrue("SubTask".equalsIgnoreCase(task.getTypeTask()));
-        boolean isIdExists = epic.findID(task.getID());
-        Assertions.assertTrue(isIdExists);
-        System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
-    }
 
     @Nested
     class TaskLifeCycle{
@@ -126,7 +100,7 @@ public class ManagerTaskInMemoryTest {
             idEpic = task.getID();
 
             Assertions.assertTrue(newSize>oldSize);
-            Assertions.assertTrue("EPIC".equalsIgnoreCase(task.getTypeTask()));
+            Assertions.assertTrue(CONST.EPIC_NAME.equalsIgnoreCase(task.getTypeTask()));
             System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
         }
 
@@ -140,7 +114,7 @@ public class ManagerTaskInMemoryTest {
             idSub = task.getID();
 
             Assertions.assertTrue(newSize>oldSize);
-            Assertions.assertTrue("SubTask".equalsIgnoreCase(task.getTypeTask()));
+            Assertions.assertTrue(CONST.SUB_NAME.equalsIgnoreCase(task.getTypeTask()));
             boolean isIdExists = managerTask.getTask(idEpic).findID(task.getID());
             Assertions.assertTrue(isIdExists);
             System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
@@ -177,7 +151,7 @@ public class ManagerTaskInMemoryTest {
 
         }
 
-        //Изменение Эпика
+        //Изменение Саба
         @Test
         public void reNameTaskSub(){
             Task task = managerTask.getTask(idSub);
@@ -201,6 +175,8 @@ public class ManagerTaskInMemoryTest {
         public void reStatusTaskSub(TaskStatus taskStatus){
             Task task = managerTask.getTask(idSub);
             managerTask.reStatus(idSub, taskStatus);
+
+            //TaskStatus oldStatus = task
             Assertions.assertEquals(taskStatus, task.getTaskStatus());
             System.out.println("Статус " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task
                     + " --> " + task.getTaskStatus());
@@ -229,7 +205,10 @@ public class ManagerTaskInMemoryTest {
             System.out.println("Повторное удаление TASK c " + idSub + " вызывает ошибку NotExistIdException!");
 
             //Добавим новый sub
-            idSub = managerTask.addSubTaskToEpicID(idEpic, "Замена", "Замена").getID();
+            Task subTask =  managerTask.addSubTaskToEpicID(idEpic, "Замена", "Замена");
+            System.out.println("Замена Саб");
+            System.out.println(subTask.fullInfo());
+            idSub = subTask.getID();
         }
 
         @AfterAll

@@ -1,5 +1,7 @@
 package dataTask;
 
+import com.controller.controlException.NotChangedEpicStatusException;
+import com.controller.controlException.NotExistIdException;
 import com.dateTask.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -42,8 +44,12 @@ public class EpicTest {
     @ParameterizedTest
     @ValueSource(strings = { "NEW", "IN_PROGRESS", "DONE", "NEW" })
     public void changeTaskStatus(TaskStatus taskStatus){
+        TaskStatus oldStatus = task.getTaskStatus();
         task.setTaskStatus(taskStatus);
-        Assertions.assertEquals(taskStatus, task.getTaskStatus());
+        Assertions.assertEquals(oldStatus, task.getTaskStatus());
+
+        System.out.println("Статус для Эпика нельзя менять");
+
     }
 
     @Test
