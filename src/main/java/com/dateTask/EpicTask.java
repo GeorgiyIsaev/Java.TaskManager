@@ -58,18 +58,7 @@ public class EpicTask extends Task {
         return false;
     }
 
-    @Override
-    public String fullInfo(){
 
-        StringBuilder text = new StringBuilder("[EPIC id " + getID() + "; STATUS-" +
-                taskStatus + " NAME: " + name +
-                "; Description: " + description + "; toEPIC_ID: " + +subTasks.size() + "]\n");
-        for(SubTask subTask : subTasks){
-            text.append(subTask).append("\n");
-        }
-        return text.toString();
-
-    }
 
     @Override
     public String getTypeTask(){

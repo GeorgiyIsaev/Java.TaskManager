@@ -52,9 +52,7 @@ public class Task implements Serializable {
         return this.id == id;
     }
     public String fullInfo(){
-        return "[TASK id " + getID() + "; STATUS-" +
-                taskStatus + " NAME: " + name +
-                "; Description: " + description + ";]";
+        return CONST.getTaskString(this);
 
     }
     public String getTypeTask(){
