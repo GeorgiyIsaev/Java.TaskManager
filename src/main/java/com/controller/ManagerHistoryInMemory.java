@@ -4,18 +4,23 @@ import com.dateTask.Task;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ManagerHistoryInMemory implements IHistoryManager{
     private List<Task> historyList;
 
     public ManagerHistoryInMemory(){
-        this.historyList = new ArrayList<>();
+        this.historyList = new LinkedList<>();
     }
 
 
     @Override
     public void add(Task task) {
+        Task taskFind = getTask(task.getID());
+        if(taskFind != null){
+            historyList.remove(taskFind);
+        }
         if (historyList.size() >=10){
             historyList.remove(0);
         }
