@@ -66,16 +66,20 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
     @Override
     public void deleteALL() {
         this.taskMap.clear();
+        historyManager.removeAll();
+
     }
     @Override
-    public Task deleteIDTask(Integer idTask) {
+    public Task deleteIDTask(int idTask) {
         if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
         Task task = taskMap.get(idTask);
+        historyManager.remove(idTask);
         if(taskMap.get(idTask).getTypeTask().equalsIgnoreCase(CONST.EPIC_NAME)){
             for(SubTask subTask :  ((EpicTask) taskMap.get(idTask)).getSubTasks()){
                 taskMap.remove(subTask.getID());
+                historyManager.remove(subTask.getID());
             }
             taskMap.remove(idTask);
             return task;
@@ -92,9 +96,10 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         return null;
     }
 
-/// /// /// /// Изменение
+
+    /// /// /// /// Изменение
     @Override
-    public Task reNameToIDTask (Integer idTask, String newName) {
+    public Task reNameToIDTask (int idTask, String newName) {
         if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
@@ -102,7 +107,7 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         return taskMap.get(idTask);
     }
     @Override
-    public Task reDescToIDTask (Integer idTask, String newDescription) {
+    public Task reDescToIDTask (int idTask, String newDescription) {
         if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
@@ -111,7 +116,7 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
     }
 
     @Override
-    public boolean reStatus(Integer idTask, TaskStatus taskStatus) {
+    public boolean reStatus(int idTask, TaskStatus taskStatus) {
         if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
@@ -125,12 +130,12 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         return true;
     }
     @Override
-    public boolean isEpic(Integer idTask){
+    public boolean isEpic(int idTask){
         return  taskMap.get(idTask).getTypeTask().equalsIgnoreCase(CONST.EPIC_NAME);
     }
 
     @Override
-    public Task getTask(Integer idTask){
+    public Task getTask(int idTask){
         if (!taskMap.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }

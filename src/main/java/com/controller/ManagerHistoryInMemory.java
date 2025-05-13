@@ -29,6 +29,12 @@ public class ManagerHistoryInMemory implements IHistoryManager{
             historyList.remove(task);
         }
     }
+
+    @Override
+    public void removeAll() {
+        this.historyList.clear();
+    }
+
     public Task getTask(int id){
         Task task= null;
         for (Task t : historyList) {
