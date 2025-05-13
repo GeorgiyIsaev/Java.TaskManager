@@ -4,6 +4,9 @@ import com.controller.controlException.ManagerFileException;
 import com.dateTask.CreateID;
 import com.dateTask.Task;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,6 +21,15 @@ public class ManagerFile {
             File f = new File(getNameFile());
         }
     }
+    public static void deleteFile(){
+        Path file = Paths.get(getNameFile());
+        try {
+            Files.deleteIfExists(file);
+        } catch (IOException e) {
+            throw new ManagerFileException(e);
+        }
+    }
+
     public static void save(IManagerTask managerTaskInMemory)  {
         Map<Integer, Task> tasksMap = new TreeMap<>();
         tasksMap.putAll(managerTaskInMemory.getTaskMap());
