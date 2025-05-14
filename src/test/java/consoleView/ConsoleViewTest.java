@@ -145,8 +145,8 @@ public class ConsoleViewTest {
                     /// УДАЛЕНИЕ ВСЕГО СПИСКА
                     Arguments.of("------>> ПРИНТ Список всех TASK", Arrays.asList("printAll", "-")),
                     Arguments.of("------>> УДАЛЕНИЕ ВСЕГО СПИСКА", Arrays.asList("deleteAll", "-")),
-                    Arguments.of("------>> ПРИНТ Список всех TASK", Arrays.asList("printAll", "-"))
-                    Arguments.of("------>> ПРИНТ History", Arrays.asList("printHistory", "-")),
+                    Arguments.of("------>> ПРИНТ Список всех TASK", Arrays.asList("printAll", "-")),
+                    Arguments.of("------>> ПРИНТ History", Arrays.asList("printHistory", "-"))
             );
             return argumentsStream;
         }
