@@ -125,6 +125,14 @@ public class ConsoleViewTest {
                     Arguments.of("------>> ПРИНТ DEBUG", Arrays.asList("printDebug", "-")),
                     Arguments.of("------>> ПРИНТ History", Arrays.asList("printHistory", "-")),
 
+                    /// Взаимодействие с список Истории
+                    Arguments.of("--> ПРИНТ - ID 4", Arrays.asList("printId 4", "-")),
+                    Arguments.of("--> ПРИНТ - ID 4", Arrays.asList("printId 4", "-")),
+                    Arguments.of("--> ПРИНТ - ID 0", Arrays.asList("printId 4", "-")),
+                    Arguments.of("--> ПРИНТ - ID 5 (ЭПИК)", Arrays.asList("printId 5", "-")),
+                    Arguments.of("--> ПРИНТ - ID 8", Arrays.asList("printId 4", "-")),
+                    Arguments.of("------>> ПРИНТ History", Arrays.asList("printHistory", "-")),
+
                     /// Удаления по ID
                     Arguments.of("Удаление по ID 4 Обычный таск)", Arrays.asList("deleteID 4", "-")),
                     Arguments.of("--> ПРИНТ - ID 4", Arrays.asList("printId 4", "-")),
@@ -132,11 +140,13 @@ public class ConsoleViewTest {
                     Arguments.of("--> ПРИНТ - ID 5 (ЭПИК)", Arrays.asList("printId 5", "-")),
                     Arguments.of("Удаление по ID 9 ЭПИК вместе с ним должен удалится SUB 10)", Arrays.asList("deleteID 9", "-")),
                     Arguments.of("------>> ПРИНТ Список всех TASK", Arrays.asList("printAll", "-")),
+                    Arguments.of("------>> ПРИНТ History", Arrays.asList("printHistory", "-")),
 
                     /// УДАЛЕНИЕ ВСЕГО СПИСКА
                     Arguments.of("------>> ПРИНТ Список всех TASK", Arrays.asList("printAll", "-")),
                     Arguments.of("------>> УДАЛЕНИЕ ВСЕГО СПИСКА", Arrays.asList("deleteAll", "-")),
                     Arguments.of("------>> ПРИНТ Список всех TASK", Arrays.asList("printAll", "-"))
+                    Arguments.of("------>> ПРИНТ History", Arrays.asList("printHistory", "-")),
             );
             return argumentsStream;
         }
