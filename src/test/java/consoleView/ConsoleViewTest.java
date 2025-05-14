@@ -129,7 +129,7 @@ public class ConsoleViewTest {
                     Arguments.of("Удаление по ID 4 Обычный таск)", Arrays.asList("deleteID 4", "-")),
                     Arguments.of("--> ПРИНТ - ID 4", Arrays.asList("printId 4", "-")),
                     Arguments.of("Удаление по ID 7 SUB он должен пропасть и у Эпика 5)", Arrays.asList("deleteID 7", "-")),
-                    Arguments.of("--> ПРИНТ - ID 5", Arrays.asList("printId 5", "-")),
+                    Arguments.of("--> ПРИНТ - ID 5 (ЭПИК)", Arrays.asList("printId 5", "-")),
                     Arguments.of("Удаление по ID 9 ЭПИК вместе с ним должен удалится SUB 10)", Arrays.asList("deleteID 9", "-")),
                     Arguments.of("------>> ПРИНТ Список всех TASK", Arrays.asList("printAll", "-")),
 
