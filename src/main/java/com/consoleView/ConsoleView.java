@@ -78,6 +78,11 @@ public class ConsoleView {
                 case ("printdebug") -> {
                     printDebug();
                 }
+                case ("printhistory") -> {
+                    printHistory();
+                }
+
+
 
 /// //// //// /// /// ДОБАВЛЕНИЕ
                 case ("add") -> {
@@ -162,8 +167,9 @@ public class ConsoleView {
         }
         if (!managerTaskInMemory.getTaskMap().containsKey(id)) {
             System.out.println("ERROR: Задачи с индексом " + id + " не существует!");
+            return;
         }
-        Task task = managerTaskInMemory.getTaskMap().get(id);
+        Task task = managerTaskInMemory.getTask(id);
         StringBuilder consoleTable = new StringBuilder();
         consoleTable.append(ConsoleUtils.CONSOLE_TITLE);
         consoleTable.append("\n");
@@ -187,6 +193,13 @@ public class ConsoleView {
             System.out.println(String.format(myFormatDebug,
                     key, value.getID(), value.getTypeTask(), value.getTaskStatus(),
                     value.getLinkStr(), value));
+        }
+    }
+
+    public void printHistory() {
+        System.out.println(ConsoleUtils.CONSOLE_TITLE);
+        for (Task task : managerTaskInMemory.getHistory()) {
+            System.out.println(ConsoleUtils.getTaskString(task));
         }
     }
 
