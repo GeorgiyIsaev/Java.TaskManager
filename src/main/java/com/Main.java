@@ -11,6 +11,7 @@ public class Main {
         ManagerFile.load(managerTaskInMemory);
 
         ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
-        consoleView.run();
+        //consoleView.run();
+        //consoleView.commandsSelection();
     }
 }

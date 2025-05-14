@@ -131,6 +131,9 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
     }
     @Override
     public boolean isEpic(int idTask){
+        if (!taskMap.containsKey(idTask)){
+            throw new NotExistIdException(idTask);
+        }
         return  taskMap.get(idTask).getTypeTask().equalsIgnoreCase(CONST.EPIC_NAME);
     }
 

@@ -5,6 +5,7 @@ import com.controller.IManagerTask;
 import com.controller.ManagerFile;
 
 
+import com.controller.controlException.NotExistIdException;
 import com.dateTask.*;
 
 import java.util.Map;
@@ -17,92 +18,100 @@ public class ConsoleView {
 
     public void setMyCommand(String textCommand) {
         this.myCommand = new MyCommand(textCommand);;
+
     }
 
     public ConsoleView(IManagerTask managerTaskInMemory) {
         this.managerTaskInMemory = managerTaskInMemory;
         in = new Scanner(System.in);
+        this.myCommand = new MyCommand("");;
     }
 
-    public void run() {
+    public void run(){
         System.out.println("Добро пожаловать в TaskManager!");
         System.out.println("У вас в работе " + managerTaskInMemory.getTaskMap().size() + " задач.");
         System.out.println("Введите help что бы отобразить доступные команды.");
 
         boolean isExit = false;
         do {
-            try {
+            isExit = commandsSelection();
+        }while (isExit);
+    }
 
-                System.out.print("Input command: ");
-                String textCommand = in.nextLine();
-                setMyCommand(textCommand);
-                switch (myCommand.baseCommand()) {
+
+    public boolean commandsSelection() {
+        try {
+            System.out.print("Input command: ");
+           // Scanner in2 = new Scanner(System.in);
+            in = new Scanner(System.in);
+            String textCommand = in.nextLine();
+            setMyCommand(textCommand);
+            switch (myCommand.baseCommand()) {
 /// //// //// /// /// ОБЩЕЕ
-                    case ("exit") -> {
-                        isExit = true;
-                    }
-                    case ("help") -> {
-                        help();
-                    }
-                    case ("save") -> {
-                        ManagerFile.save(managerTaskInMemory);
-                    }
+                case ("exit") -> {
+                    return true;
+                }
+                case ("help") -> {
+                    help();
+                }
+                case ("save") -> {
+                    ManagerFile.save(managerTaskInMemory);
+                }
 
 /// //// //// /// /// ПРИНТ
-                    case ("printall") -> {
-                        printTaskMap();
-                    }
-                    case ("printtask") -> {
-                        printTaskMap(CONST.TASK_NAME);
+                case ("printall") -> {
+                    printTaskMap();
+                }
+                case ("printtask") -> {
+                    printTaskMap(CONST.TASK_NAME);
 
-                    }
-                    case ("printepic") -> {
-                        printTaskMap(CONST.EPIC_NAME);
-                    }
-                    case ("printsubtask") -> {
-                        printTaskMap(CONST.SUB_NAME);
-                    }
-                    case ("printid") -> {
-                        printID(myCommand.getID());
-                    }
-                    case ("printdebug") -> {
-                        printDebug();
-                    }
+                }
+                case ("printepic") -> {
+                    printTaskMap(CONST.EPIC_NAME);
+                }
+                case ("printsubtask") -> {
+                    printTaskMap(CONST.SUB_NAME);
+                }
+                case ("printid") -> {
+                    printID(myCommand.getID());
+                }
+                case ("printdebug") -> {
+                    printDebug();
+                }
 
 /// //// //// /// /// ДОБАВЛЕНИЕ
-                    case ("add") -> {
-                        addTask();
-                    }
-                    case ("addepic") -> {
-                        addEpicTask();
-                    }
-                    case ("addsubtasktoid") -> {
-                        addSubTask();
-                    }
+                case ("add") -> {
+                    addTask();
+                }
+                case ("addepic") -> {
+                    addEpicTask();
+                }
+                case ("addsubtasktoid") -> {
+                    addSubTask();
+                }
 
 /// //// //// /// /// ИЗМЕНЕНИЕ и УДАЛЕНИЕ
-                    case ("deleteall") -> {
-                        managerTaskInMemory.deleteALL();
-                    }
-                    case ("deleteid") -> {
-                        deleteID();
-                    }
-                    case ("renameid") -> {
-                        reNameID();
-
-                    }
-                    case ("redescid") -> {
-                        reDescID();
-                    }
-                    case ("newstatusid") -> {
-                        newStatus();
-                    }
+                case ("deleteall") -> {
+                    managerTaskInMemory.deleteALL();
                 }
-            } catch (ControlException ex) {
-                System.out.println(ex.getMessage());
+                case ("deleteid") -> {
+                    deleteID();
+                }
+                case ("renameid") -> {
+                    reNameID();
+
+                }
+                case ("redescid") -> {
+                    reDescID();
+                }
+                case ("newstatusid") -> {
+                    newStatus();
+                }
             }
+        } catch (ControlException ex) {
+            System.out.println(ex.getMessage());
         }
-        while (!isExit);
+        return false;
     }
 
 
@@ -209,6 +218,10 @@ public class ConsoleView {
         if(idEpicTask == null){
             System.out.println("ERROR: вы не ввели id Эпик задачи");
             return;
+        }
+
+        if (!managerTaskInMemory.getTaskMap().containsKey(idEpicTask)){
+            System.out.println("ERROR: Задачи с ID " + idEpicTask + "не существует!");
         }
 
         if (!managerTaskInMemory.isEpic(idEpicTask)) {
