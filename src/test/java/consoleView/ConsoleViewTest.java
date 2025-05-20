@@ -30,10 +30,32 @@ public class ConsoleViewTest {
         consoleView = new ConsoleView(managerTaskInMemory);
 
     }
-
     public void setUp(String command) {
         System.setIn(new ByteArrayInputStream(command.getBytes()));
     }
+    @ParameterizedTest
+    @ArgumentsSource(MyClassArgumentsProvider.class)
+    public void manyCommandTest(String description, List<String> commands) {
+        System.out.println("\n - - > " + description);
+        StringBuilder nextCommand = new StringBuilder();
+
+        if (commands.size() > 1) {
+            nextCommand = new StringBuilder(commands.get(0));
+        }
+
+        for (int i = 1; i < commands.size(); i++) {
+            nextCommand.append("\n");
+            nextCommand.append(commands.get(i));
+        }
+        nextCommand.append("\n");
+        nextCommand.append("exit"); //все команды завершаются exit
+        setUp(nextCommand.toString());
+        consoleView.run();
+        System.out.println("Список команд: " + commands);
+
+    }
+
+
     public static class MyClassArgumentsProvider implements ArgumentsProvider {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
@@ -56,7 +78,7 @@ public class ConsoleViewTest {
                     Arguments.of("------>> ПРИНТ пустой список", Arrays.asList("printAll", "-")),
 
                     /// Взаимодействие с обычным TASK ID=0
-                    Arguments.of("Добавление Таск", Arrays.asList("add Название", "Описание")),
+                    Arguments.of("!!!!!! Добавление TASK", Arrays.asList("add Название", "Описание")),
                     Arguments.of("-->> ПРИНТ одного TASK", Arrays.asList("printAll", "-")),
                     Arguments.of("Изменяем имя ID 0 ", Arrays.asList("reNameID 0", "Новое измененное имя")),
                     Arguments.of("Изменяем описание ID 0 ", Arrays.asList("reDescID 0", "Новое измененное описание")),
@@ -73,33 +95,33 @@ public class ConsoleViewTest {
                     Arguments.of("------>> ПРИНТ одного TASK", Arrays.asList("printAll", "-")),
 
                     /// Взаимодействие с обычным EPIC ID=1 (+SUB ID=2)
-                    Arguments.of("Добавление Epic", Arrays.asList("addEpic Название", "Описание")),
+                    Arguments.of("!!!!! Добавление Epic", Arrays.asList("addEpic Название", "Описание")),
                     Arguments.of("-->> ПРИНТ Список TASK", Arrays.asList("printAll", "-")),
                     Arguments.of("Изменяем имя ID 1 ", Arrays.asList("reNameID 1", "Новое измененное имя")),
                     Arguments.of("Изменяем описание ID 1 ", Arrays.asList("reDescID 1", "Новое измененное описание")),
                     Arguments.of("Изменяем статус на PROG ID 1 ", Arrays.asList("newStatusId 1 PROG", "-")),
-                    Arguments.of("-->> ПРИНТ одного TASK cо статусом PROG", Arrays.asList("printAll", "-")),
+                    Arguments.of("-->> ПРИНТ одного Epic cо статусом PROG", Arrays.asList("printAll", "-")),
                     Arguments.of("Изменяем статус на DONE ID 1 ", Arrays.asList("newStatusId 1 DONE", "-")),
-                    Arguments.of("-->> ПРИНТ одного TASK cо статусом DONE", Arrays.asList("printAll", "-")),
+                    Arguments.of("-->> ПРИНТ одного Epic cо статусом DONE", Arrays.asList("printAll", "-")),
                     Arguments.of("Изменяем статус на NEW ID 1 ", Arrays.asList("newStatusId 1 NEW", "-")),
                     Arguments.of("-->> ПРИНТ одного TASK cо статусом NEW ID", Arrays.asList("printAll", "-")),
-                    Arguments.of("Изменяем статус на Нет такого статуса ID 1 ", Arrays.asList("newStatusId 1 Брантазябра", "-")),
+                    Arguments.of("Изменяем статус на Epic такого статуса ID 1 ", Arrays.asList("newStatusId 1 Брантазябра", "-")),
                     Arguments.of("Изменяем статус ID 1 не указал статус", Arrays.asList("newStatusId 1", "-")),
                     Arguments.of("Добавление Sub в ID 1", Arrays.asList("addSubTaskToID 1", "Название SUB", "Описание SUB")),
                     Arguments.of("--> ПРИНТ - ID 1", Arrays.asList("printId 1", "-")),
                     Arguments.of("------>> ПРИНТ Список TASK",  Arrays.asList("printAll", "-")),
 
                     /// Взаимодействие с SUB ID=3
-                    Arguments.of("Добавление Sub в ID 1 (Обычный Таск)", Arrays.asList("addSubTaskToID 1", "Название SUB 2", "Описание SUB 2")),
-                    Arguments.of("-->> ПРИНТ Список TASK", Arrays.asList("printAll", "-")),
+                    Arguments.of("!!!!!! Добавление Sub в ID 1 (Обычный Таск)", Arrays.asList("addSubTaskToID 1", "Название SUB 2", "Описание SUB 2")),
+                    Arguments.of("-->> ПРИНТ Список SUB", Arrays.asList("printAll", "-")),
                     Arguments.of("Изменяем имя ID 3 ", Arrays.asList("reNameID 3", "Новое измененное имя")),
                     Arguments.of("Изменяем описание ID 3 ", Arrays.asList("reDescID 3", "Новое измененное описание")),
                     Arguments.of("Изменяем статус на PROG ID 3", Arrays.asList("newStatusId 3 PROG", "-")),
-                    Arguments.of("-->> ПРИНТ одного TASK cо статусом PROG", Arrays.asList("printAll", "-")),
+                    Arguments.of("-->> ПРИНТ одного SUB cо статусом PROG", Arrays.asList("printAll", "-")),
                     Arguments.of("Изменяем статус на DONE ID 3 ", Arrays.asList("newStatusId 3 DONE", "-")),
-                    Arguments.of("-->> ПРИНТ одного TASK cо статусом DONE", Arrays.asList("printAll", "-")),
+                    Arguments.of("-->> ПРИНТ одного SUB cо статусом DONE", Arrays.asList("printAll", "-")),
                     Arguments.of("Изменяем статус на NEW ID 3 ", Arrays.asList("newStatusId 3 NEW", "-")),
-                    Arguments.of("-->> ПРИНТ одного TASK cо статусом NEW ID 3", Arrays.asList("printAll", "-")),
+                    Arguments.of("-->> ПРИНТ одного SUB cо статусом NEW ID 3", Arrays.asList("printAll", "-")),
                     Arguments.of("Изменяем статус на Нет такого статуса ID 3 ", Arrays.asList("newStatusId 3 Брантазябра", "-")),
                     Arguments.of("Изменяем статус ID 3 не указал статус", Arrays.asList("newStatusId 3", "-")),
                     Arguments.of("Добавление Sub в ID 3 (Нельзя добавить SUB в SUB)", Arrays.asList("addSubTaskToID 3", "Название SUB", "Описание SUB")),
@@ -150,27 +172,6 @@ public class ConsoleViewTest {
             );
             return argumentsStream;
         }
-
-    }
-    @ParameterizedTest
-    @ArgumentsSource(MyClassArgumentsProvider.class)
-    public void manyCommandTest(String description, List<String> commands) {
-        System.out.println("\n - - > " + description);
-        StringBuilder nextCommand = new StringBuilder();
-
-        if (commands.size() > 1) {
-            nextCommand = new StringBuilder(commands.get(0));
-        }
-
-        for (int i = 1; i < commands.size(); i++) {
-            nextCommand.append("\n");
-            nextCommand.append(commands.get(i));
-        }
-        nextCommand.append("\n");
-        nextCommand.append("exit"); //все команды завершаются exit
-        setUp(nextCommand.toString());
-        consoleView.run();
-        System.out.println("Список команд: " + commands);
 
     }
 

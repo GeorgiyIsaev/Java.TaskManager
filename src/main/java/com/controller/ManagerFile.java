@@ -30,17 +30,17 @@ public class ManagerFile {
         }
     }
 
-    public static void save(IManagerTask managerTaskInMemory)  {
+    public static void save(IManagerTask taskManager) {
         Map<Integer, Task> tasksMap = new TreeMap<>();
-        tasksMap.putAll(managerTaskInMemory.getTaskMap());
+        tasksMap.putAll(taskManager.getTasks());
         createFile();
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()));) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(getNameFile()))) {
             oos.writeObject(tasksMap);
         } catch (IOException e) {
             throw new ManagerFileException(e);
         }
     }
-    public static void load(IManagerTask managerTaskInMemory) {
+    public static void load(IManagerTask taskManager) {
        Map<Integer, Task> tasksMap;
         if (!(new File(getNameFile()).exists())) {
             return;
@@ -51,7 +51,7 @@ public class ManagerFile {
             for (Map.Entry<Integer, Task> entry : tasksMap.entrySet()) {
                 CreateID.INSTANCE.setId(entry.getKey());
             }
-            managerTaskInMemory.setTaskMap(tasksMap);
+            taskManager.replacementTasks(tasksMap);
 
         } catch (IOException | ClassNotFoundException e) {
             throw new ManagerFileException(e);

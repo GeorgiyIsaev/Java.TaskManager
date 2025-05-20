@@ -6,7 +6,6 @@ import com.dateTask.Task;
 import com.dateTask.TaskStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,7 +23,7 @@ public class TaskTest {
         Assertions.assertEquals(name, task.getName());
         Assertions.assertEquals(description, task.getDescription());
         Assertions.assertEquals(id, task.getID());
-        Assertions.assertEquals(TaskStatus.NEW, task.getTaskStatus());
+        Assertions.assertEquals(TaskStatus.NEW, task.getStatus());
         Assertions.assertEquals(CONST.TASK_NAME, task.getTypeTask());
         Assertions.assertEquals(CONST.NO_REFERENCE, task.getLinkStr());
 
@@ -46,8 +45,8 @@ public class TaskTest {
     @ParameterizedTest
     @ValueSource(strings = { "NEW", "IN_PROGRESS", "DONE", "NEW" })
     public void changeTaskStatus(TaskStatus taskStatus){
-        task.setTaskStatus(taskStatus);
-        Assertions.assertEquals(taskStatus, task.getTaskStatus());
+        task.setStatus(taskStatus);
+        Assertions.assertEquals(taskStatus, task.getStatus());
     }
 
 

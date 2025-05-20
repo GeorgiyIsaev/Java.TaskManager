@@ -26,7 +26,7 @@ public class SubTaskTest {
         Assertions.assertEquals(name, subTask.getName());
         Assertions.assertEquals(description, subTask.getDescription());
         Assertions.assertEquals(id, subTask.getID());
-        Assertions.assertEquals(TaskStatus.NEW, subTask.getTaskStatus());
+        Assertions.assertEquals(TaskStatus.NEW, subTask.getStatus());
         Assertions.assertEquals(CONST.SUB_NAME, subTask.getTypeTask());
         Assertions.assertEquals("" + epicTask.getID(), subTask.getLinkStr());
 
@@ -48,8 +48,8 @@ public class SubTaskTest {
     @ParameterizedTest
     @ValueSource(strings = { "NEW", "IN_PROGRESS", "DONE", "NEW" })
     public void changeTaskStatus(TaskStatus taskStatus){
-        subTask.setTaskStatus(taskStatus);
-        Assertions.assertEquals(taskStatus, subTask.getTaskStatus());
+        subTask.setStatus(taskStatus);
+        Assertions.assertEquals(taskStatus, subTask.getStatus());
     }
 
     @AfterAll

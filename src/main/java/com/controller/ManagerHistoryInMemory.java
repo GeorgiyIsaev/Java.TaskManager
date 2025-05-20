@@ -2,16 +2,15 @@ package com.controller;
 
 import com.dateTask.Task;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ManagerHistoryInMemory implements IHistoryManager{
-    private List<Task> historyList;
+    private List<Task> history;
 
     public ManagerHistoryInMemory(){
-        this.historyList = new LinkedList<>();
+        this.history = new LinkedList<>();
     }
 
 
@@ -19,30 +18,30 @@ public class ManagerHistoryInMemory implements IHistoryManager{
     public void add(Task task) {
         Task taskFind = getTask(task.getID());
         if(taskFind != null){
-            historyList.remove(taskFind);
+            history.remove(taskFind);
         }
-        if (historyList.size() >=10){
-            historyList.remove(0);
+        if (history.size() >=10){
+            history.remove(0);
         }
-        historyList.add(task);
+        history.add(task);
     }
 
     @Override
     public void remove(int id) {
         Task task = getTask(id);
         if(task != null) {
-            historyList.remove(task);
+            history.remove(task);
         }
     }
 
     @Override
     public void removeAll() {
-        this.historyList.clear();
+        this.history.clear();
     }
 
     public Task getTask(int id){
         Task task= null;
-        for (Task t : historyList) {
+        for (Task t : history) {
             if (t.getID() == id) {
                 task = t;
                 break;
@@ -53,6 +52,6 @@ public class ManagerHistoryInMemory implements IHistoryManager{
 
     @Override
     public List<Task> getHistory() {
-        return Collections.unmodifiableList(historyList);
+        return Collections.unmodifiableList(history);
     }
 }

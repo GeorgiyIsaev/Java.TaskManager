@@ -6,14 +6,11 @@ import com.controller.Managers;
 import com.controller.controlException.NotChangedEpicStatusException;
 import com.controller.controlException.NotExistIdException;
 import com.dateTask.CONST;
-import com.dateTask.SubTask;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.Objects;
 
 public class ManagerTaskInMemoryTest {
 
@@ -31,10 +28,10 @@ public class ManagerTaskInMemoryTest {
         public static void addTask(){
             String name = "Тестовое название жиз";
             String description = "Тестовое описание жиз";
-            int oldSize = managerTask.getTaskMap().size();
+            int oldSize = managerTask.getTasks().size();
             Task task = managerTask.addTask(name, description);
             idTask = task.getID();
-            int newSize = managerTask.getTaskMap().size();
+            int newSize = managerTask.getTasks().size();
             Assertions.assertTrue(newSize>oldSize);
             Assertions.assertTrue("TASK".equalsIgnoreCase(task.getTypeTask()));
             System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
@@ -64,9 +61,9 @@ public class ManagerTaskInMemoryTest {
         public void reStatusTask(TaskStatus taskStatus){
             Task task = managerTask.getTask(idTask);
             managerTask.reStatus(idTask, taskStatus);
-            Assertions.assertEquals(taskStatus, task.getTaskStatus());
+            Assertions.assertEquals(taskStatus, task.getStatus());
             System.out.println("Статус " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task
-                + " --> " + task.getTaskStatus());
+                + " --> " + task.getStatus());
 
         }
 
@@ -95,9 +92,9 @@ public class ManagerTaskInMemoryTest {
         public static void createEpic(){
             String name = "Тестовое название Epic";
             String description = "Тестовое описание Epic";
-            int oldSize = managerTask.getTaskMap().size();
+            int oldSize = managerTask.getTasks().size();
             Task task = managerTask.addEpic(name, description);
-            int newSize = managerTask.getTaskMap().size();
+            int newSize = managerTask.getTasks().size();
             idEpic = task.getID();
 
             Assertions.assertTrue(newSize>oldSize);
@@ -109,9 +106,9 @@ public class ManagerTaskInMemoryTest {
         public void addSub() {
             String name = "Тестовое название SubTask";
             String description = "Тестовое описание SubTask";
-            int oldSize = managerTask.getTaskMap().size();
+            int oldSize = managerTask.getTasks().size();
             Task task = managerTask.addSubTaskToEpicID(idEpic, name, description);
-            int newSize = managerTask.getTaskMap().size();
+            int newSize = managerTask.getTasks().size();
             idSub = task.getID();
 
             Assertions.assertTrue(newSize>oldSize);
@@ -178,9 +175,9 @@ public class ManagerTaskInMemoryTest {
             managerTask.reStatus(idSub, taskStatus);
 
             //TaskStatus oldStatus = task
-            Assertions.assertEquals(taskStatus, task.getTaskStatus());
+            Assertions.assertEquals(taskStatus, task.getStatus());
             System.out.println("Статус " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task
-                    + " --> " + task.getTaskStatus());
+                    + " --> " + task.getStatus());
 
         }
 
@@ -243,7 +240,7 @@ public class ManagerTaskInMemoryTest {
     public static void deleteAll(){
         managerTask.deleteALL();
         int sizeClearMap = 0;
-        Assertions.assertEquals(sizeClearMap, managerTask.getTaskMap().size());
+        Assertions.assertEquals(sizeClearMap, managerTask.getTasks().size());
     }
 
 }

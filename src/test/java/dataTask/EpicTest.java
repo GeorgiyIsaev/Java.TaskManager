@@ -1,7 +1,5 @@
 package dataTask;
 
-import com.controller.controlException.NotChangedEpicStatusException;
-import com.controller.controlException.NotExistIdException;
 import com.dateTask.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,7 +20,7 @@ public class EpicTest {
         Assertions.assertEquals(name, task.getName());
         Assertions.assertEquals(description, task.getDescription());
         Assertions.assertEquals(id, task.getID());
-        Assertions.assertEquals(TaskStatus.NEW, task.getTaskStatus());
+        Assertions.assertEquals(TaskStatus.NEW, task.getStatus());
         Assertions.assertEquals(CONST.EPIC_NAME, task.getTypeTask());
         Assertions.assertEquals("[]", task.getLinkStr());
 
@@ -44,9 +42,9 @@ public class EpicTest {
     @ParameterizedTest
     @ValueSource(strings = { "NEW", "IN_PROGRESS", "DONE", "NEW" })
     public void changeTaskStatus(TaskStatus taskStatus){
-        TaskStatus oldStatus = task.getTaskStatus();
-        task.setTaskStatus(taskStatus);
-        Assertions.assertEquals(oldStatus, task.getTaskStatus());
+        TaskStatus oldStatus = task.getStatus();
+        task.setStatus(taskStatus);
+        Assertions.assertEquals(oldStatus, task.getStatus());
 
         System.out.println("Статус для Эпика нельзя менять");
 
@@ -68,7 +66,7 @@ public class EpicTest {
         Assertions.assertEquals(nameSub, subInEpic.getName());
         Assertions.assertEquals(descriptionSub, subInEpic.getDescription());
         Assertions.assertEquals(id, subInEpic.getID());
-        Assertions.assertEquals(TaskStatus.NEW, subInEpic.getTaskStatus());
+        Assertions.assertEquals(TaskStatus.NEW, subInEpic.getStatus());
         Assertions.assertEquals(CONST.SUB_NAME, subInEpic.getTypeTask());
         Assertions.assertEquals("" + task.getID(), subInEpic.getLinkStr());
 

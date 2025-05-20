@@ -9,24 +9,24 @@ public class Task implements Serializable {
     }
     protected String name;
     protected String description;
-    protected TaskStatus taskStatus;
+    protected TaskStatus status;
     public Task(int id,  String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.taskStatus = TaskStatus.NEW;
+        this.status = TaskStatus.NEW;
     }
 
-    public void setTaskStatus(TaskStatus taskStatus) {
-        this.taskStatus = taskStatus;
+    public void setStatus(TaskStatus status) {
+        this.status = status;
     }
 
     public String getName() {
         return name;
     }
 
-    public TaskStatus getTaskStatus() {
-        return taskStatus;
+    public TaskStatus getStatus() {
+        return status;
     }
 
     public String getDescription() {

@@ -26,31 +26,31 @@ public class EpicTask extends Task {
 
 
     @Override
-    public void setTaskStatus(TaskStatus taskStatus) {
+    public void setStatus(TaskStatus status) {
     }
     public void updateTaskStatus(){
-        taskStatus = TaskStatus.NEW;
+        status = TaskStatus.NEW;
         int count = 0;
         for (SubTask sub : subTasks){
-            if (sub.getTaskStatus() == TaskStatus.IN_PROGRESS) {
-                taskStatus = TaskStatus.IN_PROGRESS;
+            if (sub.getStatus() == TaskStatus.IN_PROGRESS) {
+                status = TaskStatus.IN_PROGRESS;
 
-            }else if (sub.getTaskStatus() == TaskStatus.DONE){
-                taskStatus = TaskStatus.IN_PROGRESS;
+            }else if (sub.getStatus() == TaskStatus.DONE){
+                status = TaskStatus.IN_PROGRESS;
                 count++;
             }
         }
         if (count == subTasks.size()) {
-            taskStatus = TaskStatus.DONE;
+            status = TaskStatus.DONE;
         }
     }
 
-    public boolean findID(int id){
-        if(this.getID() == id)
+    public boolean findID(int idSubTask){
+        if(this.getID() == idSubTask)
              return true;
         else{
             for(Task task : subTasks){
-                if(task.findID(id)){
+                if(task.findID(idSubTask)){
                     return true;
                 }
             }
