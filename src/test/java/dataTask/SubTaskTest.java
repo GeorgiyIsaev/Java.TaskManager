@@ -27,7 +27,7 @@ public class SubTaskTest {
         Assertions.assertEquals(description, subTask.getDescription());
         Assertions.assertEquals(id, subTask.getID());
         Assertions.assertEquals(TaskStatus.NEW, subTask.getStatus());
-        Assertions.assertEquals(CONST.SUB_NAME, subTask.getTypeTask());
+        Assertions.assertEquals(TypeTask.SUB_NAME, subTask.getTypeTask());
         Assertions.assertEquals("" + epicTask.getID(), subTask.getLinkStr());
 
     }

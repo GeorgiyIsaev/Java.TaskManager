@@ -52,9 +52,9 @@ public class Task implements Serializable {
         return this.id == id;
     }
     public String getTypeTask(){
-        return CONST.TASK_NAME;
+        return TypeTask.TASK_NAME;
     }
     public String getLinkStr(){
-        return CONST.NO_REFERENCE;
+        return TypeTask.NO_REFERENCE;
     }
 }

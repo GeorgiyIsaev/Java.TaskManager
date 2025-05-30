@@ -5,7 +5,7 @@ import com.controller.IManagerTask;
 import com.controller.Managers;
 import com.controller.controlException.NotChangedEpicStatusException;
 import com.controller.controlException.NotExistIdException;
-import com.dateTask.CONST;
+import com.dateTask.TypeTask;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
 import org.junit.jupiter.api.*;
@@ -98,7 +98,7 @@ public class ManagerTaskInMemoryTest {
             idEpic = task.getID();
 
             Assertions.assertTrue(newSize>oldSize);
-            Assertions.assertTrue(CONST.EPIC_NAME.equalsIgnoreCase(task.getTypeTask()));
+            Assertions.assertTrue(TypeTask.EPIC_NAME.equalsIgnoreCase(task.getTypeTask()));
             System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);
         }
 
@@ -112,7 +112,7 @@ public class ManagerTaskInMemoryTest {
             idSub = task.getID();
 
             Assertions.assertTrue(newSize>oldSize);
-            Assertions.assertTrue(CONST.SUB_NAME.equalsIgnoreCase(task.getTypeTask()));
+            Assertions.assertTrue(TypeTask.SUB_NAME.equalsIgnoreCase(task.getTypeTask()));
             boolean isIdExists = managerTask.getTask(idEpic).findID(task.getID());
             Assertions.assertTrue(isIdExists);
             System.out.println("Добавлен " + task.getTypeTask() + ": ID " +task.getID()+ " - " + task);

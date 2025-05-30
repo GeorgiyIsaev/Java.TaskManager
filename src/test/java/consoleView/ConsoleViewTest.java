@@ -30,9 +30,11 @@ public class ConsoleViewTest {
         consoleView = new ConsoleView(managerTaskInMemory);
 
     }
+
     public void setUp(String command) {
         System.setIn(new ByteArrayInputStream(command.getBytes()));
     }
+
     @ParameterizedTest
     @ArgumentsSource(MyClassArgumentsProvider.class)
     public void manyCommandTest(String description, List<String> commands) {

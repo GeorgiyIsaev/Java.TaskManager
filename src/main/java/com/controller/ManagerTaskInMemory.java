@@ -75,7 +75,7 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         }
         Task task = tasks.get(idTask);
         history.remove(idTask);
-        if(task.getTypeTask().equalsIgnoreCase(CONST.EPIC_NAME)){
+        if(task.getTypeTask().equalsIgnoreCase(TypeTask.EPIC_NAME)){
             EpicTask epic = (EpicTask)task;
             for(SubTask subTask :  epic.getSubTasks()){
                 tasks.remove(subTask.getID());
@@ -84,13 +84,13 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
             tasks.remove(idTask);
             return task;
         }
-        else if(task.getTypeTask().equalsIgnoreCase(CONST.SUB_NAME)){
+        else if(task.getTypeTask().equalsIgnoreCase(TypeTask.SUB_NAME)){
             SubTask sub = (SubTask)task;
             sub.getRefrains().deleteSubTask(sub);
             tasks.remove(idTask);
             return task;
         }
-        else if(task.getTypeTask().equalsIgnoreCase(CONST.TASK_NAME)){
+        else if(task.getTypeTask().equalsIgnoreCase(TypeTask.TASK_NAME)){
             tasks.remove(idTask);
             return task;
         }
@@ -136,7 +136,7 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         if (!tasks.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
-        return  tasks.get(idTask).getTypeTask().equalsIgnoreCase(CONST.EPIC_NAME);
+        return  tasks.get(idTask).getTypeTask().equalsIgnoreCase(TypeTask.EPIC_NAME);
     }
 
     @Override

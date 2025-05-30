@@ -62,14 +62,14 @@ public class ConsoleView {
                     printTaskMap();
                 }
                 case ("printtask") -> {
-                    printTaskMap(CONST.TASK_NAME);
+                    printTaskMap(TypeTask.TASK_NAME);
 
                 }
                 case ("printepic") -> {
-                    printTaskMap(CONST.EPIC_NAME);
+                    printTaskMap(TypeTask.EPIC_NAME);
                 }
                 case ("printsubtask") -> {
-                    printTaskMap(CONST.SUB_NAME);
+                    printTaskMap(TypeTask.SUB_NAME);
                 }
                 case ("printid") -> {
                     printID(myCommand.getID());
@@ -175,7 +175,7 @@ public class ConsoleView {
         consoleTable.append("\n");
         consoleTable.append(ConsoleUtils.getTaskString(task));
 
-        if (task.getTypeTask().equalsIgnoreCase(CONST.EPIC_NAME)) {
+        if (task.getTypeTask().equalsIgnoreCase(TypeTask.EPIC_NAME)) {
             for (SubTask subTask : ((EpicTask) task).getSubTasks()) {
                 consoleTable.append("\n");
                 consoleTable.append(ConsoleUtils.getTaskString(subTask));

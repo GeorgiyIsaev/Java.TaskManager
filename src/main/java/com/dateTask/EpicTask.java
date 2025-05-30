@@ -62,7 +62,7 @@ public class EpicTask extends Task {
 
     @Override
     public String getTypeTask(){
-        return CONST.EPIC_NAME;
+        return TypeTask.EPIC_NAME;
     }
 
     @Override
