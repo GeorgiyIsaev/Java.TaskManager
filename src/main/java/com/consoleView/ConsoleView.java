@@ -22,7 +22,7 @@ public class ConsoleView {
 
     public ConsoleView(IManagerTask taskManager) {
         this.taskManager = taskManager;
-        in = new Scanner(System.in);
+      //  in = new Scanner(System.in);
         this.myCommand = new MyCommand("");;
     }
 
@@ -30,7 +30,7 @@ public class ConsoleView {
         System.out.println("Добро пожаловать в TaskManager!");
         System.out.println("У вас в работе " + taskManager.getTasks().size() + " задач.");
         System.out.println("Введите help что бы отобразить доступные команды.");
-
+        in = new Scanner(System.in);
         boolean isExit = false;
         do {
             isExit = commandsSelection();
@@ -42,13 +42,13 @@ public class ConsoleView {
         try {
             System.out.print("Input command: ");
            // Scanner in2 = new Scanner(System.in);
-            in = new Scanner(System.in);
+
             String textCommand = in.nextLine();
             setMyCommand(textCommand);
             switch (myCommand.baseCommand()) {
 /// //// //// /// /// ОБЩЕЕ
                 case ("exit") -> {
-                    return true;
+                    return false;
                 }
                 case ("help") -> {
                     help();
