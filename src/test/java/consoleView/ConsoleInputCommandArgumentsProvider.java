@@ -12,7 +12,8 @@ public class ConsoleInputCommandArgumentsProvider implements ArgumentsProvider {
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
         Stream<Arguments> argumentsStream = Stream.of(
                 Arguments.of("01.01 - Вызов подсказок", Arrays.asList("help","help")),
-                Arguments.of("01.02 - Очищаем список", Arrays.asList("deleteAll", "-")),
+                Arguments.of("01.02 - Сохраняем", Arrays.asList("save", "-")),
+                Arguments.of("01.023 - Очищаем список", Arrays.asList("deleteAll", "printAll", "-")),
                 Arguments.of("01.03 - ПРИНТ пустой список", Arrays.asList("printAll", "-")),
                 Arguments.of("01.04 - Сохраняем", Arrays.asList("save", "-")),
                 Arguments.of("01.05 - Выходим", Arrays.asList("exit","exit", "-")),

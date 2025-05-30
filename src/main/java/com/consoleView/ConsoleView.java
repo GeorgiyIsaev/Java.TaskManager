@@ -31,10 +31,11 @@ public class ConsoleView {
         System.out.println("У вас в работе " + taskManager.getTasks().size() + " задач.");
         System.out.println("Введите help что бы отобразить доступные команды.");
         in = new Scanner(System.in);
-        boolean isExit = false;
+        boolean isExit;
         do {
             isExit = commandsSelection();
         }while (isExit);
+        in.close();
     }
 
 
@@ -55,6 +56,7 @@ public class ConsoleView {
                 }
                 case ("save") -> {
                     ManagerFile.save(taskManager);
+                    System.out.println("Содержимое Task Manager сохранено в файл!");
                 }
 
 /// //// //// /// /// ПРИНТ
@@ -97,6 +99,7 @@ public class ConsoleView {
 /// //// //// /// /// ИЗМЕНЕНИЕ и УДАЛЕНИЕ
                 case ("deleteall") -> {
                     taskManager.deleteALL();
+                    System.out.println("Все содержимое Task Manager удалено!");
                 }
                 case ("deleteid") -> {
                     deleteID();
@@ -115,7 +118,7 @@ public class ConsoleView {
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
         }
-        return false;
+        return true;
     }
 
 
@@ -144,6 +147,9 @@ public class ConsoleView {
                 " \"newStatusId 'NUMBER ID' ('NEW, 'PROG' or 'DONE')\"  – изменить статус выполнения задачи с ID\n";
         System.out.println(textHelp);
     }
+
+
+
 
 /// /// /// ВЫВОД - ПРИНТ
     //String myFormat = "%-4s %-8s %-12s %-12s %-25s";
