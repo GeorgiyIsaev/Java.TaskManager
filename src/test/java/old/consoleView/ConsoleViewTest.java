@@ -1,4 +1,4 @@
-package consoleView;
+package old.consoleView;
 
 import com.consoleView.ConsoleView;
 import com.controller.IManagerTask;
