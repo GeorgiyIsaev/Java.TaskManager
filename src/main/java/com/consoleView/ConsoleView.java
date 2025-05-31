@@ -11,45 +11,52 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleView {
-    private Scanner in;
+  //  private Scanner in;
     private IManagerTask taskManager;
     MyCommand myCommand;
+    private boolean isExit;
 
-    public void setMyCommand(String textCommand) {
-        this.myCommand = new MyCommand(textCommand);;
-
+    public MyCommand getMyCommand() {
+        return myCommand;
     }
 
     public ConsoleView(IManagerTask taskManager) {
         this.taskManager = taskManager;
-      //  in = new Scanner(System.in);
-        this.myCommand = new MyCommand("");;
+     ///   this.myCommand = new MyCommand();;
     }
 
     public void run(){
         System.out.println("Добро пожаловать в TaskManager!");
         System.out.println("У вас в работе " + taskManager.getTasks().size() + " задач.");
         System.out.println("Введите help что бы отобразить доступные команды.");
-        in = new Scanner(System.in);
-        boolean isExit;
-        do {
-            isExit = commandsSelection();
-        }while (isExit);
-        in.close();
+
+       this.myCommand = new MyCommand();       ;
+       //in = new Scanner(System.in);
+        this.isExit = true;
+        while (this.isExit){
+            this.myCommand.input("Введите команду: ");
+            commandsSelection();
+        }
+        this.myCommand.close();
+       // in.close();
     }
 
 
-    public boolean commandsSelection() {
+    public void commandsSelection() {
+        if(this.myCommand== null){
+            return;
+        }
+
         try {
-            System.out.print("Input command: ");
+           // System.out.print("Input command: ");
            // Scanner in2 = new Scanner(System.in);
 
-            String textCommand = in.nextLine();
-            setMyCommand(textCommand);
+         //   String textCommand = in.nextLine();
+          //  setMyCommand(textCommand);
             switch (myCommand.baseCommand()) {
 /// //// //// /// /// ОБЩЕЕ
                 case ("exit") -> {
-                    return false;
+                    this.isExit = false;
                 }
                 case ("help") -> {
                     help();
@@ -82,8 +89,6 @@ public class ConsoleView {
                 case ("printhistory") -> {
                     printHistory();
                 }
-
-
 
 /// //// //// /// /// ДОБАВЛЕНИЕ
                 case ("add") -> {
@@ -118,7 +123,6 @@ public class ConsoleView {
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
         }
-        return true;
     }
 
 
@@ -211,25 +215,23 @@ public class ConsoleView {
 
 /// /// /// Добавление
     public void addTask(){
-        String textName = myCommand.secondCommand();
+        String textName = myCommand.getCommand();
         if(textName == null){
             System.out.println("ERROR: Вы не ввели имя задачи");
             return;
         }
-        System.out.print("Input description Task: ");
-        String textDescription = in.nextLine();
-        Task task = taskManager.addTask(textName, textDescription);
+        myCommand.input("Введите описание Task: ");
+       Task task = taskManager.addTask(textName, myCommand.getCommand());
         System.out.println("Add Task (id = " + task.getID() + "): " + task);
     }
     public void addEpicTask() {
-        String textName = myCommand.secondCommand();
+        String textName = myCommand.getCommand();
         if(textName == null){
             System.out.println("ERROR: Вы не ввели имя задачи");
             return;
         }
-        System.out.print("Input description Epic: ");
-        String textDescription = in.nextLine();
-        Task task = taskManager.addEpic(textName, textDescription);
+        myCommand.input("Введите описание Epic: ");
+        Task task = taskManager.addEpic(textName, myCommand.getCommand());
         System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
     }
     public void addSubTask() {
@@ -247,10 +249,16 @@ public class ConsoleView {
             System.out.println("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
             return;
         }
-        System.out.print("Input Name Sub Task: ");
-        String textName = in.nextLine();
-        System.out.print("Input Description Sub Task: ");
-        String textDescription = in.nextLine();
+        myCommand.input("Введите описание Epic: ");
+
+        String textName = myCommand.getCommand();
+        myCommand.input("Введите описание Epic: ");
+        String textDescription = myCommand.getCommand();
+
+     //   System.out.print("Input Name Sub Task: ");
+    //    String textName = in.nextLine();
+      //  System.out.print("Input Description Sub Task: ");
+       // String textDescription = in.nextLine();
         Task task = taskManager.addSubTaskToEpicID(idEpicTask, textName, textDescription);
         System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
     }
@@ -275,8 +283,11 @@ public class ConsoleView {
             System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
             return;
         }
-        System.out.print("Input NewName Task: ");
-        String textName = in.nextLine();
+        myCommand.input("Введите новое имя Задачи: ");
+        String textName = myCommand.getCommand();
+
+     //   System.out.print("Input NewName Task: ");
+      //  String textName = in.nextLine();
         Task task = taskManager.reNameToIDTask(idTask, textName);
 
         System.out.println(task.getTypeTask() + " с ID: " + idTask + " переименован! -> " + task);
@@ -291,9 +302,12 @@ public class ConsoleView {
             System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
             return;
         }
-        System.out.print("Input NewDescription Task: ");
-        String textName = in.nextLine();
-        Task task = taskManager.reDescToIDTask(idTask, textName);
+        myCommand.input("Введите новое описание Задачи: ");
+        String textDescription= myCommand.getCommand();
+
+      //  System.out.print("Input NewDescription Task: ");
+       // String textName = in.nextLine();
+        Task task = taskManager.reDescToIDTask(idTask, textDescription);
         System.out.println(task.getTypeTask() + " с ID: " + idTask + " изменил описание! -> " + task);
     }
     public void newStatus() {
@@ -312,7 +326,9 @@ public class ConsoleView {
                     "Статус задачи: " + task.getStatus());
             return;
         }
-        switch (myCommand.thirdCommand().toLowerCase()) {
+
+        String status = myCommand.getCommand();
+        switch (status) {
             case "new" -> {
                 taskManager.reStatus(idTask, TaskStatus.NEW);
             }
@@ -323,7 +339,7 @@ public class ConsoleView {
                 taskManager.reStatus(idTask, TaskStatus.DONE);
             }
             default -> {
-                System.out.println("ERROR: Значение '" + myCommand.thirdCommand().toUpperCase() + "' не соответствует значению статуса.\n" +
+                System.out.println("ERROR: Статус с наименованием [" +status+ "] не существует!\n" +
                         " Допустимые значение 'NEW' 'PROG' 'DONE'");
             }
         }

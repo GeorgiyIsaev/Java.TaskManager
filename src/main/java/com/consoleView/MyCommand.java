@@ -1,39 +1,84 @@
 package com.consoleView;
 
+import java.util.Scanner;
+
 public class MyCommand {
     private String command;
-    public MyCommand(String command){
-        this.command = command;
+ ///   private String nextCommand;
+  ///  String[] splitCommand;
+
+    public String getCommand() {
+        return command;
+    }
+
+
+    //private String firstCommand;
+   // private String secondCommand;
+  //  private String thirdCommand;
+
+  //  private String command;
+    private Scanner scanner;
+
+
+//    public MyCommand(String command){
+//        this.scanner = new Scanner(System.in);
+//   //     this.command = command;
+//    }
+
+   public MyCommand(){
+       this.scanner = new Scanner(System.in);
+  }
+    public void input(String title){
+        System.out.print("Input command: ");
+        command = scanner.nextLine();
+     //   nextCommand = command;
+    //    this.splitCommand = command.split(" ");
+    }
+    public void close(){
+        this.scanner.close();
     }
 
 
     public String baseCommand(){
-        String inputCommand;
-        int i = command.indexOf(' ');
-        if (i > 0) {
-            inputCommand = command.substring(0, i).toLowerCase();
-        } else inputCommand = command.toLowerCase();
-        return inputCommand;
-    }
-    public String secondCommand(){
-        int idSeparator =  command.indexOf(' ');
-        if (command.length() <= idSeparator++) {
-            return null;
+        int idSpase = command.indexOf(' ');
+        if(idSpase < 0) {
+            return command;
         }
-        return command.substring(idSeparator);
+        String baseCommand =  command.substring(0, idSpase);
+        nextCommand();
+        return baseCommand;
     }
-    public String thirdCommand(){
-        command = secondCommand();
-        return secondCommand();
+    //public String secondCommand(){
+//
+//    //}
+//   /// public String thirdCommand(){
+//        int THIRD_COMMAND = 1;
+//        if(splitCommand.length < THIRD_COMMAND){
+//            return "";
+//        }
+//        nextCommand();
+//        return splitCommand[THIRD_COMMAND];
+//    //}
+    public void nextCommand(){
+        int idSpase = command.indexOf(' ');
+        if(idSpase < 1) {
+            command =  "";
+        }
+        command = command.substring(idSpase);
     }
+
+
+
+
     public Integer getID(){
-        String[] sp = command.split(" ");
-        if (sp.length < 1){
-            return null;
-        }
+       // int ID_COMMAND = 1;
+     //   if(splitCommand.length < ID_COMMAND){
+       //     return null;
+      //  }
         Integer i;
+        String IdString = baseCommand();
         try {
-            i = Integer.parseInt(sp[1]);
+            i = Integer.parseInt(IdString);
         } catch (NumberFormatException e) {
             i = null;
         }
