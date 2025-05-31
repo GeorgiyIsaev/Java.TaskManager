@@ -165,11 +165,11 @@ public class ConsoleView {
     }
     public void printID(Integer id){
         if(id == null){
-            System.out.println("ERROR: вы не ввели id задачи");
+            System.out.println(ConsoleNotification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(id)) {
-            System.out.println("ERROR: Задачи с индексом " + id + " не существует!");
+            System.out.println(ConsoleNotification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.getTask(id);
@@ -209,20 +209,21 @@ public class ConsoleView {
 /// /// /// Добавление
     public void addTask(){
         String textName = myCommand.getCommand();
-        if(textName == null){
-            System.out.println("ERROR: Вы не ввели имя задачи");
-            return;
-        }
+//        if(textName == null){
+//            System.out.println("ERROR: Вы не ввели имя задачи");
+//            return;
+//        }
         myCommand.input("Введите описание Task: ");
        Task task = taskManager.addTask(textName, myCommand.getCommand());
         System.out.println("Add Task (id = " + task.getID() + "): " + task);
     }
     public void addEpicTask() {
         String textName = myCommand.getCommand();
-        if(textName == null){
-            System.out.println("ERROR: Вы не ввели имя задачи");
-            return;
-        }
+//        if(textName == null){
+//
+//            System.out.println("ERROR: Вы не ввели имя задачи");
+//            return;
+//        }
         myCommand.input("Введите описание Epic: ");
         Task task = taskManager.addEpic(textName, myCommand.getCommand());
         System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
@@ -230,20 +231,18 @@ public class ConsoleView {
     public void addSubTask() {
         Integer idEpicTask = myCommand.getID();
         if(idEpicTask == null){
-            System.out.println("ERROR: вы не ввели id Эпик задачи");
+            System.out.println(ConsoleNotification.ID_NOT_INPUT);
             return;
         }
-
         if (!taskManager.getTasks().containsKey(idEpicTask)){
-            System.out.println("ERROR: Задачи с ID " + idEpicTask + "не существует!");
+            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            return;
         }
-
         if (!taskManager.isEpic(idEpicTask)) {
-            System.out.println("ERROR: Задача с id " + idEpicTask + " не ЭПИК");
+            System.out.println(ConsoleNotification.NOT_EPIC);
             return;
         }
         myCommand.input("Введите описание Epic: ");
-
         String textName = myCommand.getCommand();
         myCommand.input("Введите описание Epic: ");
         String textDescription = myCommand.getCommand();
@@ -260,21 +259,22 @@ public class ConsoleView {
     public void deleteID() {
         Integer id = myCommand.getID();
         if(id == null){
-            System.out.println("ERROR: вы не ввели id задачи");
+            System.out.println(ConsoleNotification.ID_NOT_INPUT);
             return;
         }
         Task task = taskManager.deleteIDTask(id);
-        System.out.println("ЗАПИСЬ: " + task.getTypeTask() + " " + task + "УДАЛЕНА!");
+        System.out.println(ConsoleNotification.DELETE_TASK);
+        System.out.println(ConsoleUtils.CONSOLE_TITLE);
+        System.out.println(ConsoleUtils.getTaskString(task));
     }
     public void reNameID() {
-        Integer idTask = myCommand.getID();
-        if(idTask == null){
-            System.out.println("ERROR: вы не ввели id задачи");
-            return;
-        }
+        Integer idTask = myCommand.getID();if(idTask == null){
+            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+        return;
+       }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
-            return;
+            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+       return;
         }
         myCommand.input("Введите новое имя Задачи: ");
         String textName = myCommand.getCommand();
@@ -283,16 +283,18 @@ public class ConsoleView {
       //  String textName = in.nextLine();
         Task task = taskManager.reNameToIDTask(idTask, textName);
 
-        System.out.println(task.getTypeTask() + " с ID: " + idTask + " переименован! -> " + task);
+        System.out.println(ConsoleNotification.RENAME);
+        System.out.println(ConsoleUtils.CONSOLE_TITLE);
+        System.out.println(ConsoleUtils.getTaskString(task));
     }
     public void  reDescID() {
         Integer idTask = myCommand.getID();
         if(idTask == null){
-            System.out.println("ERROR: вы не ввели id задачи");
+            System.out.println(ConsoleNotification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
+            System.out.println(ConsoleNotification.ID_NOT_EXIST);
             return;
         }
         myCommand.input("Введите новое описание Задачи: ");
@@ -301,22 +303,23 @@ public class ConsoleView {
       //  System.out.print("Input NewDescription Task: ");
        // String textName = in.nextLine();
         Task task = taskManager.reDescToIDTask(idTask, textDescription);
-        System.out.println(task.getTypeTask() + " с ID: " + idTask + " изменил описание! -> " + task);
+        System.out.println(ConsoleNotification.REDESC);
+        System.out.println(ConsoleUtils.CONSOLE_TITLE);
+        System.out.println(ConsoleUtils.getTaskString(task));
     }
     public void newStatus() {
         Integer idTask = myCommand.getID();
         if(idTask == null){
-            System.out.println("ERROR: вы не ввели id задачи");
+            System.out.println(ConsoleNotification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println("ERROR: Задачи с ID: " + idTask + " не существует!");
+            System.out.println(ConsoleNotification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.getTasks().get(idTask);
         if (taskManager.isEpic(idTask)) {
-            System.out.println("ERROR: Задачи с ID: " + idTask + " EPIC! Расчет статуса осуществляется автоматически!/n"+
-                    "Статус задачи: " + task.getStatus());
+            System.out.println(ConsoleNotification.NOT_CHANGE_STATUS);
             return;
         }
 
@@ -324,18 +327,22 @@ public class ConsoleView {
         switch (status) {
             case "new" -> {
                 taskManager.reStatus(idTask, TaskStatus.NEW);
+                System.out.println(ConsoleNotification.RESTATUS);
             }
             case "prog" -> {
                 taskManager.reStatus(idTask, TaskStatus.IN_PROGRESS);
+                System.out.println(ConsoleNotification.RESTATUS);
             }
             case "done" -> {
                 taskManager.reStatus(idTask, TaskStatus.DONE);
+                System.out.println(ConsoleNotification.RESTATUS);
             }
             default -> {
-                System.out.println("ERROR: Статус с наименованием [" +status+ "] не существует!\n" +
-                        " Допустимые значение 'NEW' 'PROG' 'DONE'");
+                System.out.println(ConsoleNotification.STATUS_INCORRECTLY);
+
             }
         }
-        System.out.println("Статус задачи: " + task + " -> " + task.getStatus());
+        System.out.println(ConsoleUtils.CONSOLE_TITLE);
+        System.out.println(ConsoleUtils.getTaskString(task));
     }
 }

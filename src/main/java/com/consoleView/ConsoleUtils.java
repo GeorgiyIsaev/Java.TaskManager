@@ -18,4 +18,7 @@ public class ConsoleUtils {
     public static String getTaskString(Task task){
         return  getTaskString(task.getID(), task.getTypeTask(), task.getStatus(),task.getLinkStr(), task.toString());
     }
+
+
+
 }
