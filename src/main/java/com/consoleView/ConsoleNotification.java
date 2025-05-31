@@ -2,6 +2,8 @@ package com.consoleView;
 
 public class ConsoleNotification {
 
+    public static final String NOT_COMMAND = "Неверная команда";
+    public static final String EXIT = "Спасибо за работу!";
     public static final String SAVE = "Содержимое Task Manager сохранено в файл!";
     public static final String DELETE_ALL= "Все содержимое Task Manager удалено!";
     public static final String HELP = """

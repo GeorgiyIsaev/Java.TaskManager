@@ -7,6 +7,7 @@ import com.controller.ManagerFile;
 
 import com.dateTask.*;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -53,10 +54,10 @@ public class ConsoleView {
 
          //   String textCommand = in.nextLine();
           //  setMyCommand(textCommand);
-            switch (myCommand.baseCommand()) {
+            switch (myCommand.baseCommand().toLowerCase()) {
 /// //// //// /// /// ОБЩЕЕ
                 case ("exit") -> {
-                    this.isExit = false;
+                    exit();
                 }
                 case ("help") -> {
                     help();
@@ -116,6 +117,9 @@ public class ConsoleView {
                 case ("newstatusid") -> {
                     newStatus();
                 }
+                default -> {
+                    System.out.println(ConsoleNotification.NOT_COMMAND);
+                }
             }
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
@@ -135,6 +139,11 @@ public class ConsoleView {
         ManagerFile.save(taskManager);
         System.out.println(ConsoleNotification.SAVE);
     }
+    public void exit(){
+        this.isExit = false;
+        System.out.println(ConsoleNotification.EXIT);
+    }
+
 
 
 

@@ -1,6 +1,7 @@
 package consoleView;
 
 import com.consoleView.ConsoleNotification;
+import com.consoleView.ConsoleUtils;
 import com.consoleView.ConsoleView;
 import com.controller.IManagerTask;
 import com.controller.Managers;
@@ -67,6 +68,42 @@ public class ConsoleBaseCommandTest {
         consoleView.run();
         String consoleContent = outContent.toString();
         boolean isExist = isExistInConsole(consoleContent,ConsoleNotification.SAVE);
+        Assertions.assertTrue(isExist);
+    }
+
+    @Test
+    public void exitTest(){
+        IManagerTask managerTaskInMemory = Managers.getDefault();
+        ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
+        String nextCommand = "exit";
+        setUp(nextCommand);
+        consoleView.run();
+        String consoleContent = outContent.toString();
+        boolean isExist = isExistInConsole(consoleContent,ConsoleNotification.EXIT);
+        Assertions.assertTrue(isExist);
+    }
+
+    @Test
+    public void printAllTest(){
+        IManagerTask managerTaskInMemory = Managers.getDefault();
+        ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
+        String nextCommand = "printAll\nexit";
+        setUp(nextCommand);
+        consoleView.run();
+        String consoleContent = outContent.toString();
+        boolean isExist = isExistInConsole(consoleContent, ConsoleUtils.CONSOLE_TITLE);
+        Assertions.assertTrue(isExist);
+    }
+
+    @Test
+    public void notTrueCommandTest(){
+        IManagerTask managerTaskInMemory = Managers.getDefault();
+        ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
+        String nextCommand = "Брантазябра\nexit";
+        setUp(nextCommand);
+        consoleView.run();
+        String consoleContent = outContent.toString();
+        boolean isExist = isExistInConsole(consoleContent, ConsoleNotification.NOT_COMMAND);
         Assertions.assertTrue(isExist);
     }
 
