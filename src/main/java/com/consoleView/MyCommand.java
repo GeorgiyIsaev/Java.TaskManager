@@ -29,7 +29,7 @@ public class MyCommand {
        this.scanner = new Scanner(System.in);
   }
     public void input(String title){
-        System.out.print("Input command: ");
+        System.out.print(title);
         command = scanner.nextLine();
      //   nextCommand = command;
     //    this.splitCommand = command.split(" ");

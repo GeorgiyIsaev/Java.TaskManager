@@ -62,8 +62,7 @@ public class ConsoleView {
                     help();
                 }
                 case ("save") -> {
-                    ManagerFile.save(taskManager);
-                    System.out.println("Содержимое Task Manager сохранено в файл!");
+                    save();
                 }
 
 /// //// //// /// /// ПРИНТ
@@ -103,15 +102,13 @@ public class ConsoleView {
 
 /// //// //// /// /// ИЗМЕНЕНИЕ и УДАЛЕНИЕ
                 case ("deleteall") -> {
-                    taskManager.deleteALL();
-                    System.out.println("Все содержимое Task Manager удалено!");
+                    deleteAll();
                 }
                 case ("deleteid") -> {
                     deleteID();
                 }
                 case ("renameid") -> {
                     reNameID();
-
                 }
                 case ("redescid") -> {
                     reDescID();
@@ -126,30 +123,17 @@ public class ConsoleView {
     }
 
 
-/// /// /// ХЕЛП
+/// /// /// ХЕЛП СОХРАНЕНИЕ ОЧИСТКА
     public void help() {
-        String textHelp = "ДОСТУПНЫЕ КОМАНДЫ: \n" +
-                " \"help\" - показать список команда\n" +
-                " \"exit\" - завершить программу\n" +
-                " \"save\" - сохранить все записи\n" +
-                "КОМАНДЫ ДЛЯ ОТОБРАЖЕНИЯ ЗАДАЧ: \n" +
-                " \"printAll\" - показать все задачи\n" +
-                " \"printEpic\" - показать только ЭПИКИ\n" +
-                " \"printSubTask\" - показать только ПОДЗАДАЧИ \n" +
-                " \"printHistory'\" - показать историю вызова задач\n" +
-                " \"printTask\" - показать только ОБЫЧНЫЕ ЗАДАЧИ \n" +
-                " \"printId 'NUMBER ID'\" - показать задачу по id\n" +
-                "КОМАНДЫ ДЛЯ ДОБАВЛЕНИЯ ЗАДАЧ: \n" +
-                " \"add 'указать имя задач'\" - добавить обычную задачу\n" +
-                " \"addEpic 'указать имя задач'\" - добавить задачу c подзадачами\n" +
-                " \"addSubTaskToID 'NUMBER ID'\" - добавить подзадачу к Эпику с указанным ID\n" +
-                "УДАЛЕНИЕ И ИЗМЕНЕНИЕ ЗАДАЧ: \n" +
-                " \"deleteAll\" - удалить все задачи\n" +
-                " \"deleteID 'NUMBER ID'\" - удалить задачу с ID\n" +
-                " \"reNameID 'NUMBER ID'\" – изменить имя задачи с ID\n" +
-                " \"reDescID 'NUMBER ID'\" – изменить описание задачи с ID\n" +
-                " \"newStatusId 'NUMBER ID' ('NEW, 'PROG' or 'DONE')\"  – изменить статус выполнения задачи с ID\n";
-        System.out.println(textHelp);
+        System.out.println(ConsoleNotification.HELP);
+    }
+    public void deleteAll(){
+        taskManager.deleteALL();
+        System.out.println(ConsoleNotification.DELETE_ALL);
+    }
+    public void save(){
+        ManagerFile.save(taskManager);
+        System.out.println(ConsoleNotification.SAVE);
     }
 
 
