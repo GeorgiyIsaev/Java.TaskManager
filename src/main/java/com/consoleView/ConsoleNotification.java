@@ -10,7 +10,7 @@ public class ConsoleNotification {
     //public static final String NAME_NOT_INPUT = "ERROR: ID Задачи указан не верно!";
     public static final String DELETE_TASK = "СЛЕДУЮЩАЯ ЗАДАЧА УДАЛЕНА";
     public static final String NOT_EPIC = "Задача с указанным ID не EPIC";
-    public static final String ID_NOT_INPUT = "ERROR: ID Задачи указан не верно!";
+    public static final String ID_NOT_INPUT = "ERROR: Не указан ID задачи!";
     public static final String ID_NOT_EXIST = "ERROR: Задачи с указанным ID не существует!";
     public static final String NOT_COMMAND = "Неверная команда";
     public static final String EXIT = "Спасибо за работу!";

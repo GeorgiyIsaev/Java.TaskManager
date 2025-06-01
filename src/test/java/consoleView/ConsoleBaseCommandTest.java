@@ -9,6 +9,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -29,10 +31,8 @@ public class ConsoleBaseCommandTest {
     public void restoreStreams() {
         System.setOut(originalOut);
     }
-
     public boolean isExistInConsole(String allContent, String findContent){
         return allContent.toUpperCase().contains(findContent.toUpperCase());
-
     }
 
 
@@ -40,7 +40,7 @@ public class ConsoleBaseCommandTest {
     public void deleteAllTest(){
         IManagerTask managerTaskInMemory = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
-        String nextCommand = "deleteall\nexit";
+        String nextCommand = "deleteAll\nexit";
         setUp(nextCommand);
         consoleView.run();
         String consoleContent = outContent.toString();
@@ -105,6 +105,35 @@ public class ConsoleBaseCommandTest {
         String consoleContent = outContent.toString();
         boolean isExist = isExistInConsole(consoleContent, ConsoleNotification.NOT_COMMAND);
         Assertions.assertTrue(isExist);
+    }
+
+
+
+
+    //ТЕСТЫ Обращения к задаче с несуществующим ID
+    @ParameterizedTest(name = "ID не существует - Команда: {0}")
+         //   "{index} - {0} is a palindrome")
+    @ValueSource(strings = {
+            "reNameID 0\nНовое Имя",
+            "reDescID 0\nНовое описание",
+            "addSubTaskToID 0\nНазвание SUB\nОписание SUB",
+            "newStatusId 0 PROG",
+            "newStatusId 0 DONE",
+            "newStatusId 0 NEW",
+            "newStatusId 0 Нет",
+            "newStatusId 0",
+            "printID 0"})
+    public void callingNonExistentTask(String command){
+        IManagerTask managerTaskInMemory = Managers.getDefault();
+        ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
+
+        command = "deleteAll\n" + command + "\nexit";
+        setUp(command);
+        consoleView.run();
+
+        String consoleContent = outContent.toString();
+        boolean isExist = isExistInConsole(consoleContent, ConsoleNotification.ID_NOT_EXIST);
+        Assertions.assertTrue(isExist, consoleContent);
     }
 
 }

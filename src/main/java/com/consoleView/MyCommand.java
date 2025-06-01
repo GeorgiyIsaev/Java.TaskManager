@@ -60,7 +60,7 @@ public class MyCommand {
 //        return splitCommand[THIRD_COMMAND];
 //    //}
     public void nextCommand(){
-        int idSpase = command.indexOf(' ');
+        int idSpase = command.indexOf(' ')+1;
         if(idSpase < 1) {
             command =  "";
         }
