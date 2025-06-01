@@ -54,7 +54,8 @@ public class ConsoleView {
 
          //   String textCommand = in.nextLine();
           //  setMyCommand(textCommand);
-            switch (myCommand.baseCommand().toLowerCase()) {
+            String command = myCommand.baseCommand().toLowerCase();
+            switch (command) {
 /// //// //// /// /// ОБЩЕЕ
                 case ("exit") -> {
                     exit();
@@ -118,7 +119,7 @@ public class ConsoleView {
                     newStatus();
                 }
                 default -> {
-                    System.out.println(ConsoleNotification.NOT_COMMAND);
+                    System.out.println(ConsoleNotification.NOT_COMMAND + " [" + command + "]");
                 }
             }
         } catch (ControlException ex) {
@@ -323,7 +324,7 @@ public class ConsoleView {
             return;
         }
 
-        String status = myCommand.getCommand();
+        String status = myCommand.getCommand().toLowerCase();
         switch (status) {
             case "new" -> {
                 taskManager.reStatus(idTask, TaskStatus.NEW);
@@ -338,7 +339,7 @@ public class ConsoleView {
                 System.out.println(ConsoleNotification.RESTATUS);
             }
             default -> {
-                System.out.println(ConsoleNotification.STATUS_INCORRECTLY);
+                System.out.println("[" +status +"] " + ConsoleNotification.STATUS_INCORRECTLY);
 
             }
         }

@@ -2,7 +2,7 @@ package com.consoleView;
 
 public class ConsoleNotification {
 
-    public static final String STATUS_INCORRECTLY= "ERROR: Не верно введен статус\nДопустимые значение 'NEW' 'PROG' 'DONE'";
+    public static final String STATUS_INCORRECTLY= "ERROR: Не верно введен статус! Допустимые значения 'NEW' 'PROG' 'DONE'";
     public static final String NOT_CHANGE_STATUS= "Нельзя изменить статус EPIC";
     public static final String RESTATUS= "Статус задачи изменено успешно!";
     public static final String REDESC= "Описание задачи изменено успешно!";
