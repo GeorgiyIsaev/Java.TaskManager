@@ -42,12 +42,6 @@ public class ConsoleInteractionWithTaskTest {
     public boolean isExistInConsole(String allContent, String findContent){
         return allContent.toUpperCase().contains(findContent.toUpperCase());
     }
-//    @AfterEach
-//    public void upCounter() {
-//        UtilsCounter.currentID++;
-//    }
-
-
 
     //ТЕСТ ВЗАИМОДЕЙСТВИЯ С ПРОСТЫМИ ЗАДАЧАМИ
 
