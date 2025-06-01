@@ -4,6 +4,10 @@ public enum CreateID {
     INSTANCE;
     private int id = 0;
 
+    public Integer getCurrentID(){
+        return id;
+    }
+
     public Integer createID(){
         return id++;
     }

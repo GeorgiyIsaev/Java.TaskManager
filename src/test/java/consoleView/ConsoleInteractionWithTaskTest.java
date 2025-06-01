@@ -5,6 +5,7 @@ import com.consoleView.ConsoleUtils;
 import com.consoleView.ConsoleView;
 import com.controller.IManagerTask;
 import com.controller.Managers;
+import com.dateTask.CreateID;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
 import org.junit.jupiter.api.AfterEach;
@@ -41,10 +42,10 @@ public class ConsoleInteractionWithTaskTest {
     public boolean isExistInConsole(String allContent, String findContent){
         return allContent.toUpperCase().contains(findContent.toUpperCase());
     }
-    @AfterEach
-    public void upCounter() {
-        UtilsCounter.currentID++;
-    }
+//    @AfterEach
+//    public void upCounter() {
+//        UtilsCounter.currentID++;
+//    }
 
 
 
@@ -76,7 +77,7 @@ public class ConsoleInteractionWithTaskTest {
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String newName = "Новое имя";
-        String command = "add Название\nОписание\nreNameID "+  UtilsCounter.currentID +"\n" + newName + "\nexit";
+        String command = "add Название\nОписание\nreNameID "+ CreateID.INSTANCE.getCurrentID() +"\n" + newName + "\nexit";
         String findContent = ConsoleNotification.RENAME;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -102,7 +103,7 @@ public class ConsoleInteractionWithTaskTest {
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String newDescription = "Новое описание";
-        String command = "add Название\nОписание\nreDescID "+  UtilsCounter.currentID +"\n" + newDescription + "\nexit";
+        String command = "add Название\nОписание\nreDescID "+  CreateID.INSTANCE.getCurrentID() +"\n" + newDescription + "\nexit";
         String findContent = ConsoleNotification.REDESC;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -127,7 +128,7 @@ public class ConsoleInteractionWithTaskTest {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
-        String command = "add Название\nОписание\nnewStatusId "+  UtilsCounter.currentID +" PROG\nexit";
+        String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" PROG\nexit";
         String findContent = ConsoleNotification.RESTATUS;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -152,7 +153,7 @@ public class ConsoleInteractionWithTaskTest {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
-        String command = "add Название\nОписание\nnewStatusId "+  UtilsCounter.currentID +" NEW\nexit";
+        String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" NEW\nexit";
         String findContent = ConsoleNotification.RESTATUS;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -177,7 +178,7 @@ public class ConsoleInteractionWithTaskTest {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
-        String command = "add Название\nОписание\nnewStatusId "+  UtilsCounter.currentID +" DONE\nexit";
+        String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" DONE\nexit";
         String findContent = ConsoleNotification.RESTATUS;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -202,7 +203,7 @@ public class ConsoleInteractionWithTaskTest {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
-        String command = "add Название\nОписание\nnewStatusId "+  UtilsCounter.currentID +" EXCEPTION\nexit";
+        String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" EXCEPTION\nexit";
         String findContent = ConsoleNotification.STATUS_INCORRECTLY;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -219,7 +220,7 @@ public class ConsoleInteractionWithTaskTest {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
-        String command = "add Название\nОписание\nnewStatusId "+  UtilsCounter.currentID +"\nexit";
+        String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
         String findContent = ConsoleNotification.STATUS_INCORRECTLY;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -236,7 +237,7 @@ public class ConsoleInteractionWithTaskTest {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
-        String command = "add Название\nОписание\naddSubTaskToID "+  UtilsCounter.currentID +"\nНазвание SUB\nОписание SUB\nexit";
+        String command = "add Название\nОписание\naddSubTaskToID "+  CreateID.INSTANCE.getCurrentID() +"\nНазвание SUB\nОписание SUB\nexit";
         String findContent = ConsoleNotification.NOT_EPIC;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -253,7 +254,7 @@ public class ConsoleInteractionWithTaskTest {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
-        String command = "add Название\nОписание\nprintID "+  UtilsCounter.currentID +"\nexit";
+        String command = "add Название\nОписание\nprintID "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
         String findContent = ConsoleUtils.CONSOLE_TITLE;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
@@ -280,7 +281,7 @@ public class ConsoleInteractionWithTaskTest {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
-        String command = "add Название\nОписание\ndeleteID "+  UtilsCounter.currentID +"\nexit";
+        String command = "add Название\nОписание\ndeleteID "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
         String findContent = ConsoleNotification.DELETE_TASK;
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
 
