@@ -41,7 +41,7 @@ public class ConsoleView {
 
     public void commandsSelection() {
         try {
-            String command = myCommand.baseCommand().toLowerCase();
+            String command = this.getMyCommand().baseCommand().toLowerCase();
             switch (command) {
 /// //// //// /// /// ОБЩЕЕ
                 case ("exit") -> {

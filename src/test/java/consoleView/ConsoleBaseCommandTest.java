@@ -1,5 +1,6 @@
 package consoleView;
 
+import com.Main;
 import com.consoleView.ConsoleNotification;
 import com.consoleView.ConsoleUtils;
 import com.consoleView.ConsoleView;
@@ -36,6 +37,19 @@ public class ConsoleBaseCommandTest {
     }
 
 
+
+    @Test
+    public void testMain() {
+        String[] args = {""};
+        String nextCommand = "exit\n";
+        setUp(nextCommand);
+        Main.main(args);
+
+        String consoleContent = outContent.toString();
+        boolean isExist = isExistInConsole(consoleContent,ConsoleNotification.EXIT);
+        Assertions.assertTrue(isExist, consoleContent);
+    }
+
     @Test
     public void deleteAllTest(){
         IManagerTask managerTaskInMemory = Managers.getDefault();
@@ -43,6 +57,7 @@ public class ConsoleBaseCommandTest {
         String nextCommand = "deleteAll\nexit";
         setUp(nextCommand);
         consoleView.run();
+
         String consoleContent = outContent.toString();
         boolean isExist = isExistInConsole(consoleContent,ConsoleNotification.DELETE_ALL);
         Assertions.assertTrue(isExist);
@@ -141,13 +156,15 @@ public class ConsoleBaseCommandTest {
     @ParameterizedTest(name = "ID не существует - Команда: {0}")
     //   "{index} - {0} is a palindrome")
     @ValueSource(strings = {
-            "reNameID Ноль\nНовое описание",
+            "reNameID Ноль\nНовое имя",
+            "reDescID Ноль\nНовое описание",
             "addSubTaskToID Ноль\nНазвание SUB\nОписание SUB",
             "newStatusId Ноль PROG",
             "newStatusId Ноль DONE",
             "newStatusId Ноль NEW",
             "newStatusId Ноль Нет",
             "newStatusId Ноль",
+            "deleteId Ноль",
             "printID Ноль"})
     public void callingIncorrectIdSpecifiedTaskTest(String command){
         IManagerTask managerTaskInMemory = Managers.getDefault();
@@ -161,5 +178,4 @@ public class ConsoleBaseCommandTest {
         boolean isExist = isExistInConsole(consoleContent, ConsoleNotification.ID_NOT_INPUT);
         Assertions.assertTrue(isExist, consoleContent);
     }
-
 }

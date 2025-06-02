@@ -1,6 +1,7 @@
 package com.consoleView;
 
-public class ConsoleNotification {
+public final class ConsoleNotification {
+    private ConsoleNotification(){}
 
     public static final String STATUS_INCORRECTLY= "ERROR: Не верно введен статус! Допустимые значения 'NEW' 'PROG' 'DONE'";
     public static final String NOT_CHANGE_STATUS= "Нельзя изменить статус EPIC";
@@ -16,6 +17,7 @@ public class ConsoleNotification {
     public static final String EXIT = "Спасибо за работу!";
     public static final String SAVE = "Содержимое Task Manager сохранено в файл!";
     public static final String DELETE_ALL= "Все содержимое Task Manager удалено!";
+
     public static final String HELP = """
             ДОСТУПНЫЕ КОМАНДЫ:\s
              "help" - показать список команда

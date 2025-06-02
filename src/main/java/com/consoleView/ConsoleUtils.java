@@ -3,7 +3,7 @@ package com.consoleView;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
 
-public class ConsoleUtils {
+public final class ConsoleUtils {
     private ConsoleUtils(){} //нет конструктора
 
     public static String FORMAT_PRINT = "%-4s %-8s %-5s %-12s %-25s";
