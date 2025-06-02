@@ -157,7 +157,7 @@ public class ConsoleBaseCommandTest {
     @ParameterizedTest(name = "ID не существует - Команда: {0}")
     //   "{index} - {0} is a palindrome")
     @ValueSource(strings = {
-            "reNameID Ноль\nНовое имя",
+            "reNameID Ноль\nНовое",
             "reDescID Ноль\nНовое описание",
             "addSubTaskToID Ноль\nНазвание SUB\nОписание SUB",
             "newStatusId Ноль PROG",
@@ -165,6 +165,10 @@ public class ConsoleBaseCommandTest {
             "newStatusId Ноль NEW",
             "newStatusId Ноль Нет",
             "newStatusId Ноль",
+            "newStatusId",
+            "newStatusId\n\n\n",
+            "newStatusId \n \n \n",
+            "newStatusId \n 0\n 0\n",
             "deleteId Ноль",
             "printID Ноль"})
     public void callingIncorrectIdSpecifiedTaskTest(String command){
