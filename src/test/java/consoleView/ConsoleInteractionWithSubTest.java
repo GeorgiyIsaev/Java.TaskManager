@@ -359,4 +359,40 @@ public class ConsoleInteractionWithSubTest {
 
         Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Список менеджера пуст
     }
+
+
+    @Test
+    void printFullSubTest() {
+        IManagerTask managerTask = Managers.getDefault();
+        ConsoleView consoleView = new ConsoleView(managerTask);
+        final int NO_TASKS = 0;
+        int idEpic1 = CreateID.INSTANCE.getCurrentID();
+        int idSub1 = CreateID.INSTANCE.getCurrentID()+1;
+        int idEpic2 = CreateID.INSTANCE.getCurrentID()+2;
+        int idSub2 = CreateID.INSTANCE.getCurrentID()+3;
+
+        String command = "addEPIC ЭПИК01\nОписание\n" +
+                "addSubTaskToID " + idEpic1 + "\nСаб Название\nСаб Описание\n" +
+                "addEPIC ЭПИК02\nОписание\n" +
+                "addSubTaskToID " + idEpic2 + "\nСаб Название\nСаб Описание\n" +
+                "printSubTask\n" +
+                "exit";
+        String findContent = ConsoleUtils.CONSOLE_TITLE;
+        Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
+
+        setUp(command);
+        consoleView.run();
+
+        String consoleContent = outContent.toString();
+        boolean isExistTitle = isExistInConsole(consoleContent, findContent);
+        Assertions.assertTrue(isExistTitle, consoleContent); //Успех отображен в консоли
+
+        Task sub01 = managerTask.getTask(idSub1);
+        Task sub02 = managerTask.getTask(idSub2);
+
+        boolean isExistEpic01= isExistInConsole(consoleContent, ConsoleUtils.getTaskString(sub01));
+        Assertions.assertTrue(isExistEpic01, consoleContent);
+        boolean isExistEpic02= isExistInConsole(consoleContent, ConsoleUtils.getTaskString(sub02));
+        Assertions.assertTrue(isExistEpic02, consoleContent);
+    }
 }

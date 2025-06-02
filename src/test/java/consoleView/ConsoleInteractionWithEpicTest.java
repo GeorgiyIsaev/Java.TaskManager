@@ -265,6 +265,39 @@ public class ConsoleInteractionWithEpicTest {
 
 
     @Test
+    void printFullEpicTest() {
+        IManagerTask managerTask = Managers.getDefault();
+        ConsoleView consoleView = new ConsoleView(managerTask);
+        final int NO_TASKS = 0;
+        int idEpic = CreateID.INSTANCE.getCurrentID();
+
+        String command = "addEPIC ЭПИК01\nОписание\n" +
+                "addEPIC ЭПИК02\nОписание\n" +
+                "printEpic\n" +
+              "exit";
+        String findContent = ConsoleUtils.CONSOLE_TITLE;
+        Assertions.assertEquals(NO_TASKS, managerTask.getTasks().size()); //Перед выполнением список пустой
+
+        setUp(command);
+        consoleView.run();
+
+        String consoleContent = outContent.toString();
+        boolean isExistTitle = isExistInConsole(consoleContent, findContent);
+        Assertions.assertTrue(isExistTitle, consoleContent); //Успех отображен в консоли
+
+        Task epic01 = managerTask.getTask(idEpic);
+        Task epic02 = managerTask.getTask(idEpic+1);
+
+        boolean isExistEpic01= isExistInConsole(consoleContent, ConsoleUtils.getTaskString(epic01));
+        Assertions.assertTrue(isExistEpic01, consoleContent);
+        boolean isExistEpic02= isExistInConsole(consoleContent, ConsoleUtils.getTaskString(epic02));
+        Assertions.assertTrue(isExistEpic02, consoleContent);
+    }
+
+
+
+
+    @Test
     void deleteIDTaskTest() {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
