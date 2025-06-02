@@ -223,6 +223,10 @@ public class ConsoleView {
             System.out.println(ConsoleNotification.ID_NOT_INPUT);
             return;
         }
+        if (!taskManager.getTasks().containsKey(id)) {
+            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            return;
+        }
         Task task = taskManager.deleteIDTask(id);
         System.out.println(ConsoleNotification.DELETE_TASK);
         System.out.println(ConsoleUtils.CONSOLE_TITLE);

@@ -138,6 +138,7 @@ public class ConsoleBaseCommandTest {
             "newStatusId 0 NEW",
             "newStatusId 0 Нет",
             "newStatusId 0",
+            "deleteId 0",
             "printID 0"})
     public void callingNonExistentTask(String command){
         IManagerTask managerTaskInMemory = Managers.getDefault();

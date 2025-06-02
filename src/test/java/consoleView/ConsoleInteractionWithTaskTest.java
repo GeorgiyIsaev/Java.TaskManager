@@ -24,6 +24,8 @@ import java.io.PrintStream;
 import java.util.Map;
 import java.util.stream.Stream;
 
+//ConsoleInteractionHistoryTest
+
 public class ConsoleInteractionWithTaskTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
