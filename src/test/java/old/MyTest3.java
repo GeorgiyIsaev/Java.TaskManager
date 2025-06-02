@@ -15,11 +15,11 @@ public class MyTest3 {
         ConsoleView consoleView = new ConsoleView(managerTaskInMemoryMap);
 
         createTask(managerTaskInMemoryMap);
-        consoleView.printTaskMap();
+        consoleView.printTask();
 
         changeTask(managerTaskInMemoryMap);
         System.out.println("            Демонстрация Изменений");
-        consoleView.printTaskMap();
+        consoleView.printTask();
 
         System.out.println("            Сохранение");
         ManagerFile.save(managerTaskInMemoryMap);
@@ -27,11 +27,11 @@ public class MyTest3 {
 
         System.out.println("            Загрузка");
         ManagerFile.load(managerTaskInMemoryMap);
-        consoleView.printTaskMap();
+        consoleView.printTask();
 
         System.out.println("            Новая задача после загрузки");
         managerTaskInMemoryMap.addTask("Задача после загрузки", "Описание простой задачи");
-        consoleView.printTaskMap();
+        consoleView.printTask();
 
         System.out.println("            История");
         System.out.println(managerTaskInMemoryMap.getHistory());

@@ -110,6 +110,7 @@ public class ConsoleBaseCommandTest {
 
 
 
+
     //ТЕСТЫ Обращения к задаче с несуществующим ID
     @ParameterizedTest(name = "ID не существует - Команда: {0}")
          //   "{index} - {0} is a palindrome")
@@ -133,6 +134,31 @@ public class ConsoleBaseCommandTest {
 
         String consoleContent = outContent.toString();
         boolean isExist = isExistInConsole(consoleContent, ConsoleNotification.ID_NOT_EXIST);
+        Assertions.assertTrue(isExist, consoleContent);
+    }
+
+    //ТЕСТЫ Обращения к задаче с неправильно указанным ID
+    @ParameterizedTest(name = "ID не существует - Команда: {0}")
+    //   "{index} - {0} is a palindrome")
+    @ValueSource(strings = {
+            "reNameID Ноль\nНовое описание",
+            "addSubTaskToID Ноль\nНазвание SUB\nОписание SUB",
+            "newStatusId Ноль PROG",
+            "newStatusId Ноль DONE",
+            "newStatusId Ноль NEW",
+            "newStatusId Ноль Нет",
+            "newStatusId Ноль",
+            "printID Ноль"})
+    public void callingIncorrectIdSpecifiedTaskTest(String command){
+        IManagerTask managerTaskInMemory = Managers.getDefault();
+        ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
+
+        command = "deleteAll\n" + command + "\nexit";
+        setUp(command);
+        consoleView.run();
+
+        String consoleContent = outContent.toString();
+        boolean isExist = isExistInConsole(consoleContent, ConsoleNotification.ID_NOT_INPUT);
         Assertions.assertTrue(isExist, consoleContent);
     }
 

@@ -7,9 +7,7 @@ import com.controller.ManagerFile;
 
 import com.dateTask.*;
 
-import java.util.Locale;
 import java.util.Map;
-import java.util.Scanner;
 
 public class ConsoleView {
   //  private Scanner in;
@@ -23,7 +21,7 @@ public class ConsoleView {
 
     public ConsoleView(IManagerTask taskManager) {
         this.taskManager = taskManager;
-     ///   this.myCommand = new MyCommand();;
+        this.myCommand = new MyCommand();;
     }
 
     public void run(){
@@ -31,29 +29,18 @@ public class ConsoleView {
         System.out.println("У вас в работе " + taskManager.getTasks().size() + " задач.");
         System.out.println("Введите help что бы отобразить доступные команды.");
 
-       this.myCommand = new MyCommand();       ;
-       //in = new Scanner(System.in);
+        this.myCommand = new MyCommand();
         this.isExit = true;
         while (this.isExit){
             this.myCommand.input("Введите команду: ");
             commandsSelection();
         }
         this.myCommand.close();
-       // in.close();
     }
 
 
     public void commandsSelection() {
-        if(this.myCommand== null){
-            return;
-        }
-
         try {
-           // System.out.print("Input command: ");
-           // Scanner in2 = new Scanner(System.in);
-
-         //   String textCommand = in.nextLine();
-          //  setMyCommand(textCommand);
             String command = myCommand.baseCommand().toLowerCase();
             switch (command) {
 /// //// //// /// /// ОБЩЕЕ
@@ -69,23 +56,20 @@ public class ConsoleView {
 
 /// //// //// /// /// ПРИНТ
                 case ("printall") -> {
-                    printTaskMap();
+                    printTask();
                 }
                 case ("printtask") -> {
-                    printTaskMap(TypeTask.TASK_NAME);
+                    printTask(TypeTask.TASK_NAME);
 
                 }
                 case ("printepic") -> {
-                    printTaskMap(TypeTask.EPIC_NAME);
+                    printTask(TypeTask.EPIC_NAME);
                 }
                 case ("printsubtask") -> {
-                    printTaskMap(TypeTask.SUB_NAME);
+                    printTask(TypeTask.SUB_NAME);
                 }
                 case ("printid") -> {
                     printID(myCommand.getID());
-                }
-                case ("printdebug") -> {
-                    printDebug();
                 }
                 case ("printhistory") -> {
                     printHistory();
@@ -150,12 +134,10 @@ public class ConsoleView {
 
 
 /// /// /// ВЫВОД - ПРИНТ
-    //String myFormat = "%-4s %-8s %-12s %-12s %-25s";
-    public void printTaskMap() {
-        printTaskMap(null);
+    public void printTask() {
+        printTask(null);
     }
-    public void printTaskMap(String typeFilter) {
-        // "EPIC" "TASK" "SubTASK"
+    public void printTask(String typeFilter) {
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
         for (Map.Entry<Integer, Task> entry : taskManager.getTasks().entrySet()) {
             Task value = entry.getValue();
@@ -164,6 +146,7 @@ public class ConsoleView {
             }
         }
     }
+
     public void printID(Integer id){
         if(id == null){
             System.out.println(ConsoleNotification.ID_NOT_INPUT);
@@ -187,18 +170,7 @@ public class ConsoleView {
         }
         System.out.println(consoleTable);
     }
-    public void printDebug() {
-       ///  Только для проверок разработчиком
-        String myFormatDebug = "%3s %4s %8s %12s %12s %s";
-        System.out.println(String.format(myFormatDebug, "KEY", "ID", "TYPE", "STATUS", "LINK", "INFORMATION"));
-        for (Map.Entry<Integer, Task> entry : taskManager.getTasks().entrySet()) {
-            Integer key = entry.getKey();
-            Task value = entry.getValue();
-            System.out.println(String.format(myFormatDebug,
-                    key, value.getID(), value.getTypeTask(), value.getStatus(),
-                    value.getLinkStr(), value));
-        }
-    }
+
 
     public void printHistory() {
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
@@ -210,25 +182,18 @@ public class ConsoleView {
 /// /// /// Добавление
     public void addTask(){
         String textName = myCommand.getCommand();
-//        if(textName == null){
-//            System.out.println("ERROR: Вы не ввели имя задачи");
-//            return;
-//        }
         myCommand.input("Введите описание Task: ");
-       Task task = taskManager.addTask(textName, myCommand.getCommand());
+        Task task = taskManager.addTask(textName, myCommand.getCommand());
         System.out.println("Add Task (id = " + task.getID() + "): " + task);
     }
+
     public void addEpicTask() {
         String textName = myCommand.getCommand();
-//        if(textName == null){
-//
-//            System.out.println("ERROR: Вы не ввели имя задачи");
-//            return;
-//        }
         myCommand.input("Введите описание Epic: ");
         Task task = taskManager.addEpic(textName, myCommand.getCommand());
         System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
     }
+
     public void addSubTask() {
         Integer idEpicTask = myCommand.getID();
         if(idEpicTask == null){
@@ -243,15 +208,10 @@ public class ConsoleView {
             System.out.println(ConsoleNotification.NOT_EPIC);
             return;
         }
-        myCommand.input("Введите описание Epic: ");
+        myCommand.input("Введите Название SubTask: ");
         String textName = myCommand.getCommand();
-        myCommand.input("Введите описание Epic: ");
+        myCommand.input("Введите описание SubTask: ");
         String textDescription = myCommand.getCommand();
-
-     //   System.out.print("Input Name Sub Task: ");
-    //    String textName = in.nextLine();
-      //  System.out.print("Input Description Sub Task: ");
-       // String textDescription = in.nextLine();
         Task task = taskManager.addSubTaskToEpicID(idEpicTask, textName, textDescription);
         System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
     }
@@ -268,6 +228,7 @@ public class ConsoleView {
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
         System.out.println(ConsoleUtils.getTaskString(task));
     }
+
     public void reNameID() {
         Integer idTask = myCommand.getID();if(idTask == null){
             System.out.println(ConsoleNotification.ID_NOT_INPUT);
@@ -279,15 +240,13 @@ public class ConsoleView {
         }
         myCommand.input("Введите новое имя Задачи: ");
         String textName = myCommand.getCommand();
-
-     //   System.out.print("Input NewName Task: ");
-      //  String textName = in.nextLine();
         Task task = taskManager.reNameToIDTask(idTask, textName);
 
         System.out.println(ConsoleNotification.RENAME);
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
         System.out.println(ConsoleUtils.getTaskString(task));
     }
+
     public void  reDescID() {
         Integer idTask = myCommand.getID();
         if(idTask == null){
@@ -300,9 +259,6 @@ public class ConsoleView {
         }
         myCommand.input("Введите новое описание Задачи: ");
         String textDescription= myCommand.getCommand();
-
-      //  System.out.print("Input NewDescription Task: ");
-       // String textName = in.nextLine();
         Task task = taskManager.reDescToIDTask(idTask, textDescription);
         System.out.println(ConsoleNotification.REDESC);
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
@@ -340,7 +296,6 @@ public class ConsoleView {
             }
             default -> {
                 System.out.println("[" +status +"] " + ConsoleNotification.STATUS_INCORRECTLY);
-
             }
         }
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
