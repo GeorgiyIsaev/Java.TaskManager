@@ -1,5 +1,4 @@
-package com;
-import com.consoleView.ConsoleView;
+package com.consoleView;
 import com.controller.Managers;
 import com.controller.IManagerTask;
 import com.controller.ManagerFile;

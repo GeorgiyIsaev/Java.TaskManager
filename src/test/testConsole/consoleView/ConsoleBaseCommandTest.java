@@ -1,6 +1,6 @@
 package consoleView;
 
-import com.Main;
+import com.consoleView.Main;
 import com.consoleView.ConsoleNotification;
 import com.consoleView.ConsoleUtils;
 import com.consoleView.ConsoleView;
