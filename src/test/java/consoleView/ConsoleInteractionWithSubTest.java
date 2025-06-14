@@ -323,7 +323,7 @@ public class ConsoleInteractionWithSubTest {
     }
 
     @Test
-    void deleteIdEpicContainsSubTest() {
+    void deleteEpicByIDContainsSubTest() {
         IManagerTask managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
