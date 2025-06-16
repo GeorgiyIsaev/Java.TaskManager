@@ -10,7 +10,7 @@ public class TaskTest {
 
 
     @Test
-    public void CheckThatTheTaskReturnsTheCorrectType(){
+    public void checkThatTheTaskReturnsTheCorrectType(){
         Task task = new Task("", "");
         String typeTasK = task.getTypeTask();
         String typeTasKShouldBy = TypeTask.TASK_NAME;
@@ -18,27 +18,27 @@ public class TaskTest {
     }
 
     @Test
-    public void TheIDOfNewTaskMustBeOneMoreThanPreviousOne(){
+    public void idOfNewTaskMustBeOneMoreThanPreviousOne(){
         Task task1 = new Task("", "");
         Task task2 = new Task("", "");
         Assertions.assertEquals(task1.getID() +1 , task2.getID());
     }
 
     @Test
-    public void  TheReturnedTaskNameShouldMatchTheOnePassedToConstructor(){
+    public void  returnedTaskNameShouldMatchTheOnePassedToConstructor(){
         String nameTask = "Имя тестовой задачи";
         Task task = new Task(nameTask, "");
         Assertions.assertEquals(nameTask, task.getName());
     }
     @Test
-    public void  TheReturnedTaskDescriptionShouldMatchTheOnePassedToConstructor(){
+    public void  returnedTaskDescriptionShouldMatchTheOnePassedToConstructor(){
         String description = "Описание тестовой задачи";
         Task task = new Task("", description);
         Assertions.assertEquals(description, task.getDescription());
     }
 
     @Test
-    public void TaskShouldNotHaveAnyConnections(){
+    public void taskShouldNotHaveAnyConnections(){
         Task task = new Task("", "");
         String infoConnections = TypeTask.NO_REFERENCE;
         Assertions.assertEquals(infoConnections, task.getLinkStr());
@@ -46,20 +46,20 @@ public class TaskTest {
 
 
     @Test
-    public void TaskStatusShouldBeSetToNewWhenCreated(){
+    public void taskStatusShouldBeSetToNewWhenCreated(){
         Task task = new Task("", "");
         Assertions.assertEquals(TaskStatus.NEW, task.getStatus());
     }
 
 
     @Test
-    public void TaskShouldChangeItsStatusToDONE(){
+    public void taskShouldChangeItsStatusToDONE(){
         Task task = new Task("", "");
         task.setStatus(TaskStatus.DONE);
         Assertions.assertEquals(TaskStatus.DONE, task.getStatus());
     }
     @Test
-    public void TaskShouldChangeItsStatusToPROGRESS(){
+    public void taskShouldChangeItsStatusToPROGRESS(){
         Task task = new Task("", "");
         task.setStatus(TaskStatus.IN_PROGRESS);
         Assertions.assertEquals(TaskStatus.IN_PROGRESS, task.getStatus());
@@ -75,7 +75,7 @@ public class TaskTest {
     }
 
     @Test
-    public void TaskShouldChangeTheDescription(){
+    public void taskShouldChangeTheDescription(){
         Task task = new Task("", "");
         String newDescription = "Новое описание задачи";
         task.setDescription(newDescription);
@@ -83,7 +83,7 @@ public class TaskTest {
     }
 
     @Test
-    public void TaskShouldReturnStringDescription(){
+    public void taskShouldReturnStringDescription(){
         String name = "Имя";
         String description = "Описание";
         Task task = new Task(name, description);
@@ -92,7 +92,7 @@ public class TaskTest {
     }
 
     @Test
-    public void SearchingForAnIdInTaskShouldConfirmThatTaskHasThatId(){
+    public void searchingForAnIdInTaskShouldConfirmThatTaskHasThatId(){
         Task task = new Task("", "");
         int id = task.getID();
         boolean isFind = task.findID(id);
@@ -100,7 +100,7 @@ public class TaskTest {
     }
 
     @Test
-    public void SearchingForAnIdInTaskShouldNOTConfirmThatTaskHasThatId(){
+    public void searchingForAnIdInTaskShouldNOTConfirmThatTaskHasThatId(){
         Task task = new Task("", "");
         int id = task.getID() + 1;
         boolean isFind = task.findID(id);

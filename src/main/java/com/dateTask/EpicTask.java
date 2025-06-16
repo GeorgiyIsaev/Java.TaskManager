@@ -19,7 +19,13 @@ public class EpicTask extends Task {
 //
 //    }
 
+    public void replacementSameID(SubTask sub){
+        if(!findID(sub.getID())) return;
+        deleteSubTask(sub);
+    }
+
     public void addSubTask(SubTask sub){
+        replacementSameID(sub);
         subTasks.add(sub);
     }
     public void deleteSubTask(SubTask subTask){

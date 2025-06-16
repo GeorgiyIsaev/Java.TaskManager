@@ -40,7 +40,8 @@ public class EpicTaskTest {
     }
 
     @Test
-    public void EpicShouldNotHaveAnyConnections(){
+
+    public void EpicShouldPointToEmptyConnections(){
         Task task = new EpicTask("", "");
         String infoConnections = "[]"; // список Sub пуст
         Assertions.assertEquals(infoConnections, task.getLinkStr(), task.getLinkStr());
@@ -55,7 +56,7 @@ public class EpicTaskTest {
 
 
     @Test
-    public void EpicShouldCNOThangeItsStatusToDONE(){
+    public void EpicShouldCNOTChangeItsStatusToDONE(){
         Task task = new EpicTask("", "");
         TaskStatus statusOld = task.getStatus();
         task.setStatus(TaskStatus.DONE);

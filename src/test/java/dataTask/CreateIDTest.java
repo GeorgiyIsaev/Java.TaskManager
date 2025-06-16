@@ -8,7 +8,7 @@ public class CreateIDTest {
 
 
     @Test
-    public void CurrentOneShouldBeEqualToTheNewID(){
+    public void currentOneShouldBeEqualToTheNewID(){
         int currentId = CreateID.INSTANCE.getCurrentID();
         int newId = CreateID.INSTANCE.createID();
         Assertions.assertEquals(newId, currentId);
@@ -16,7 +16,7 @@ public class CreateIDTest {
 
 
     @Test
-    public void NewIDShouldBeOneGreaterThanCurrentID(){
+    public void newIDShouldBeOneGreaterThanCurrentID(){
         int newId = CreateID.INSTANCE.createID();
         int currentId = CreateID.INSTANCE.getCurrentID();
         Assertions.assertEquals(currentId, newId + 1);
@@ -24,7 +24,7 @@ public class CreateIDTest {
 
 
     @Test
-    public void AfterReplacingIDCurrentIDAndCreateIDShouldBeOnMore(){
+    public void afterReplacingIDCurrentIDAndCreateIDShouldBeOnMore(){
         int startID = 1000;
         CreateID.INSTANCE.setId(startID);
         int currentId = CreateID.INSTANCE.getCurrentID();
@@ -36,7 +36,7 @@ public class CreateIDTest {
 
 
     @Test
-    public void ReplacingItWithSmallerIDShouldNotDecreaseIt(){
+    public void replacingItWithSmallerIDShouldNotDecreaseIt(){
         int startID = 500;
         int startIDmin = 300;
         CreateID.INSTANCE.setId(startID);

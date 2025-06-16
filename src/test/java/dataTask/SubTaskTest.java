@@ -16,7 +16,7 @@ public class SubTaskTest {
 
 
     @Test
-    public void CheckThatTheSubReturnsTheCorrectType(){
+    public void checkThatTheSubReturnsTheCorrectType(){
         Task task = new SubTask("", "", epic);
         String typeTasK = task.getTypeTask();
         String typeTasKShouldBy = TypeTask.SUB_NAME;
@@ -24,20 +24,20 @@ public class SubTaskTest {
     }
 
     @Test
-    public void TheIDOfNewSubMustBeOneMoreThanPreviousOne(){
+    public void idOfNewSubMustBeOneMoreThanPreviousOne(){
         Task task1 = new SubTask("", "", epic);
         Task task2 = new SubTask("", "", epic);
         Assertions.assertEquals(task1.getID() +1 , task2.getID());
     }
 
     @Test
-    public void  TheReturnedSubNameShouldMatchTheOnePassedToConstructor(){
+    public void  returnedSubNameShouldMatchTheOnePassedToConstructor(){
         String nameTask = "Имя тестовой задачи";
         Task task = new SubTask(nameTask, "", epic);
         Assertions.assertEquals(nameTask, task.getName());
     }
     @Test
-    public void  TheReturnedSubDescriptionShouldMatchTheOnePassedToConstructor(){
+    public void  returnedSubDescriptionShouldMatchTheOnePassedToConstructor(){
         String description = "Описание тестовой задачи";
         Task task = new SubTask("", description, epic);
         Assertions.assertEquals(description, task.getDescription());
@@ -52,20 +52,20 @@ public class SubTaskTest {
 
 
     @Test
-    public void SubStatusShouldBeSetToNewWhenCreated(){
+    public void subStatusShouldBeSetToNewWhenCreated(){
         Task task = new SubTask("", "", epic);
         Assertions.assertEquals(TaskStatus.NEW, task.getStatus());
     }
 
 
     @Test
-    public void SubShouldChangeItsStatusToDONE(){
+    public void subShouldChangeItsStatusToDONE(){
         Task task = new SubTask("", "", epic);
         task.setStatus(TaskStatus.DONE);
         Assertions.assertEquals(TaskStatus.DONE, task.getStatus());
     }
     @Test
-    public void SubShouldChangeItsStatusToPROGRESS(){
+    public void subShouldChangeItsStatusToPROGRESS(){
         Task task = new SubTask("", "", epic);;
         task.setStatus(TaskStatus.IN_PROGRESS);
         Assertions.assertEquals(TaskStatus.IN_PROGRESS, task.getStatus());
@@ -81,7 +81,7 @@ public class SubTaskTest {
     }
 
     @Test
-    public void SubShouldChangeTheDescription(){
+    public void subShouldChangeTheDescription(){
         Task task = new SubTask("", "", epic);;
         String newDescription = "Новое описание задачи";
         task.setDescription(newDescription);
@@ -89,7 +89,7 @@ public class SubTaskTest {
     }
 
     @Test
-    public void SubShouldReturnStringDescription(){
+    public void subShouldReturnStringDescription(){
         String name = "Имя";
         String description = "Описание";
         Task task = new SubTask(name, description, epic);;
@@ -98,7 +98,7 @@ public class SubTaskTest {
     }
 
     @Test
-    public void SearchingForAnIdInSubShouldConfirmThatTaskHasThatId(){
+    public void searchingForAnIdInSubShouldConfirmThatTaskHasThatId(){
         Task task = new SubTask("", "", epic);;
         int id = task.getID();
         boolean isFind = task.findID(id);
@@ -106,7 +106,7 @@ public class SubTaskTest {
     }
 
     @Test
-    public void SearchingForAnIdInSubShouldNOTConfirmThatTaskHasThatId(){
+    public void searchingForAnIdInSubShouldNOTConfirmThatTaskHasThatId(){
         Task task = new SubTask("", "", epic);;
         int id = task.getID() + 1;
         boolean isFind = task.findID(id);
@@ -115,7 +115,7 @@ public class SubTaskTest {
 
 
     @Test
-    public void TheLinkToEpicShouldBeVerified(){
+    public void theLinkToEpicShouldBeVerified(){
         SubTask task = new SubTask("", "", epic);
         EpicTask epicTaskRef = task.getRefrains();
         Assertions.assertEquals(epic, epicTaskRef);
