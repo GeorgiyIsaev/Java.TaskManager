@@ -34,15 +34,15 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
     /// /// /// /// ДОБАВЛЕНИЕ
     @Override
     public Task addTask(String name, String description){
-        int currentID = CreateID.INSTANCE.createID();
-        tasks.put(currentID, new Task(currentID, name, description));
-        return tasks.get(currentID);
+        Task task = new Task(name, description);
+        tasks.put(task.getID(), task);
+        return tasks.get(task.getID());
     }
     @Override
     public Task addEpic(String name, String description){
-        int currentID = CreateID.INSTANCE.createID();
-        tasks.put(currentID, new EpicTask(currentID, name, description));
-        return tasks.get(currentID);
+        Task task = new EpicTask(name, description);
+        tasks.put(task.getID(), task);
+        return tasks.get(task.getID());
     }
     @Override
     public Task addSubTaskToEpicID(int idEpic, String name, String description) {
@@ -55,7 +55,7 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         int currentID = CreateID.INSTANCE.createID();
         EpicTask epic = (EpicTask)tasks.get(idEpic);
 
-        SubTask subTask = new SubTask(currentID, name, description, epic);
+        SubTask subTask = new SubTask(name, description, epic);
         epic.addSubTask(subTask);
         tasks.put(currentID, subTask);
         return subTask;

@@ -10,12 +10,19 @@ public class Task implements Serializable {
     protected String name;
     protected String description;
     protected TaskStatus status;
-    public Task(int id,  String name, String description) {
-        this.id = id;
+    public Task(String name, String description) {
+        this.id = CreateID.INSTANCE.createID();
         this.name = name;
         this.description = description;
         this.status = TaskStatus.NEW;
     }
+
+//    private Task(int id,  String name, String description) {
+//        this.id = id;
+//        this.name = name;
+//        this.description = description;
+//        this.status = TaskStatus.NEW;
+//    }
 
     public void setStatus(TaskStatus status) {
         this.status = status;

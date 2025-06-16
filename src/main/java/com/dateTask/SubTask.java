@@ -6,10 +6,15 @@ public class SubTask extends Task{
     public EpicTask getRefrains() {
         return refrains;
     }
-    public SubTask(Integer id, String name, String description, EpicTask refrains) {
-        super(id,name,description);
+
+    public SubTask(String name, String description, EpicTask refrains) {
+        super(name,description);
         this.refrains = refrains;
     }
+//    public SubTask(Integer id, String name, String description, EpicTask refrains) {
+//        super(id,name,description);
+//        this.refrains = refrains;
+//    }
     @Override
     public void setStatus(TaskStatus status) {
        this.status = status;

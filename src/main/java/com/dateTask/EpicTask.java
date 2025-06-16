@@ -8,12 +8,16 @@ public class EpicTask extends Task {
     public ArrayList<SubTask> getSubTasks() {
         return subTasks;
     }
-
-    public EpicTask(Integer id, String name, String description){
-       super(id, name, description);
+    public EpicTask( String name, String description){
+        super(name, description);
         subTasks = new ArrayList<>();
 
     }
+//    public EpicTask(Integer id, String name, String description){
+//       super(id, name, description);
+//        subTasks = new ArrayList<>();
+//
+//    }
 
     public void addSubTask(SubTask sub){
         subTasks.add(sub);
