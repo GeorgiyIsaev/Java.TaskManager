@@ -98,28 +98,28 @@ public class ManagerTaskInMemoryTest {
 
     @Test
     public void taskShouldPerformDescriptionChange() {
-        String newDescription = "Новое имя";
+        String newDescription = "Новое Описание";
         IManagerTask taskManager = Managers.getDefault();
         Task createTask = taskManager.addTask("","");
-        taskManager.reNameToIDTask(createTask.getID(), newDescription);
-        Assertions.assertEquals(newDescription, createTask.getName());
+        taskManager.reDescToIDTask(createTask.getID(), newDescription);
+        Assertions.assertEquals(newDescription, createTask.getDescription());
     }
     @Test
     public void epicShouldPerformDescriptionChange() {
-        String newDescription = "Новое имя";
+        String newDescription = "Новое Описание";
         IManagerTask taskManager = Managers.getDefault();
         Task createEpic = taskManager.addEpic("","");
-        taskManager.reNameToIDTask(createEpic.getID(), newDescription);
-        Assertions.assertEquals(newDescription, createEpic.getName());
+        taskManager.reDescToIDTask(createEpic.getID(), newDescription);
+        Assertions.assertEquals(newDescription, createEpic.getDescription());
     }
     @Test
     public void subShouldPerformDescriptionChange() {
-        String newDescription= "Новое имя";
+        String newDescription= "Новое Описание";
         IManagerTask taskManager = Managers.getDefault();
         Task createEpic = taskManager.addEpic("","");
         Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
-        taskManager.reNameToIDTask(createSub.getID(), newDescription);
-        Assertions.assertEquals(newDescription, createSub.getName());
+        taskManager.reDescToIDTask(createSub.getID(), newDescription);
+        Assertions.assertEquals(newDescription, createSub.getDescription());
     }
 
     //Изменение Статуса
@@ -142,6 +142,13 @@ public class ManagerTaskInMemoryTest {
         IManagerTask taskManager = Managers.getDefault();
         Task createTask = taskManager.addTask("","");
         taskManager.reStatus(createTask.getID(), TaskStatus.IN_PROGRESS);
+        taskManager.reStatus(createTask.getID(), TaskStatus.NEW);
+        Assertions.assertEquals(TaskStatus.NEW, createTask.getStatus());
+    }
+    @Test
+    public void taskShouldPerformStatusNEWtoNEWChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createTask = taskManager.addTask("","");
         taskManager.reStatus(createTask.getID(), TaskStatus.NEW);
         Assertions.assertEquals(TaskStatus.NEW, createTask.getStatus());
     }
