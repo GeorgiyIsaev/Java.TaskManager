@@ -52,12 +52,10 @@ public class ManagerTaskInMemory implements Serializable, IManagerTask {
         if(!isEpic(idEpic)){
             throw new NotEpicException(idEpic);
         }
-        int currentID = CreateID.INSTANCE.createID();
         EpicTask epic = (EpicTask)tasks.get(idEpic);
-
         SubTask subTask = new SubTask(name, description, epic);
         epic.addSubTask(subTask);
-        tasks.put(currentID, subTask);
+        tasks.put(subTask.getID(), subTask);
         return subTask;
     }
 
