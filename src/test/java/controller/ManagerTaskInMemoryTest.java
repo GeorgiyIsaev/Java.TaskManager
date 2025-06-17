@@ -204,5 +204,63 @@ public class ManagerTaskInMemoryTest {
         Assertions.assertEquals(TaskStatus.NEW, createSub.getStatus());
     }
 
+    /// Удаление по ID
+    @Test
+    public void deleteByIDShouldRemoveTaskFromCollection() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createTask = taskManager.addTask("","");
+        Assertions.assertNotNull(taskManager.getTask(createTask.getID()));
+
+        taskManager.deleteIDTask(createTask.getID());
+        int emptyCollectionSize = 0;
+        Assertions.assertEquals(emptyCollectionSize, taskManager.getTasks().size());
+    }
+    @Test
+    public void deleteByIDShouldRemoveEpicFromCollection() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Assertions.assertNotNull(taskManager.getTask(createEpic.getID()));
+
+        taskManager.deleteIDTask(createEpic.getID());
+        int emptyCollectionSize = 0;
+        Assertions.assertEquals(emptyCollectionSize, taskManager.getTasks().size());
+    }
+    @Test
+    public void deleteByIDShouldRemoveSubFromCollection() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
+        Assertions.assertNotNull(taskManager.getTask(createSub.getID()));
+
+        taskManager.deleteIDTask(createSub.getID());
+        int epicIntoCollectionSize = 1;
+        Assertions.assertEquals(epicIntoCollectionSize, taskManager.getTasks().size());
+    }
+    @Test
+    public void deleteByIDShouldRemoveEpicAndRelatedSubFromCollection() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
+        Assertions.assertNotNull(taskManager.getTask(createSub.getID()));
+
+        taskManager.deleteIDTask(createEpic.getID());
+        int emptyCollectionSize = 0;
+        Assertions.assertEquals(emptyCollectionSize, taskManager.getTasks().size());
+    }
+
+    ///Очистка всей коллекции
+    @Test
+    public void deleteALlDShouldRemoveAllFromCollection() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("Epic","");
+        Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"Sub","");
+        Task createTask = taskManager.addTask("Task","");
+        Assertions.assertNotNull(taskManager.getTask(createSub.getID()));
+        Assertions.assertNotNull(taskManager.getTask(createTask.getID()));
+
+        taskManager.deleteALL();
+        int emptyCollectionSize = 0;
+        Assertions.assertEquals(emptyCollectionSize, taskManager.getTasks().size());
+    }
 
 }
