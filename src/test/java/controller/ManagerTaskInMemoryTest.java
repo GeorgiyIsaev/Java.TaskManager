@@ -2,10 +2,14 @@ package controller;
 
 import com.controller.IManagerTask;
 import com.controller.Managers;
+import com.controller.controlException.NotChangedEpicStatusException;
 import com.dateTask.Task;
+import com.dateTask.TaskStatus;
 import com.dateTask.TypeTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Objects;
 
 public class ManagerTaskInMemoryTest {
 
@@ -117,5 +121,88 @@ public class ManagerTaskInMemoryTest {
         taskManager.reNameToIDTask(createSub.getID(), newDescription);
         Assertions.assertEquals(newDescription, createSub.getName());
     }
+
+    //Изменение Статуса
+    @Test
+    public void taskShouldPerformStatusPROGChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createTask = taskManager.addTask("","");
+        taskManager.reStatus(createTask.getID(), TaskStatus.IN_PROGRESS);
+        Assertions.assertEquals(TaskStatus.IN_PROGRESS, createTask.getStatus());
+    }
+    @Test
+    public void taskShouldPerformStatusDONEChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createTask = taskManager.addTask("","");
+        taskManager.reStatus(createTask.getID(), TaskStatus.DONE);
+        Assertions.assertEquals(TaskStatus.DONE, createTask.getStatus());
+    }
+    @Test
+    public void taskShouldPerformStatusNEWChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createTask = taskManager.addTask("","");
+        taskManager.reStatus(createTask.getID(), TaskStatus.IN_PROGRESS);
+        taskManager.reStatus(createTask.getID(), TaskStatus.NEW);
+        Assertions.assertEquals(TaskStatus.NEW, createTask.getStatus());
+    }
+
+    @Test
+    public void epicShouldNOTPerformStatusPROGChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Assertions.assertThrows(NotChangedEpicStatusException.class, ()->{
+            taskManager.reStatus(createEpic.getID(), TaskStatus.IN_PROGRESS);
+        });
+        Assertions.assertEquals(TaskStatus.NEW, createEpic.getStatus());
+    }
+    @Test
+    public void epicShouldNOTPerformStatusDONEChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Assertions.assertThrows(NotChangedEpicStatusException.class, ()->{
+            taskManager.reStatus(createEpic.getID(), TaskStatus.DONE);
+        });
+        Assertions.assertEquals(TaskStatus.NEW, createEpic.getStatus());
+    }
+    @Test
+    public void epicShouldNOTPerformStatusNEWChange() {
+
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Assertions.assertThrows(NotChangedEpicStatusException.class, ()->{
+            taskManager.reStatus(createEpic.getID(), TaskStatus.IN_PROGRESS);
+        });
+        Assertions.assertThrows(NotChangedEpicStatusException.class, ()->{
+            taskManager.reStatus(createEpic.getID(), TaskStatus.NEW);
+        });
+        Assertions.assertEquals(TaskStatus.NEW, createEpic.getStatus());
+    }
+
+    @Test
+    public void subShouldPerformStatusPROGChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
+        taskManager.reStatus(createSub.getID(), TaskStatus.IN_PROGRESS);
+        Assertions.assertEquals(TaskStatus.IN_PROGRESS, createSub.getStatus());
+    }
+    @Test
+    public void subShouldPerformStatusDONEChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
+        taskManager.reStatus(createSub.getID(), TaskStatus.DONE);
+        Assertions.assertEquals(TaskStatus.DONE, createSub.getStatus());
+    }
+    @Test
+    public void subShouldPerformStatusNEWChange() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("","");
+        Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
+        taskManager.reStatus(createSub.getID(), TaskStatus.IN_PROGRESS);
+        taskManager.reStatus(createSub.getID(), TaskStatus.NEW);
+        Assertions.assertEquals(TaskStatus.NEW, createSub.getStatus());
+    }
+
 
 }
