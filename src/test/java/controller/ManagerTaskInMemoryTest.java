@@ -3,12 +3,15 @@ package controller;
 import com.controller.IManagerTask;
 import com.controller.Managers;
 import com.controller.controlException.NotChangedEpicStatusException;
+import com.controller.controlException.NotExistIdException;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
 import com.dateTask.TypeTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ManagerTaskInMemoryTest {
@@ -266,6 +269,38 @@ public class ManagerTaskInMemoryTest {
         Assertions.assertNotNull(taskManager.getTask(createTask.getID()));
 
         taskManager.deleteALL();
+        int emptyCollectionSize = 0;
+        Assertions.assertEquals(emptyCollectionSize, taskManager.getTasks().size());
+    }
+
+    /// Замена Коллекции
+    @Test
+    public void replacementOfTaskCollectionToAnotherShouldBeSuccessful() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("Epic","");
+        Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"Sub","");
+        Task createTask = taskManager.addTask("Task","");
+        Assertions.assertNotNull(taskManager.getTask(createSub.getID()));
+        Assertions.assertNotNull(taskManager.getTask(createTask.getID()));
+
+        Map<Integer, Task> tasks = new HashMap<>();
+        Task taskToReplace = new Task("","");
+        tasks.put(taskToReplace.getID(),taskToReplace);
+        taskManager.replacementTasks(tasks);
+        Assertions.assertEquals(taskToReplace, taskManager.getTask(taskToReplace.getID()));
+    }
+
+    @Test
+    public void replacementOfTaskCollectionToEmptyShouldBeSuccessful() {
+        IManagerTask taskManager = Managers.getDefault();
+        Task createEpic = taskManager.addEpic("Epic","");
+        Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"Sub","");
+        Task createTask = taskManager.addTask("Task","");
+        Assertions.assertNotNull(taskManager.getTask(createSub.getID()));
+        Assertions.assertNotNull(taskManager.getTask(createTask.getID()));
+
+        Map<Integer, Task> tasks = new HashMap<>();
+        taskManager.replacementTasks(tasks);
         int emptyCollectionSize = 0;
         Assertions.assertEquals(emptyCollectionSize, taskManager.getTasks().size());
     }
