@@ -24,9 +24,9 @@ public class ManagerTaskInMemoryExceptionTest {
     @Test
     public void subShouldNotBeAddedToNonEpic() {
         IManagerTask taskManager = Managers.getDefault();
-        Task createEpic = taskManager.addTask("","");
+        Task createTask= taskManager.addTask("","");
         Assertions.assertThrows(NotEpicException.class, ()->{
-            Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
+            Task createSub = taskManager.addSubTaskToEpicID(createTask.getID(),"","");
         });
     }
 
