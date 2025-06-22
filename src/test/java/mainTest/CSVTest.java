@@ -12,7 +12,7 @@ public class CSVTest {
 
     public static void main(String[] args) {
 
-        TaskManager managerTaskInMemoryMap = Managers.getDefault();
+        TaskManager managerTaskInMemoryMap = Managers.getFileBacked();
         ConsoleView consoleView = new ConsoleView(managerTaskInMemoryMap);
 
         createTask(managerTaskInMemoryMap);
