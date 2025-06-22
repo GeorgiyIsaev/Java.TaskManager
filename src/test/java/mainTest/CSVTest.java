@@ -18,10 +18,19 @@ public class CSVTest {
         createTask(managerTaskInMemoryMap);
         System.out.println(" Вывод Задач на консоль");
         consoleView.printTask();
+
+        System.out.println("Сохранение");
         FileBackedCSV fileBackedCSV = new FileBackedCSV("MyCSV.csv");
         fileBackedCSV.save(managerTaskInMemoryMap);
-        System.out.println(" Сохранение");
-        System.out.println(" Сохранение завершено");
+        System.out.println("Сохранение завершено");
+
+        System.out.println("Очистка");
+        managerTaskInMemoryMap.deleteALL();
+        consoleView.printTask();
+
+        System.out.println("Загрузка");
+        fileBackedCSV.load(managerTaskInMemoryMap);
+        consoleView.printTask();
     }
     public static void createTask(TaskManager managerTaskInMemory) {
         managerTaskInMemory.addTask("Первая задача", "Описание простой задачи");

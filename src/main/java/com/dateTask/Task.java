@@ -18,12 +18,13 @@ public class Task implements Serializable {
         taskType = TaskType.TASK;
     }
 
-//    private Task(int id,  String name, String description) {
-//        this.id = id;
-//        this.name = name;
-//        this.description = description;
-//        this.status = TaskStatus.NEW;
-//    }
+    public Task(int id,  String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = TaskStatus.NEW;
+        taskType = TaskType.TASK;
+    }
 
     public void setStatus(TaskStatus status) {
         this.status = status;

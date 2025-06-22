@@ -13,11 +13,11 @@ public class EpicTask extends Task {
         this.subTasks = new ArrayList<>();
         this.setTypeTask(TaskType.EPIC);
     }
-//    public EpicTask(Integer id, String name, String description){
-//       super(id, name, description);
-//        subTasks = new ArrayList<>();
-//
-//    }
+    public EpicTask(Integer id, String name, String description){
+        super(id, name, description);
+        subTasks = new ArrayList<>();
+        this.setTypeTask(TaskType.EPIC);
+    }
 
     public void replacementSameID(SubTask sub){
         if(!findID(sub.getID())) return;

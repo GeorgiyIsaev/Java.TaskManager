@@ -12,10 +12,11 @@ public class SubTask extends Task{
         this.refrains = refrains;
         this.setTypeTask(TaskType.SUBTASK);
     }
-//    public SubTask(Integer id, String name, String description, EpicTask refrains) {
-//        super(id,name,description);
-//        this.refrains = refrains;
-//    }
+    public SubTask(Integer id, String name, String description, EpicTask refrains) {
+        super(id,name,description);
+        this.refrains = refrains;
+        this.setTypeTask(TaskType.SUBTASK);
+    }
     @Override
     public void setStatus(TaskStatus status) {
        super.setStatus(status);

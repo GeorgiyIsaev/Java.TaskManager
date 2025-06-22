@@ -12,6 +12,11 @@ public interface TaskManager {
     public Task addEpic(String name, String description);
     public Task addSubTaskToEpicID(int idEpic, String name, String description);
 
+    public Task addTaskByID(int id, String name, String description);
+    public Task addEpicByID(int id,String name, String description);
+    public Task addSubTaskToEpicIDByID(int idSub, int idEpicAdded, String name, String description);
+
+
     public void deleteALL();
     public Task deleteIDTask(int idTask);
 

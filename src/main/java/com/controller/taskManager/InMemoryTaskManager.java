@@ -61,6 +61,34 @@ public class InMemoryTaskManager implements Serializable, TaskManager {
         return subTask;
     }
 
+    /// /// /// /// ДОБАВЛЕНИЕ с ID
+    @Override
+    public Task addTaskByID(int id, String name, String description){
+        Task task = new Task(id, name, description);
+        tasks.put(task.getID(), task);
+        return tasks.get(task.getID());
+    }
+    @Override
+    public Task addEpicByID(int id, String name, String description){
+        Task task = new EpicTask(id, name, description);
+        tasks.put(task.getID(), task);
+        return tasks.get(task.getID());
+    }
+    @Override
+    public Task addSubTaskToEpicIDByID(int idSub, int idEpicAdded, String name, String description) {
+        if (!tasks.containsKey(idEpicAdded)){
+            throw new NotExistIdException(idEpicAdded);
+        }
+        if(!isEpic(idEpicAdded)){
+            throw new NotEpicException(idEpicAdded);
+        }
+        EpicTask epic = (EpicTask)tasks.get(idEpicAdded);
+        SubTask subTask = new SubTask(idSub, name, description, epic);
+        epic.addSubTask(subTask);
+        tasks.put(subTask.getID(), subTask);
+        return subTask;
+    }
+
 /// /// /// /// УДАЛЕНИЕ
     @Override
     public void deleteALL() {
