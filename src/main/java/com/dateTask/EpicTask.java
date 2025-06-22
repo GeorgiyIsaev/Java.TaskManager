@@ -43,17 +43,18 @@ public class EpicTask extends Task {
         int count = 0;
         for (SubTask sub : subTasks){
             if (sub.getStatus() == TaskStatus.IN_PROGRESS) {
-                super.setStatus(TaskStatus.IN_PROGRESS);
+                this.setStatus(TaskStatus.IN_PROGRESS);
+                return;
 
             }else if (sub.getStatus() == TaskStatus.DONE){
-                super.setStatus(TaskStatus.IN_PROGRESS);
+                this.setStatus(TaskStatus.IN_PROGRESS);
                 count++;
             }
         }
         if (count == subTasks.size()) {
-            super.setStatus(TaskStatus.DONE);
+            this.setStatus(TaskStatus.DONE);
         }
-        super.setStatus(TaskStatus.NEW);
+        this.setStatus(TaskStatus.NEW);
     }
 
     public boolean findID(int idSubTask){

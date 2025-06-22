@@ -36,7 +36,7 @@ public class ManagerTaskInMemoryTest {
     public void taskEpicShouldReallyTask() {
         TaskManager taskManager = Managers.getDefault();
         Task createTask = taskManager.addTask("","");
-        Assertions.assertEquals(TaskType.TASK, createTask.getTypeTask());
+        Assertions.assertEquals(TaskType.TASK.name(), createTask.getTypeTask());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ManagerTaskInMemoryTest {
     public void epicShouldReallyBeEpic() {
         TaskManager taskManager = Managers.getDefault();
         Task createEpic = taskManager.addEpic("","");
-        Assertions.assertEquals(TaskType.EPIC, createEpic.getTypeTask());
+        Assertions.assertEquals(TaskType.EPIC.name(), createEpic.getTypeTask());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ManagerTaskInMemoryTest {
         TaskManager taskManager = Managers.getDefault();
         Task createEpic = taskManager.addEpic("","");
         Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
-        Assertions.assertEquals(TaskType.SUBTASK, createSub.getTypeTask());
+        Assertions.assertEquals(TaskType.SUBTASK.name(), createSub.getTypeTask());
     }
 
     /// Изменения Имени и описания
