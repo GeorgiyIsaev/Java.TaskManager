@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.controller.controlException.ManagerFileException;
+import com.controller.controlException.NotExistIdException;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.*;
 
@@ -88,6 +89,7 @@ public class FileBackedCSV {
             String description = clearWrapper(elements[4]);
             Task task = taskManager.addTaskByID(id, name,description);
             task.setStatus(TaskStatus.toTaskStatus(elements[1]));
+            CreateID.INSTANCE.setId(id);
         }
         if(elements[1].equals(TaskType.SUBTASK.name())){
             int id = toInt(elements[0]);
@@ -96,6 +98,7 @@ public class FileBackedCSV {
             int idEpicAdded = toInt(elements[5]);
             Task task = taskManager.addSubTaskToEpicIDByID(id,idEpicAdded, name,description);
             task.setStatus(TaskStatus.toTaskStatus(elements[1]));
+            CreateID.INSTANCE.setId(id);
         }
         if(elements[1].equals(TaskType.EPIC.name())){
             int id = toInt(elements[0]);
@@ -103,6 +106,7 @@ public class FileBackedCSV {
             String description = clearWrapper(elements[4]);
             Task task = taskManager.addEpicByID(id,name,description);
             task.setStatus(TaskStatus.toTaskStatus(elements[1]));
+            CreateID.INSTANCE.setId(id);
         }
     }
     public void load(TaskManager taskManager) {
@@ -117,7 +121,7 @@ public class FileBackedCSV {
                 parseLineAndAddTaskToManager(taskManager, lineSCV);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new ManagerFileException(e);
         }
     }
 }
