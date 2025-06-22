@@ -10,6 +10,7 @@ public class SubTask extends Task{
     public SubTask(String name, String description, EpicTask refrains) {
         super(name,description);
         this.refrains = refrains;
+        this.setTypeTask(TaskType.SUBTASK);
     }
 //    public SubTask(Integer id, String name, String description, EpicTask refrains) {
 //        super(id,name,description);
@@ -17,16 +18,8 @@ public class SubTask extends Task{
 //    }
     @Override
     public void setStatus(TaskStatus status) {
-       this.status = status;
+       super.setStatus(status);
        refrains.updateTaskStatus();
-    }
-
-
-
-
-    @Override
-    public String getTypeTask(){
-        return TypeTask.SUB_NAME;
     }
     @Override
     public String getLinkStr(){

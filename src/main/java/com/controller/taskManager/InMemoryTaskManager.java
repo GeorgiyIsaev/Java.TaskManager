@@ -75,14 +75,14 @@ public class InMemoryTaskManager implements Serializable, TaskManager {
         }
         Task task = tasks.get(idTask);
 
-        if(task.getTypeTask().equals(TypeTask.EPIC_NAME)){
+        if(task.getTypeTask().equals(TaskType.EPIC.name())){
             EpicTask epic = (EpicTask)task;
             for(SubTask subTask :  epic.getSubTasks()){
                 tasks.remove(subTask.getID());
                 history.remove(subTask.getID());
             }
         }
-        else if(task.getTypeTask().equals(TypeTask.SUB_NAME)){
+        else if(task.getTypeTask().equals(TaskType.SUBTASK.name())){
             SubTask sub = (SubTask)task;
             sub.getRefrains().deleteSubTask(sub);
         }
@@ -132,7 +132,7 @@ public class InMemoryTaskManager implements Serializable, TaskManager {
         if (!tasks.containsKey(idTask)){
             throw new NotExistIdException(idTask);
         }
-        return  tasks.get(idTask).getTypeTask().equalsIgnoreCase(TypeTask.EPIC_NAME);
+        return  tasks.get(idTask).getTypeTask().equalsIgnoreCase(TaskType.EPIC.name());
     }
 
     @Override

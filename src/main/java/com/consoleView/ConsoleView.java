@@ -1,6 +1,5 @@
 package com.consoleView;
 
-import com.controller.controlException.ControlException;
 import com.controller.taskManager.TaskManager;
 import com.controller.FileManager;
 
@@ -12,7 +11,7 @@ import java.util.Map;
 public class ConsoleView {
   //  private Scanner in;
     private TaskManager taskManager;
-    MyCommand myCommand;
+    private MyCommand myCommand;
     private boolean isExit;
 
     public MyCommand getMyCommand() {
@@ -40,7 +39,7 @@ public class ConsoleView {
 
 
     public void commandsSelection() {
-        try {
+
             String command = this.getMyCommand().baseCommand().toLowerCase();
             switch (command) {
 /// //// //// /// /// ОБЩЕЕ
@@ -59,14 +58,14 @@ public class ConsoleView {
                     printTask();
                 }
                 case ("printtask") -> {
-                    printTask(TypeTask.TASK_NAME);
+                    printTask(TaskType.TASK.name());
 
                 }
                 case ("printepic") -> {
-                    printTask(TypeTask.EPIC_NAME);
+                    printTask(TaskType.EPIC.name());
                 }
                 case ("printsubtask") -> {
-                    printTask(TypeTask.SUB_NAME);
+                    printTask(TaskType.SUBTASK.name());
                 }
                 case ("printid") -> {
                     printID(myCommand.getID());
@@ -106,9 +105,6 @@ public class ConsoleView {
                     System.out.println(ConsoleNotification.NOT_COMMAND + " [" + command + "]");
                 }
             }
-        } catch (ControlException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 
 
@@ -162,7 +158,7 @@ public class ConsoleView {
         consoleTable.append("\n");
         consoleTable.append(ConsoleUtils.getTaskString(task));
 
-        if (task.getTypeTask().equalsIgnoreCase(TypeTask.EPIC_NAME)) {
+        if (task.getTypeTask().equalsIgnoreCase(TaskType.EPIC.name())) {
             for (SubTask subTask : ((EpicTask) task).getSubTasks()) {
                 consoleTable.append("\n");
                 consoleTable.append(ConsoleUtils.getTaskString(subTask));

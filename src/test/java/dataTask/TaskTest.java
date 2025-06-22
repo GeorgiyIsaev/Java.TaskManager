@@ -2,6 +2,7 @@ package dataTask;
 
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
+import com.dateTask.TaskType;
 import com.dateTask.TypeTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ public class TaskTest {
     public void checkThatTheTaskReturnsTheCorrectType(){
         Task task = new Task("", "");
         String typeTasK = task.getTypeTask();
-        String typeTasKShouldBy = TypeTask.TASK_NAME;
+        String typeTasKShouldBy = TaskType.TASK.name();
         Assertions.assertEquals(typeTasKShouldBy, typeTasK);
     }
 
@@ -40,7 +41,7 @@ public class TaskTest {
     @Test
     public void taskShouldNotHaveAnyConnections(){
         Task task = new Task("", "");
-        String infoConnections = TypeTask.NO_REFERENCE;
+        String infoConnections = Task.NO_REFERENCE;
         Assertions.assertEquals(infoConnections, task.getLinkStr());
     }
 

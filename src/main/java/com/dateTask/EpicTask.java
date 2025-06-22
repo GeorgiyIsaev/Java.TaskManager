@@ -10,8 +10,8 @@ public class EpicTask extends Task {
     }
     public EpicTask( String name, String description){
         super(name, description);
-        subTasks = new ArrayList<>();
-
+        this.subTasks = new ArrayList<>();
+        this.setTypeTask(TaskType.SUBTASK);
     }
 //    public EpicTask(Integer id, String name, String description){
 //       super(id, name, description);
@@ -37,22 +37,23 @@ public class EpicTask extends Task {
 
     @Override
     public void setStatus(TaskStatus status) {
+        //Изменений не происходит!
     }
     public void updateTaskStatus(){
-        status = TaskStatus.NEW;
         int count = 0;
         for (SubTask sub : subTasks){
             if (sub.getStatus() == TaskStatus.IN_PROGRESS) {
-                status = TaskStatus.IN_PROGRESS;
+                super.setStatus(TaskStatus.IN_PROGRESS);
 
             }else if (sub.getStatus() == TaskStatus.DONE){
-                status = TaskStatus.IN_PROGRESS;
+                super.setStatus(TaskStatus.IN_PROGRESS);
                 count++;
             }
         }
         if (count == subTasks.size()) {
-            status = TaskStatus.DONE;
+            super.setStatus(TaskStatus.DONE);
         }
+        super.setStatus(TaskStatus.NEW);
     }
 
     public boolean findID(int idSubTask){
@@ -66,13 +67,6 @@ public class EpicTask extends Task {
             }
         }
         return false;
-    }
-
-
-
-    @Override
-    public String getTypeTask(){
-        return TypeTask.EPIC_NAME;
     }
 
     @Override

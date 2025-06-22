@@ -3,18 +3,19 @@ package com.dateTask;
 import java.io.Serializable;
 
 public class Task implements Serializable {
+    static public final String NO_REFERENCE = "-";
     private final int id;
-    public int getID(){
-        return id;
-    }
-    protected String name;
-    protected String description;
-    protected TaskStatus status;
+    private String name;
+    private String description;
+    private TaskStatus status;
+    private TaskType taskType;
+
     public Task(String name, String description) {
         this.id = CreateID.INSTANCE.createID();
         this.name = name;
         this.description = description;
         this.status = TaskStatus.NEW;
+        taskType = TaskType.TASK;
     }
 
 //    private Task(int id,  String name, String description) {
@@ -26,6 +27,10 @@ public class Task implements Serializable {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    public int getID(){
+        return id;
     }
 
     public String getName() {
@@ -48,20 +53,24 @@ public class Task implements Serializable {
         this.description = description;
     }
 
+    public String getTypeTask(){
+        return taskType.name();
+    }
+    protected void setTypeTask(TaskType taskType){
+        this.taskType = taskType;
+    }
 
     @Override
     public String toString() {
-        return name +
-                " {" + description + "}";
+        return getName() +
+                " {" + getDescription() + "}";
 
     }
     public boolean findID(int id){
         return this.id == id;
     }
-    public String getTypeTask(){
-        return TypeTask.TASK_NAME;
-    }
+
     public String getLinkStr(){
-        return TypeTask.NO_REFERENCE;
+        return NO_REFERENCE;
     }
 }
