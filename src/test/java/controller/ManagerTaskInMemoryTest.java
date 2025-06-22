@@ -5,7 +5,7 @@ import com.controller.Managers;
 import com.controller.controlException.NotChangedEpicStatusException;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
-import com.dateTask.TypeTask;
+import com.dateTask.TaskType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +36,7 @@ public class ManagerTaskInMemoryTest {
     public void taskEpicShouldReallyTask() {
         TaskManager taskManager = Managers.getDefault();
         Task createTask = taskManager.addTask("","");
-        Assertions.assertEquals(TypeTask.TASK_NAME, createTask.getTypeTask());
+        Assertions.assertEquals(TaskType.TASK, createTask.getTypeTask());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ManagerTaskInMemoryTest {
     public void epicShouldReallyBeEpic() {
         TaskManager taskManager = Managers.getDefault();
         Task createEpic = taskManager.addEpic("","");
-        Assertions.assertEquals(TypeTask.EPIC_NAME, createEpic.getTypeTask());
+        Assertions.assertEquals(TaskType.EPIC, createEpic.getTypeTask());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ManagerTaskInMemoryTest {
         TaskManager taskManager = Managers.getDefault();
         Task createEpic = taskManager.addEpic("","");
         Task createSub = taskManager.addSubTaskToEpicID(createEpic.getID(),"","");
-        Assertions.assertEquals(TypeTask.SUB_NAME, createSub.getTypeTask());
+        Assertions.assertEquals(TaskType.SUBTASK, createSub.getTypeTask());
     }
 
     /// Изменения Имени и описания

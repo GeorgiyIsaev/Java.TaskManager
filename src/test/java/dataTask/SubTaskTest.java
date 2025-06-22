@@ -19,7 +19,7 @@ public class SubTaskTest {
     public void checkThatTheSubReturnsTheCorrectType(){
         Task task = new SubTask("", "", epic);
         String typeTasK = task.getTypeTask();
-        String typeTasKShouldBy = TypeTask.SUB_NAME;
+        String typeTasKShouldBy = TaskType.SUBTASK.name();
         Assertions.assertEquals(typeTasKShouldBy, typeTasK);
     }
 

@@ -3,7 +3,7 @@ package dataTask;
 import com.dateTask.EpicTask;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
-import com.dateTask.TypeTask;
+import com.dateTask.TaskType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class EpicTaskTest {
     public void CheckThatEpicReturnsTheCorrectType(){
         Task task = new EpicTask("", "");
         String typeTasK = task.getTypeTask();
-        String typeTasKShouldBy = TypeTask.EPIC_NAME;
+        String typeTasKShouldBy = TaskType.EPIC.name();
         Assertions.assertEquals(typeTasKShouldBy, typeTasK);
     }
 

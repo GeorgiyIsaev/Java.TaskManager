@@ -1,4 +1,4 @@
-package old;
+package mainTest;
 
 
 import com.consoleView.ConsoleView;

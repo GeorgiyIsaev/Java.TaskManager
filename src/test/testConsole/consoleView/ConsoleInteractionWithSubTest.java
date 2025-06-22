@@ -9,7 +9,7 @@ import com.controller.controlException.NotExistIdException;
 import com.dateTask.CreateID;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
-import com.dateTask.TypeTask;
+import com.dateTask.TaskType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,7 +85,7 @@ public class ConsoleInteractionWithSubTest {
         Task lastTask = managerTask.getTask(idSub);
         Assertions.assertNotNull(lastTask);
         Assertions.assertEquals(newName, lastTask.getName());
-        Assertions.assertEquals(TypeTask.SUB_NAME, lastTask.getTypeTask());
+        Assertions.assertEquals(TaskType.SUBTASK.name(), lastTask.getTypeTask());
     }
 
     @Test
@@ -112,7 +112,7 @@ public class ConsoleInteractionWithSubTest {
         Task lastTask = managerTask.getTask(idSub);
         Assertions.assertNotNull(lastTask);
         Assertions.assertEquals(newDescription, lastTask.getDescription());
-        Assertions.assertEquals(TypeTask.SUB_NAME, lastTask.getTypeTask());
+        Assertions.assertEquals(TaskType.SUBTASK.name(), lastTask.getTypeTask());
     }
 
     @Test
@@ -137,7 +137,7 @@ public class ConsoleInteractionWithSubTest {
 
         Task lastTask = managerTask.getTask(idSub);
         Assertions.assertNotNull(lastTask); //Проверяем что Задача существует
-        Assertions.assertEquals(TypeTask.SUB_NAME, lastTask.getTypeTask(), consoleContent); //Проверяем что Задача действительно Sub
+        Assertions.assertEquals(TaskType.SUBTASK.name(), lastTask.getTypeTask(), consoleContent); //Проверяем что Задача действительно Sub
         Assertions.assertEquals(TaskStatus.IN_PROGRESS, lastTask.getStatus(), consoleContent); //Проверяем что описание действительно изменилось
     }
 
@@ -163,7 +163,7 @@ public class ConsoleInteractionWithSubTest {
 
         Task lastTask = managerTask.getTask(idSub);
         Assertions.assertNotNull(lastTask); //Проверяем что Задача существует
-        Assertions.assertEquals(TypeTask.SUB_NAME, lastTask.getTypeTask(), consoleContent); //Проверяем что Задача действительно Sub
+        Assertions.assertEquals(TaskType.SUBTASK.name(), lastTask.getTypeTask(), consoleContent); //Проверяем что Задача действительно Sub
         Assertions.assertEquals(TaskStatus.NEW, lastTask.getStatus(), consoleContent); //Проверяем что описание действительно изменилось
 
     }
@@ -190,7 +190,7 @@ public class ConsoleInteractionWithSubTest {
 
         Task lastTask = managerTask.getTask(idSub);
         Assertions.assertNotNull(lastTask); //Проверяем что Задача существует
-        Assertions.assertEquals(TypeTask.SUB_NAME, lastTask.getTypeTask(), consoleContent); //Проверяем что Задача действительно Sub
+        Assertions.assertEquals(TaskType.SUBTASK.name(), lastTask.getTypeTask(), consoleContent); //Проверяем что Задача действительно Sub
         Assertions.assertEquals(TaskStatus.DONE, lastTask.getStatus(), consoleContent); //Проверяем что описание действительно изменилось
 
     }

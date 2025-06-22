@@ -3,7 +3,6 @@ package dataTask;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
 import com.dateTask.TaskType;
-import com.dateTask.TypeTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
