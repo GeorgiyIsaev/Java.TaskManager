@@ -4,11 +4,7 @@ import com.controller.controlException.ManagerFileException;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.*;
 
-import javax.sound.midi.Patch;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class FileBackedCSV {
@@ -123,37 +119,5 @@ public class FileBackedCSV {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-//        //Map<Integer, Task> tasksMap;
-//        try (BufferedReader br = new BufferedReader  (new FileReader(getFileName()))) {
-//           while (br.n)
-//            String tableSCV = br.readLine();
-//            System.out.println(tableSCV);
-//            while (tableSCV != null) {
-//                System.out.println(tableSCV);
-//                // read next line
-//                tableSCV = tableSCV.readLine();
-//            }
-//
-//            //tasksMap = (TreeMap<Integer, Task>) ois.readObject();
-//            //for (Map.Entry<Integer, Task> entry : tasksMap.entrySet()) {
-//            //    CreateID.INSTANCE.setId(entry.getKey());
-//            //}
-//           // taskManager.replacementTasks(tasksMap);
-//
-//        } catch (IOException e) {
-//            throw new ManagerFileException(e);
-//        }
     }
-
-
-
-
-
-
-
 }
