@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.history;
 
 import com.dateTask.Task;
 
@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ManagerHistoryInMemory implements IHistoryManager{
+public class InMemoryHistoryManager implements HistoryManager {
     private List<Task> history;
 
-    public ManagerHistoryInMemory(){
+    public InMemoryHistoryManager(){
         this.history = new LinkedList<>();
     }
 

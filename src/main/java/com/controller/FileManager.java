@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.controller.controlException.ManagerFileException;
+import com.controller.taskManager.TaskManager;
 import com.dateTask.CreateID;
 import com.dateTask.Task;
 import java.io.*;
@@ -10,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ManagerFile {
+public class FileManager {
     private static String getNameFile() {
         String sep = File.separator;
         return "Date" + sep + "MyTask.bin";
@@ -30,7 +31,7 @@ public class ManagerFile {
         }
     }
 
-    public static void save(IManagerTask taskManager) {
+    public static void save(TaskManager taskManager) {
         Map<Integer, Task> tasksMap = new TreeMap<>();
         tasksMap.putAll(taskManager.getTasks());
         createFile();
@@ -40,7 +41,7 @@ public class ManagerFile {
             throw new ManagerFileException(e);
         }
     }
-    public static void load(IManagerTask taskManager) {
+    public static void load(TaskManager taskManager) {
        Map<Integer, Task> tasksMap;
         if (!(new File(getNameFile()).exists())) {
             return;

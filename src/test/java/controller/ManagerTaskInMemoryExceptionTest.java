@@ -1,13 +1,11 @@
 package controller;
 
-import com.controller.IManagerTask;
+import com.controller.taskManager.TaskManager;
 import com.controller.Managers;
-import com.controller.controlException.NotChangedEpicStatusException;
 import com.controller.controlException.NotEpicException;
 import com.controller.controlException.NotExistIdException;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
-import com.dateTask.TypeTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,14 +14,14 @@ public class ManagerTaskInMemoryExceptionTest {
     ///Добавления
     @Test
     public void subShouldNotBeAddedNonExistentTask() {
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Assertions.assertThrows(NotExistIdException.class, ()->{
             Task createSub = taskManager.addSubTaskToEpicID(-1,"","");
         });
     }
     @Test
     public void subShouldNotBeAddedToNonEpic() {
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Task createTask= taskManager.addTask("","");
         Assertions.assertThrows(NotEpicException.class, ()->{
             Task createSub = taskManager.addSubTaskToEpicID(createTask.getID(),"","");
@@ -33,14 +31,14 @@ public class ManagerTaskInMemoryExceptionTest {
     /// Изменение
     @Test
     public void shouldThrowExceptionWhenChangingNameOfTaskWithNonExistentID() {
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Assertions.assertThrows(NotExistIdException.class, ()->{
             taskManager.reNameToIDTask(-1,"");
         });
     }
     @Test
     public void shouldThrowExceptionWhenChangingDescriptionOfTaskWithNonExistentID() {
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Assertions.assertThrows(NotExistIdException.class, ()->{
             taskManager.reDescToIDTask(-1,"");
         });
@@ -48,7 +46,7 @@ public class ManagerTaskInMemoryExceptionTest {
 
     @Test
     public void shouldThrowExceptionWhenChangingStatusOfTaskWithNonExistentID() {
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Assertions.assertThrows(NotExistIdException.class, ()->{
             taskManager.reStatus(-1,TaskStatus.DONE);
         });
@@ -57,7 +55,7 @@ public class ManagerTaskInMemoryExceptionTest {
     /// Удаление по ID
     @Test
     public void deleteByIDShouldRemoveTaskFromCollection() {
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Assertions.assertThrows(NotExistIdException.class, ()->{
             taskManager.deleteIDTask(-1);
         });
@@ -66,14 +64,14 @@ public class ManagerTaskInMemoryExceptionTest {
     ///Вызов не существующий задачи
     @Test
     public void callingNonExistentTaskShouldThrowException() {
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Assertions.assertThrows(NotExistIdException.class, ()->{
             taskManager.getTask(-1);
         });
     }
     @Test
     public void definingEpicForNonExistentTaskShouldThrowException() {
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Assertions.assertThrows(NotExistIdException.class, ()->{
             taskManager.isEpic(-1);
         });

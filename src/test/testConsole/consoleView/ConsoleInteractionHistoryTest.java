@@ -2,10 +2,9 @@ package consoleView;
 
 import com.consoleView.ConsoleUtils;
 import com.consoleView.ConsoleView;
-import com.controller.IManagerTask;
+import com.controller.taskManager.TaskManager;
 import com.controller.Managers;
 import com.dateTask.CreateID;
-import com.dateTask.Task;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,7 +37,7 @@ public class ConsoleInteractionHistoryTest {
     /// ТЕСТ ИСТОРИИ ПРОСМОТРОВ
     @Test
     void printHistoryTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         int idEpic1 = CreateID.INSTANCE.getCurrentID();
         int idSub = CreateID.INSTANCE.getCurrentID();

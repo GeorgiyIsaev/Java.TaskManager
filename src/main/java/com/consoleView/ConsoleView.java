@@ -1,8 +1,8 @@
 package com.consoleView;
 
 import com.controller.controlException.ControlException;
-import com.controller.IManagerTask;
-import com.controller.ManagerFile;
+import com.controller.taskManager.TaskManager;
+import com.controller.FileManager;
 
 
 import com.dateTask.*;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class ConsoleView {
   //  private Scanner in;
-    private IManagerTask taskManager;
+    private TaskManager taskManager;
     MyCommand myCommand;
     private boolean isExit;
 
@@ -19,7 +19,7 @@ public class ConsoleView {
         return myCommand;
     }
 
-    public ConsoleView(IManagerTask taskManager) {
+    public ConsoleView(TaskManager taskManager) {
         this.taskManager = taskManager;
         this.myCommand = new MyCommand();;
     }
@@ -121,7 +121,7 @@ public class ConsoleView {
         System.out.println(ConsoleNotification.DELETE_ALL);
     }
     public void save(){
-        ManagerFile.save(taskManager);
+        FileManager.save(taskManager);
         System.out.println(ConsoleNotification.SAVE);
     }
     public void exit(){

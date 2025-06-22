@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.taskManager;
 
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
@@ -6,7 +6,7 @@ import com.dateTask.TaskStatus;
 import java.util.List;
 import java.util.Map;
 
-public interface IManagerTask {
+public interface TaskManager {
 
     public Task addTask(String name, String description);
     public Task addEpic(String name, String description);

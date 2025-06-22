@@ -1,8 +1,10 @@
-package com.controller;
+package com.controller.taskManager;
 
 import com.controller.controlException.NotChangedEpicStatusException;
 import com.controller.controlException.NotEpicException;
 import com.controller.controlException.NotExistIdException;
+import com.controller.history.HistoryManager;
+import com.controller.history.InMemoryHistoryManager;
 import com.dateTask.*;
 import java.io.Serializable;
 import java.util.Collections;
@@ -10,11 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ManagerTaskInMemory implements Serializable, IManagerTask {
+public class InMemoryTaskManager implements Serializable, TaskManager {
     private Map<Integer, Task> tasks;
-    private IHistoryManager history;
-    public ManagerTaskInMemory() {
-        history = new ManagerHistoryInMemory();
+    private HistoryManager history;
+    public InMemoryTaskManager() {
+        history = new InMemoryHistoryManager();
         tasks = new TreeMap<>();
     }
 

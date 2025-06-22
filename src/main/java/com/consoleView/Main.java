@@ -1,14 +1,14 @@
 package com.consoleView;
 import com.controller.Managers;
-import com.controller.IManagerTask;
-import com.controller.ManagerFile;
+import com.controller.taskManager.TaskManager;
+import com.controller.FileManager;
 
 
 public final class Main {
     private Main(){}
     public static void main(String[] args) {
-        IManagerTask managerTaskInMemory = Managers.getDefault();
-        ManagerFile.load(managerTaskInMemory);
+        TaskManager managerTaskInMemory = Managers.getDefault();
+        FileManager.load(managerTaskInMemory);
 
         ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
         consoleView.run();

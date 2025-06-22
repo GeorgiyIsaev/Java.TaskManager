@@ -1,6 +1,6 @@
 package controller;
 
-import com.controller.IManagerTask;
+import com.controller.taskManager.TaskManager;
 import com.controller.Managers;
 import com.dateTask.Task;
 import org.junit.jupiter.api.Assertions;
@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class ManagerHistoryInMemoryTest {
+public class InMemoryHistoryManagerTest {
 
     @Test
     public void whenCreatingManagerTheHistoryShouldBeEmpty(){
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         int sizeHistoryContainer =  taskManager.getHistory().size();
         int emptyContainer = 0;
         Assertions.assertEquals(emptyContainer,sizeHistoryContainer);
@@ -21,7 +21,7 @@ public class ManagerHistoryInMemoryTest {
 
     @Test
     public void whenAddingManagerTheHistoryShouldBeEmpty(){
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Task createTask = taskManager.addTask("","");
         int sizeHistoryContainer =  taskManager.getHistory().size();
         int emptyContainer = 0;
@@ -30,7 +30,7 @@ public class ManagerHistoryInMemoryTest {
 
     @Test
     public void historyShouldBeWrittenWhenTaskIsCalled(){
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Task createTask = taskManager.addTask("","");
         taskManager.getTask(createTask.getID());
 
@@ -45,7 +45,7 @@ public class ManagerHistoryInMemoryTest {
 
     @Test
     public void whenCallingSameTasksTheHistoryShouldBeWrittenOnlyOnce(){
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Task createTask = taskManager.addTask("","");
         taskManager.getTask(createTask.getID());
         taskManager.getTask(createTask.getID());
@@ -61,7 +61,7 @@ public class ManagerHistoryInMemoryTest {
 
     @Test
     public void taskShouldBeRemovedFromHistoryWhenTaskIsDeleted(){
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
         Task createTask = taskManager.addTask("","");
         taskManager.getTask(createTask.getID());
         Task taskFromHistory = taskManager.getHistory().get(0);
@@ -75,7 +75,7 @@ public class ManagerHistoryInMemoryTest {
 
     @Test
     public void onlyLastTenCallsShouldBeRecordedInHistory(){
-        IManagerTask taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefault();
 
         Task createOneTask = taskManager.addTask("","");
         taskManager.getTask(createOneTask.getID());

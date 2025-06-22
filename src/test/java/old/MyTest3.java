@@ -3,15 +3,15 @@ package old;
 
 import com.consoleView.ConsoleView;
 import com.controller.Managers;
-import com.controller.IManagerTask;
-import com.controller.ManagerFile;
+import com.controller.taskManager.TaskManager;
+import com.controller.FileManager;
 import com.dateTask.TaskStatus;
 
 public class MyTest3 {
     public static void main(String[] args) {
 
-        IManagerTask managerTaskInMemoryMap = Managers.getDefault();
-        ManagerFile.load(managerTaskInMemoryMap);
+        TaskManager managerTaskInMemoryMap = Managers.getDefault();
+        FileManager.load(managerTaskInMemoryMap);
         ConsoleView consoleView = new ConsoleView(managerTaskInMemoryMap);
 
         createTask(managerTaskInMemoryMap);
@@ -22,11 +22,11 @@ public class MyTest3 {
         consoleView.printTask();
 
         System.out.println("            Сохранение");
-        ManagerFile.save(managerTaskInMemoryMap);
+        FileManager.save(managerTaskInMemoryMap);
 
 
         System.out.println("            Загрузка");
-        ManagerFile.load(managerTaskInMemoryMap);
+        FileManager.load(managerTaskInMemoryMap);
         consoleView.printTask();
 
         System.out.println("            Новая задача после загрузки");
@@ -36,7 +36,7 @@ public class MyTest3 {
         System.out.println("            История");
         System.out.println(managerTaskInMemoryMap.getHistory());
     }
-    public static void createTask(IManagerTask managerTaskInMemory) {
+    public static void createTask(TaskManager managerTaskInMemory) {
         managerTaskInMemory.addTask("Первая задача", "Описание простой задачи");
         managerTaskInMemory.getTask(0);
         managerTaskInMemory.addTask("Вторая задача", "Другое описание простой задачи");
@@ -55,7 +55,7 @@ public class MyTest3 {
 
     }
 
-    public static void changeTask(IManagerTask managerTaskInMemory) {
+    public static void changeTask(TaskManager managerTaskInMemory) {
         managerTaskInMemory.reNameToIDTask(5, "Новое крутое название");
         managerTaskInMemory.getTask(5);
         managerTaskInMemory.reDescToIDTask(3, "Новое крутое описание");

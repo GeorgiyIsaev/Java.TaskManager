@@ -3,11 +3,10 @@ package consoleView;
 import com.consoleView.ConsoleNotification;
 import com.consoleView.ConsoleUtils;
 import com.consoleView.ConsoleView;
-import com.controller.IManagerTask;
+import com.controller.taskManager.TaskManager;
 import com.controller.Managers;
 import com.dateTask.CreateID;
 import com.dateTask.Task;
-import com.dateTask.TaskStatus;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +38,7 @@ public class ConsoleInteractionWithEpicTest {
     /// ТЕСТ ВЗАИМОДЕЙСТВИЯ С EPIC ЗАДАЧАМИ
     @Test
     void addEpicTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\nexit";
@@ -59,7 +58,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void reNameTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String newName = "Новое имя";
@@ -86,7 +85,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void reDescTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String newDescription = "Новое описание";
@@ -113,7 +112,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void reStatusPROGTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" PROG\nexit";
@@ -138,7 +137,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void reStatusNEWTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" NEW\nexit";
@@ -163,7 +162,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void reStatusDONETaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" DONE\nexit";
@@ -188,7 +187,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void reStatusEXCEPTIONTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" EXCEPTION\nexit";
@@ -205,7 +204,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void reStatusNONTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
@@ -222,7 +221,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void reSubInTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\naddSubTaskToID "+  CreateID.INSTANCE.getCurrentID() +"\nНазвание SUB\nОписание SUB\nexit";
@@ -239,7 +238,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void printIDTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\nprintID "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
@@ -266,7 +265,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void printFullEpicTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         int idEpic = CreateID.INSTANCE.getCurrentID();
@@ -299,7 +298,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void deleteIDTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "addEPIC Название\nОписание\ndeleteID "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
@@ -317,7 +316,7 @@ public class ConsoleInteractionWithEpicTest {
 
     @Test
     void deleteIDTaskContainsSubTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         int idEpic = CreateID.INSTANCE.getCurrentID();

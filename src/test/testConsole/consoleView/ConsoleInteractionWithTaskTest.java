@@ -3,7 +3,7 @@ package consoleView;
 import com.consoleView.ConsoleNotification;
 import com.consoleView.ConsoleUtils;
 import com.consoleView.ConsoleView;
-import com.controller.IManagerTask;
+import com.controller.taskManager.TaskManager;
 import com.controller.Managers;
 import com.dateTask.CreateID;
 import com.dateTask.Task;
@@ -12,17 +12,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.ArgumentsProvider;
-import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Map;
-import java.util.stream.Stream;
 
 //ConsoleInteractionHistoryTest
 
@@ -49,7 +43,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void addTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\nexit";
@@ -69,7 +63,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void reNameTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String newName = "Новое имя";
@@ -95,7 +89,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void reDescTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String newDescription = "Новое описание";
@@ -121,7 +115,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void reStatusPROGTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" PROG\nexit";
@@ -146,7 +140,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void reStatusNEWTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" NEW\nexit";
@@ -171,7 +165,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void reStatusDONETaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" DONE\nexit";
@@ -196,7 +190,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void reStatusEXCEPTIONTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +" EXCEPTION\nexit";
@@ -213,7 +207,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void reStatusNONTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\nnewStatusId "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
@@ -230,7 +224,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void reSubInTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\naddSubTaskToID "+  CreateID.INSTANCE.getCurrentID() +"\nНазвание SUB\nОписание SUB\nexit";
@@ -247,7 +241,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void printIDTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\nprintID "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
@@ -274,7 +268,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void deleteIDTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         String command = "add Название\nОписание\ndeleteID "+  CreateID.INSTANCE.getCurrentID() +"\nexit";
@@ -293,7 +287,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void printFullTaskTest() {
-        IManagerTask managerTask = Managers.getDefault();
+        TaskManager managerTask = Managers.getDefault();
         ConsoleView consoleView = new ConsoleView(managerTask);
         final int NO_TASKS = 0;
         int idTask01= CreateID.INSTANCE.getCurrentID();
