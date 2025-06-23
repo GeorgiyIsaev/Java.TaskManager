@@ -9,7 +9,7 @@ import com.dateTask.TaskStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ManagerTaskInMemoryExceptionTest {
+public class InMemoryTaskManagerExceptionTest {
 
     ///Добавления
     @Test
