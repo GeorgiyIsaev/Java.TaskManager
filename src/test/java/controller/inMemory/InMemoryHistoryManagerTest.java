@@ -1,4 +1,4 @@
-package controller;
+package controller.inMemory;
 
 import com.controller.taskManager.TaskManager;
 import com.controller.Managers;
