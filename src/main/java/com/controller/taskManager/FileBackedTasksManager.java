@@ -77,4 +77,10 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         save();
         return result;
     }
+
+    @Override
+    public void replacementTasks(Map<Integer, Task> tasks) {
+        super.replacementTasks(tasks);
+        save();
+    }
 }

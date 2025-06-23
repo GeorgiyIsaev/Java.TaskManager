@@ -11,6 +11,8 @@ public class Managers {
     public static TaskManager getFileBacked() {
         return new FileBackedTasksManager("MyCSV.csv");
     }
-
+    public static TaskManager getFileBacked(String fileName) {
+        return new FileBackedTasksManager(fileName);
+    }
 
 }

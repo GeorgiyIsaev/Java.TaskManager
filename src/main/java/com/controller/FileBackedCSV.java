@@ -81,33 +81,35 @@ public class FileBackedCSV {
     private void parseLineAndAddTaskToManager(TaskManager taskManager, String lineSCV){
         String[] elements = lineSCV.split(", ");
         if(elements.length <5 ) return;
-        System.out.println(Arrays.toString(elements));
+        //System.out.println(Arrays.toString(elements));
 
-        if(elements[1].equals(TaskType.TASK.name())){
-            int id = toInt(elements[0]);
-            String name = clearWrapper(elements[3]);
-            String description = clearWrapper(elements[4]);
+        final int ID = 0 ;
+        final int TYPE = 1 ;
+        final int STATUS = 2 ;
+        final int NAME = 3 ;
+        final int DESCRIPTION = 4 ;
+        final int LINK = 5 ;
+
+        int id = toInt(elements[ID]);
+        String name = clearWrapper(elements[NAME]);
+        String description = clearWrapper(elements[DESCRIPTION]);
+        String status = elements[STATUS];
+
+        if(elements[TYPE].equals(TaskType.TASK.name())){
             Task task = taskManager.addTaskByID(id, name,description);
-            task.setStatus(TaskStatus.toTaskStatus(elements[1]));
-            CreateID.INSTANCE.setId(id);
+            task.setStatus(TaskStatus.toTaskStatus(status));
         }
-        if(elements[1].equals(TaskType.SUBTASK.name())){
-            int id = toInt(elements[0]);
-            String name = clearWrapper(elements[3]);
-            String description = clearWrapper(elements[4]);
-            int idEpicAdded = toInt(elements[5]);
+        if(elements[TYPE].equals(TaskType.SUBTASK.name())){
+            int idEpicAdded = toInt(elements[LINK]);
             Task task = taskManager.addSubTaskToEpicIDByID(id,idEpicAdded, name,description);
-            task.setStatus(TaskStatus.toTaskStatus(elements[1]));
-            CreateID.INSTANCE.setId(id);
+            task.setStatus(TaskStatus.toTaskStatus(status));
+
         }
-        if(elements[1].equals(TaskType.EPIC.name())){
-            int id = toInt(elements[0]);
-            String name = clearWrapper(elements[3]);
-            String description = clearWrapper(elements[4]);
+        if(elements[TYPE].equals(TaskType.EPIC.name())){
             Task task = taskManager.addEpicByID(id,name,description);
-            task.setStatus(TaskStatus.toTaskStatus(elements[1]));
-            CreateID.INSTANCE.setId(id);
+            task.setStatus(TaskStatus.toTaskStatus(status));
         }
+        CreateID.INSTANCE.setId(id);
     }
     public void load(TaskManager taskManager) {
         if (!(new File(getFileName()).exists())) {
