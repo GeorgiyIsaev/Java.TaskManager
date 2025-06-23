@@ -26,6 +26,7 @@ public class InMemoryTaskManager implements Serializable, TaskManager {
     }
     @Override
     public void replacementTasks(Map<Integer, Task> tasks) {
+        this.deleteALL();
         this.tasks = tasks;
     }
     @Override
@@ -94,7 +95,6 @@ public class InMemoryTaskManager implements Serializable, TaskManager {
     public void deleteALL() {
         this.tasks.clear();
         history.removeAll();
-
     }
     @Override
     public Task deleteIDTask(int idTask) {

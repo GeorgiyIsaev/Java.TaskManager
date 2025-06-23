@@ -34,15 +34,22 @@ public class FileBackedCSV {
         return line;
     }
     public String createLineTaskForCSV(Task task){
-        String line = "";
-        line += task.getID();   line += ", ";
-        line += task.getTypeTask(); line += ", ";
-        line += task.getStatus(); line += ", ";
-        line += wrapperSpecialCharacters(task.getName()); line += ", ";
-        line += wrapperSpecialCharacters(task.getDescription());line += ", ";
-        line += task.getLinkStr();
-        return line;
+        return task.getID() + ", " +
+                task.getTypeTask() + ", " +
+                task.getStatus() + ", " +
+                wrapperSpecialCharacters(task.getName()) + ", " +
+                wrapperSpecialCharacters(task.getDescription()) +
+                ", " +
+                task.getLinkStr();
     }
+    public String createLineHistory(TaskManager taskManager){
+        StringBuilder line = new StringBuilder("\nHISTORY");
+        for (Task historyTask :  taskManager.getHistory()) {
+            line.append(", ").append(historyTask.getID());
+        }
+        return line.toString();
+    }
+
     public String createTable(TaskManager taskManager){
         StringBuilder tableCSV = new StringBuilder();
         for (Map.Entry<Integer, Task> entry : taskManager.getTasks().entrySet()) {
@@ -50,6 +57,7 @@ public class FileBackedCSV {
             tableCSV.append("\n");
             tableCSV.append(createLineTaskForCSV(task));
         }
+        tableCSV.append(createLineHistory(taskManager));
         return tableCSV.toString();
     }
     public void save(TaskManager taskManager) {
@@ -78,10 +86,20 @@ public class FileBackedCSV {
         line = line.replace("\"\"" , "\"");
         return line;
     }
+    private boolean createNewHistoryReturnTrueIfRecording(TaskManager taskManager, String[] elementsLineCSV){
+        if(!elementsLineCSV[0].equals("HISTORY") ) { return false; }
+        for (int i= 1; i<elementsLineCSV.length; i++){
+            taskManager.getTask(toInt(elementsLineCSV[i]));
+        }
+        return true;
+    }
+
     private void parseLineAndAddTaskToManager(TaskManager taskManager, String lineSCV){
         String[] elements = lineSCV.split(", ");
-        if(elements.length <5 ) return;
-        //System.out.println(Arrays.toString(elements));
+        System.out.println(Arrays.toString(elements));
+
+        if(createNewHistoryReturnTrueIfRecording(taskManager, elements)){return;}
+        if(elements.length <5 ) {return;}
 
         final int ID = 0 ;
         final int TYPE = 1 ;
