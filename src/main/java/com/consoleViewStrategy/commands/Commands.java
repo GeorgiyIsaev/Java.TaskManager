@@ -1,5 +1,7 @@
 package com.consoleViewStrategy.commands;
 
+import com.consoleView.ConsoleNotification;
+import com.consoleViewStrategy.utils.CommandNotification;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
 
@@ -15,30 +17,45 @@ public class Commands {
     public ConsoleUserAction getConsoleUserAction() {
         return consoleUserAction;
     }
-    public Map<String, ICommand> getCommands() {
-        return commands;
+
+    public TaskManager getTaskManager() {
+        return taskManager;
     }
 
     public Commands(TaskManager taskManager){
         this.taskManager = taskManager;
         consoleUserAction = new ConsoleUserAction();
         commands = new HashMap<>();
-        commands.put("1", new Command1());
-        commands.put("2", new Command2());
+        CommandNotification com =new CommandNotification();
+
+        commands.put(com.PRINT_ID.toLowerCase(), new PrintID());
+        commands.put(com.PRINT_ALL.toLowerCase(), new PrintAll());
+        commands.put(com.PRINT_TASK.toLowerCase(), new PrintTask());
+        commands.put(com.PRINT_EPIC.toLowerCase(), new PrintEpic());
+        commands.put(com.PRINT_SUBTASK.toLowerCase(), new PrintSubTask());
+
     }
     public void commandCall(String command){
-        ICommand iCommand =  commands.get(command);
+        ICommand iCommand =  commands.get(command.toLowerCase());
         if(iCommand ==null){
-            System.out.println("НЕТ");
+            System.out.println(ConsoleNotification.NOT_COMMAND);
             return;
         }
         iCommand.start(this);
     }
+    public void hello(){
+        System.out.println("Добро пожаловать в TaskManager!");
+        System.out.println("У вас в работе " + taskManager.getTasks().size() + " задач.");
+        System.out.println("Введите help что бы отобразить доступные команды.");
+    }
+
     public void run(){
+        hello();
         while(isExit) {
             consoleUserAction.input("Введите команду: ");
             if(consoleUserAction.getCommand().equalsIgnoreCase("Exit")){
                 isExit = false;
+                System.out.println(ConsoleNotification.EXIT);
                 break;
             }
             commandCall(consoleUserAction.getCommand());
