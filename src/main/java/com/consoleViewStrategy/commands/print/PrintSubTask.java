@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class PrintSubTask implements ICommand {
     TaskManager taskManager;
-    Integer id;
 
     @Override
     public void start(Commands commands) {

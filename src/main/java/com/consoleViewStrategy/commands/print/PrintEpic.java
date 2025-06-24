@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class PrintEpic implements ICommand {
     TaskManager taskManager;
-    Integer id;
+
     @Override
     public void start(Commands commands) {
         taskManager = commands.getTaskManager();

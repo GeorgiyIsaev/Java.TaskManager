@@ -6,22 +6,20 @@ import com.consoleViewStrategy.commands.ICommand;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
-import java.util.Map;
 
-public class PrintAll implements ICommand {
-    TaskManager taskManager;
+public class PrintHistory implements ICommand {
+    TaskManager taskManager;;
 
     @Override
     public void start(Commands commands) {
         taskManager = commands.getTaskManager();
-        printAll();
+        printHistory();
     }
 
-    public void printAll() {
+    public void printHistory() {
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
-        for (Map.Entry<Integer, Task> entry : taskManager.getTasks().entrySet()) {
-            Task value = entry.getValue();
-            System.out.println(ConsoleUtils.getTaskString(value));
+        for (Task task : taskManager.getHistory()) {
+            System.out.println(ConsoleUtils.getTaskString(task));
         }
     }
 }
