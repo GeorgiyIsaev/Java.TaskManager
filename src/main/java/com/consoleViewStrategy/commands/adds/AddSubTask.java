@@ -1,4 +1,4 @@
-package com.consoleViewStrategy.commands.add;
+package com.consoleViewStrategy.commands.adds;
 
 import com.consoleView.ConsoleNotification;
 import com.consoleViewStrategy.commands.Commands;

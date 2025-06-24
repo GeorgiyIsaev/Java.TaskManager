@@ -1,7 +1,11 @@
 package com.consoleViewStrategy.commands;
 
 import com.consoleView.ConsoleNotification;
-import com.consoleViewStrategy.commands.print.*;
+import com.consoleViewStrategy.commands.adds.AddEpic;
+import com.consoleViewStrategy.commands.adds.AddSubTask;
+import com.consoleViewStrategy.commands.adds.AddTask;
+import com.consoleViewStrategy.commands.helpers.Help;
+import com.consoleViewStrategy.commands.prints.*;
 import com.consoleViewStrategy.utils.CommandNotification;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
@@ -29,11 +33,20 @@ public class Commands {
         commands = new HashMap<>();
         CommandNotification com =new CommandNotification();
 
+        commands.put(com.HELP.toLowerCase(), new Help());
+
         commands.put(com.PRINT_ID.toLowerCase(), new PrintID());
         commands.put(com.PRINT_ALL.toLowerCase(), new PrintAll());
         commands.put(com.PRINT_TASK.toLowerCase(), new PrintTask());
         commands.put(com.PRINT_EPIC.toLowerCase(), new PrintEpic());
         commands.put(com.PRINT_SUBTASK.toLowerCase(), new PrintSubTask());
+        commands.put(com.PRINT_HISTORY.toLowerCase(), new PrintHistory());
+
+        commands.put(com.ADD_TASK.toLowerCase(), new AddTask());
+        commands.put(com.ADD_EPIC.toLowerCase(), new AddEpic());
+        commands.put(com.ADD_SUBTASK.toLowerCase(), new AddSubTask());
+
+
 
     }
     public void commandCall(String command){
