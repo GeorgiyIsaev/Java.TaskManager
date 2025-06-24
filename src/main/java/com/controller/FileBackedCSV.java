@@ -96,7 +96,7 @@ public class FileBackedCSV {
 
     private void parseLineAndAddTaskToManager(TaskManager taskManager, String lineSCV){
         String[] elements = lineSCV.split(", ");
-        System.out.println(Arrays.toString(elements));
+        //System.out.println(Arrays.toString(elements));
 
         if(createNewHistoryReturnTrueIfRecording(taskManager, elements)){return;}
         if(elements.length <5 ) {return;}
