@@ -17,5 +17,8 @@ public class CommandNotification {
     public final String ADD_SUBTASK= "AddSubTaskToID";
 
 
+    public final String DELETE_ALL= "DeleteAll";
+    public final String DELETE_ByID= "DeleteID";
+
 
 }

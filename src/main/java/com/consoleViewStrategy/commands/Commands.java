@@ -4,6 +4,8 @@ import com.consoleView.ConsoleNotification;
 import com.consoleViewStrategy.commands.adds.AddEpic;
 import com.consoleViewStrategy.commands.adds.AddSubTask;
 import com.consoleViewStrategy.commands.adds.AddTask;
+import com.consoleViewStrategy.commands.deletes.DeleteAll;
+import com.consoleViewStrategy.commands.deletes.DeleteByID;
 import com.consoleViewStrategy.commands.helpers.Help;
 import com.consoleViewStrategy.commands.prints.*;
 import com.consoleViewStrategy.utils.CommandNotification;
@@ -45,6 +47,9 @@ public class Commands {
         commands.put(com.ADD_TASK.toLowerCase(), new AddTask());
         commands.put(com.ADD_EPIC.toLowerCase(), new AddEpic());
         commands.put(com.ADD_SUBTASK.toLowerCase(), new AddSubTask());
+
+        commands.put(com.DELETE_ALL.toLowerCase(), new DeleteAll());
+        commands.put(com.DELETE_ByID.toLowerCase(), new DeleteByID());
 
 
 
