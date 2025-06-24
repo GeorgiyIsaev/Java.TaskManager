@@ -9,6 +9,7 @@ import com.consoleViewStrategy.commands.change.ReName;
 import com.consoleViewStrategy.commands.change.ReStatus;
 import com.consoleViewStrategy.commands.deletes.DeleteAll;
 import com.consoleViewStrategy.commands.deletes.DeleteByID;
+import com.consoleViewStrategy.commands.helpers.Exit;
 import com.consoleViewStrategy.commands.helpers.Help;
 import com.consoleViewStrategy.commands.prints.*;
 import com.consoleViewStrategy.utils.CommandNotification;
@@ -23,6 +24,14 @@ public class Commands {
     private final ConsoleUserAction consoleUserAction;
     private final TaskManager taskManager;
     private boolean isExit = true;
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public void setExit(boolean exit) {
+        isExit = exit;
+    }
 
     public ConsoleUserAction getConsoleUserAction() {
         return consoleUserAction;
@@ -39,6 +48,7 @@ public class Commands {
         CommandNotification com =new CommandNotification();
 
         commands.put(com.HELP.toLowerCase(), new Help());
+        commands.put(com.EXIT.toLowerCase(), new Exit());
 
         commands.put(com.PRINT_ID.toLowerCase(), new PrintID());
         commands.put(com.PRINT_ALL.toLowerCase(), new PrintAll());
@@ -77,14 +87,10 @@ public class Commands {
 
     public void run(){
         hello();
-        while(isExit) {
+        while(isExit()) {
             consoleUserAction.input("Введите команду: ");
-            if(consoleUserAction.getCommand().equalsIgnoreCase("Exit")){
-                isExit = false;
-                System.out.println(ConsoleNotification.EXIT);
-                break;
-            }
             commandCall(consoleUserAction.getCommand());
         }
+        consoleUserAction.close();
     }
 }
