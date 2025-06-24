@@ -1,6 +1,7 @@
 package com.consoleViewStrategy.commands;
 
 import com.consoleView.ConsoleNotification;
+import com.consoleViewStrategy.commands.print.*;
 import com.consoleViewStrategy.utils.CommandNotification;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;

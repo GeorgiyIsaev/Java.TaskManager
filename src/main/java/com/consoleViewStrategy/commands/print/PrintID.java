@@ -1,11 +1,13 @@
-package com.consoleViewStrategy.commands;
+package com.consoleViewStrategy.commands.print;
 
 import com.consoleView.ConsoleNotification;
 import com.consoleView.ConsoleUtils;
+import com.consoleViewStrategy.commands.Commands;
+import com.consoleViewStrategy.commands.ICommand;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.*;
 
-public class PrintID implements ICommand{
+public class PrintID implements ICommand {
     TaskManager taskManager;
     Integer id;
     @Override
