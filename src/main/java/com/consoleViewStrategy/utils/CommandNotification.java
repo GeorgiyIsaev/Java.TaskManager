@@ -20,5 +20,8 @@ public class CommandNotification {
     public final String DELETE_ALL= "DeleteAll";
     public final String DELETE_ByID= "DeleteID";
 
+    public final String RE_NAME= "ReNameID";
+    public final String RE_DESCRIPTION = "ReDescID";
+    public final String RE_STATUS = "NewStatusID";
 
 }
