@@ -1,16 +1,16 @@
 package com.controller.taskManager;
 
-import com.controller.FileBackedCSV;
+import com.controller.files.FileBackedCSV;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
 
-import java.util.List;
+import java.nio.file.Path;
 import java.util.Map;
 
 public class FileBackedTasksManager extends InMemoryTaskManager{
    private final FileBackedCSV fileBackedCSV;
-   public FileBackedTasksManager(String fileName){
-       this.fileBackedCSV = new FileBackedCSV(fileName);
+   public FileBackedTasksManager(Path filePath){
+       this.fileBackedCSV = new FileBackedCSV(filePath);
        this.fileBackedCSV.load(this);
    }
 

@@ -1,7 +1,7 @@
 package com.consoleView;
 import com.controller.Managers;
 import com.controller.taskManager.TaskManager;
-import com.controller.FileManager;
+import com.controller.files.FileManager;
 
 
 public final class Main {

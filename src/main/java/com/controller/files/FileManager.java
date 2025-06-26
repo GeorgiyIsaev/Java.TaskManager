@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.files;
 
 import com.controller.controlException.ManagerFileException;
 import com.controller.taskManager.TaskManager;
@@ -14,11 +14,11 @@ import java.util.TreeMap;
 public class FileManager {
     private static String getNameFile() {
         String sep = File.separator;
-        return "Date" + sep + "MyTask.bin";
+        return "date" + sep + "MyTask.bin";
     }
     private static void createFile() {
         if (!(new File(getNameFile()).exists())) {
-            new File("Date").mkdirs();
+            new File("date").mkdirs();
             File f = new File(getNameFile());
         }
     }

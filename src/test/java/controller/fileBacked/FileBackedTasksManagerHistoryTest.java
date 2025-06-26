@@ -1,23 +1,27 @@
 package controller.fileBacked;
 
 import com.controller.Managers;
+import com.controller.files.CreatePath;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public class FileBackedTasksManagerHistoryTest {
 
     public TaskManager getClearManager(){
-        TaskManager taskManager = Managers.getFileBacked("MyCSVTest.csv");
+        Path filePath = CreatePath.of().generateToPakResources("csv.csv");
+        TaskManager taskManager = Managers.getFileBacked(filePath);
         taskManager.deleteALL();
         return taskManager;
     }
 
     public TaskManager getManager(){
-        return Managers.getFileBacked("MyCSVTest.csv");
+        Path filePath = CreatePath.of().generateToPakResources("csv.csv");
+        return Managers.getFileBacked(filePath);
     }
 
     @Test

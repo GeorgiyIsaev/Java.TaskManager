@@ -1,30 +1,44 @@
-package com.controller;
+package com.controller.files;
 
 import com.controller.controlException.ManagerFileException;
-import com.controller.controlException.NotExistIdException;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
+
 public class FileBackedCSV {
-    private String fileName;
-
-    public FileBackedCSV(String fileName){
-        this.fileName = fileName;
-       // this.fileName = "MyTask.bin";
-    }
-    private String getFileName() {
-        String sep = File.separator;
-        return "Date" + sep + fileName;
+    Path pathFile;
+    public FileBackedCSV(Path pathFile) {
+        this.pathFile = pathFile;
     }
 
-    private void createFile() {
-        if (!(new File(getFileName()).exists())) {
-            new File("Date").mkdirs();
-            File f = new File(getFileName());
+    private void createFileIfNotExists() {
+        File file = pathFile.toFile();
+
+        if (!file.exists()) {
+            System.out.println("НЕ Существует " + file.getPath());
+            try {
+                Files.createDirectories(pathFile.toAbsolutePath());
+            } catch (IOException e) {
+                System.out.println("Какая то ошибка");
+                throw new RuntimeException(e);
+            }
+            // file.mkdirs();
+            //File f = new File(getNameFile());
         }
+        else{
+            System.out.println("УЖЕ Существует " + file.getPath());
+        }
+
+
+//        if (!(new File(getNameFile()).exists())) {
+//            new File("date").mkdirs();
+//            File f = new File(getNameFile());
+//        }
     }
 
     /// Блок Записи в файл
@@ -61,8 +75,10 @@ public class FileBackedCSV {
         return tableCSV.toString();
     }
     public void save(TaskManager taskManager) {
-        createFile();
-        try (PrintWriter pw = new PrintWriter(new File(getFileName()))) {
+        File file = pathFile.toFile();
+        createFileIfNotExists();
+
+        try (PrintWriter pw = new PrintWriter(pathFile.toFile())) {
             pw.write(createTable(taskManager));
         } catch (IOException e) {
             throw new ManagerFileException(e);
@@ -96,8 +112,6 @@ public class FileBackedCSV {
 
     private void parseLineAndAddTaskToManager(TaskManager taskManager, String lineSCV){
         String[] elements = lineSCV.split(", ");
-        //System.out.println(Arrays.toString(elements));
-
         if(createNewHistoryReturnTrueIfRecording(taskManager, elements)){return;}
         if(elements.length <5 ) {return;}
 
@@ -130,17 +144,14 @@ public class FileBackedCSV {
         CreateID.INSTANCE.setId(id);
     }
     public void load(TaskManager taskManager) {
-        if (!(new File(getFileName()).exists())) {
+        boolean isNotFileExist = !pathFile.toFile().exists();
+        if(isNotFileExist) {
             return;
         }
-        try (Scanner scanner = new Scanner(new File(getFileName()))){
-            String lineSCV;
-            while (scanner.hasNextLine()) {
-                lineSCV = scanner.nextLine();
-                System.out.println(lineSCV);
-                parseLineAndAddTaskToManager(taskManager, lineSCV);
-            }
-        } catch (FileNotFoundException e) {
+        try {
+            String fileContent = Files.readString(pathFile);
+            String[] lines = fileContent.split("\n");
+        } catch (IOException e) {
             throw new ManagerFileException(e);
         }
     }

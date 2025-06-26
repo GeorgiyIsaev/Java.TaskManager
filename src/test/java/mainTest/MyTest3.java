@@ -4,7 +4,7 @@ package mainTest;
 import com.consoleView.ConsoleView;
 import com.controller.Managers;
 import com.controller.taskManager.TaskManager;
-import com.controller.FileManager;
+import com.controller.files.FileManager;
 import com.dateTask.TaskStatus;
 
 public class MyTest3 {

@@ -1,7 +1,7 @@
 package com.consoleView;
 
 import com.controller.taskManager.TaskManager;
-import com.controller.FileManager;
+import com.controller.files.FileManager;
 
 
 import com.dateTask.*;
@@ -11,6 +11,8 @@ import java.util.Map;
 public class ConsoleView {
   //  private Scanner in;
     private TaskManager taskManager;
+    private NotificationService notificationService;
+
     private MyCommand myCommand;
     private boolean isExit;
 
@@ -19,6 +21,11 @@ public class ConsoleView {
     }
 
     public ConsoleView(TaskManager taskManager) {
+        this.taskManager = taskManager;
+        this.myCommand = new MyCommand();;
+    }
+    public ConsoleView(TaskManager taskManager, NotificationService notificationService) {
+        this.notificationService = notificationService;
         this.taskManager = taskManager;
         this.myCommand = new MyCommand();;
     }
@@ -114,6 +121,7 @@ public class ConsoleView {
     }
     public void deleteAll(){
         taskManager.deleteALL();
+        notificationService.sendToConsole(NotificationType.DELETE_ALL);
         System.out.println(ConsoleNotification.DELETE_ALL);
     }
     public void save(){

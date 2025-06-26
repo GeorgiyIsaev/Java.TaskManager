@@ -1,35 +1,29 @@
 package mainTest;
 
 import com.consoleView.ConsoleView;
-import com.controller.FileBackedCSV;
-import com.controller.FileManager;
 import com.controller.Managers;
+import com.controller.files.CreatePath;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
-import com.dateTask.TaskStatus;
+
+import java.nio.file.Path;
 
 public class CSVTest {
 
     public static void main(String[] args) {
+        //Path filePath= CreatePath.of().generatePathToPakDate("csv.csv");
 
-        TaskManager managerTaskInMemoryMap = Managers.getFileBacked();
+        Path filePath = CreatePath.of().generateToPakResources("csv.csv");
+        TaskManager managerTaskInMemoryMap = Managers.getFileBacked(filePath);
         ConsoleView consoleView = new ConsoleView(managerTaskInMemoryMap);
 
         createTask(managerTaskInMemoryMap);
+
         System.out.println(" Вывод Задач на консоль");
         consoleView.printTask();
 
-        System.out.println("Сохранение");
-        FileBackedCSV fileBackedCSV = new FileBackedCSV("MyCSV.csv");
-        fileBackedCSV.save(managerTaskInMemoryMap);
-        System.out.println("Сохранение завершено");
-
         System.out.println("Очистка");
         //managerTaskInMemoryMap.deleteALL();
-        consoleView.printTask();
-
-        System.out.println("Загрузка");
-        fileBackedCSV.load(managerTaskInMemoryMap);
         consoleView.printTask();
     }
     public static void createTask(TaskManager managerTaskInMemory) {
@@ -40,7 +34,7 @@ public class CSVTest {
         managerTaskInMemory.addSubTaskToEpicID(epic.getID(),"Подзадача 02", "Для тестирования 02");
         managerTaskInMemory.addSubTaskToEpicID(epic.getID(),"Подзадача 03", "Для тестирования 03");
         managerTaskInMemory.getTask(epic.getID());
-     //   managerTaskInMemory.getTask(task.getID());
+        managerTaskInMemory.getTask(task.getID());
     };
 
 

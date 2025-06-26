@@ -2,6 +2,7 @@ package controller.fileBacked;
 
 import com.controller.Managers;
 import com.controller.controlException.NotChangedEpicStatusException;
+import com.controller.files.CreatePath;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 import com.dateTask.TaskStatus;
@@ -9,6 +10,7 @@ import com.dateTask.TaskType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,13 +18,15 @@ public class FileBackedTasksManagerTest {
 
 
     public TaskManager getClearManager(){
-        TaskManager taskManager = Managers.getFileBacked("MyCSVTest.csv");
+        Path filePath = CreatePath.of().generateToPakResources("csv.csv");
+        TaskManager taskManager = Managers.getFileBacked(filePath);
         taskManager.deleteALL();
         return taskManager;
     }
 
     public TaskManager getManager(){
-        return Managers.getFileBacked("MyCSVTest.csv");
+        Path filePath = CreatePath.of().generateToPakResources("csv.csv");
+        return Managers.getFileBacked(filePath);
     }
 
 
