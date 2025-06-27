@@ -29,18 +29,18 @@ public class ReName extends CommandBase {
     public void reNameID() {
         Integer idTask = consoleUserAction.getID();
         if (idTask == null) {
-            System.out.println(Notification.ID_NOT_INPUT);
+            consoleManager.getNotificationService().sendTo(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println(Notification.ID_NOT_EXIST);
+            consoleManager.getNotificationService().sendTo(Notification.ID_NOT_EXIST);
             return;
         }
         consoleUserAction.input("Введите новое имя Задачи: ");
         String textName = consoleUserAction.getCommand();
         Task task = taskManager.reNameToIDTask(idTask, textName);
 
-        System.out.println(Notification.RENAME);
+        consoleManager.getNotificationService().sendTo(Notification.RENAME);
         System.out.println(TaskToString.CONSOLE_TITLE);
         System.out.println(TaskToString.transform(task));
     }

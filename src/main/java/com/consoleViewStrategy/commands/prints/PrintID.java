@@ -27,11 +27,11 @@ public class PrintID extends CommandBase {
 
     private void printID(Integer id){
         if(id == null){
-            System.out.println(Notification.ID_NOT_INPUT);
+            consoleManager.getNotificationService().sendTo(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(id)) {
-            System.out.println(Notification.ID_NOT_EXIST);
+            consoleManager.getNotificationService().sendTo(Notification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.getTask(id);

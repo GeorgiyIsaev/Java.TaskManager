@@ -28,17 +28,17 @@ public class ReDescription extends CommandBase {
     public void reDescID() {
         Integer idTask = consoleUserAction.getID();
         if (idTask == null) {
-            System.out.println(Notification.ID_NOT_INPUT);
+            consoleManager.getNotificationService().sendTo(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println(Notification.ID_NOT_EXIST);
+            consoleManager.getNotificationService().sendTo(Notification.ID_NOT_EXIST);
             return;
         }
         consoleUserAction.input("Введите новое описание Задачи: ");
         String textDescription = consoleUserAction.getCommand();
         Task task = taskManager.reDescToIDTask(idTask, textDescription);
-        System.out.println(Notification.REDESC);
+        consoleManager.getNotificationService().sendTo(Notification.REDESC);
         System.out.println(TaskToString.CONSOLE_TITLE);
         System.out.println(TaskToString.transform(task));
     }

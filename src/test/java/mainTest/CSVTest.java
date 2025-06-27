@@ -2,6 +2,8 @@ package mainTest;
 
 
 import com.consoleViewStrategy.ConsoleManager;
+import com.consoleViewStrategy.utils.ConsoleService;
+import com.consoleViewStrategy.utils.NotificationService;
 import com.controller.Managers;
 import com.controller.files.CreatePath;
 import com.controller.taskManager.TaskManager;
@@ -16,7 +18,9 @@ public class CSVTest {
 
         Path filePath = CreatePath.of().generatePathToPakDateAndSave("csv.csv");
         TaskManager managerTaskInMemoryMap = Managers.getFileBacked(filePath);
-        ConsoleManager consoleView = new ConsoleManager(managerTaskInMemoryMap);
+        NotificationService notificationService = new ConsoleService();
+
+        ConsoleManager consoleView = new ConsoleManager(managerTaskInMemoryMap, notificationService);
 
         createTask(managerTaskInMemoryMap);
 

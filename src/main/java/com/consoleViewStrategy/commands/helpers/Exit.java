@@ -18,6 +18,6 @@ public class Exit extends CommandBase {
     @Override
     public void start( ) {
         consoleManager.setExit(false);
-        System.out.println(Notification.EXIT);
+        consoleManager.getNotificationService().sendTo(Notification.EXIT);
     }
 }

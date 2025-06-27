@@ -23,6 +23,6 @@ public class DeleteAll extends CommandBase {
     }
     public void deleteAll(){
         taskManager.deleteALL();
-        System.out.println(Notification.DELETE_ALL);
+        consoleManager.getNotificationService().sendTo(Notification.DELETE_ALL);
     }
 }

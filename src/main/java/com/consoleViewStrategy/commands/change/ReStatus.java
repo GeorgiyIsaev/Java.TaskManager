@@ -29,16 +29,16 @@ public class ReStatus extends CommandBase {
     public void reStatus() {
         Integer idTask = consoleUserAction.getID();
         if (idTask == null) {
-            System.out.println(Notification.ID_NOT_INPUT);
+            consoleManager.getNotificationService().sendTo(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println(Notification.ID_NOT_EXIST);
+            consoleManager.getNotificationService().sendTo(Notification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.getTasks().get(idTask);
         if (taskManager.isEpic(idTask)) {
-            System.out.println(Notification.NOT_CHANGE_STATUS);
+            consoleManager.getNotificationService().sendTo(Notification.NOT_CHANGE_STATUS);
             return;
         }
 
@@ -46,15 +46,15 @@ public class ReStatus extends CommandBase {
         switch (status) {
             case "new" -> {
                 taskManager.reStatus(idTask, TaskStatus.NEW);
-                System.out.println(Notification.RESTATUS);
+                consoleManager.getNotificationService().sendTo(Notification.RESTATUS);
             }
             case "prog" -> {
                 taskManager.reStatus(idTask, TaskStatus.IN_PROGRESS);
-                System.out.println(Notification.RESTATUS);
+                consoleManager.getNotificationService().sendTo(Notification.RESTATUS);
             }
             case "done" -> {
                 taskManager.reStatus(idTask, TaskStatus.DONE);
-                System.out.println(Notification.RESTATUS);
+                consoleManager.getNotificationService().sendTo(Notification.RESTATUS);
             }
             default -> {
                 System.out.println("[" + status + "] " + Notification.STATUS_INCORRECTLY);
