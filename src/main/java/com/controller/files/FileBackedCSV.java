@@ -16,7 +16,7 @@ public class FileBackedCSV {
         this.pathFile = pathFile;
     }
 
-    private void createFileIfNotExists() {
+    private void createDirectoriesIfNotExists() {
         Path directory = pathFile.getParent();
         //System.out.println("Путь проверки " + directory);
         if(directory != null && !Files.isDirectory(directory)){
@@ -67,7 +67,7 @@ public class FileBackedCSV {
     }
     public void save(TaskManager taskManager) {
         //File file = pathFile.toFile();
-        createFileIfNotExists();
+        createDirectoriesIfNotExists();
 
         try (PrintWriter pw = new PrintWriter(pathFile.toFile())) {
             pw.write(createTable(taskManager));
