@@ -303,4 +303,53 @@ public class InMemoryTaskManagerTest {
         Assertions.assertEquals(emptyCollectionSize, taskManager.getTasks().size());
     }
 
+
+    @Test
+    public void creatingTaskWithSameIDShouldReplaceIt() {
+        TaskManager taskManager = Managers.getDefault();
+        int idTask = 1;
+        String nameTask01 = "Задача 1";
+        String nameTask02 = "Задача 2";
+        taskManager.addTaskByID(idTask,nameTask01,"");
+        Task getTaskByID = taskManager.getTask(idTask);
+        Assertions.assertEquals(nameTask01, getTaskByID.getName());
+
+        taskManager.addTaskByID(idTask,nameTask02,"");
+        Task getTaskByIDReplace = taskManager.getTask(idTask);
+        Assertions.assertEquals(nameTask02, getTaskByIDReplace.getName());
+    }
+
+    @Test
+    public void creatingEpicWithSameIDShouldReplaceIt() {
+        TaskManager taskManager = Managers.getDefault();
+        int idTask = 1;
+        String nameTask01 = "Задача 1";
+        String nameTask02 = "Задача 2";
+        taskManager.addEpicByID(idTask,nameTask01,"");
+        Task getTaskByID = taskManager.getTask(idTask);
+        Assertions.assertEquals(nameTask01, getTaskByID.getName());
+
+        taskManager.addEpicByID(idTask,nameTask02,"");
+        Task getTaskByIDReplace = taskManager.getTask(idTask);
+        Assertions.assertEquals(nameTask02, getTaskByIDReplace.getName());
+    }
+
+    @Test
+    public void creatingSubWithSameIDShouldReplaceIt() {
+        TaskManager taskManager = Managers.getDefault();
+        int idEpic = 0;
+        int idSub = 1;
+        String nameTask01 = "Задача 1";
+        String nameTask02 = "Задача 2";
+        taskManager.addEpicByID(idEpic,"Epic","");
+        taskManager.addSubTaskToEpicIDByID(idSub, idEpic, nameTask01,"");
+        Task getTaskByID = taskManager.getTask(idSub);
+        Assertions.assertEquals(nameTask01, getTaskByID.getName());
+
+        taskManager.addSubTaskToEpicIDByID(idSub, idEpic, nameTask02,"");
+        Task getTaskByIDReplace = taskManager.getTask(idSub);
+        Assertions.assertEquals(nameTask02, getTaskByIDReplace.getName());
+    }
+
+
 }
