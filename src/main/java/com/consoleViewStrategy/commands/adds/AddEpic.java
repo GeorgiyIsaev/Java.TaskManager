@@ -7,8 +7,20 @@ import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
 public class AddEpic implements ICommand {
-    TaskManager taskManager;
-    ConsoleUserAction consoleUserAction;
+    private TaskManager taskManager;
+    private ConsoleUserAction consoleUserAction;
+
+    private final String name;
+    public AddEpic(String name){
+       this.name = name;
+    }
+    @Override
+    public String description(){
+        return  "\"" + name + " 'имя задачи'\" – добавить ЭПИК";
+    }
+    public String getName() {
+        return name;
+    }
 
     @Override
     public void start(ConsoleManager consoleManager) {

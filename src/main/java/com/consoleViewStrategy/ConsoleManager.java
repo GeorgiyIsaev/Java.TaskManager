@@ -18,13 +18,43 @@ import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ConsoleManager {
-    private Map<String, ICommand> commands;
+    private final Map<String, ICommand> commands;
     private final ConsoleUserAction consoleUserAction;
     private final TaskManager taskManager;
     private boolean isExit = true;
+
+    public ConsoleManager(TaskManager taskManager){
+        this.taskManager = taskManager;
+        consoleUserAction = new ConsoleUserAction();
+        commands = new LinkedHashMap<>();
+        addCommand(new Help("Help"));
+        addCommand(new Exit("Exit"));
+
+        addCommand(new PrintID("PrintID"));
+        addCommand(new PrintAll("PrintAll"));
+        addCommand(new PrintTask("PrintTask"));
+        addCommand(new PrintEpic("PrintEpic"));
+        addCommand(new PrintSubTask("PrintSubTask"));
+        addCommand(new PrintHistory("PrintHistory"));
+
+        addCommand(new AddTask("AddTask"));
+        addCommand(new AddEpic("AddEpic"));
+        addCommand(new AddSubTask("AddSubTaskToID"));
+
+        addCommand(new DeleteAll("DeleteAll"));
+        addCommand(new DeleteByID("DeleteID"));
+
+        addCommand(new ReName("ReName"));
+        addCommand(new ReDescription("ReDescription"));
+        addCommand(new ReStatus("ReStatus"));
+    }
+    public void addCommand(ICommand iCommand){
+        commands.put(iCommand.getName().toLowerCase(), iCommand);
+    }
 
     public boolean isExit() {
         return isExit;
@@ -42,33 +72,10 @@ public class ConsoleManager {
         return taskManager;
     }
 
-    public ConsoleManager(TaskManager taskManager){
-        this.taskManager = taskManager;
-        consoleUserAction = new ConsoleUserAction();
-        commands = new HashMap<>();
-        CommandName com =new CommandName();
-
-        commands.put(com.HELP.toLowerCase(), new Help());
-        commands.put(com.EXIT.toLowerCase(), new Exit());
-
-        commands.put(com.PRINT_ID.toLowerCase(), new PrintID());
-        commands.put(com.PRINT_ALL.toLowerCase(), new PrintAll());
-        commands.put(com.PRINT_TASK.toLowerCase(), new PrintTask());
-        commands.put(com.PRINT_EPIC.toLowerCase(), new PrintEpic());
-        commands.put(com.PRINT_SUBTASK.toLowerCase(), new PrintSubTask());
-        commands.put(com.PRINT_HISTORY.toLowerCase(), new PrintHistory());
-
-        commands.put(com.ADD_TASK.toLowerCase(), new AddTask());
-        commands.put(com.ADD_EPIC.toLowerCase(), new AddEpic());
-        commands.put(com.ADD_SUBTASK.toLowerCase(), new AddSubTask());
-
-        commands.put(com.DELETE_ALL.toLowerCase(), new DeleteAll());
-        commands.put(com.DELETE_ByID.toLowerCase(), new DeleteByID());
-
-        commands.put(com.RE_NAME.toLowerCase(), new ReName());
-        commands.put(com.RE_DESCRIPTION.toLowerCase(), new ReDescription());
-        commands.put(com.RE_STATUS.toLowerCase(), new ReStatus());
+    public Map<String, ICommand> getCommands() {
+        return commands;
     }
+
     public void commandCall(String command){
         ICommand iCommand =  commands.get(command.toLowerCase());
         if(iCommand ==null){

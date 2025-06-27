@@ -8,8 +8,22 @@ import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
 public class AddSubTask implements ICommand {
-    TaskManager taskManager;
-    ConsoleUserAction consoleUserAction;
+    private TaskManager taskManager;
+    private ConsoleUserAction consoleUserAction;
+
+    private final String name;
+
+    public AddSubTask(String name){
+        this.name = name;
+    }
+    @Override
+    public String description(){
+        return  "\"" + name + " 'NUMBER ID'\" – добавить подзадачу к Эпику с указанным ID";
+    }
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public void start(ConsoleManager consoleManager) {

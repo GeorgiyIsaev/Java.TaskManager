@@ -7,9 +7,22 @@ import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
 public class AddTask implements ICommand {
-    TaskManager taskManager;
-    ConsoleUserAction consoleUserAction;
+    private TaskManager taskManager;
+    private ConsoleUserAction consoleUserAction;
 
+    private final String name;
+
+    public AddTask(String name){
+        this.name = name;
+    }
+    @Override
+    public String description(){
+        return  "\"" + name + " 'имя задачи'\" – добавить обычную задачу";
+    }
+
+    public String getName() {
+        return name;
+    }
     @Override
     public void start(ConsoleManager consoleManager) {
         taskManager = consoleManager.getTaskManager();

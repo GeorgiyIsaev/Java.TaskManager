@@ -1,7 +1,7 @@
 package com.consoleViewStrategy.commands.change;
 
 import com.consoleViewStrategy.utils.Notification;
-import com.consoleView.ConsoleUtils;
+import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
@@ -9,8 +9,22 @@ import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
 public class ReDescription implements ICommand {
-    TaskManager taskManager;
-    ConsoleUserAction consoleUserAction;
+    private TaskManager taskManager;
+    private ConsoleUserAction consoleUserAction;
+
+    private final String name;
+
+    public ReDescription(String name){
+        this.name = name;
+    }
+    @Override
+    public String description(){
+        return  "\"" + name + " 'NUMBER ID'\" – изменить описание задачи с ID";
+    }
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public void start(ConsoleManager consoleManager) {
@@ -33,7 +47,7 @@ public class ReDescription implements ICommand {
         String textDescription = consoleUserAction.getCommand();
         Task task = taskManager.reDescToIDTask(idTask, textDescription);
         System.out.println(Notification.REDESC);
-        System.out.println(ConsoleUtils.CONSOLE_TITLE);
-        System.out.println(ConsoleUtils.getTaskString(task));
+        System.out.println(TaskToString.CONSOLE_TITLE);
+        System.out.println(TaskToString.transform(task));
     }
 }

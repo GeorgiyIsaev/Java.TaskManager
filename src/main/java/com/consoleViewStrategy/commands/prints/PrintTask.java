@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.commands.prints;
 
-import com.consoleView.ConsoleUtils;
+import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
 import com.controller.taskManager.TaskManager;
@@ -10,7 +10,19 @@ import com.dateTask.TaskType;
 import java.util.Map;
 
 public class PrintTask implements ICommand {
-    TaskManager taskManager;
+    private TaskManager taskManager;
+
+    private final String name;
+    public PrintTask(String name){
+        this.name = name;
+    }
+    @Override
+    public String description(){
+        return  "\"" + name + "\" – показать только ОБЫЧНЫЕ ЗАДАЧИ ";
+    }
+    public String getName() {
+        return name;
+    }
 
     @Override
     public void start(ConsoleManager consoleManager) {
@@ -19,11 +31,11 @@ public class PrintTask implements ICommand {
     }
 
     public void printTask(String typeFilter) {
-        System.out.println(ConsoleUtils.CONSOLE_TITLE);
+        System.out.println(TaskToString.CONSOLE_TITLE);
         for (Map.Entry<Integer, Task> entry : taskManager.getTasks().entrySet()) {
             Task value = entry.getValue();
             if (typeFilter == null || typeFilter.equalsIgnoreCase(value.getTypeTask())) {
-                System.out.println(ConsoleUtils.getTaskString(value));
+                System.out.println(TaskToString.transform(value));
             }
         }
     }

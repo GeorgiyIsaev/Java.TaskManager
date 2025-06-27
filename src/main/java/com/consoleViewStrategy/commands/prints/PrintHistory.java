@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.commands.prints;
 
-import com.consoleView.ConsoleUtils;
+import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
 import com.controller.taskManager.TaskManager;
@@ -8,7 +8,20 @@ import com.dateTask.Task;
 
 
 public class PrintHistory implements ICommand {
-    TaskManager taskManager;;
+    private TaskManager taskManager;;
+
+
+    private final String name;
+    public PrintHistory(String name){
+        this.name = name;
+    }
+    @Override
+    public String description(){
+        return  "\"" + name + "\" – показать историю вызовов задач";
+    }
+    public String getName() {
+        return name;
+    }
 
     @Override
     public void start(ConsoleManager consoleManager) {
@@ -17,9 +30,9 @@ public class PrintHistory implements ICommand {
     }
 
     public void printHistory() {
-        System.out.println(ConsoleUtils.CONSOLE_TITLE);
+        System.out.println(TaskToString.CONSOLE_TITLE);
         for (Task task : taskManager.getHistory()) {
-            System.out.println(ConsoleUtils.getTaskString(task));
+            System.out.println(TaskToString.transform(task));
         }
     }
 }
