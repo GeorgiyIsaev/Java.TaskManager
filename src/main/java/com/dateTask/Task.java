@@ -24,6 +24,7 @@ public class Task implements Serializable {
         this.description = description;
         this.status = TaskStatus.NEW;
         taskType = TaskType.TASK;
+        CreateID.INSTANCE.setId(id);
     }
 
     public void setStatus(TaskStatus status) {

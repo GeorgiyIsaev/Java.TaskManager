@@ -121,13 +121,11 @@ public class FileBackedCSV {
             int idEpicAdded = toInt(elements[LINK]);
             Task task = taskManager.addSubTaskToEpicIDByID(id,idEpicAdded, name,description);
             task.setStatus(TaskStatus.toTaskStatus(status));
-
         }
         if(elements[TYPE].equals(TaskType.EPIC.name())){
             Task task = taskManager.addEpicByID(id,name,description);
             task.setStatus(TaskStatus.toTaskStatus(status));
         }
-        CreateID.INSTANCE.setId(id);
     }
     public void parseTableCSV(TaskManager taskManager, String fileContent){
         String[] lines = fileContent.split("\n");
