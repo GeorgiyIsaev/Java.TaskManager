@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.commands.change;
 
-import com.consoleView.ConsoleNotification;
+import com.consoleViewStrategy.utils.Notification;
 import com.consoleView.ConsoleUtils;
 import com.consoleViewStrategy.commands.Commands;
 import com.consoleViewStrategy.commands.ICommand;
@@ -22,18 +22,18 @@ public class ReName implements ICommand {
     public void reNameID() {
         Integer idTask = consoleUserAction.getID();
         if (idTask == null) {
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         consoleUserAction.input("Введите новое имя Задачи: ");
         String textName = consoleUserAction.getCommand();
         Task task = taskManager.reNameToIDTask(idTask, textName);
 
-        System.out.println(ConsoleNotification.RENAME);
+        System.out.println(Notification.RENAME);
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
         System.out.println(ConsoleUtils.getTaskString(task));
     }

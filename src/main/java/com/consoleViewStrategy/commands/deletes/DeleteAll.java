@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.commands.deletes;
 
-import com.consoleView.ConsoleNotification;
+import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.commands.Commands;
 import com.consoleViewStrategy.commands.ICommand;
 import com.controller.taskManager.TaskManager;
@@ -15,6 +15,6 @@ public class DeleteAll implements ICommand {
     }
     public void deleteAll(){
         taskManager.deleteALL();
-        System.out.println(ConsoleNotification.DELETE_ALL);
+        System.out.println(Notification.DELETE_ALL);
     }
 }

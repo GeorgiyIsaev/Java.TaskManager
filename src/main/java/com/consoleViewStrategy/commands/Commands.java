@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.commands;
 
-import com.consoleView.ConsoleNotification;
+import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.commands.adds.AddEpic;
 import com.consoleViewStrategy.commands.adds.AddSubTask;
 import com.consoleViewStrategy.commands.adds.AddTask;
@@ -74,7 +74,7 @@ public class Commands {
     public void commandCall(String command){
         ICommand iCommand =  commands.get(command.toLowerCase());
         if(iCommand ==null){
-            System.out.println(ConsoleNotification.NOT_COMMAND);
+            System.out.println(Notification.NOT_COMMAND);
             return;
         }
         iCommand.start(this);

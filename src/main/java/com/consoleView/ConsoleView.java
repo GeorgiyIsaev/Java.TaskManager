@@ -1,5 +1,6 @@
 package com.consoleView;
 
+import com.consoleViewStrategy.utils.Notification;
 import com.controller.taskManager.TaskManager;
 import com.controller.files.FileManager;
 
@@ -109,7 +110,7 @@ public class ConsoleView {
                     newStatus();
                 }
                 default -> {
-                    System.out.println(ConsoleNotification.NOT_COMMAND + " [" + command + "]");
+                    System.out.println(Notification.NOT_COMMAND + " [" + command + "]");
                 }
             }
     }
@@ -117,20 +118,20 @@ public class ConsoleView {
 
 /// /// /// ХЕЛП СОХРАНЕНИЕ ОЧИСТКА
     public void help() {
-        System.out.println(ConsoleNotification.HELP);
+        System.out.println(Notification.HELP);
     }
     public void deleteAll(){
         taskManager.deleteALL();
         notificationService.sendToConsole(NotificationType.DELETE_ALL);
-        System.out.println(ConsoleNotification.DELETE_ALL);
+        System.out.println(Notification.DELETE_ALL);
     }
     public void save(){
         FileManager.save(taskManager);
-        System.out.println(ConsoleNotification.SAVE);
+        System.out.println(Notification.SAVE);
     }
     public void exit(){
         this.isExit = false;
-        System.out.println(ConsoleNotification.EXIT);
+        System.out.println(Notification.EXIT);
     }
 
 
@@ -153,11 +154,11 @@ public class ConsoleView {
 
     public void printID(Integer id){
         if(id == null){
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(id)) {
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.getTask(id);
@@ -201,15 +202,15 @@ public class ConsoleView {
     public void addSubTask() {
         Integer idEpicTask = myCommand.getID();
         if(idEpicTask == null){
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idEpicTask)){
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         if (!taskManager.isEpic(idEpicTask)) {
-            System.out.println(ConsoleNotification.NOT_EPIC);
+            System.out.println(Notification.NOT_EPIC);
             return;
         }
         myCommand.input("Введите Название SubTask: ");
@@ -224,33 +225,33 @@ public class ConsoleView {
     public void deleteID() {
         Integer id = myCommand.getID();
         if(id == null){
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(id)) {
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.deleteIDTask(id);
-        System.out.println(ConsoleNotification.DELETE_TASK);
+        System.out.println(Notification.DELETE_TASK);
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
         System.out.println(ConsoleUtils.getTaskString(task));
     }
 
     public void reNameID() {
         Integer idTask = myCommand.getID();if(idTask == null){
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
         return;
        }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
        return;
         }
         myCommand.input("Введите новое имя Задачи: ");
         String textName = myCommand.getCommand();
         Task task = taskManager.reNameToIDTask(idTask, textName);
 
-        System.out.println(ConsoleNotification.RENAME);
+        System.out.println(Notification.RENAME);
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
         System.out.println(ConsoleUtils.getTaskString(task));
     }
@@ -258,33 +259,33 @@ public class ConsoleView {
     public void  reDescID() {
         Integer idTask = myCommand.getID();
         if(idTask == null){
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         myCommand.input("Введите новое описание Задачи: ");
         String textDescription= myCommand.getCommand();
         Task task = taskManager.reDescToIDTask(idTask, textDescription);
-        System.out.println(ConsoleNotification.REDESC);
+        System.out.println(Notification.REDESC);
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
         System.out.println(ConsoleUtils.getTaskString(task));
     }
     public void newStatus() {
         Integer idTask = myCommand.getID();
         if(idTask == null){
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.getTasks().get(idTask);
         if (taskManager.isEpic(idTask)) {
-            System.out.println(ConsoleNotification.NOT_CHANGE_STATUS);
+            System.out.println(Notification.NOT_CHANGE_STATUS);
             return;
         }
 
@@ -292,18 +293,18 @@ public class ConsoleView {
         switch (status) {
             case "new" -> {
                 taskManager.reStatus(idTask, TaskStatus.NEW);
-                System.out.println(ConsoleNotification.RESTATUS);
+                System.out.println(Notification.RESTATUS);
             }
             case "prog" -> {
                 taskManager.reStatus(idTask, TaskStatus.IN_PROGRESS);
-                System.out.println(ConsoleNotification.RESTATUS);
+                System.out.println(Notification.RESTATUS);
             }
             case "done" -> {
                 taskManager.reStatus(idTask, TaskStatus.DONE);
-                System.out.println(ConsoleNotification.RESTATUS);
+                System.out.println(Notification.RESTATUS);
             }
             default -> {
-                System.out.println("[" +status +"] " + ConsoleNotification.STATUS_INCORRECTLY);
+                System.out.println("[" +status +"] " + Notification.STATUS_INCORRECTLY);
             }
         }
         System.out.println(ConsoleUtils.CONSOLE_TITLE);

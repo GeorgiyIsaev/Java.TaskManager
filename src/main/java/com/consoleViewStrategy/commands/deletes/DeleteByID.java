@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.commands.deletes;
 
-import com.consoleView.ConsoleNotification;
+import com.consoleViewStrategy.utils.Notification;
 import com.consoleView.ConsoleUtils;
 import com.consoleViewStrategy.commands.Commands;
 import com.consoleViewStrategy.commands.ICommand;
@@ -21,15 +21,15 @@ public class DeleteByID implements ICommand {
     public void deleteID() {
         Integer id = consoleUserAction.getID();
         if(id == null){
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(id)) {
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.deleteIDTask(id);
-        System.out.println(ConsoleNotification.DELETE_TASK);
+        System.out.println(Notification.DELETE_TASK);
         System.out.println(ConsoleUtils.CONSOLE_TITLE);
         System.out.println(ConsoleUtils.getTaskString(task));
     }

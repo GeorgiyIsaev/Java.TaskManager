@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.commands.change;
 
-import com.consoleView.ConsoleNotification;
+import com.consoleViewStrategy.utils.Notification;
 import com.consoleView.ConsoleUtils;
 import com.consoleViewStrategy.commands.Commands;
 import com.consoleViewStrategy.commands.ICommand;
@@ -23,16 +23,16 @@ public class ReStatus implements ICommand {
     public void reStatus() {
         Integer idTask = consoleUserAction.getID();
         if (idTask == null) {
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idTask)) {
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         Task task = taskManager.getTasks().get(idTask);
         if (taskManager.isEpic(idTask)) {
-            System.out.println(ConsoleNotification.NOT_CHANGE_STATUS);
+            System.out.println(Notification.NOT_CHANGE_STATUS);
             return;
         }
 
@@ -40,18 +40,18 @@ public class ReStatus implements ICommand {
         switch (status) {
             case "new" -> {
                 taskManager.reStatus(idTask, TaskStatus.NEW);
-                System.out.println(ConsoleNotification.RESTATUS);
+                System.out.println(Notification.RESTATUS);
             }
             case "prog" -> {
                 taskManager.reStatus(idTask, TaskStatus.IN_PROGRESS);
-                System.out.println(ConsoleNotification.RESTATUS);
+                System.out.println(Notification.RESTATUS);
             }
             case "done" -> {
                 taskManager.reStatus(idTask, TaskStatus.DONE);
-                System.out.println(ConsoleNotification.RESTATUS);
+                System.out.println(Notification.RESTATUS);
             }
             default -> {
-                System.out.println("[" + status + "] " + ConsoleNotification.STATUS_INCORRECTLY);
+                System.out.println("[" + status + "] " + Notification.STATUS_INCORRECTLY);
             }
         }
         System.out.println(ConsoleUtils.CONSOLE_TITLE);

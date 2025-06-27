@@ -8,9 +8,9 @@ public final class Main {
     private Main(){}
     public static void main(String[] args) {
         TaskManager managerTaskInMemory = Managers.getDefault();
-        FileManager.load(managerTaskInMemory);
-
-        ConsoleView consoleView = new ConsoleView(managerTaskInMemory);
+        NotificationService notificationService = new NotificationService();
+        ConsoleView consoleView = new ConsoleView(managerTaskInMemory, notificationService);
+        //FileManager.load(managerTaskInMemory);
         consoleView.run();
     }
 }

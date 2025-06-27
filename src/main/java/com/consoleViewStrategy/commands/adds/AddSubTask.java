@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.commands.adds;
 
-import com.consoleView.ConsoleNotification;
+import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.commands.Commands;
 import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
@@ -20,15 +20,15 @@ public class AddSubTask implements ICommand {
     public void addSubTask() {
         Integer idEpicTask = consoleUserAction.getID();
         if(idEpicTask == null){
-            System.out.println(ConsoleNotification.ID_NOT_INPUT);
+            System.out.println(Notification.ID_NOT_INPUT);
             return;
         }
         if (!taskManager.getTasks().containsKey(idEpicTask)){
-            System.out.println(ConsoleNotification.ID_NOT_EXIST);
+            System.out.println(Notification.ID_NOT_EXIST);
             return;
         }
         if (!taskManager.isEpic(idEpicTask)) {
-            System.out.println(ConsoleNotification.NOT_EPIC);
+            System.out.println(Notification.NOT_EPIC);
             return;
         }
         consoleUserAction.input("Введите Название SubTask: ");
