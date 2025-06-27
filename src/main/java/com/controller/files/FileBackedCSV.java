@@ -66,7 +66,7 @@ public class FileBackedCSV {
         return tableCSV.toString();
     }
     public void save(TaskManager taskManager) {
-        File file = pathFile.toFile();
+        //File file = pathFile.toFile();
         createFileIfNotExists();
 
         try (PrintWriter pw = new PrintWriter(pathFile.toFile())) {
