@@ -11,9 +11,9 @@ import java.nio.file.Path;
 public class CSVTest {
 
     public static void main(String[] args) {
-        Path filePath= CreatePath.of().generatePath("csv.csv");
+       // Path filePath= CreatePath.of().generatePath("csv.csv");
 
-        //Path filePath = CreatePath.of().generatePathToPakDate("csv.csv");
+        Path filePath = CreatePath.of().generatePathToPakDateAndSave("csv.csv");
         TaskManager managerTaskInMemoryMap = Managers.getFileBacked(filePath);
         ConsoleView consoleView = new ConsoleView(managerTaskInMemoryMap);
 

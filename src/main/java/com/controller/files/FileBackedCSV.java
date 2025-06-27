@@ -17,27 +17,18 @@ public class FileBackedCSV {
     }
 
     private void createFileIfNotExists() {
-        File file = pathFile.toFile();
-
-        if (!file.exists()) {
-            System.out.println("НЕ Существует " + file.getPath());
+        Path directory = pathFile.getParent();
+        //System.out.println("Путь проверки " + directory);
+        if(directory != null && !Files.isDirectory(directory)){
+            //System.out.println("Требуется создание: " + directory);
             try {
-                Files.createDirectories(pathFile.toAbsolutePath());
+                Files.createDirectories(directory);
             } catch (IOException e) {
-                System.out.println("Какая то ошибка");
-                throw new RuntimeException(e);
+                throw new ManagerFileException(e);
             }
-            // file.mkdirs();
-            //File f = new File(getNameFile());
         }
-        else{
-            System.out.println("УЖЕ Существует " + file.getPath());
-        }
-
-
-//        if (!(new File(getNameFile()).exists())) {
-//            new File("date").mkdirs();
-//            File f = new File(getNameFile());
+//        else{
+//            System.out.println("Создание: " + directory + " не требуется!");
 //        }
     }
 
