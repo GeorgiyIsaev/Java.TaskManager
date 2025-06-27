@@ -2,7 +2,7 @@ package com.consoleViewStrategy.commands.prints;
 
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleView.ConsoleUtils;
-import com.consoleViewStrategy.commands.Commands;
+import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.*;
@@ -11,9 +11,9 @@ public class PrintID implements ICommand {
     TaskManager taskManager;
     Integer id;
     @Override
-    public void start(Commands commands) {
-        taskManager = commands.getTaskManager();
-        id = commands.getConsoleUserAction().getID();
+    public void start(ConsoleManager consoleManager) {
+        taskManager = consoleManager.getTaskManager();
+        id = consoleManager.getConsoleUserAction().getID();
         printID();
     }
 

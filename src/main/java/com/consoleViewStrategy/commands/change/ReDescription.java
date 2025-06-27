@@ -2,7 +2,7 @@ package com.consoleViewStrategy.commands.change;
 
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleView.ConsoleUtils;
-import com.consoleViewStrategy.commands.Commands;
+import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
@@ -13,9 +13,9 @@ public class ReDescription implements ICommand {
     ConsoleUserAction consoleUserAction;
 
     @Override
-    public void start(Commands commands) {
-        taskManager = commands.getTaskManager();
-        consoleUserAction = commands.getConsoleUserAction();
+    public void start(ConsoleManager consoleManager) {
+        taskManager = consoleManager.getTaskManager();
+        consoleUserAction = consoleManager.getConsoleUserAction();
         reDescID();
     }
 

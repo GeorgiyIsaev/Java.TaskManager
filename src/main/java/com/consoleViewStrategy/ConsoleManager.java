@@ -1,5 +1,6 @@
-package com.consoleViewStrategy.commands;
+package com.consoleViewStrategy;
 
+import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.commands.adds.AddEpic;
 import com.consoleViewStrategy.commands.adds.AddSubTask;
@@ -12,15 +13,15 @@ import com.consoleViewStrategy.commands.deletes.DeleteByID;
 import com.consoleViewStrategy.commands.helpers.Exit;
 import com.consoleViewStrategy.commands.helpers.Help;
 import com.consoleViewStrategy.commands.prints.*;
-import com.consoleViewStrategy.utils.CommandNotification;
+import com.consoleViewStrategy.utils.CommandName;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Commands {
-    private Map<String,ICommand> commands;
+public class ConsoleManager {
+    private Map<String, ICommand> commands;
     private final ConsoleUserAction consoleUserAction;
     private final TaskManager taskManager;
     private boolean isExit = true;
@@ -41,11 +42,11 @@ public class Commands {
         return taskManager;
     }
 
-    public Commands(TaskManager taskManager){
+    public ConsoleManager(TaskManager taskManager){
         this.taskManager = taskManager;
         consoleUserAction = new ConsoleUserAction();
         commands = new HashMap<>();
-        CommandNotification com =new CommandNotification();
+        CommandName com =new CommandName();
 
         commands.put(com.HELP.toLowerCase(), new Help());
         commands.put(com.EXIT.toLowerCase(), new Exit());
@@ -67,9 +68,6 @@ public class Commands {
         commands.put(com.RE_NAME.toLowerCase(), new ReName());
         commands.put(com.RE_DESCRIPTION.toLowerCase(), new ReDescription());
         commands.put(com.RE_STATUS.toLowerCase(), new ReStatus());
-
-
-
     }
     public void commandCall(String command){
         ICommand iCommand =  commands.get(command.toLowerCase());

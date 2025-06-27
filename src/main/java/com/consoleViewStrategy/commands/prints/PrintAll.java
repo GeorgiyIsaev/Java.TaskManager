@@ -1,7 +1,7 @@
 package com.consoleViewStrategy.commands.prints;
 
 import com.consoleView.ConsoleUtils;
-import com.consoleViewStrategy.commands.Commands;
+import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
@@ -12,8 +12,8 @@ public class PrintAll implements ICommand {
     TaskManager taskManager;
 
     @Override
-    public void start(Commands commands) {
-        taskManager = commands.getTaskManager();
+    public void start(ConsoleManager consoleManager) {
+        taskManager = consoleManager.getTaskManager();
         printAll();
     }
 

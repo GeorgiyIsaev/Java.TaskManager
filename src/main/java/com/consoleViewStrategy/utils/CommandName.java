@@ -1,6 +1,6 @@
 package com.consoleViewStrategy.utils;
 
-public class CommandNotification {
+public class CommandName {
 
     public final String HELP= "Help";
 

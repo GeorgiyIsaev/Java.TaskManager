@@ -1,13 +1,13 @@
 package com.consoleViewStrategy.commands.helpers;
 import com.consoleViewStrategy.utils.Notification;
-import com.consoleViewStrategy.commands.Commands;
+import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
 
 public class Help implements ICommand {
 
 
     @Override
-    public void start(Commands commands) {
+    public void start(ConsoleManager consoleManager) {
         help();
     }
 
