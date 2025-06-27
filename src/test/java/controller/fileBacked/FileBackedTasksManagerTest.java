@@ -18,14 +18,14 @@ public class FileBackedTasksManagerTest {
 
 
     public TaskManager getClearManager(){
-        Path filePath = CreatePath.of().generateToPakResources("csv.csv");
+        Path filePath = CreatePath.of().generatePathToPakDate("csvTest.csv");
         TaskManager taskManager = Managers.getFileBacked(filePath);
         taskManager.deleteALL();
         return taskManager;
     }
 
     public TaskManager getManager(){
-        Path filePath = CreatePath.of().generateToPakResources("csv.csv");
+        Path filePath = CreatePath.of().generatePathToPakDate("csvTest.csv");
         return Managers.getFileBacked(filePath);
     }
 

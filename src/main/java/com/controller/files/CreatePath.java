@@ -33,14 +33,14 @@ public class CreatePath {
         return filePath;
     }
 
-    public Path generateToPakResources(String fileName){
-        String sep = File.separator;
-        System.out.println("Создаем патч");
-        Path source = Paths.get(this.getClass().getResource(sep).getPath());
-        System.out.println("source " + source);
-        Path filePath = Paths.get(source.toAbsolutePath()
-                + sep + "date" + sep + fileName);
-        System.out.println("filePath " + filePath);
-        return filePath;
-    }
+//    public Path generateToPakResources(String fileName){
+//        String sep = File.separator;
+//        System.out.println("Создаем патч");
+//        Path source = Paths.get(this.getClass().getResource(sep).getPath());
+//        System.out.println("source " + source);
+//        Path filePath = Paths.get(source.toAbsolutePath()
+//                + sep + "date" + sep + fileName);
+//        System.out.println("filePath " + filePath);
+//        return filePath;
+//    }
 }
