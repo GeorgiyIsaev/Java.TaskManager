@@ -20,16 +20,12 @@ public class FileBackedCSV {
         Path directory = pathFile.getParent();
         //System.out.println("Путь проверки " + directory);
         if(directory != null && !Files.isDirectory(directory)){
-            //System.out.println("Требуется создание: " + directory);
             try {
                 Files.createDirectories(directory);
             } catch (IOException e) {
                 throw new ManagerFileException(e);
             }
         }
-//        else{
-//            System.out.println("Создание: " + directory + " не требуется!");
-//        }
     }
 
     /// Блок Записи в файл
@@ -66,7 +62,6 @@ public class FileBackedCSV {
         return tableCSV.toString();
     }
     public void save(TaskManager taskManager) {
-        //File file = pathFile.toFile();
         createDirectoriesIfNotExists();
 
         try (PrintWriter pw = new PrintWriter(pathFile.toFile())) {
@@ -134,6 +129,14 @@ public class FileBackedCSV {
         }
         CreateID.INSTANCE.setId(id);
     }
+    public void parseTableCSV(TaskManager taskManager, String fileContent){
+        String[] lines = fileContent.split("\n");
+        for(String line : lines){
+            parseLineAndAddTaskToManager(taskManager, line);
+        }
+    }
+
+
     public void load(TaskManager taskManager) {
         boolean isNotFileExist = !pathFile.toFile().exists();
         if(isNotFileExist) {
@@ -141,7 +144,7 @@ public class FileBackedCSV {
         }
         try {
             String fileContent = Files.readString(pathFile);
-            String[] lines = fileContent.split("\n");
+            parseTableCSV(taskManager, fileContent);
         } catch (IOException e) {
             throw new ManagerFileException(e);
         }
