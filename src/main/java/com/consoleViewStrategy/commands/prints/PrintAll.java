@@ -1,5 +1,6 @@
 package com.consoleViewStrategy.commands.prints;
 
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
@@ -8,24 +9,20 @@ import com.dateTask.Task;
 
 import java.util.Map;
 
-public class PrintAll implements ICommand {
-    private TaskManager taskManager;
+public class PrintAll extends CommandBase {
 
-    private final String name;
-    public PrintAll(String name){
-        this.name = name;
+    public PrintAll(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + "\" – показать ВСЕ задачи";
     }
-    public String getName() {
-        return name;
-    }
+
 
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
+    public void start( ) {
         printAll();
     }
 

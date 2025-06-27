@@ -1,32 +1,25 @@
 package com.consoleViewStrategy.commands.adds;
 
 import com.consoleViewStrategy.ConsoleManager;
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
-public class AddTask implements ICommand {
-    private TaskManager taskManager;
-    private ConsoleUserAction consoleUserAction;
+public class AddTask extends CommandBase {
 
-    private final String name;
-
-    public AddTask(String name){
-        this.name = name;
+    public AddTask(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + " 'имя задачи'\" – добавить обычную задачу";
     }
 
-    public String getName() {
-        return name;
-    }
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
-        consoleUserAction = consoleManager.getConsoleUserAction();
+    public void start() {
         addTask();
     }
     private void addTask(){

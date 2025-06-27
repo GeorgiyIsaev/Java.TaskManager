@@ -1,6 +1,7 @@
 package mainTest;
 
-import com.consoleView.ConsoleView;
+
+import com.consoleViewStrategy.ConsoleManager;
 import com.controller.Managers;
 import com.controller.files.CreatePath;
 import com.controller.taskManager.TaskManager;
@@ -15,16 +16,15 @@ public class CSVTest {
 
         Path filePath = CreatePath.of().generatePathToPakDateAndSave("csv.csv");
         TaskManager managerTaskInMemoryMap = Managers.getFileBacked(filePath);
-        ConsoleView consoleView = new ConsoleView(managerTaskInMemoryMap);
+        ConsoleManager consoleView = new ConsoleManager(managerTaskInMemoryMap);
 
         createTask(managerTaskInMemoryMap);
 
         System.out.println(" Вывод Задач на консоль");
-        consoleView.printTask();
+        String command = "printAll".toLowerCase();
+        consoleView.getCommands().get("printAll".toLowerCase()).start();
 
-        System.out.println("Очистка");
-        //managerTaskInMemoryMap.deleteALL();
-        consoleView.printTask();
+
     }
     public static void createTask(TaskManager managerTaskInMemory) {
         managerTaskInMemory.addTask("Первая задача", "Описание простой задачи");

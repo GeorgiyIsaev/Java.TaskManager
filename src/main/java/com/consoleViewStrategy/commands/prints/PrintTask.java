@@ -1,5 +1,6 @@
 package com.consoleViewStrategy.commands.prints;
 
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
@@ -9,24 +10,20 @@ import com.dateTask.TaskType;
 
 import java.util.Map;
 
-public class PrintTask implements ICommand {
-    private TaskManager taskManager;
+public class PrintTask extends CommandBase {
 
-    private final String name;
-    public PrintTask(String name){
-        this.name = name;
+    public PrintTask(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + "\" – показать только ОБЫЧНЫЕ ЗАДАЧИ ";
     }
-    public String getName() {
-        return name;
-    }
+
 
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
+    public void start() {
         printTask(TaskType.TASK.name());
     }
 

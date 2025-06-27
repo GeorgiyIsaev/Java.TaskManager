@@ -1,5 +1,6 @@
 package com.consoleViewStrategy.commands.prints;
 
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
@@ -7,31 +8,24 @@ import com.consoleViewStrategy.commands.ICommand;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.*;
 
-public class PrintID implements ICommand {
-   private TaskManager taskManager;
-    private Integer id;
+public class PrintID extends CommandBase {
 
-
-    private final String name;
-   public PrintID(String name){
-        this.name = name;
+    public PrintID(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + " 'NUMBER ID'\" - показать задачу по id";
     }
-    public String getName() {
-        return name;
-    }
 
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
-        id = consoleManager.getConsoleUserAction().getID();
-        printID();
+    public void start( ) {
+        Integer id = consoleManager.getConsoleUserAction().getID();
+        printID(id);
     }
 
-    private void printID(){
+    private void printID(Integer id){
         if(id == null){
             System.out.println(Notification.ID_NOT_INPUT);
             return;

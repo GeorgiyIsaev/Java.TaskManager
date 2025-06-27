@@ -31,26 +31,26 @@ public class ConsoleManager {
         this.taskManager = taskManager;
         consoleUserAction = new ConsoleUserAction();
         commands = new LinkedHashMap<>();
-        addCommand(new Help("Help"));
-        addCommand(new Exit("Exit"));
+        addCommand(new Help("Help", this));
+        addCommand(new Exit("Exit", this));
 
-        addCommand(new PrintID("PrintID"));
-        addCommand(new PrintAll("PrintAll"));
-        addCommand(new PrintTask("PrintTask"));
-        addCommand(new PrintEpic("PrintEpic"));
-        addCommand(new PrintSubTask("PrintSubTask"));
-        addCommand(new PrintHistory("PrintHistory"));
+        addCommand(new PrintID("PrintID", this));
+        addCommand(new PrintAll("PrintAll", this));
+        addCommand(new PrintTask("PrintTask", this));
+        addCommand(new PrintEpic("PrintEpic", this));
+        addCommand(new PrintSubTask("PrintSubTask", this));
+        addCommand(new PrintHistory("PrintHistory", this));
 
-        addCommand(new AddTask("AddTask"));
-        addCommand(new AddEpic("AddEpic"));
-        addCommand(new AddSubTask("AddSubTaskToID"));
+        addCommand(new AddTask("AddTask", this));
+        addCommand(new AddEpic("AddEpic", this));
+        addCommand(new AddSubTask("AddSubTaskToID", this));
 
-        addCommand(new DeleteAll("DeleteAll"));
-        addCommand(new DeleteByID("DeleteID"));
+        addCommand(new DeleteAll("DeleteAll", this));
+        addCommand(new DeleteByID("DeleteID", this));
 
-        addCommand(new ReName("ReName"));
-        addCommand(new ReDescription("ReDescription"));
-        addCommand(new ReStatus("ReStatus"));
+        addCommand(new ReName("ReName", this));
+        addCommand(new ReDescription("ReDescription", this));
+        addCommand(new ReStatus("ReStatus", this));
     }
     public void addCommand(ICommand iCommand){
         commands.put(iCommand.getName().toLowerCase(), iCommand);
@@ -82,7 +82,7 @@ public class ConsoleManager {
             System.out.println(Notification.NOT_COMMAND);
             return;
         }
-        iCommand.start(this);
+        iCommand.start();
     }
     public void hello(){
         System.out.println("Добро пожаловать в TaskManager!");

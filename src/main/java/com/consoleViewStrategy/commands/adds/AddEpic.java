@@ -1,31 +1,25 @@
 package com.consoleViewStrategy.commands.adds;
 
 import com.consoleViewStrategy.ConsoleManager;
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
-public class AddEpic implements ICommand {
-    private TaskManager taskManager;
-    private ConsoleUserAction consoleUserAction;
+public class AddEpic extends CommandBase {
 
-    private final String name;
-    public AddEpic(String name){
-       this.name = name;
+    public AddEpic(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + " 'имя задачи'\" – добавить ЭПИК";
     }
-    public String getName() {
-        return name;
-    }
 
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
-        consoleUserAction = consoleManager.getConsoleUserAction();
+    public void start() {
         addEpicTask();
     }
     public void addEpicTask() {

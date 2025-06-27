@@ -1,25 +1,25 @@
 package com.consoleViewStrategy.commands.helpers;
 import com.consoleViewStrategy.ConsoleManager;
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.commands.ICommand;
 
-public class Help implements ICommand {
-    private final String name;
-    public Help(String name){
-        this.name = name;
+public class Help extends CommandBase {
+
+    public Help(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + "\" – показать список команда";
     }
-    public String getName() {
-        return name;
-    }
+
 
     @Override
-    public void start(ConsoleManager consoleManager) {
-        help(consoleManager);
+    public void start() {
+        help();
     }
-    public void help(ConsoleManager consoleManager) {
+    public void help() {
         System.out.println("ДОСТУПНЫЕ КОМАНДЫ:");
         for(ICommand iCommand : consoleManager.getCommands().values()){
             System.out.println(iCommand.description());

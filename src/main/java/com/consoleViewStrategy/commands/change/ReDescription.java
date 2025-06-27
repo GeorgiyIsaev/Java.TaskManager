@@ -1,35 +1,27 @@
 package com.consoleViewStrategy.commands.change;
 
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
-import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
-public class ReDescription implements ICommand {
-    private TaskManager taskManager;
-    private ConsoleUserAction consoleUserAction;
-
-    private final String name;
-
-    public ReDescription(String name){
-        this.name = name;
+public class ReDescription extends CommandBase {
+    public ReDescription(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + " 'NUMBER ID'\" – изменить описание задачи с ID";
     }
 
-    public String getName() {
-        return name;
-    }
+
 
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
-        consoleUserAction = consoleManager.getConsoleUserAction();
+    public void start() {
         reDescID();
     }
 

@@ -1,5 +1,6 @@
 package com.consoleViewStrategy.commands.change;
 
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
@@ -8,26 +9,20 @@ import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
-public class ReName implements ICommand {
-    private TaskManager taskManager;
-    private ConsoleUserAction consoleUserAction;
+public class ReName extends CommandBase {
 
-    private final String name;
-   public ReName(String name){
-        this.name = name;
+    public ReName(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + " 'NUMBER ID'\" – изменить имя задачи с ID";
     }
-    public String getName() {
-        return name;
-    }
+
 
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
-        consoleUserAction = consoleManager.getConsoleUserAction();
+    public void start() {
         reNameID();
     }
 

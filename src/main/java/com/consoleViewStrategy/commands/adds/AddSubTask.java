@@ -1,5 +1,6 @@
 package com.consoleViewStrategy.commands.adds;
 
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
@@ -7,28 +8,18 @@ import com.consoleViewStrategy.utils.ConsoleUserAction;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
-public class AddSubTask implements ICommand {
-    private TaskManager taskManager;
-    private ConsoleUserAction consoleUserAction;
-
-    private final String name;
-
-    public AddSubTask(String name){
-        this.name = name;
+public class AddSubTask extends CommandBase {
+    public AddSubTask(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
+
     @Override
     public String description(){
         return  "\"" + name + " 'NUMBER ID'\" – добавить подзадачу к Эпику с указанным ID";
     }
 
-    public String getName() {
-        return name;
-    }
-
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
-        consoleUserAction = consoleManager.getConsoleUserAction();
+    public void start() {
         addSubTask();
     }
     public void addSubTask() {

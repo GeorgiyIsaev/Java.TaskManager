@@ -1,5 +1,6 @@
 package com.consoleViewStrategy.commands.prints;
 
+import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
@@ -9,24 +10,17 @@ import com.dateTask.TaskType;
 
 import java.util.Map;
 
-public class PrintEpic implements ICommand {
-  private   TaskManager taskManager;
+public class PrintEpic extends CommandBase {
 
-    private final String name;
-    public PrintEpic(String name){
-        this.name = name;
+    public PrintEpic(String name, ConsoleManager consoleManager) {
+        super(name, consoleManager);
     }
     @Override
     public String description(){
         return  "\"" + name + "\" – показать только ЭПИКИ";
     }
-    public String getName() {
-        return name;
-    }
-
     @Override
-    public void start(ConsoleManager consoleManager) {
-        taskManager = consoleManager.getTaskManager();
+    public void start( ) {
         printTask(TaskType.EPIC.name());
     }
     public void printTask(String typeFilter) {
