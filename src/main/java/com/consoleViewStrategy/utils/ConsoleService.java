@@ -14,4 +14,9 @@ public class ConsoleService implements NotificationService{
         System.out.println(TaskToString.CONSOLE_TITLE);
         System.out.println(TaskToString.transform(task));
     }
+    @Override
+    public void notCommand(Notification type, String command){
+        System.out.println(type + " [" + command + "]!");
+    }
+
 }

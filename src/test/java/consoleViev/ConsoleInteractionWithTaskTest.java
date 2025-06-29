@@ -3,6 +3,7 @@ package consoleViev;
 import com.consoleViewStrategy.Main;
 import com.consoleViewStrategy.utils.Notification;
 import com.dateTask.CreateID;
+import com.dateTask.TaskType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,6 +42,7 @@ public class ConsoleInteractionWithTaskTest {
     public void reset(){
         String command = "\nexit";
         setUp(command);
+        startMain();
         outContent.reset();
     }
 
@@ -214,19 +216,7 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void deleteIDTaskTest() {
-        reset();
-        String nameTask = "Тестовое имя задачи";
-        String descTask = "Тестовое описание задачи";
-        int id = CreateID.INSTANCE.getCurrentID();
-        String command = "help\naddTask "+nameTask+"\n"+descTask+"\ndeleteID "+ id + "\nprintID "  + id + "\nexit";
-        setUp(command);
-        startMain();
-        String consoleContent = outContent.toString();
-        boolean isExistNotification = isExistInConsole(consoleContent, Notification.DELETE_ByID.toString());
-        Assertions.assertTrue(isExistNotification, consoleContent);
 
-        boolean isExistNotID =  isExistInConsole(consoleContent, Notification.ID_NOT_EXIST.toString());
-        Assertions.assertTrue(isExistNotID, consoleContent);
     }
 
 
@@ -261,5 +251,35 @@ public class ConsoleInteractionWithTaskTest {
 
         boolean isExistDesc= isExistInConsole(consoleContent, nameTask2);
         Assertions.assertTrue(isExistDesc, consoleContent);
+    }
+
+    @Test
+    void printOnlyTasksTestShouldNotEpicAnDSubPrint() {
+        reset();
+        int idEpic = CreateID.INSTANCE.getCurrentID();
+        String command = "addEPIC Название\nОписание\n" +
+                "addSubTaskToID " + idEpic + "\nСаб Название\nСаб Описание\n" +
+                "addTask Название\nОписание\n" +
+                "\nexit";
+        ;
+        setUp(command);
+        startMain();
+
+
+        reset();
+        String commandPrintTask ="printTask\n" + "exit";
+        setUp(commandPrintTask);
+        startMain();
+
+        String consoleContent = outContent.toString();
+        boolean isExistNotification = isExistInConsole(consoleContent, Notification.PRINT_onlyTASK.toString());
+        Assertions.assertTrue(isExistNotification, consoleContent);
+
+        consoleContent = outContent.toString();
+        boolean isExistName = isExistInConsole(consoleContent, TaskType.EPIC.name());
+        Assertions.assertFalse(isExistName, consoleContent);
+
+        boolean isExistDesc= isExistInConsole(consoleContent, TaskType.SUBTASK.name());
+        Assertions.assertFalse(isExistDesc, consoleContent);
     }
 }

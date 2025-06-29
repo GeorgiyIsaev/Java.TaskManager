@@ -83,7 +83,7 @@ public class ConsoleManager {
     public void commandCall(String command){
         ICommand iCommand =  commands.get(command.toLowerCase());
         if(iCommand ==null){
-            notificationService.sendTo(Notification.NOT_COMMAND);
+            notificationService.notCommand(Notification.NOT_COMMAND, command);
             return;
         }
         iCommand.start();
