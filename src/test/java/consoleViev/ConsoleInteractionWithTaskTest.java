@@ -216,7 +216,19 @@ public class ConsoleInteractionWithTaskTest {
 
     @Test
     void deleteIDTaskTest() {
+        reset();
+        String nameTask = "Тестовое имя задачи";
+        String descTask = "Тестовое описание задачи";
+        int id = CreateID.INSTANCE.getCurrentID();
+        String command = "addTask "+nameTask+"\n"+descTask+"\ndeleteID "+ id + "\nprintID "  + id + "\nexit";
+        setUp(command);
+        startMain();
+        String consoleContent = outContent.toString();
+        boolean isExistNotification = isExistInConsole(consoleContent, Notification.DELETE_ByID.toString());
+        Assertions.assertTrue(isExistNotification, consoleContent);
 
+        boolean isExistNotID =  isExistInConsole(consoleContent, Notification.ID_NOT_EXIST.toString());
+        Assertions.assertTrue(isExistNotID, consoleContent);
     }
 
 

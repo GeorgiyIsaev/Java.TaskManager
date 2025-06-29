@@ -39,7 +39,7 @@ public class ConsoleManager {
         addCommand(new PrintAll("PrintAll", this));
         addCommand(new PrintTask("PrintTask", this));
         addCommand(new PrintEpic("PrintEpic", this));
-        addCommand(new PrintSubTask("PrintSubTask", this));
+        addCommand(new PrintSubTask("PrintSub", this));
         addCommand(new PrintHistory("PrintHistory", this));
 
         addCommand(new AddTask("AddTask", this));

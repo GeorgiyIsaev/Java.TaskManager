@@ -45,7 +45,6 @@ public class ConsoleInteractionWithEpicTest {
     }
 
     ///  ТЕСТЫ (Эпик Задачи - EPIC)
-
     @Test
     void addEpicTest() {
         reset();
