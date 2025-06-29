@@ -41,6 +41,6 @@ public class AddSubTask extends CommandBase {
         consoleUserAction.input("Введите описание SubTask: ");
         String textDescription = consoleUserAction.getCommand();
         Task task = taskManager.addSubTaskToEpicID(idEpicTask, textName, textDescription);
-        System.out.println("Add SubTask (id = " + task.getID() + "): " + task);
+        consoleManager.getNotificationService().addTo(Notification.ADD_SUBTASK, task);
     }
 }

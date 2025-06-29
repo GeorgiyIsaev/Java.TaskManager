@@ -1,6 +1,7 @@
 package com.consoleViewStrategy.commands.prints;
 
 import com.consoleViewStrategy.commands.CommandBase;
+import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
@@ -27,6 +28,7 @@ public class PrintAll extends CommandBase {
     }
 
     public void printAll() {
+        consoleManager.getNotificationService().sendTo(Notification.PRINT_ALL);
         System.out.println(TaskToString.CONSOLE_TITLE);
         for (Map.Entry<Integer, Task> entry : taskManager.getTasks().entrySet()) {
             Task value = entry.getValue();

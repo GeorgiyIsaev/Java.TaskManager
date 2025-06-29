@@ -1,6 +1,7 @@
 package com.consoleViewStrategy.commands.prints;
 
 import com.consoleViewStrategy.commands.CommandBase;
+import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.ICommand;
@@ -24,6 +25,7 @@ public class PrintEpic extends CommandBase {
         printTask(TaskType.EPIC.name());
     }
     public void printTask(String typeFilter) {
+        consoleManager.getNotificationService().sendTo(Notification.PRINT_EPIC);
         System.out.println(TaskToString.CONSOLE_TITLE);
         for (Map.Entry<Integer, Task> entry : taskManager.getTasks().entrySet()) {
             Task value = entry.getValue();

@@ -4,6 +4,7 @@ import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
+import com.consoleViewStrategy.utils.Notification;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
@@ -27,6 +28,6 @@ public class AddEpic extends CommandBase {
         consoleUserAction.input("Введите описание Epic: ");
         String textDescription= consoleUserAction.getCommand();
         Task task = taskManager.addEpic(textName,textDescription);
-        System.out.println("Add EpicTask (id = " + task.getID() + "): " + task);
+        consoleManager.getNotificationService().addTo(Notification.ADD_EPIC, task);
     }
 }

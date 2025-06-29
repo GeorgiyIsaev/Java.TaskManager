@@ -39,13 +39,13 @@ public class PrintID extends CommandBase {
         consoleTable.append(TaskToString.CONSOLE_TITLE);
         consoleTable.append("\n");
         consoleTable.append(TaskToString.transform(task));
-
         if (task.getTypeTask().equalsIgnoreCase(TaskType.EPIC.name())) {
             for (SubTask subTask : ((EpicTask) task).getSubTasks()) {
                 consoleTable.append("\n");
                 consoleTable.append(TaskToString.transform(subTask));
             }
         }
+        consoleManager.getNotificationService().sendTo(Notification.PRINT_ID);
         System.out.println(consoleTable);
     }
 }

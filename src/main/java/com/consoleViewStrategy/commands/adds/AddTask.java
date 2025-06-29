@@ -4,6 +4,7 @@ import com.consoleViewStrategy.ConsoleManager;
 import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.commands.ICommand;
 import com.consoleViewStrategy.utils.ConsoleUserAction;
+import com.consoleViewStrategy.utils.Notification;
 import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
@@ -27,6 +28,7 @@ public class AddTask extends CommandBase {
         consoleUserAction.input("Введите описание Task: ");
         String textDescription= consoleUserAction.getCommand();
         Task task = taskManager.addTask(textName, textDescription);
-        System.out.println("Add Task (id = " + task.getID() + "): " + task);
+        consoleManager.getNotificationService().addTo(Notification.ADD_TASK, task);
+
     }
 }

@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class ConsoleBaseCommandTest {
+
     /// Ввод и вывод в консоль
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -33,7 +34,7 @@ public class ConsoleBaseCommandTest {
         System.setOut(originalOut);
     }
 
-    //Вспомоготалеьные методы
+    /// Вспомоготалеьные методы
     public boolean isExistInConsole(String allContent, String findContent){
         return allContent.toUpperCase().contains(findContent.toUpperCase());
     }
@@ -43,8 +44,7 @@ public class ConsoleBaseCommandTest {
 
     }
 
-
-
+    ///  ТЕСТЫ
     @Test
     public void exitTest() {
         String nextCommand = "exit\n";
