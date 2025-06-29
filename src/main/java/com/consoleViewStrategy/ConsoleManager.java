@@ -50,7 +50,7 @@ public class ConsoleManager {
         addCommand(new DeleteByID("DeleteID", this));
 
         addCommand(new ReName("ReName", this));
-        addCommand(new ReDescription("ReDescription", this));
+        addCommand(new ReDescription("ReDesc", this));
         addCommand(new ReStatus("ReStatus", this));
     }
     public void addCommand(ICommand iCommand){
@@ -98,7 +98,8 @@ public class ConsoleManager {
         hello();
         while(isExit()) {
             consoleUserAction.input("Введите команду: ");
-            commandCall(consoleUserAction.getCommand());
+            String command = consoleUserAction.baseCommand();
+            commandCall(command);
         }
         consoleUserAction.close();
     }
