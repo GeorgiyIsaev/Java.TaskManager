@@ -6,14 +6,14 @@ public enum Notification {
     NOT_COMMAND("Неверная команда"),
 
     PRINT_ALL("ТАБЛИЦА ВСЕХ ЗАДАЧ:"),
-    PRINT_TASK("ТАБЛИЦА Только с ПРОСТЫМИ ЗАДАЧАМИ (TASK):"),
+    PRINT_onlyTASK("ТАБЛИЦА Только с ПРОСТЫМИ ЗАДАЧАМИ (TASK):"),
     PRINT_EPIC("ТАБЛИЦА Только с Эпиками (EPIC):"),
     PRINT_SUB("ТАБЛИЦА Только с ПОДЗАДАЧАМИ (SUBTASK):"),
     PRINT_ID("ТАБЛИЦА С ОДНОЙ ЗАДАЧЕЙ"),
     PRINT_HISTORY("ТАБЛИЦА с историей вызовов задач"),
 
     DELETE_ALL("Все содержимое Task Manager удалено!"),
-    DELETE_TASK("Задача успешна удалена"),
+    DELETE_ByID("Задача успешна удалена"),
 
     ADD_TASK("Новая задача добавлена!"),
     ADD_EPIC("Новый ЭПИК добавлен!"),

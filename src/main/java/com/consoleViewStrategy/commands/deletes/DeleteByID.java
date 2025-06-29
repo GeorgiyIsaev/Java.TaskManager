@@ -4,9 +4,6 @@ import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
-import com.consoleViewStrategy.commands.ICommand;
-import com.consoleViewStrategy.utils.ConsoleUserAction;
-import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 
 public class DeleteByID extends CommandBase {
@@ -35,7 +32,7 @@ public class DeleteByID extends CommandBase {
             return;
         }
         Task task = taskManager.deleteIDTask(id);
-        consoleManager.getNotificationService().sendTo(Notification.DELETE_TASK);
+        consoleManager.getNotificationService().sendTo(Notification.DELETE_ByID);
         System.out.println(TaskToString.CONSOLE_TITLE);
         System.out.println(TaskToString.transform(task));
     }

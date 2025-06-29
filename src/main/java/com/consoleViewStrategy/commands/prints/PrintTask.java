@@ -4,8 +4,6 @@ import com.consoleViewStrategy.commands.CommandBase;
 import com.consoleViewStrategy.utils.Notification;
 import com.consoleViewStrategy.utils.TaskToString;
 import com.consoleViewStrategy.ConsoleManager;
-import com.consoleViewStrategy.commands.ICommand;
-import com.controller.taskManager.TaskManager;
 import com.dateTask.Task;
 import com.dateTask.TaskType;
 
@@ -29,7 +27,7 @@ public class PrintTask extends CommandBase {
     }
 
     public void printTask(String typeFilter) {
-        consoleManager.getNotificationService().sendTo(Notification.PRINT_TASK);
+        consoleManager.getNotificationService().sendTo(Notification.PRINT_onlyTASK);
         System.out.println(TaskToString.CONSOLE_TITLE);
         for (Map.Entry<Integer, Task> entry : taskManager.getTasks().entrySet()) {
             Task value = entry.getValue();
